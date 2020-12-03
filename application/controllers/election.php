@@ -115,5 +115,14 @@ class Election extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function view_election($id)
+	{
+		$this->load->model('database_model');
+
+		$data['data']= $this->database_model->get($id, 't_election');
+		print_r($data);
+
+		$this->load->view('user/view', $data);
+	}
 
 }

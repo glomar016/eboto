@@ -347,6 +347,16 @@ $(document).ready(function() {
         electionDataTable.ajax.url(url).load();
     }
 
+    // view function
+    $(document).on("click", ".btn_view", function(){
+        var id = this.value;
+
+        window.location.href = "<?php echo base_url()?>election/view_election/"+id;
+
+    });
+    // end of view function
+
+
     // delete function
     $(document).on("click", ".btn_delete", function(){
         var id = this.value;
