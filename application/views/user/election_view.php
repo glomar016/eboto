@@ -35,6 +35,15 @@
 
     <!-- Jquery-->
     <script src="<?php echo base_url()?>resources/js/jquery-3.5.1.min.js"></script>
+    
+    <!-- Data Tables JS-->
+    <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
+
+    <!-- Data Time JS-->
+    <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
+
+    <!-- Moment w locales JS-->
+    <script src="<?php echo base_url()?>resources/js/moment.js"></script>
 
     <!-- Sweet Alert -->
     <script src="<?php echo base_url()?>resources/js/sweetalert2@10.js"></script>
@@ -61,21 +70,28 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
+                    <!-- Card Header -->
                     <div class="col-lg-12">
-                        <!-- Card Header -->
-                        <div class="col-lg-12">
-                                    <div class="card border border-primary">
-                                        <div class="card-header">
-                                            <strong class="card-title text-center"><?php echo $data[0]->electionName?></strong>
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="card-text"><?php echo $data[0]->electionOrg?></p>
-                                            <p class="card-text"><?php echo $data[0]->electionDateStart?></p>
-                                            <p class="card-text"><?php echo $data[0]->electionDateEnd?></p>
+                        <div class="card">
+                            <div class="card-header" style="background-color: maroon;">
+                                <h1 class="display-4 text-center" style="color: white;"><?php echo $data[0]->electionName?></h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="candidateList">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-lg-2" style="background-color: gold;">
+                                            <p style="color:white;" class="text-center">Voting Ends: </p>
+                                            <p style="color:white;" id="liveclock" class="text-center"></p>
                                         </div>
                                     </div>
+                                    <br>
+                                    <!-- <p class="text-center">Description: <?php echo $data[0]->electionDescription?></p>
+                                    <p class="text-center">Date Start: <?php echo date("m-d-Y", strtotime($data[0]->electionDateStart))?></p>
+                                    <p class="text-center">Date End: <?php echo date("m-d-Y", strtotime($data[0]->electionDateEnd))?></p> -->
+                                    <!-- </div> -->
                                 </div>
-
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,6 +131,30 @@
 
 </body>
 
+<script>
+$(document).ready(function(){
+
+    var electionName = "<?php echo $data[0]->electionName ?>"
+    var electionDateStart = "<?php echo $data[0]->electionDateStart ?>"
+    var electionDateEnd = "<?php echo $data[0]->electionDateEnd ?>"
+    var electionDescription = "<?php echo $data[0]->electionDescription ?>"
+
+
+    const clock = document.getElementById('liveclock');
+    // $( ".candidateList" ).append("<p>"+electionName+"</p>");
+    setInterval(() => {
+        // clock.textContent 
+        clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
+    }, 1000);
+
+        // $( ".candidateList" ).append("<p class='text-center'>Voting Ends: "+(moment(electionDateEnd).endOf('hour').fromNow()) +"</p>");
+        $( ".candidateList" ).append("<p class='text-center'>Description: "+electionDescription+"</p>");
+        $( ".candidateList" ).append("<p class='text-center'>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
+        $( ".candidateList" ).append("<p class='text-center'>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
+
+});
+
+</script>
 
 </html>
 <!-- end document-->

@@ -13,10 +13,11 @@ class Database_model extends CI_Model {
     }
 
     // SHOW
-    function show($statusColumn, $tableName){
+    function show($statusColumn, $tableName, $dateEnd, $dateToday){
         $this->db->select("*");
         $this->db->from($tableName);
         $this->db->where($statusColumn, "1");
+        $this->db->where("$dateEnd >=", $dateToday);
         $query = $this->db->get();
         $data = $query->result();
         return $data;

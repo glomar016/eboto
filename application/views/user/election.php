@@ -93,6 +93,8 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Hidden Date End</th>
+                                                <th>Hidden Date Start</th>
                                                 <th>Name</th>
                                                 <th>Date Start</th>
                                                 <th>Date End</th>
@@ -314,13 +316,15 @@ $(document).ready(function() {
             "ajax": "<?php echo base_url()?>election/show_election",
             "columns": [
                 { data: "id"},
+                { data: "electionDateEnd"},
+                { data: "electionDateStart"},
                 { data: "electionName"},
                 { data: "electionDateStart", render: function(data, type, row){
                     return moment(data).format('LL');
-                }},
+                }, "orderData":[2]},
                 { data: "electionDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
-                }},
+                }, "orderData":[1]},
                 { data: "electionOrg"},
                 { data: "electionStatus", render: function(data, type, row){
                     if(data == 1){
@@ -335,8 +339,7 @@ $(document).ready(function() {
                 }}
             ],
 
-            
-            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0, 1, 2]}],
             "order": [[0, "desc"]]
         })
     }

@@ -40,6 +40,8 @@ class Election extends CI_Controller {
 		$electionDescription = $this->input->post('electionDescription');
 		$electionDateStart = $this->input->post('electionDateStart');
 		$electionDateEnd = $this->input->post('electionDateEnd');
+		$electionDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($electionDateEnd)));
+
 
 		// making data of assoc array to pass to model
 		$data = array(
@@ -65,6 +67,8 @@ class Election extends CI_Controller {
 		$electionDescription = $this->input->post('editelectionDescription');
 		$electionDateStart = $this->input->post('editelectionDateStart');
 		$electionDateEnd = $this->input->post('editelectionDateEnd');
+		$electionDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($electionDateEnd)));
+
 
 		// making data of assoc array to pass to model
 		$data = array(
@@ -85,10 +89,12 @@ class Election extends CI_Controller {
 	public function show_election()
 	{
 		// loading model that needed
+		$this->load->helper('date');
 		
 		$this->load->model('database_model');
 
-		$data["data"] = $this->database_model->show('electionStatus', "t_election");
+		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
+		$data["data"] = $this->database_model->show('electionStatus', "t_election", "electionDateEnd", $dateToday);
 
 		echo json_encode($data);
 
@@ -120,9 +126,8 @@ class Election extends CI_Controller {
 		$this->load->model('database_model');
 
 		$data['data']= $this->database_model->get($id, 't_election');
-		print_r($data);
 
-		$this->load->view('user/view', $data);
+		$this->load->view('user/election_view', $data);
 	}
 
 }
