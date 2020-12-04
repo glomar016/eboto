@@ -93,6 +93,8 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Hidden Date End</th>
+                                                <th>Hidden Date Start</th>
                                                 <th>Name</th>
                                                 <th>Date Start</th>
                                                 <th>Date End</th>
@@ -120,8 +122,8 @@
     <div class="modal fade" id="contestModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:darkslateblue;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create contest</h3>
+				<div class="modal-header" style=background-color:blue;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Contest</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -135,7 +137,7 @@
                                             <label for="contestName" class=" form-control-label">Contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="contestName" name="contestName" placeholder="Name of Contest" class="form-control">
+                                            <input type="text" id="contestName" name="contestName" placeholder="Name of contest" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -144,7 +146,7 @@
                                             <label for="contestRestriction" class=" form-control-label">Restriction</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <select name="contestRestriction" id="contestRestriction" class="form-control">
+                                            <select name="contestOrg" id="contestOrg" class="form-control">
                                                 <option value="0">Please select your Restriction</option>
                                                 <option value="1">Option #1</option>
                                                 <option value="2">Option #2</option>
@@ -191,6 +193,83 @@
         </div>
     </div>
     <!-- END contest MODAL -->
+
+    <!-- Edit contest MODAL -->
+    <div class="modal fade" id="editcontestModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style=background-color:gold;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update Contest</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="editcontestForm">
+                            <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-trophy"></i>
+                                            <label for="contestName" class=" form-control-label">Contest Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" hidden>
+                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of Contest" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-group"></i>
+                                            <label for="contestRestriction" class=" form-control-label">Restriction</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <select name="editcontestOrg" id="editcontestOrg" class="form-control">
+                                                <option value="0">Please select your Restriction</option>
+                                                <option value="1">Option #1</option>
+                                                <option value="2">Option #2</option>
+                                                <option value="3">Option #3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-comment"></i>
+                                            <label for="contestDescription" class=" form-control-label">Description </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <textarea name="editcontestDescription" id="editcontestDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
+                                            <label for="contestDateStart" class=" form-control-label">Date Start</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="date" id="editcontestDateStart" name="editcontestDateStart" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
+                                            <label for="contestDateEnd" class=" form-control-label">Date End</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="date" id="editcontestDateEnd" name="editcontestDateEnd" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END edit contest MODAL -->
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
@@ -237,25 +316,22 @@ $(document).ready(function() {
             "ajax": "<?php echo base_url()?>contest/show_contest",
             "columns": [
                 { data: "id"},
+                { data: "contestDateEnd"},
+                { data: "contestDateStart"},
                 { data: "contestName"},
                 { data: "contestDateStart", render: function(data, type, row){
                     return moment(data).format('LL');
-                }},
+                }, "orderData":[2]},
                 { data: "contestDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
-                }},
+                }, "orderData":[1]},
                 { data: "contestOrg"},
                 { data: "contestStatus", render: function(data, type, row){
                     if(data == 1){
-<<<<<<< HEAD
-                        return '<div class="btn-group"><button id="pollView" name="'+row['id']+'" title="View" type="button" class="btn btn-primary btn-sm"><i class="zmdi zmdi-eye"></i> </button>'+
-                                '<button id="pollEdit" type="button" class="btn btn-warning btn-sm" title="Edit"> <i class="zmdi zmdi-edit"> </i></button>'+
-                                '<button type="button" class="btn btn-danger btn-sm btn_delete" value="'+row.id+'"   title="Delete"> <i class="zmdi zmdi-delete"> </i></button></div>';
-=======
-                        return return '<div class="btn-group"><button type="button" class="btn btn-primary btn-sm"  title="View">Vote <i class="zmdi zmdi-check-all"></i> </button>';
-                                // '<button type="button" class="btn btn-warning btn-sm" title="Edit"> <i class="zmdi zmdi-edit"> </i></button>'+
-                                // '<button type="button" class="btn btn-danger btn-sm"  title="Delete"> <i class="zmdi zmdi-delete"> </i></button></div>';
->>>>>>> parent of c200c67 (updated w/ sqldriver for migration)
+                        return '<div class="btn-group">'+
+                                '<button class="btn btn-primary btn-sm btn_view" value="'+row.id+'" title="View" type="button" ><i class="zmdi zmdi-eye"></i> </button>'+
+                                '<button class="btn btn-warning btn-sm btn_edit" value="'+row.id+'" title="Edit" type="button" ><i class="zmdi zmdi-edit"></i> </button>'+
+                                '<button class="btn btn-danger btn-sm btn_delete" value="'+row.id+'" title="Delete" type="button"> <i class="zmdi zmdi-delete"> </i></button></div>';
                     }   
                     else{
                         return '<button>Activate</button>';
@@ -263,8 +339,7 @@ $(document).ready(function() {
                 }}
             ],
 
-            
-            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0, 1, 2]}],
             "order": [[0, "desc"]]
         })
     }
@@ -275,34 +350,85 @@ $(document).ready(function() {
         contestDataTable.ajax.url(url).load();
     }
 
+    // view function
+    $(document).on("click", ".btn_view", function(){
+        var id = this.value;
+
+        window.location.href = "<?php echo base_url()?>contest/view_contest/"+id;
+
+    });
+    // end of view function
+
+
     // delete function
     $(document).on("click", ".btn_delete", function(){
         var id = this.value;
-        
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $.ajax({
+                    url: '<?php echo base_url()?>contest/delete_contest',
+                    data: {id: id},
+
+                        success:function(data){
+                            refresh();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your contest has been deleted.',
+                                'success'
+                                )
+                        }
+                });
+
+
+            }
+            })
+       
+    });
+
+    // edit function
+    $(document).on("click", ".btn_edit", function(){
+        var id = this.value;
+
         $.ajax({
-            url: '<?php echo base_url()?>contest/delete_contest',
-            data: {id: id},
+            url: '<?php echo base_url()?>contest/get_contest/'+id,
+            type: "GET",
+            dataType: "JSON",
 
                 success:function(data){
-                    refresh();
-                    Swal.fire({
-                                        title: 'Success!',
-                                        text: 'You successfully deleted a contest.',
-                                        icon: 'success',
-                                        confirmButtonText: 'Ok'
-                                        })
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+                    var row = parsedResponse[0];
+                    $('[name="id"').val(row.id);
+                    $('[name="editcontestName"]').val(row.contestName);
+                    $('[name="editcontestRestriction"]').val(row.contestOrg);
+                    $('[name="editcontestDescription"]').val(row.contestDescription);
+                    $('[name="editcontestDateStart"]').val(row.contestDateStart.slice(0, 10));
+                    $('[name="editcontestDateEnd"]').val(row.contestDateEnd.slice(0, 10));
+                    
+                    $('#editcontestModal').modal('show'); // show bootstrap modal when complete loaded
                 }
-        });
+        })
+       
     });
 
     loadtable();
 
+    // Create contest
     $('#addcontestForm').on('submit', function(e){
                         e.preventDefault();
 
                         var form = $('#addcontestForm');
-                        // var contestDataTable = $('#contestTable').DataTable();
 
+                        
                         // ajax post
                         $.ajax({
                             url: '<?php echo base_url()?>contest/add_contest',
@@ -311,21 +437,76 @@ $(document).ready(function() {
 
                             success:function()
                                     {
-
-                                    refresh();
-                                    $('#contestModal').modal('hide');
                                     
+                                    refresh();
+                                  
                                     Swal.fire({
                                         title: 'Success!',
                                         text: 'You successfully created a contest.',
                                         icon: 'success',
                                         confirmButtonText: 'Ok'
                                         })
-
+                                    
+                                    $('#contestModal').modal('hide');
+                                    $('#contestModal form')[0].reset();
                                         
                                     }
                         });
                 });
+    // END OF // Create contest
+
+    // Update contest
+    $('#editcontestForm').on('submit', function(e){
+                        e.preventDefault();
+
+                        console.log( $( this ).serialize() );
+                        var form = ( $( this ).serialize() );
+
+                        // var form = $('#editcontestForm');
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You are updating an contest!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, update it!'
+                            }).then((result) => {
+                            if (result.isConfirmed) {                         
+                                // ajax post
+                                console.log(form);
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>contest/update_contest',
+                                                type: 'post',
+                                                data: form,
+                                                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                success:function()
+                                                        {
+                                                        
+                                                        refresh();
+                                                    
+                                                        Swal.fire({
+                                                            title: 'Success!',
+                                                            text: 'You successfully updated an contest.',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'Ok'
+                                                            })
+                                                        
+                                                        $('#editcontestModal').modal('hide');
+                                                        $('#editcontestModal form')[0].reset();
+                                                            
+                                                        }
+                                            });
+                                    }       
+                                })
+                });
+
+    // END OF // Update contest
+            
+
+                        
     
 });
 

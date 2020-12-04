@@ -93,6 +93,8 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Hidden Date End</th>
+                                                <th>Hidden Date Start</th>
                                                 <th>Name</th>
                                                 <th>Date Start</th>
                                                 <th>Date End</th>
@@ -120,8 +122,8 @@
     <div class="modal fade" id="pollModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:darkslateblue;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Poll</h3>
+				<div class="modal-header" style=background-color:blue;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create poll</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -135,7 +137,7 @@
                                             <label for="pollName" class=" form-control-label">Poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="pollName" name="pollName" placeholder="Name of Poll" class="form-control">
+                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -144,7 +146,7 @@
                                             <label for="pollRestriction" class=" form-control-label">Restriction</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <select name="pollRestriction" id="pollRestriction" class="form-control">
+                                            <select name="pollOrg" id="pollOrg" class="form-control">
                                                 <option value="0">Please select your Restriction</option>
                                                 <option value="1">Option #1</option>
                                                 <option value="2">Option #2</option>
@@ -191,6 +193,83 @@
         </div>
     </div>
     <!-- END poll MODAL -->
+
+    <!-- Edit poll MODAL -->
+    <div class="modal fade" id="editpollModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style=background-color:gold;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update poll</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="editpollForm">
+                            <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-trophy"></i>
+                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" hidden>
+                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of Poll" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-group"></i>
+                                            <label for="pollRestriction" class=" form-control-label">Restriction</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <select name="editpollOrg" id="editpollOrg" class="form-control">
+                                                <option value="0">Please select your Restriction</option>
+                                                <option value="1">Option #1</option>
+                                                <option value="2">Option #2</option>
+                                                <option value="3">Option #3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-comment"></i>
+                                            <label for="pollDescription" class=" form-control-label">Description </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <textarea name="editpollDescription" id="editpollDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
+                                            <label for="pollDateStart" class=" form-control-label">Date Start</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="date" id="editpollDateStart" name="editpollDateStart" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
+                                            <label for="pollDateEnd" class=" form-control-label">Date End</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="date" id="editpollDateEnd" name="editpollDateEnd" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END edit poll MODAL -->
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
@@ -231,27 +310,28 @@
 <script>
 $(document).ready(function() {
 
-    
-
     function loadtable(){
          pollDataTable = $('#pollTable').DataTable( {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>poll/show_poll",
             "columns": [
                 { data: "id"},
+                { data: "pollDateEnd"},
+                { data: "pollDateStart"},
                 { data: "pollName"},
                 { data: "pollDateStart", render: function(data, type, row){
                     return moment(data).format('LL');
-                }},
+                }, "orderData":[2]},
                 { data: "pollDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
-                }},
+                }, "orderData":[1]},
                 { data: "pollOrg"},
                 { data: "pollStatus", render: function(data, type, row){
                     if(data == 1){
-                        return '<div class="btn-group"><button id="pollView" name="'+row['id']+'" title="View" type="button" class="btn btn-primary btn-sm"><i class="zmdi zmdi-eye"></i> </button>'+
-                                '<button id="pollEdit" type="button" class="btn btn-warning btn-sm" title="Edit"> <i class="zmdi zmdi-edit"> </i></button>'+
-                                '<button type="button" class="btn btn-danger btn-sm btn_delete" value="'+row.id+'"   title="Delete"> <i class="zmdi zmdi-delete"> </i></button></div>';
+                        return '<div class="btn-group">'+
+                                '<button class="btn btn-primary btn-sm btn_view" value="'+row.id+'" title="View" type="button" ><i class="zmdi zmdi-eye"></i> </button>'+
+                                '<button class="btn btn-warning btn-sm btn_edit" value="'+row.id+'" title="Edit" type="button" ><i class="zmdi zmdi-edit"></i> </button>'+
+                                '<button class="btn btn-danger btn-sm btn_delete" value="'+row.id+'" title="Delete" type="button"> <i class="zmdi zmdi-delete"> </i></button></div>';
                     }   
                     else{
                         return '<button>Activate</button>';
@@ -259,52 +339,96 @@ $(document).ready(function() {
                 }}
             ],
 
-            
-            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0, 1, 2]}],
             "order": [[0, "desc"]]
         })
-
-
-            
-
     }
 
     function refresh(){
         var url = "<?php echo base_url()?>poll/show_poll";
 
         pollDataTable.ajax.url(url).load();
-        
     }
+
+    // view function
+    $(document).on("click", ".btn_view", function(){
+        var id = this.value;
+
+        window.location.href = "<?php echo base_url()?>poll/view_poll/"+id;
+
+    });
+    // end of view function
+
+
     // delete function
     $(document).on("click", ".btn_delete", function(){
         var id = this.value;
-        
-        $.ajax({
-            url: '<?php echo base_url()?>poll/delete_poll',
-            data: {id: id},
 
-                success:function(data){
-                    refresh();
-                    Swal.fire({
-                                        title: 'Success!',
-                                        text: 'You successfully deleted a poll.',
-                                        icon: 'success',
-                                        confirmButtonText: 'Ok'
-                                        })
-                }
-        });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $.ajax({
+                    url: '<?php echo base_url()?>poll/delete_poll',
+                    data: {id: id},
+
+                        success:function(data){
+                            refresh();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your poll has been deleted.',
+                                'success'
+                                )
+                        }
+                });
+
+
+            }
+            })
+       
     });
 
-    // load the table
+    // edit function
+    $(document).on("click", ".btn_edit", function(){
+        var id = this.value;
+
+        $.ajax({
+            url: '<?php echo base_url()?>poll/get_poll/'+id,
+            type: "GET",
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+                    var row = parsedResponse[0];
+                    $('[name="id"').val(row.id);
+                    $('[name="editpollName"]').val(row.pollName);
+                    $('[name="editpollRestriction"]').val(row.pollOrg);
+                    $('[name="editpollDescription"]').val(row.pollDescription);
+                    $('[name="editpollDateStart"]').val(row.pollDateStart.slice(0, 10));
+                    $('[name="editpollDateEnd"]').val(row.pollDateEnd.slice(0, 10));
+                    
+                    $('#editpollModal').modal('show'); // show bootstrap modal when complete loaded
+                }
+        })
+       
+    });
+
     loadtable();
 
-
+    // Create poll
     $('#addpollForm').on('submit', function(e){
                         e.preventDefault();
 
                         var form = $('#addpollForm');
-                        // var pollDataTable = $('#pollTable').DataTable();
 
+                        
                         // ajax post
                         $.ajax({
                             url: '<?php echo base_url()?>poll/add_poll',
@@ -313,26 +437,80 @@ $(document).ready(function() {
 
                             success:function()
                                     {
-
-                                    refresh();
-                                    $('#pollModal').modal('hide');
                                     
+                                    refresh();
+                                  
                                     Swal.fire({
                                         title: 'Success!',
                                         text: 'You successfully created a poll.',
                                         icon: 'success',
                                         confirmButtonText: 'Ok'
                                         })
-
+                                    
+                                    $('#pollModal').modal('hide');
+                                    $('#pollModal form')[0].reset();
                                         
                                     }
                         });
                 });
+    // END OF // Create poll
 
+    // Update poll
+    $('#editpollForm').on('submit', function(e){
+                        e.preventDefault();
+
+                        console.log( $( this ).serialize() );
+                        var form = ( $( this ).serialize() );
+
+                        // var form = $('#editpollForm');
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You are updating an poll!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, update it!'
+                            }).then((result) => {
+                            if (result.isConfirmed) {                         
+                                // ajax post
+                                console.log(form);
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>poll/update_poll',
+                                                type: 'post',
+                                                data: form,
+                                                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                success:function()
+                                                        {
+                                                        
+                                                        refresh();
+                                                    
+                                                        Swal.fire({
+                                                            title: 'Success!',
+                                                            text: 'You successfully updated an poll.',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'Ok'
+                                                            })
+                                                        
+                                                        $('#editpollModal').modal('hide');
+                                                        $('#editpollModal form')[0].reset();
+                                                            
+                                                        }
+                                            });
+                                    }       
+                                })
+                });
+
+    // END OF // Update poll
+            
+
+                        
     
-  
 });
 
+        
 
 </script>
 

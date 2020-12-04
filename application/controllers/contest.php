@@ -36,10 +36,12 @@ class Contest extends CI_Controller {
 
 		// getting data from input
 		$contestName = $this->input->post('contestName');
-		// $contestOrg = $this->input->post('contestOrg');
+		$contestOrg = $this->input->post('contestOrg');
 		$contestDescription = $this->input->post('contestDescription');
 		$contestDateStart = $this->input->post('contestDateStart');
 		$contestDateEnd = $this->input->post('contestDateEnd');
+		$contestDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($contestDateEnd)));
+
 
 		// making data of assoc array to pass to model
 		$data = array(
@@ -60,19 +62,24 @@ class Contest extends CI_Controller {
 
 		// getting data from input
 		$id = $this->input->post('id');
-		$contestName = $this->input->post('contestName');
-		// $contestOrg = $this->input->post('contestOrg');
-		$contestDateStart = $this->input->post('contestDateStart');
-		$contestDateEnd = $this->input->post('contestDateEnd');
+		$contestName = $this->input->post('editcontestName');
+		$contestOrg = $this->input->post('editcontestOrg');
+		$contestDescription = $this->input->post('editcontestDescription');
+		$contestDateStart = $this->input->post('editcontestDateStart');
+		$contestDateEnd = $this->input->post('editcontestDateEnd');
+		$contestDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($contestDateEnd)));
+
 
 		// making data of assoc array to pass to model
 		$data = array(
-				"id" => $id, 
-                "contestName" => $contestName, 
-                "contestOrg" => $contestOrg, 
+				"contestName" => $contestName, 
+				"contestDescription" => $contestDescription,
+                // "contestOrg" => $contestOrg, 
                 "contestDateStart" => $contestDateStart,
                 "contestDateEnd" => $contestDateEnd
 		);
+
+		print_r($data);
 
 		// passing data to model
 		$this->database_model->update($id, $data, "t_contest");
@@ -82,29 +89,14 @@ class Contest extends CI_Controller {
 	public function show_contest()
 	{
 		// loading model that needed
+		$this->load->helper('date');
 		
 		$this->load->model('database_model');
 
-		$data["data"] = $this->database_model->show('contestStatus', "t_contest");
-
-	// 	$data = [];
-	// 	foreach($query as $r) {
-	// 		$data[] = array(
-	// 			 $r['contestName'],
-	// 			 $r['contestDescription'],
-	// 			 $r['contestDateStart'],
-	// 			 $r['contestDateEnd'],
-	// 			 $r['contestOrg']
-	// 		);
-	//    }
- 
-	//    $result = array(
-	// 			  "data" => $data
-	// 		 );
+		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
+		$data["data"] = $this->database_model->show('contestStatus', "t_contest", "contestDateEnd", $dateToday);
 
 		echo json_encode($data);
-
-		// $this->load->view('user/contest', $data);
 
 
 	}
@@ -119,5 +111,23 @@ class Contest extends CI_Controller {
 		$this->database_model->delete($id, "contestStatus", "t_contest");
 	}
 
+	public function get_contest($id)
+	{
+
+		$this->load->model('database_model');
+
+		$data = $this->database_model->get($id, 't_contest');
+
+		echo json_encode($data);
+	}
+
+	public function view_contest($id)
+	{
+		$this->load->model('database_model');
+
+		$data['data']= $this->database_model->get($id, 't_contest');
+
+		$this->load->view('user/contest_view', $data);
+	}
 
 }
