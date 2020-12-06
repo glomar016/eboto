@@ -70,33 +70,94 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
-                    <!-- Card Header -->
+                         <!-- Card Header -->
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header" style="background-color: maroon;">
-                                <h1 class="display-4 text-center" style="color: white;"><?php echo $data[0]->contestName?></h1>
-                            </div>
-                            <div class="card-body">
-                                <div class="candidateList">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="col-lg-2" style="background-color: gold;">
-                                            <p style="color:white;" class="text-center">Voting Ends: </p>
-                                            <p style="color:white;" id="liveclock" class="text-center"></p>
+                        <div class="card" style = float:center;>
+                            <div class="card-body" style="background-color: #ffffff;">
+                                    <div class="d-flex justify-content-left">
+                                        <div class="col-lg-3">
+                                            <div style="color:black;" class="text-center">
+                                                <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
+                                                Voting Ends:
+                                                <span class="badge badge-pill badge-warning" id="liveclock">
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <br>
-                                    <!-- <p class="text-center">Description: <?php echo $data[0]->contestDescription?></p>
-                                    <p class="text-center">Date Start: <?php echo date("m-d-Y", strtotime($data[0]->contestDateStart))?></p>
-                                    <p class="text-center">Date End: <?php echo date("m-d-Y", strtotime($data[0]->contestDateEnd))?></p> -->
-                                    <!-- </div> -->
-                                </div>
+                                            <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p>
+                                            <br>
+                                            <br>
+                                            <div class="au-card m-b-30">
+                                            <div class="au-card-inner">
+                                                <h2><?php echo $data[0]->contestName?></h2>
+                                                <!-- <p class="text-center">Description: <?php echo $data[0]->contestDescription?></p>
+                                                <p class="text-center">Date Start: <?php echo date("m-d-Y", strtotime($data[0]->contestDateStart))?></p>
+                                                <p class="text-center">Date End: <?php echo date("m-d-Y", strtotime($data[0]->contestDateEnd))?></p> -->
+                                                <!-- </div> -->
+                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addContestant">   
+                                                <i style=padding:3px; class="fa fa-plus"></i> 
+                                                Add Contestant </button>
+                                            </div>
+                                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  
+    <!-- contestant MODAL -->
+    <div class="modal fade" id="addContestant" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style=background-color:maroon;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Contestant</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="addcandidateForm">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-user"></i>
+                                            <label for="contestantName" class=" form-control-label">Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="contestantName" name="contestantName" placeholder="Your Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-comment"></i>
+                                            <label for="contestantDescription" class=" form-control-label">Description </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                <i style =padding-right:16px; class="fa fa-file-image-o"></i>
+                                                    <label for="contestantImage" class=" form-control-label">Image</label>
+                                                </div>
+                                                <div class="col-4 col-md-8">
+                                                    <input type="file" id="contestantImage" name="contestantImage" class="form-control-file">
+                                                </div>
+                                        </div>
+                                    <div style= float:right;>
+                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END contestant MODAL -->
 
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
