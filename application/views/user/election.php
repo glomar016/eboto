@@ -148,8 +148,8 @@
                                         <div class="col-4 col-md-8">
                                             <select name="electionOrg" id="electionOrg" class="form-control">
                                                 <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
+                                                <option value="1">Public</option>
+                                                <option value="2">COMMITS</option>
                                                 <option value="3">Option #3</option>
                                             </select>
                                         </div>

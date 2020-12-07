@@ -79,16 +79,13 @@
                             <div class="card-body">
                                 <div class="candidateList">
                                     <div class="d-flex justify-content-center">
-                                        <div class="col-lg-2" style="background-color: gold;">
-                                            <p style="color:white;" class="text-center">Voting Ends: </p>
-                                            <p style="color:white;" id="liveclock" class="text-center"></p>
+                                        <div class="col-lg-2">
+                                            <span class="badge badge-primary text-center">Voting Ends: 
+                                                <span id="liveclock" class="badge badge-success text-center"></span>
+                                            </span>
                                         </div>
                                     </div>
                                     <br>
-                                    <!-- <p class="text-center">Description: <?php echo $data[0]->electionDescription?></p>
-                                    <p class="text-center">Date Start: <?php echo date("m-d-Y", strtotime($data[0]->electionDateStart))?></p>
-                                    <p class="text-center">Date End: <?php echo date("m-d-Y", strtotime($data[0]->electionDateEnd))?></p> -->
-                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
@@ -147,7 +144,6 @@ $(document).ready(function(){
         clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
     }, 1000);
 
-        // $( ".candidateList" ).append("<p class='text-center'>Voting Ends: "+(moment(electionDateEnd).endOf('hour').fromNow()) +"</p>");
         $( ".candidateList" ).append("<p class='text-center'>Description: "+electionDescription+"</p>");
         $( ".candidateList" ).append("<p class='text-center'>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
         $( ".candidateList" ).append("<p class='text-center'>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
