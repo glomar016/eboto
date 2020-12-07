@@ -70,32 +70,76 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
-                         <!-- Card Header -->
+                    <!-- Card Header -->
                     <div class="col-lg-12">
                         <div class="card" style = float:center;>
+                            <div class="card-header" style="background-color: #ffffff;">
+                                <h1 class="h2 text-left" style="color:black;"><?php echo $data[0]->electionName?></h1>
+                            </div>
                             <div class="card-body" style="background-color: #ffffff;">
+                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addCandidate">   
+                                <i style=padding:3px; class="fa fa-plus"></i> 
+                                Add Candidate </button>
+                                <img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png style=padding-left:50px;>
+                                <br>
+                                <br>
+                            <div class="card border-info mb-3" style="max-width: 17rem;">
+                            <div class="card-header text-center">Information of <?php echo $data[0]->electionName?></div>
+                            <div class="card-body text-info">
+                                <h5 class="candidateList"></h5>
+                            </div>
+                            </div>
                                     <div class="d-flex justify-content-left">
-                                        <div class="col-lg-3">
-                                            <div style="color:black;" class="text-center">
-                                                <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
-                                                Voting Ends:
-                                                <span class="badge badge-pill badge-warning" id="liveclock">
-                                                </span>
+                                        <div class="col-lg-3" style="background-color: #800000;">
+                                            <div style="color:white;" class="text-center">
+                                            <i style=padding:3px;color:yellow; class="fa fa-clock-o"></i> 
+                                            Voting Ends:
+                                            <span class="badge badge-pill badge-warning" id="liveclock">
+                                            </span>
+                                            
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
-                                            <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p>
-                                            <br>
-                                            <br>
-                                            <div class="au-card m-b-30">
-                                            <div class="au-card-inner">
-                                                <h2><?php echo $data[0]->electionName?></h2>
-                                                <!-- <h5 class="candidateList"></h5> -->
-                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addCandidate">   
-                                                <i style=padding:3px; class="fa fa-plus"></i> 
-                                                Add Candidate </button>
-                                            </div>
-                                            </div>
+                                                           <!-- Data Table Content -->
+                        <div class="au-card m-b-30">
+                            <div class="au-card-inner">
+
+                                <!-- DATA TABLE -->
+                                
+                                <div class="table-data__tool">
+                                        <h2>List of Election</h2>
+                                    <div class="table-data__tool-right">
+                                        <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#electionModal">   
+                                        <i style=padding:3px; class="fa fa-plus"></i> 
+                                        Create Election </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table id="electionTable" class="table table-data3" style="width:50%"> 
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Date Start</th>
+                                                <th>Date End</th>
+                                                <th>Restriction</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                                </div>  
+                            </div>
+                        </div>
+                        <!-- End of Data Table Content -->
+                                    <br>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -175,15 +219,6 @@
                                             <input type="date" id="candidateBirthday" name="candidateBirthday" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="candidateImage" class=" form-control-label">Image</label>
-                                                </div>
-                                                <div class="col-4 col-md-8">
-                                                    <input type="file" id="candidateImage" name="candidateImage" class="form-control-file">
-                                                </div>
-                                    </div>
                                     <div style= float:right;>
                                         <input style=background-color:#28a745; type="submit" class="btn btn-primary">
                                     </div>
@@ -246,6 +281,7 @@ $(document).ready(function(){
         clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
     }, 1000);
 
+        // $( ".candidateList" ).append("<p class='text-center'>Voting Ends: "+(moment(electionDateEnd).endOf('hour').fromNow()) +"</p>");
         $( ".candidateList" ).append("<p class='text-center'>Description: "+electionDescription+"</p>");
         $( ".candidateList" ).append("<p class='text-center'>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
         $( ".candidateList" ).append("<p class='text-center'>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");

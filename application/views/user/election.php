@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
-                                    <table id="electionTable" class="table table-data3" stytle="width:100%"> 
+                                    <table id="electionTable" class="table table-data3" style="width:100%"> 
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Id</th>
@@ -122,7 +122,7 @@
     <div class="modal fade" id="electionModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:blue;>
+				<div class="modal-header" style=background-color:#900000;>
 							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Election</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
