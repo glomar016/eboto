@@ -84,17 +84,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                            <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p>
+                                            <!-- <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p> -->
                                             <br>
                                             <br>
                                             <div class="au-card m-b-30">
-                                            <div class="au-card-inner">
-                                                <h2><?php echo $data[0]->electionName?></h2>
-                                                <!-- <h5 class="candidateList"></h5> -->
-                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addCandidate">   
-                                                <i style=padding:3px; class="fa fa-plus"></i> 
-                                                Add Candidate </button>
-                                            </div>
+                                                <div class="au-card-inner candidateList">
+                                                    <h2><?php echo $data[0]->electionName?></h2>
+                                                    <!-- <h5 class="candidateList"></h5> -->
+                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addCandidate">   
+                                                    <i style=padding:3px; class="fa fa-plus"></i> 
+                                                    Add Candidate </button>
+                                                </div>
                                             </div>
                             </div>
                         </div>
@@ -246,9 +246,9 @@ $(document).ready(function(){
         clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
     }, 1000);
 
-        $( ".candidateList" ).append("<p class='text-center'>Description: "+electionDescription+"</p>");
-        $( ".candidateList" ).append("<p class='text-center'>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
-        $( ".candidateList" ).append("<p class='text-center'>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
+        $( ".candidateList" ).append("<p>Description: "+electionDescription+"</p>");
+        $( ".candidateList" ).append("<p>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
+        $( ".candidateList" ).append("<p>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
 
 });
 

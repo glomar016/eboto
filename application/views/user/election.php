@@ -207,7 +207,7 @@
                 <div class="card">   
                         <div class="card-body card-block">
                             <form action="" method="post" id="editelectionForm">
-                            <div class="row form-group">
+                                <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
                                             <label for="electionName" class=" form-control-label">Election Name</label>
@@ -428,7 +428,6 @@ $(document).ready(function() {
 
                         var form = $('#addelectionForm');
 
-                        
                         // ajax post
                         $.ajax({
                             url: '<?php echo base_url()?>election/add_election',

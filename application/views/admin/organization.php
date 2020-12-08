@@ -29,9 +29,27 @@
     <link href="<?php echo base_url()?>resources/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url()?>resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url()?>resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
     <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
+
+    <!-- Jquery-->
+    <script src="<?php echo base_url()?>resources/js/jquery-3.5.1.min.js"></script>
+
+    <!-- Data Tables JS-->
+    <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
+
+    <!-- Data Time JS-->
+    <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
+
+    <!-- Moment w locales JS-->
+    <script src="<?php echo base_url()?>resources/js/moment.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="<?php echo base_url()?>resources/js/sweetalert2@10.js"></script>
 
 </head>
 <body class="animsition">
@@ -61,7 +79,7 @@
                                         <h3 style ="color:white;"> Organization </h3>
                                     </div>
                                     <div class="card-body">
-                                        <button  type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#organization">   
+                                        <button  type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#organizationModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
                                         Create Organization </button>
                                     </div>
@@ -77,60 +95,47 @@
 
     <!-- ORGANIZATION MODAL -->
 
-    <div class="modal fade" id="organization" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="organizationModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:maroon;>
-							<h5 class="modal-title" id="largeModalLabel" style=color:white;>Create Organization</h5>
+				<div class="modal-header" style=background-color:#900000;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create organization</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
                 </div>
-
-                        <div class="card">
-
-                                <div class="card-body card-block">
-                                    <form action="" method="post" class="">
-                                            <div class="row form-group">
-                                                <div class="col col-md-4">
-                                                    <i style =padding-right:16px; class="fa fa-users"></i>
-                                                    <label for="orgName" class=" form-control-label">Organization Name</label>
-                                                </div>
-                                                <div class="col-4 col-md-7">
-                                                    <input type="text" id="orgName" name="orgName" placeholder="Name of Organization" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-4">
-                                                <i style =padding-right:16px; class="fa fa-comment"></i>
-                                                    <label for="orgDescription" class=" form-control-label">Description </label>
-                                                </div>
-                                                <div class="col-4 col-md-7">
-                                                    <textarea name="orgDescription" id="orgDescription" rows="4" placeholder="Content" class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-4">
-                                                <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="orgImg" class=" form-control-label">Organization Image</label>
-                                                </div>
-                                                <div class="col-4 col-md-7">
-                                                    <input type="file" id="orgImg" name="orgImg" class="form-control-file">
-                                                </div>
-                                            </div>
-                                            <div style = float:right;>
-                                                <button style=background-color:#28a745; type="button" class="btn btn-primary">Confirm</button>
-                                            </div>
-
-
-                                    </form>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="addorganizationForm">
+                            <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-trophy"></i>
+                                            <label for="organizationName" class=" form-control-label">Organization Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="organizationName" name="organizationName" placeholder="Name of Organization" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
+                                            <label for="organizationLogo" class=" form-control-label">Organization Logo</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                        <input type="file" name="organizationLogo" id="organizationLogo" accept="image/*" size="20" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input type="submit" name="upload" id="upload" value="Upload" class="btn btn-primary">
+                                    </div>
                                 </div>
-                          
+                            </form>
                         </div>
-						
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </div>r
 
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
@@ -139,7 +144,7 @@
     </div>
 
     <!-- Jquery JS-->
-    <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script>
+    <!-- <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script> -->
     <!-- Bootstrap JS-->
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -163,6 +168,37 @@
     <script src="<?php echo base_url()?>resources/js/main.js"></script>
 
 </body>
+
+<script>
+$(document).ready(function(){
+    $('#addorganizationForm').on('submit', function(e){
+            e.preventDefault();
+            if($('#organizationLogo').val() == ''){
+                alert("Please select the file");
+            }
+            else
+            {
+                $.ajax({
+                    url: '<?php echo base_url()?>admin/organization/add_organization',
+                    type:"post",
+                    data: new FormData(this),
+                    processData:false,
+                    contentType:false,
+
+                    success: function(data){
+                        $('#addorganizationForm').html(data); 
+                    }
+            })
+
+            }
+            
+    });
+
+});
+
+
+</script>
+
 
 </html>
 <!-- end document-->

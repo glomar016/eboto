@@ -20,9 +20,30 @@ class Organization extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->model('database_model');
 		$this->load->view('admin/organization');
-    }
-    
+	}
+	
+	public function add_organization(){
+		// loading model that needed
+		$this->load->model('database_model');
+
+		if(isset($_FILES["organizationLogo"]["name"]))
+		{
+			$config['upload_path'] = './resources/images';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			$this->load->library('upload', $config);
+			
+			if(!$this->upload->do_upload('organizationLogo'))
+			{
+				echo $this->upload->display_errors();
+			}
+			else
+			{
+				$data = $this->upload->data();
+			}
+		}
+	}
     
 
 }
