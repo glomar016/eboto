@@ -74,18 +74,32 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- CONTENT HEADER -->
-                        <div class="card" style=height:800px>
-                                    <div class="card-header" style =background-color:maroon>
-                                        <h3 style ="color:white;"> Organization </h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <button  type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#organizationModal">   
+                        <!-- DATA TABLE -->
+                                
+                        <div class="table-data__tool">
+                                        <h2>List of Organization</h2>
+                                    <div class="table-data__tool-right">
+                                        <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#organizationModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
                                         Create Organization </button>
                                     </div>
-                                    <div class="card-body card-block">
-                                        <div class="has-success form-group">
-                                    </div>
+                                </div>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table id="organizationTable" class="table table-data3" style="width:100%"> 
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Logo</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
                         </div>
                     </div>
                 </div>
@@ -135,8 +149,54 @@
                 </div>
             </div>
         </div>
-    </div>r
+    </div>
+<!-- END OF CREATE MODAL -->
 
+<!-- UPDATE MODAL -->
+
+    <div class="modal fade" id="editorganizationModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style=background-color:#900000;>
+                            <h3 class="modal-title" id="largeModalLabel" style=color:white;>Update Organization</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="editorganizationForm">
+                            <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-trophy"></i>
+                                            <label for="editorganizationName" class=" form-control-label">Organization Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" hidden>
+                                            <input type="text" id="editorganizationName" name="editorganizationName" placeholder="Name of Organization" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
+                                            <label for="editorganizationLogo" class=" form-control-label">Organization Logo</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                        <input type="file" name="editorganizationLogo" id="editorganizationLogo" accept="image/*" size="20" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input type="submit" name="upload" id="upload" value="Upload" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF UPDATE MODAL -->
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
@@ -171,10 +231,161 @@
 
 <script>
 $(document).ready(function(){
+
+    function loadtable(){
+         organizationDataTable = $('#organizationTable').DataTable( {
+            "pageLength": 10,
+            "ajax": "<?php echo base_url()?>admin/organization/show_organization",
+            "columns": [
+                { data: "id"},
+                { data: "orgLogo"},
+                { data: "orgName"},
+                { data: "orgStatus", render: function(data, type, row){
+                    if(data == 1){
+                        return '<div class="btn-group">'+
+                                '<button class="btn btn-primary btn-sm btn_view" value="'+row.id+'" title="View" type="button" ><i class="zmdi zmdi-eye"></i> </button>'+
+                                '<button class="btn btn-warning btn-sm btn_edit" value="'+row.id+'" title="Edit" type="button" ><i class="zmdi zmdi-edit"></i> </button>'+
+                                '<button class="btn btn-danger btn-sm btn_delete" value="'+row.id+'" title="Delete" type="button"> <i class="zmdi zmdi-delete"> </i></button></div>';
+                    }   
+                    else{
+                        return '<button>Activate</button>';
+                    }
+                }}
+            ],
+
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0, 1]}],
+            "order": [[0, "desc"]]
+        })
+    }
+
+    function refresh(){
+        var url = "<?php echo base_url()?>admin/organization/show_organization";
+
+        organizationDataTable.ajax.url(url).load();
+    }
+
+    $(document).on("click", ".btn_delete", function(){
+        var id = this.value;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $.ajax({
+                    url: '<?php echo base_url()?>admin/organization/delete_organization',
+                    data: {id: id},
+
+                        success:function(data){
+                            refresh();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your organization has been deleted.',
+                                'success'
+                                )
+                        }
+                });
+
+
+            }
+            })
+       
+    });
+
+    // edit function
+    $(document).on("click", ".btn_edit", function(){
+        var id = this.value;
+
+        $.ajax({
+            url: '<?php echo base_url()?>/admin/organization/get_organization/'+id,
+            type: "GET",
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+                    var row = parsedResponse[0];
+                    $('[name="id"').val(row.id);
+                    $('[name="editorganizationName"]').val(row.orgName);
+                    
+                    $('#editorganizationModal').modal('show'); // show bootstrap modal when complete loaded
+                }
+        })
+       
+    });
+
+    // Update organization
+    $('#editorganizationForm').on('submit', function(e){
+                        e.preventDefault();
+                        var id = this.value;
+
+                        if($('#editorganizationLogo').val() == ''){
+                            Swal.fire({
+                                        title: 'Warning!',
+                                        text: 'Please select an image.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                            })
+                        }
+                        else
+                        {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You are updating an organization!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, update it!'
+                            }).then((result) => {
+                            if (result.isConfirmed) {                         
+                                // ajax post
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>admin/organization/update_organization',
+                                                type:"post",
+                                                data: new FormData(this),
+                                                processData:false,
+                                                contentType:false,
+
+                                                success:function()
+                                                        {
+                                                        
+                                                        refresh();
+                                                    
+                                                        Swal.fire({
+                                                            title: 'Success!',
+                                                            text: 'You successfully updated an organization.',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'Ok'
+                                                            })
+                                                        
+                                                        $('#editorganizationModal').modal('hide');
+                                                        $('#editorganizationModal form')[0].reset();
+                                                            
+                                                        }
+                                            });
+                                    }       
+                                })
+                        }
+                });
+
+    loadtable();
+
+
     $('#addorganizationForm').on('submit', function(e){
             e.preventDefault();
             if($('#organizationLogo').val() == ''){
-                alert("Please select the file");
+                Swal.fire({
+                    title: 'Warning!',
+                    text: 'Please select an image.',
+                    icon: 'warning',
+                    confirmButtonText: 'Ok'
+                })
             }
             else
             {
@@ -186,6 +397,8 @@ $(document).ready(function(){
                     contentType:false,
 
                     success: function(data){
+
+                        refresh()
                         Swal.fire({
                                 title: 'Success!',
                                 text: 'You successfully created an organization.',
