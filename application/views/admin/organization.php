@@ -186,7 +186,15 @@ $(document).ready(function(){
                     contentType:false,
 
                     success: function(data){
-                        $('#addorganizationForm').html(data); 
+                        Swal.fire({
+                                title: 'Success!',
+                                text: 'You successfully created an organization.',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                                })
+                            
+                                $('#organizationModal').modal('hide');
+                                $('#organizationModal form')[0].reset();
                     }
             })
 

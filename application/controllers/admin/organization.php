@@ -24,14 +24,19 @@ class Organization extends CI_Controller {
 		$this->load->view('admin/organization');
 	}
 	
-	public function add_organization(){
+	public function add_organization()
+	{
 		// loading model that needed
 		$this->load->model('database_model');
+		$organizationName = $this->input->post('organizationName');
+
 
 		if(isset($_FILES["organizationLogo"]["name"]))
 		{
 			$config['upload_path'] = './resources/images';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			
+			$this->load->library('image_lib');
 			$this->load->library('upload', $config);
 			
 			if(!$this->upload->do_upload('organizationLogo'))
@@ -41,6 +46,24 @@ class Organization extends CI_Controller {
 			else
 			{
 				$data = $this->upload->data();
+				$configer =  array(
+					'image_library'   => 'gd2',
+					'source_image'    =>  $data['full_path'],
+					'maintain_ratio'  =>  FALSE,
+					'width'           =>  250,
+					'height'          =>  250,
+				  );
+				$this->image_lib->clear();
+				$this->image_lib->initialize($configer);
+				$this->image_lib->resize();
+
+				$insert_data = array(
+					'orgName' => $organizationName,
+                    'orgLogo' => $data['file_name'],
+                    // 'path' => $data['full_path']
+					 );
+					 
+				$this->database_model->create($insert_data, "r_org");
 			}
 		}
 	}
