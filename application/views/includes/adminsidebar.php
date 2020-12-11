@@ -17,11 +17,15 @@
                         </li>
                         <li <?php if($this->router->fetch_class() == 'contest') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/contest">
-                                <i class="fas fa-bar-chart-o"></i>Contest</a>
+                                <i class="fas fa-trophy"></i>Contest</a>
+                        </li>
+                        <li <?php if($this->router->fetch_class() == 'poll') {?> class="active has-sub" <?php } ?>> 
+                            <a href="<?php echo base_url()?>admin/polll">
+                                <i class="fas fa-bar-chart-o"></i>Poll</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'organization') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/organization">
-                                <i class="fas fa-trophy"></i>Organization</a>
+                                <i class="fas fa-users"></i>Organization</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'userrole') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/userrole">
