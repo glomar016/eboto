@@ -130,7 +130,7 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="addcontestForm">
+                            <form action="" method="post" id="addcontestForm" name="addcontestForm">
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="editcontestForm">
+                            <form action="" method="post" id="editcontestForm" name="editcontestForm">
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
@@ -422,92 +422,89 @@ $(document).ready(function() {
 
     loadtable();
 
-    // Create contest
-    $('#addcontestForm').on('submit', function(e){
-                        e.preventDefault();
-
-                        var form = $('#addcontestForm');
-
-                        
-                        // ajax post
-                        $.ajax({
-                            url: '<?php echo base_url()?>admin/contest/add_contest',
-                            type: 'post',
-                            data: form.serialize(),
-
-                            success:function()
-                                    {
-                                    
-                                    refresh();
-                                  
-                                    Swal.fire({
-                                        title: 'Success!',
-                                        text: 'You successfully created a contest.',
-                                        icon: 'success',
-                                        confirmButtonText: 'Ok'
-                                        })
-                                    
-                                    $('#contestModal').modal('hide');
-                                    $('#contestModal form')[0].reset();
-                                        
-                                    }
-                        });
-                });
-    // END OF // Create contest
-
     // Update contest
     $('#editcontestForm').on('submit', function(e){
                         e.preventDefault();
 
-                        console.log( $( this ).serialize() );
-                        var form = ( $( this ).serialize() );
+                        var editcontestName = document.editcontestForm.editcontestName.value;
+                        var editcontestDateStart = document.editcontestForm.editcontestDateStart.value;
+                        var editcontestDateEnd = document.editcontestForm.editcontestDateEnd.value;
 
-                        // var form = $('#editcontestForm');
+                        var dateStart = new Date(editcontestDateStart);
+                        var dateEnd = new Date(editcontestDateEnd);
+                        var today = new Date();
+                        
+                        if(editcontestName == '' || editcontestDateStart == '' || editcontestDateEnd == ''){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Please fill out required field.',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                        }
+                        else{
+                        
+                            if(dateStart < today || dateStart >= dateEnd){
+                                Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Invalid Date Start and Date End',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                            }
+                            
+                            else{
+                           
+                            // ajax call
+                            console.log( $( this ).serialize() );
+                            var form = ( $( this ).serialize() );
 
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You are updating an contest!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, update it!'
-                            }).then((result) => {
-                            if (result.isConfirmed) {                         
-                                // ajax post
-                                console.log(form);
-                                            $.ajax({
-                                                url: '<?php echo base_url()?>admin/contest/update_contest',
-                                                type: 'post',
-                                                data: form,
-                                                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            // var form = $('#editcontestForm');
 
-                                                success:function()
-                                                        {
-                                                        
-                                                        refresh();
-                                                    
-                                                        Swal.fire({
-                                                            title: 'Success!',
-                                                            text: 'You successfully updated an contest.',
-                                                            icon: 'success',
-                                                            confirmButtonText: 'Ok'
-                                                            })
-                                                        
-                                                        $('#editcontestModal').modal('hide');
-                                                        $('#editcontestModal form')[0].reset();
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: "You are updating an contest!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, update it!'
+                                }).then((result) => {
+                                if (result.isConfirmed) {                         
+                                    // ajax post
+                                    console.log(form);
+                                                $.ajax({
+                                                    url: '<?php echo base_url()?>admin/contest/update_contest',
+                                                    type: 'post',
+                                                    data: form,
+                                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                    success:function()
+                                                            {
                                                             
-                                                        }
-                                            });
-                                    }       
-                                })
+                                                            refresh();
+                                                        
+                                                            Swal.fire({
+                                                                title: 'Success!',
+                                                                text: 'You successfully updated an contest.',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ok'
+                                                                })
+                                                            
+                                                            $('#editcontestModal').modal('hide');
+                                                            $('#editcontestModal form')[0].reset();
+                                                                
+                                                            }
+                                                });
+                                }
+                            })
+                            // end of ajax call
+                        }
+                    }
                 });
 
     // END OF // Update contest
             
-
-                        
-    
 });
 
         

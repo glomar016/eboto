@@ -20,7 +20,7 @@
                                 <i class="fas fa-trophy"></i>Contest</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'poll') {?> class="active has-sub" <?php } ?>> 
-                            <a href="<?php echo base_url()?>admin/polll">
+                            <a href="<?php echo base_url()?>admin/poll">
                                 <i class="fas fa-bar-chart-o"></i>Poll</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'organization') {?> class="active has-sub" <?php } ?>> 

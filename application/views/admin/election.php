@@ -130,7 +130,7 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="addelectionForm">
+                            <form action="" method="post" name="addelectionForm" id="addelectionForm">
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="editelectionForm">
+                            <form action="" method="post" id="editelectionForm" name="editelectionForm">
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
@@ -422,87 +422,152 @@ $(document).ready(function() {
 
     loadtable();
 
-    // Create Election
+    // Create election
     $('#addelectionForm').on('submit', function(e){
                         e.preventDefault();
 
-                        var form = $('#addelectionForm');
+                        var electionName = document.addelectionForm.electionName.value;
+                        var electionDateStart = document.addelectionForm.electionDateStart.value;
+                        var electionDateEnd = document.addelectionForm.electionDateEnd.value;
 
-                        // ajax post
-                        $.ajax({
-                            url: '<?php echo base_url()?>admin/election/add_election',
-                            type: 'post',
-                            data: form.serialize(),
+                        var dateStart = new Date(electionDateStart);
+                        var dateEnd = new Date(electionDateEnd);
+                        var today = new Date();
 
-                            success:function()
-                                    {
-                                    
-                                    refresh();
-                                  
-                                    Swal.fire({
-                                        title: 'Success!',
-                                        text: 'You successfully created a election.',
-                                        icon: 'success',
-                                        confirmButtonText: 'Ok'
-                                        })
-                                    
-                                    $('#electionModal').modal('hide');
-                                    $('#electionModal form')[0].reset();
+                        if(electionName == '' || electionDateStart == '' || electionDateEnd == ''){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Please fill out required field.',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                        }
+                        else{
+
+                            if(dateStart < today || dateStart >= dateEnd){
+                                Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Invalid Date Start and Date End',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                            }
+                            
+                            else{
+                           
+                            // ajax call
+                                var form = $('#addelectionForm');                                
+                                // ajax post
+                                $.ajax({
+                                    url: '<?php echo base_url()?>admin/election/add_election',
+                                    type: 'post',
+                                    data: form.serialize(),
+
+                                    success:function()
+                                            {
+                                            
+                                            refresh();
                                         
-                                    }
-                        });
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'You successfully created a election.',
+                                                icon: 'success',
+                                                confirmButtonText: 'Ok'
+                                                })
+                                            
+                                            $('#electionModal').modal('hide');
+                                            $('#electionModal form')[0].reset();
+                                                
+                                            }
+                                });
+                                // end of ajax call
+                            }   
+                        }
                 });
-    // END OF // Create Election
+    // END OF // Create election
 
-    // Update Election
+    // Update election
     $('#editelectionForm').on('submit', function(e){
                         e.preventDefault();
 
-                        console.log( $( this ).serialize() );
-                        var form = ( $( this ).serialize() );
+                        var editelectionName = document.editelectionForm.editelectionName.value;
+                        var editelectionDateStart = document.editelectionForm.editelectionDateStart.value;
+                        var editelectionDateEnd = document.editelectionForm.editelectionDateEnd.value;
 
-                        // var form = $('#editelectionForm');
+                        var dateStart = new Date(editelectionDateStart);
+                        var dateEnd = new Date(editelectionDateEnd);
+                        var today = new Date();
+                        
+                        if(editelectionName == '' || editelectionDateStart == '' || editelectionDateEnd == ''){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Please fill out required field.',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                        }
+                        else{
+                        
+                            if(dateStart < today || dateStart >= dateEnd){
+                                Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Invalid Date Start and Date End',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                            }
+                            
+                            else{
+                           
+                            // ajax call
+                            console.log( $( this ).serialize() );
+                            var form = ( $( this ).serialize() );
 
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You are updating an election!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, update it!'
-                            }).then((result) => {
-                            if (result.isConfirmed) {                         
-                                // ajax post
-                                console.log(form);
-                                            $.ajax({
-                                                url: '<?php echo base_url()?>admin/election/update_election',
-                                                type: 'post',
-                                                data: form,
-                                                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            // var form = $('#editelectionForm');
 
-                                                success:function()
-                                                        {
-                                                        
-                                                        refresh();
-                                                    
-                                                        Swal.fire({
-                                                            title: 'Success!',
-                                                            text: 'You successfully updated an election.',
-                                                            icon: 'success',
-                                                            confirmButtonText: 'Ok'
-                                                            })
-                                                        
-                                                        $('#editelectionModal').modal('hide');
-                                                        $('#editelectionModal form')[0].reset();
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: "You are updating an election!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, update it!'
+                                }).then((result) => {
+                                if (result.isConfirmed) {                         
+                                    // ajax post
+                                    console.log(form);
+                                                $.ajax({
+                                                    url: '<?php echo base_url()?>admin/election/update_election',
+                                                    type: 'post',
+                                                    data: form,
+                                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                    success:function()
+                                                            {
                                                             
-                                                        }
-                                            });
-                                    }       
-                                })
+                                                            refresh();
+                                                        
+                                                            Swal.fire({
+                                                                title: 'Success!',
+                                                                text: 'You successfully updated an election.',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ok'
+                                                                })
+                                                            
+                                                            $('#editelectionModal').modal('hide');
+                                                            $('#editelectionModal form')[0].reset();
+                                                                
+                                                            }
+                                                });
+                                }
+                            })
+                            // end of ajax call
+                        }
+                    }
                 });
 
-    // END OF // Update Election
+    // END OF // Update election
             
 
                         
