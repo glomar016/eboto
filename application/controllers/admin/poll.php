@@ -23,7 +23,7 @@ class Poll extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-		$this->load->view('user/poll');
+		$this->load->view('admin/poll');
 
     }
 	
@@ -127,7 +127,7 @@ class Poll extends CI_Controller {
 
 		$data['data']= $this->database_model->get($id, 't_poll');
 
-		$this->load->view('user/poll_view', $data);
+		$this->load->view('admin/poll_view', $data);
 	}
 
 }

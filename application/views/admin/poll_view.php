@@ -57,7 +57,7 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?php $this->load->view('includes/sidebar.php'); ?>
+        <?php $this->load->view('includes/adminsidebar.php'); ?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->

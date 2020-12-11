@@ -23,7 +23,7 @@ class Election extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-		$this->load->view('user/election');
+		$this->load->view('admin/election');
 
     }
 	
@@ -127,7 +127,7 @@ class Election extends CI_Controller {
 
 		$data['data']= $this->database_model->get($id, 't_election');
 
-		$this->load->view('user/election_view', $data);
+		$this->load->view('admin/election_view', $data);
 	}
 
 }

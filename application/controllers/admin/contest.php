@@ -23,7 +23,7 @@ class Contest extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-		$this->load->view('user/contest');
+		$this->load->view('admin/contest');
 
     }
 	
@@ -127,7 +127,7 @@ class Contest extends CI_Controller {
 
 		$data['data']= $this->database_model->get($id, 't_contest');
 
-		$this->load->view('user/contest_view', $data);
+		$this->load->view('admin/contest_view', $data);
 	}
 
 }

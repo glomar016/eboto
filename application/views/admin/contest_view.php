@@ -57,7 +57,7 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?php $this->load->view('includes/sidebar.php'); ?>
+        <?php $this->load->view('includes/adminsidebar.php'); ?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -84,17 +84,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                            <!-- <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p> -->
+                                            <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p>
                                             <br>
                                             <br>
                                             <div class="au-card m-b-30">
-                                                <div class="au-card-inner candidateList">
-                                                    <h2><?php echo $data[0]->electionName?></h2>
-                                                    <!-- <h5 class="candidateList"></h5> -->
-                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addCandidate">   
-                                                    <i style=padding:3px; class="fa fa-plus"></i> 
-                                                    Add Candidate </button>
-                                                </div>
+                                            <div class="au-card-inner">
+                                                <h2><?php echo $data[0]->contestName?></h2>
+                                                <!-- <p class="text-center">Description: <?php echo $data[0]->contestDescription?></p>
+                                                <p class="text-center">Date Start: <?php echo date("m-d-Y", strtotime($data[0]->contestDateStart))?></p>
+                                                <p class="text-center">Date End: <?php echo date("m-d-Y", strtotime($data[0]->contestDateEnd))?></p> -->
+                                                <!-- </div> -->
+                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addContestant">   
+                                                <i style=padding:3px; class="fa fa-plus"></i> 
+                                                Add Contestant </button>
+                                            </div>
                                             </div>
                             </div>
                         </div>
@@ -102,13 +105,13 @@
                 </div>
             </div>
         </div>
-    </div> 
-    <!-- candidate MODAL -->
-    <div class="modal fade" id="addCandidate" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+    </div>  
+    <!-- contestant MODAL -->
+    <div class="modal fade" id="addContestant" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:maroon;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Candidate</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Contestant</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -119,71 +122,30 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateFirstName" class=" form-control-label">First Name</label>
+                                            <label for="contestantName" class=" form-control-label">Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="candidateFirstName" name="candidateFirstName" placeholder="Your First Name" class="form-control">
+                                            <input type="text" id="contestantName" name="contestantName" placeholder="Your Name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateMiddleName" class=" form-control-label">Middle Name</label>
+                                        <i style =padding-right:16px; class="fa fa-comment"></i>
+                                            <label for="contestantDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="candidateMiddleName" name="candidateMiddleName" placeholder="Your Middle Name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateLastName" class=" form-control-label">Last Name</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <input type="text" id="candidateLastName" name="candidateLastName" placeholder="Your Last Name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-address-card"></i>
-                                            <label for="candidatePosition" class=" form-control-label">Position</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <input type="text" id="candidatePosition" name="candidatePosition" placeholder="Your Position" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-group"></i>
-                                            <label for="candidateCourse" class=" form-control-label">Restriction</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <select name="candidateCourse" id="candidateCourse" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
-                                            <label for="candidateBirthday" class=" form-control-label">Birthday</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <input type="date" id="candidateBirthday" name="candidateBirthday" class="form-control">
+                                            <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Content" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                                 <div class="col col-md-3">
                                                 <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="candidateImage" class=" form-control-label">Image</label>
+                                                    <label for="contestantImage" class=" form-control-label">Image</label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
-                                                    <input type="file" id="candidateImage" name="candidateImage" class="form-control-file">
+                                                    <input type="file" id="contestantImage" name="contestantImage" class="form-control-file">
                                                 </div>
-                                    </div>
+                                        </div>
                                     <div style= float:right;>
                                         <input style=background-color:#28a745; type="submit" class="btn btn-primary">
                                     </div>
@@ -195,7 +157,7 @@
             </div>
         </div>
     </div>
-    <!-- END candidate MODAL -->
+    <!-- END contestant MODAL -->
 
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
@@ -233,22 +195,23 @@
 <script>
 $(document).ready(function(){
 
-    var electionName = "<?php echo $data[0]->electionName ?>"
-    var electionDateStart = "<?php echo $data[0]->electionDateStart ?>"
-    var electionDateEnd = "<?php echo $data[0]->electionDateEnd ?>"
-    var electionDescription = "<?php echo $data[0]->electionDescription ?>"
+    var contestName = "<?php echo $data[0]->contestName ?>"
+    var contestDateStart = "<?php echo $data[0]->contestDateStart ?>"
+    var contestDateEnd = "<?php echo $data[0]->contestDateEnd ?>"
+    var contestDescription = "<?php echo $data[0]->contestDescription ?>"
 
 
     const clock = document.getElementById('liveclock');
-    // $( ".candidateList" ).append("<p>"+electionName+"</p>");
+    // $( ".candidateList" ).append("<p>"+contestName+"</p>");
     setInterval(() => {
         // clock.textContent 
-        clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
+        clock.textContent = moment(contestDateEnd).endOf('seconds').fromNow();
     }, 1000);
 
-        $( ".candidateList" ).append("<p>Description: "+electionDescription+"</p>");
-        $( ".candidateList" ).append("<p>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
-        $( ".candidateList" ).append("<p>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
+        // $( ".candidateList" ).append("<p class='text-center'>Voting Ends: "+(moment(contestDateEnd).endOf('hour').fromNow()) +"</p>");
+        $( ".candidateList" ).append("<p class='text-center'>Description: "+contestDescription+"</p>");
+        $( ".candidateList" ).append("<p class='text-center'>Date Start: "+(moment(contestDateStart).format('LL'))+"</p>");
+        $( ".candidateList" ).append("<p class='text-center'>Date End: "+(moment(contestDateEnd).format('LL'))+"</p>");
 
 });
 

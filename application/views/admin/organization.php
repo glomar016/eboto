@@ -374,6 +374,13 @@ $(document).ready(function(){
                         }
                 });
 
+    $(document).on("click", ".btn_view", function(){
+        var id = this.value;
+
+        window.location.href = "<?php echo base_url()?>admin/organization/view_organization/"+id;
+
+    });
+
     loadtable();
 
 

@@ -8,12 +8,20 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li <?php if($this->router->fetch_class() == 'dashboard') {?> class="active has-sub" <?php } ?>>
-                            <a class="js-arrow" href="<?php echo base_url()?>dashboard">
+                            <a class="js-arrow" href="<?php echo base_url()?>admin/dashboard">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        </li>
+                        <li <?php if($this->router->fetch_class() == 'election') {?> class="active has-sub" <?php } ?>> 
+                            <a href="<?php echo base_url()?>admin/election">
+                                <i class="fas fa-archive"></i>Election</a>
+                        </li>
+                        <li <?php if($this->router->fetch_class() == 'contest') {?> class="active has-sub" <?php } ?>> 
+                            <a href="<?php echo base_url()?>admin/contest">
+                                <i class="fas fa-bar-chart-o"></i>Contest</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'organization') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/organization">
-                                <i class="fas fa-users"></i>Organization</a>
+                                <i class="fas fa-trophy"></i>Organization</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'userrole') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/userrole">

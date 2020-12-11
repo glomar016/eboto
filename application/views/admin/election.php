@@ -60,7 +60,7 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?php $this->load->view('includes/sidebar.php'); ?>
+        <?php $this->load->view('includes/adminsidebar.php'); ?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -313,7 +313,7 @@ $(document).ready(function() {
     function loadtable(){
          electionDataTable = $('#electionTable').DataTable( {
             "pageLength": 10,
-            "ajax": "<?php echo base_url()?>election/show_election",
+            "ajax": "<?php echo base_url()?>admin/election/show_election",
             "columns": [
                 { data: "id"},
                 { data: "electionDateEnd"},
@@ -345,7 +345,7 @@ $(document).ready(function() {
     }
 
     function refresh(){
-        var url = "<?php echo base_url()?>election/show_election";
+        var url = "<?php echo base_url()?>admin/election/show_election";
 
         electionDataTable.ajax.url(url).load();
     }
@@ -354,7 +354,7 @@ $(document).ready(function() {
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
 
-        window.location.href = "<?php echo base_url()?>election/view_election/"+id;
+        window.location.href = "<?php echo base_url()?>admin/election/view_election/"+id;
 
     });
     // end of view function
@@ -376,7 +376,7 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 
                 $.ajax({
-                    url: '<?php echo base_url()?>election/delete_election',
+                    url: '<?php echo base_url()?>admin/election/delete_election',
                     data: {id: id},
 
                         success:function(data){
@@ -400,7 +400,7 @@ $(document).ready(function() {
         var id = this.value;
 
         $.ajax({
-            url: '<?php echo base_url()?>election/get_election/'+id,
+            url: '<?php echo base_url()?>admin/election/get_election/'+id,
             type: "GET",
             dataType: "JSON",
 
@@ -430,7 +430,7 @@ $(document).ready(function() {
 
                         // ajax post
                         $.ajax({
-                            url: '<?php echo base_url()?>election/add_election',
+                            url: '<?php echo base_url()?>admin/election/add_election',
                             type: 'post',
                             data: form.serialize(),
 
@@ -476,7 +476,7 @@ $(document).ready(function() {
                                 // ajax post
                                 console.log(form);
                                             $.ajax({
-                                                url: '<?php echo base_url()?>election/update_election',
+                                                url: '<?php echo base_url()?>admin/election/update_election',
                                                 type: 'post',
                                                 data: form,
                                                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

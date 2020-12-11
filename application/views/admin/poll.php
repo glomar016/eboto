@@ -60,7 +60,7 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?php $this->load->view('includes/sidebar.php'); ?>
+        <?php $this->load->view('includes/adminsidebar.php'); ?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -313,7 +313,7 @@ $(document).ready(function() {
     function loadtable(){
          pollDataTable = $('#pollTable').DataTable( {
             "pageLength": 10,
-            "ajax": "<?php echo base_url()?>poll/show_poll",
+            "ajax": "<?php echo base_url()?>admin/poll/show_poll",
             "columns": [
                 { data: "id"},
                 { data: "pollDateEnd"},
@@ -345,7 +345,7 @@ $(document).ready(function() {
     }
 
     function refresh(){
-        var url = "<?php echo base_url()?>poll/show_poll";
+        var url = "<?php echo base_url()?>admin/poll/show_poll";
 
         pollDataTable.ajax.url(url).load();
     }
@@ -354,7 +354,7 @@ $(document).ready(function() {
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
 
-        window.location.href = "<?php echo base_url()?>poll/view_poll/"+id;
+        window.location.href = "<?php echo base_url()?>admin/poll/view_poll/"+id;
 
     });
     // end of view function
@@ -376,7 +376,7 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 
                 $.ajax({
-                    url: '<?php echo base_url()?>poll/delete_poll',
+                    url: '<?php echo base_url()?>admin/poll/delete_poll',
                     data: {id: id},
 
                         success:function(data){
@@ -400,7 +400,7 @@ $(document).ready(function() {
         var id = this.value;
 
         $.ajax({
-            url: '<?php echo base_url()?>poll/get_poll/'+id,
+            url: '<?php echo base_url()?>admin/poll/get_poll/'+id,
             type: "GET",
             dataType: "JSON",
 
@@ -431,7 +431,7 @@ $(document).ready(function() {
                         
                         // ajax post
                         $.ajax({
-                            url: '<?php echo base_url()?>poll/add_poll',
+                            url: '<?php echo base_url()?>admin/poll/add_poll',
                             type: 'post',
                             data: form.serialize(),
 
@@ -477,7 +477,7 @@ $(document).ready(function() {
                                 // ajax post
                                 console.log(form);
                                             $.ajax({
-                                                url: '<?php echo base_url()?>poll/update_poll',
+                                                url: '<?php echo base_url()?>admin/poll/update_poll',
                                                 type: 'post',
                                                 data: form,
                                                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

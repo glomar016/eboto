@@ -115,7 +115,7 @@ class Organization extends CI_Controller {
 			$config['upload_path'] = './resources/images';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
 			
-			$this->load->library('image_lib');
+			// $this->load->library('image_lib');
 			$this->load->library('upload', $config);
 			
 			if(!$this->upload->do_upload('editorganizationLogo'))
@@ -125,16 +125,16 @@ class Organization extends CI_Controller {
 			else
 			{
 				$data = $this->upload->data();
-				$configer =  array(
-					'image_library'   => 'gd2',
-					'source_image'    =>  $data['full_path'],
-					'maintain_ratio'  =>  TRUE,
-					'width'           =>  300,
-					'height'          =>  300,
-				  );
-				$this->image_lib->clear();
-				$this->image_lib->initialize($configer);
-				$this->image_lib->resize();
+				// $configer =  array(
+				// 	'image_library'   => 'gd2',
+				// 	'source_image'    =>  $data['full_path'],
+				// 	'maintain_ratio'  =>  TRUE,
+				// 	'width'           =>  300,
+				// 	'height'          =>  300,
+				//   );
+				// $this->image_lib->clear();
+				// $this->image_lib->initialize($configer);
+				// $this->image_lib->resize();
 
 				$insert_data = array(
 					'orgName' => $organizationName,
@@ -146,6 +146,15 @@ class Organization extends CI_Controller {
 				$this->database_model->update($id, $insert_data, "r_org");
 			}
 		}
+	}
+
+	public function view_organization($id)
+	{
+		$this->load->model('database_model');
+
+		$data['data']= $this->database_model->get($id, 'r_org');
+
+		$this->load->view('admin/organization_view', $data);
 	}
 
 }

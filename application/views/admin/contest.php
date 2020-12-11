@@ -60,7 +60,7 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?php $this->load->view('includes/sidebar.php'); ?>
+        <?php $this->load->view('includes/adminsidebar.php'); ?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -313,7 +313,7 @@ $(document).ready(function() {
     function loadtable(){
          contestDataTable = $('#contestTable').DataTable( {
             "pageLength": 10,
-            "ajax": "<?php echo base_url()?>contest/show_contest",
+            "ajax": "<?php echo base_url()?>admin/contest/show_contest",
             "columns": [
                 { data: "id"},
                 { data: "contestDateEnd"},
@@ -345,7 +345,7 @@ $(document).ready(function() {
     }
 
     function refresh(){
-        var url = "<?php echo base_url()?>contest/show_contest";
+        var url = "<?php echo base_url()?>admin/contest/show_contest";
 
         contestDataTable.ajax.url(url).load();
     }
@@ -354,7 +354,7 @@ $(document).ready(function() {
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
 
-        window.location.href = "<?php echo base_url()?>contest/view_contest/"+id;
+        window.location.href = "<?php echo base_url()?>admin/contest/view_contest/"+id;
 
     });
     // end of view function
@@ -376,7 +376,7 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 
                 $.ajax({
-                    url: '<?php echo base_url()?>contest/delete_contest',
+                    url: '<?php echo base_url()?>admin/contest/delete_contest',
                     data: {id: id},
 
                         success:function(data){
@@ -400,7 +400,7 @@ $(document).ready(function() {
         var id = this.value;
 
         $.ajax({
-            url: '<?php echo base_url()?>contest/get_contest/'+id,
+            url: '<?php echo base_url()?>admin/contest/get_contest/'+id,
             type: "GET",
             dataType: "JSON",
 
@@ -431,7 +431,7 @@ $(document).ready(function() {
                         
                         // ajax post
                         $.ajax({
-                            url: '<?php echo base_url()?>contest/add_contest',
+                            url: '<?php echo base_url()?>admin/contest/add_contest',
                             type: 'post',
                             data: form.serialize(),
 
@@ -477,7 +477,7 @@ $(document).ready(function() {
                                 // ajax post
                                 console.log(form);
                                             $.ajax({
-                                                url: '<?php echo base_url()?>contest/update_contest',
+                                                url: '<?php echo base_url()?>admin/contest/update_contest',
                                                 type: 'post',
                                                 data: form,
                                                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
