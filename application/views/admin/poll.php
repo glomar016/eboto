@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
-                                    <table id="pollTable" class="table table-data3" stytle="width:100%"> 
+                                    <table id="pollTable" class="table table-data3" style="width:100%"> 
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Id</th>
@@ -122,7 +122,7 @@
     <div class="modal fade" id="pollModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:maroon;>
+				<div class="modal-header" style=background-color:#900000;>
 							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create poll</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -130,14 +130,14 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="addpollForm" name="addpollForm">
+                            <form action="" method="post" name="addpollForm" id="addpollForm">
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" class="form-control">
+                                            <input type="text" id="pollName" name="pollName" placeholder="Name of Poll" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -148,8 +148,8 @@
                                         <div class="col-4 col-md-8">
                                             <select name="pollOrg" id="pollOrg" class="form-control">
                                                 <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
+                                                <option value="1">Public</option>
+                                                <option value="2">COMMITS</option>
                                                 <option value="3">Option #3</option>
                                             </select>
                                         </div>
@@ -169,7 +169,9 @@
                                             <label for="pollDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="pollDateStart" name="pollDateStart" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
+                                            id="pollDateStart" name="pollDateStart" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -178,7 +180,10 @@
                                             <label for="pollDateEnd" class=" form-control-label">Date End</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="pollDateEnd" name="pollDateEnd" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>" 
+                                            min="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>"
+                                            id="pollDateEnd" name="pollDateEnd" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
@@ -207,10 +212,10 @@
                 <div class="card">   
                         <div class="card-body card-block">
                             <form action="" method="post" id="editpollForm" name="editpollForm">
-                            <div class="row form-group">
+                                <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
@@ -246,7 +251,9 @@
                                             <label for="pollDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="editpollDateStart" name="editpollDateStart" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
+                                            id="editpollDateStart" name="editpollDateStart" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -255,7 +262,10 @@
                                             <label for="pollDateEnd" class=" form-control-label">Date End</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="editpollDateEnd" name="editpollDateEnd" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>" 
+                                            min="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>"
+                                            id="editpollDateEnd" name="editpollDateEnd" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
@@ -422,6 +432,54 @@ $(document).ready(function() {
 
     loadtable();
 
+    // Create poll
+    $('#addpollForm').on('submit', function(e){
+                        e.preventDefault();
+
+                        var pollName = document.addpollForm.pollName.value;
+                        var pollDateStart = document.addpollForm.pollDateStart.value;
+                        var pollDateEnd = document.addpollForm.pollDateEnd.value;
+                        
+                        if(pollName == '' || pollDateStart == '' || pollDateEnd == ''){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Please fill out required field.',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                        }
+                        else{
+                           
+                            // ajax call
+                                var form = $('#addpollForm');                                
+                                // ajax post
+                                $.ajax({
+                                    url: '<?php echo base_url()?>admin/poll/add_poll',
+                                    type: 'post',
+                                    data: form.serialize(),
+
+                                    success:function()
+                                            {
+                                            
+                                            refresh();
+                                        
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'You successfully created a poll.',
+                                                icon: 'success',
+                                                confirmButtonText: 'Ok'
+                                                })
+                                            
+                                            $('#pollModal').modal('hide');
+                                            $('#pollModal form')[0].reset();
+                                                
+                                            }
+                                });
+                                // end of ajax call
+                        }
+                });
+    // END OF // Create poll
+
     // Update poll
     $('#editpollForm').on('submit', function(e){
                         e.preventDefault();
@@ -429,10 +487,6 @@ $(document).ready(function() {
                         var editpollName = document.editpollForm.editpollName.value;
                         var editpollDateStart = document.editpollForm.editpollDateStart.value;
                         var editpollDateEnd = document.editpollForm.editpollDateEnd.value;
-
-                        var dateStart = new Date(editpollDateStart);
-                        var dateEnd = new Date(editpollDateEnd);
-                        var today = new Date();
                         
                         if(editpollName == '' || editpollDateStart == '' || editpollDateEnd == ''){
                                             Swal.fire({
@@ -443,18 +497,7 @@ $(document).ready(function() {
                                                     })
                         }
                         else{
-                        
-                            if(dateStart < today || dateStart >= dateEnd){
-                                Swal.fire({
-                                                    title: 'Warning!',
-                                                    text: 'Invalid Date Start and Date End',
-                                                    icon: 'warning',
-                                                    confirmButtonText: 'Ok'
-                                                    })
-                            }
-                            
-                            else{
-                           
+                    
                             // ajax call
                             console.log( $( this ).serialize() );
                             var form = ( $( this ).serialize() );
@@ -499,7 +542,6 @@ $(document).ready(function() {
                                 }
                             })
                             // end of ajax call
-                        }
                     }
                 });
 

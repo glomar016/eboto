@@ -169,7 +169,9 @@
                                             <label for="electionDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="electionDateStart" name="electionDateStart" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
+                                            id="electionDateStart" name="electionDateStart" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -178,7 +180,10 @@
                                             <label for="electionDateEnd" class=" form-control-label">Date End</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="electionDateEnd" name="electionDateEnd" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>" 
+                                            min="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>"
+                                            id="electionDateEnd" name="electionDateEnd" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
@@ -246,7 +251,9 @@
                                             <label for="electionDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="editelectionDateStart" name="editelectionDateStart" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
+                                            id="editelectionDateStart" name="editelectionDateStart" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -255,7 +262,10 @@
                                             <label for="electionDateEnd" class=" form-control-label">Date End</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" id="editelectionDateEnd" name="editelectionDateEnd" class="form-control">
+                                            <input type="date" 
+                                            value="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>" 
+                                            min="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>"
+                                            id="editelectionDateEnd" name="editelectionDateEnd" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
@@ -432,7 +442,6 @@ $(document).ready(function() {
 
                         var dateStart = new Date(electionDateStart);
                         var dateEnd = new Date(electionDateEnd);
-                        var today = new Date();
 
                         if(electionName == '' || electionDateStart == '' || electionDateEnd == ''){
                                             Swal.fire({
@@ -443,17 +452,6 @@ $(document).ready(function() {
                                                     })
                         }
                         else{
-
-                            if(dateStart < today || dateStart >= dateEnd){
-                                Swal.fire({
-                                                    title: 'Warning!',
-                                                    text: 'Invalid Date Start and Date End',
-                                                    icon: 'warning',
-                                                    confirmButtonText: 'Ok'
-                                                    })
-                            }
-                            
-                            else{
                            
                             // ajax call
                                 var form = $('#addelectionForm');                                
@@ -481,7 +479,6 @@ $(document).ready(function() {
                                             }
                                 });
                                 // end of ajax call
-                            }   
                         }
                 });
     // END OF // Create election
@@ -493,10 +490,6 @@ $(document).ready(function() {
                         var editelectionName = document.editelectionForm.editelectionName.value;
                         var editelectionDateStart = document.editelectionForm.editelectionDateStart.value;
                         var editelectionDateEnd = document.editelectionForm.editelectionDateEnd.value;
-
-                        var dateStart = new Date(editelectionDateStart);
-                        var dateEnd = new Date(editelectionDateEnd);
-                        var today = new Date();
                         
                         if(editelectionName == '' || editelectionDateStart == '' || editelectionDateEnd == ''){
                                             Swal.fire({
@@ -507,18 +500,7 @@ $(document).ready(function() {
                                                     })
                         }
                         else{
-                        
-                            if(dateStart < today || dateStart >= dateEnd){
-                                Swal.fire({
-                                                    title: 'Warning!',
-                                                    text: 'Invalid Date Start and Date End',
-                                                    icon: 'warning',
-                                                    confirmButtonText: 'Ok'
-                                                    })
-                            }
-                            
-                            else{
-                           
+                    
                             // ajax call
                             console.log( $( this ).serialize() );
                             var form = ( $( this ).serialize() );
@@ -563,7 +545,6 @@ $(document).ready(function() {
                                 }
                             })
                             // end of ajax call
-                        }
                     }
                 });
 
