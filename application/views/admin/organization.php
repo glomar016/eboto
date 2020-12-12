@@ -120,7 +120,7 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="addorganizationForm">
+                            <form action="" method="post" id="addorganizationForm" name="addorganizationForm">
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
@@ -165,7 +165,7 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="editorganizationForm">
+                            <form action="" method="post" id="editorganizationForm" name="editorganizationForm">
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
@@ -324,6 +324,25 @@ $(document).ready(function(){
                         e.preventDefault();
                         var id = this.value;
 
+        var editorganizationName = document.editorganizationForm.editorganizationName.value;
+        var editorganizationLogo = document.editorganizationForm.editorganizationLogo.value;
+        var Extension = editorganizationLogo.substring(
+            editorganizationLogo.lastIndexOf('.') + 1).toLowerCase();
+
+
+
+            if(editorganizationName == '' || editorganizationLogo == ''){
+                                Swal.fire({
+                                        title: 'Warning!',
+                                        text: 'Please fill out required field.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                                        })
+            }
+            else
+            {
+                if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
                         if($('#editorganizationLogo').val() == ''){
                             Swal.fire({
                                         title: 'Warning!',
@@ -372,7 +391,17 @@ $(document).ready(function(){
                                     }       
                                 })
                         }
-                });
+                }
+                else{
+                    Swal.fire({
+                            title: 'Warning!',
+                            text: 'Invalid image file.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                }
+            }
+    });
 
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
@@ -383,45 +412,72 @@ $(document).ready(function(){
 
     loadtable();
 
-
+// Create org
     $('#addorganizationForm').on('submit', function(e){
             e.preventDefault();
-            if($('#organizationLogo').val() == ''){
-                Swal.fire({
-                    title: 'Warning!',
-                    text: 'Please select an image.',
-                    icon: 'warning',
-                    confirmButtonText: 'Ok'
-                })
-            }
-            else
-            {
-                $.ajax({
-                    url: '<?php echo base_url()?>admin/organization/add_organization',
-                    type:"post",
-                    data: new FormData(this),
-                    processData:false,
-                    contentType:false,
 
-                    success: function(data){
+        var addorganizationName = document.addorganizationForm.organizationName.value;
+        var addorganizationLogo = document.addorganizationForm.organizationLogo.value;
+        var Extension = addorganizationLogo.substring(
+            addorganizationLogo.lastIndexOf('.') + 1).toLowerCase();
 
-                        refresh()
+
+        if(addorganizationName == '' || addorganizationLogo == ''){
+                                Swal.fire({
+                                        title: 'Warning!',
+                                        text: 'Please fill out required field.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                                        })
+        }
+        else
+        {
+            if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+
+                    if($('#organizationLogo').val() == ''){
                         Swal.fire({
-                                title: 'Success!',
-                                text: 'You successfully created an organization.',
-                                icon: 'success',
-                                confirmButtonText: 'Ok'
-                                })
-                            
-                                $('#organizationModal').modal('hide');
-                                $('#organizationModal form')[0].reset();
+                            title: 'Warning!',
+                            text: 'Please select an image.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
                     }
-            })
+                    else
+                    {
+                        $.ajax({
+                            url: '<?php echo base_url()?>admin/organization/add_organization',
+                            type:"post",
+                            data: new FormData(this),
+                            processData:false,
+                            contentType:false,
 
+                            success: function(data){
+
+                                refresh()
+                                Swal.fire({
+                                        title: 'Success!',
+                                        text: 'You successfully created an organization.',
+                                        icon: 'success',
+                                        confirmButtonText: 'Ok'
+                                        })
+                                    
+                                        $('#organizationModal').modal('hide');
+                                        $('#organizationModal form')[0].reset();
+                                    }
+                        })
+                    }
+                }
+            else{
+                Swal.fire({
+                            title: 'Warning!',
+                            text: 'Invalid image file.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
             }
-            
+        }
     });
-
 });
 
 

@@ -76,7 +76,7 @@
                             <div class="card-body" style="background-color: #ffffff;">
                                     <div class="d-flex justify-content-left">
                                         <div class="col-lg-3">
-                                            <div style="color:black;" class="text-center">
+                                            <div style="color:black;">
                                                 <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
                                                 Voting Ends:
                                                 <span class="badge badge-pill badge-warning" id="liveclock">
