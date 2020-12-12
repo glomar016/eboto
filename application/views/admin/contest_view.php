@@ -125,7 +125,7 @@
                                             <label for="contestantName" class=" form-control-label">Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="contestantName" name="contestantName" placeholder="Your Name" class="form-control">
+                                            <input type="text" id="contestantName" name="contestantName" placeholder="Name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">

@@ -122,10 +122,10 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="optionName" class=" form-control-label">Name</label>
+                                            <label for="optionName" class=" form-control-label">Option</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="optionName" name="optionName" placeholder="Your Name" class="form-control">
+                                            <input type="text" id="optionName" name="optionName" placeholder="Option" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>

@@ -119,28 +119,10 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateFirstName" class=" form-control-label">First Name</label>
+                                            <label for="candidateName" class=" form-control-label"> Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="candidateFirstName" name="candidateFirstName" placeholder="Your First Name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateMiddleName" class=" form-control-label">Middle Name</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <input type="text" id="candidateMiddleName" name="candidateMiddleName" placeholder="Your Middle Name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateLastName" class=" form-control-label">Last Name</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <input type="text" id="candidateLastName" name="candidateLastName" placeholder="Your Last Name" class="form-control">
+                                            <input type="text" id="candidateName" name="candidateName" placeholder="Name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -149,30 +131,16 @@
                                             <label for="candidatePosition" class=" form-control-label">Position</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="candidatePosition" name="candidatePosition" placeholder="Your Position" class="form-control">
+                                            <input type="text" id="candidatePosition" name="candidatePosition" placeholder="Position" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-group"></i>
-                                            <label for="candidateCourse" class=" form-control-label">Restriction</label>
+                                        <i style =padding-right:16px; class="fa fa-comment"></i>
+                                            <label for="candidateDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <select name="candidateCourse" id="candidateCourse" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-calendar"></i>
-                                            <label for="candidateBirthday" class=" form-control-label">Birthday</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <input type="date" id="candidateBirthday" name="candidateBirthday" class="form-control">
+                                            <textarea name="candidateDescription" id="candidateDescription" rows="4" placeholder="Content" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
