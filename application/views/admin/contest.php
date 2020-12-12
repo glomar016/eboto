@@ -134,7 +134,7 @@
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="contestName" class=" form-control-label">contest Name</label>
+                                            <label for="contestName" class=" form-control-label">Contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="contestName" name="contestName" placeholder="Name of Contest" class="form-control">
@@ -169,8 +169,7 @@
                                             <label for="contestDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" 
-                                            value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
+                                            <input type="date" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
                                             id="contestDateStart" name="contestDateStart" class="form-control">
                                         </div>
                                     </div>
@@ -204,7 +203,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:gold;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update contest</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update Contest</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -215,11 +214,11 @@
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="contestName" class=" form-control-label">contest Name</label>
+                                            <label for="contestName" class=" form-control-label">Contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of Contest" class="form-control">
+                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of contest" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -251,9 +250,7 @@
                                             <label for="contestDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" 
-                                            value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
-                                            id="editcontestDateStart" name="editcontestDateStart" class="form-control">
+                                            <input type="date" id="editcontestDateStart" name="editcontestDateStart" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -262,10 +259,7 @@
                                             <label for="contestDateEnd" class=" form-control-label">Date End</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" 
-                                            value="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>" 
-                                            min="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>"
-                                            id="editcontestDateEnd" name="editcontestDateEnd" class="form-control">
+                                            <input type="date" id="editcontestDateEnd" name="editcontestDateEnd" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
@@ -440,7 +434,9 @@ $(document).ready(function() {
                         var contestDateStart = document.addcontestForm.contestDateStart.value;
                         var contestDateEnd = document.addcontestForm.contestDateEnd.value;
 
-                        
+                        var dateStart = new Date(contestDateStart);
+                        var dateEnd = new Date(contestDateEnd);
+
                         if(contestName == '' || contestDateStart == '' || contestDateEnd == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
@@ -450,6 +446,17 @@ $(document).ready(function() {
                                                     })
                         }
                         else{
+
+                            if(dateStart >= dateEnd){
+                                Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Invalid Date Start and Date End',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                            }
+                            
+                            else{
                            
                             // ajax call
                                 var form = $('#addcontestForm');                                
@@ -477,6 +484,7 @@ $(document).ready(function() {
                                             }
                                 });
                                 // end of ajax call
+                            }   
                         }
                 });
     // END OF // Create contest
@@ -488,6 +496,9 @@ $(document).ready(function() {
                         var editcontestName = document.editcontestForm.editcontestName.value;
                         var editcontestDateStart = document.editcontestForm.editcontestDateStart.value;
                         var editcontestDateEnd = document.editcontestForm.editcontestDateEnd.value;
+
+                        var dateStart = new Date(editcontestDateStart);
+                        var dateEnd = new Date(editcontestDateEnd);
                         
                         if(editcontestName == '' || editcontestDateStart == '' || editcontestDateEnd == ''){
                                             Swal.fire({
@@ -498,7 +509,18 @@ $(document).ready(function() {
                                                     })
                         }
                         else{
-                    
+                        
+                            if(dateStart >= dateEnd){
+                                Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Invalid Date Start and Date End',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    })
+                            }
+                            
+                            else{
+                           
                             // ajax call
                             console.log( $( this ).serialize() );
                             var form = ( $( this ).serialize() );
@@ -543,6 +565,7 @@ $(document).ready(function() {
                                 }
                             })
                             // end of ajax call
+                        }
                     }
                 });
 
