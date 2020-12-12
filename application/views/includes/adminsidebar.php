@@ -7,7 +7,7 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li <?php if($this->router->fetch_class() == 'dashboard' || $this->uri->segment(1) == 'admin') {?> class="active has-sub" <?php } ?>>
+                        <li <?php if($this->router->fetch_class() == 'dashboard') {?> class="active has-sub" <?php } ?>>
                             <a class="js-arrow" href="<?php echo base_url()?>admin/dashboard">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
