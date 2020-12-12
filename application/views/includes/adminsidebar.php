@@ -7,7 +7,7 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li <?php if($this->router->fetch_class() == 'dashboard') {?> class="active has-sub" <?php } ?>>
+                        <li <?php if($this->router->fetch_class() == 'dashboard' || $this->uri->segment(1) == 'admin') {?> class="active has-sub" <?php } ?>>
                             <a class="js-arrow" href="<?php echo base_url()?>admin/dashboard">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
@@ -20,7 +20,7 @@
                                 <i class="fas fa-trophy"></i>Contest</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'poll') {?> class="active has-sub" <?php } ?>> 
-                            <a href="<?php echo base_url()?>admin/polll">
+                            <a href="<?php echo base_url()?>admin/poll">
                                 <i class="fas fa-bar-chart-o"></i>Poll</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'organization') {?> class="active has-sub" <?php } ?>> 
