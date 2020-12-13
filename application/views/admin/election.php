@@ -147,10 +147,13 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="electionOrg" id="electionOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Public</option>
-                                                <option value="2">COMMITS</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                    foreach($data as $row)
+                                                    { 
+                                                        echo $row->orgName;
+                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -228,10 +231,12 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="editelectionOrg" id="editelectionOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                foreach($data as $row)
+                                                { 
+                                                echo '<option value="'.$row->orgName.'">'.$row->orgName.'</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -329,7 +334,7 @@ $(document).ready(function() {
                 { data: "electionDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
                 }, "orderData":[1]},
-                { data: "electionOrg"},
+                { data: "orgName"},
                 { data: "electionStatus", render: function(data, type, row){
                     if(data == 1){
                         return '<div class="btn-group">'+
@@ -347,6 +352,7 @@ $(document).ready(function() {
             "order": [[0, "desc"]]
         })
     }
+
 
     function refresh(){
         var url = "<?php echo base_url()?>admin/election/show_election";

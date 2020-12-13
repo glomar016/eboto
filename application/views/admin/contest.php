@@ -137,7 +137,7 @@
                                             <label for="contestName" class=" form-control-label">Contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="contestName" name="contestName" placeholder="Name of Contest" class="form-control">
+                                            <input type="text" id="contestName" name="contestName" placeholder="Name of contest" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -147,10 +147,13 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="contestOrg" id="contestOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Public</option>
-                                                <option value="2">COMMITS</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                    foreach($data as $row)
+                                                    { 
+                                                        echo $row->orgName;
+                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -228,10 +231,12 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="editcontestOrg" id="editcontestOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                foreach($data as $row)
+                                                { 
+                                                echo '<option value="'.$row->orgName.'">'.$row->orgName.'</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -329,7 +334,7 @@ $(document).ready(function() {
                 { data: "contestDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
                 }, "orderData":[1]},
-                { data: "contestOrg"},
+                { data: "orgName"},
                 { data: "contestStatus", render: function(data, type, row){
                     if(data == 1){
                         return '<div class="btn-group">'+
@@ -347,6 +352,7 @@ $(document).ready(function() {
             "order": [[0, "desc"]]
         })
     }
+
 
     function refresh(){
         var url = "<?php echo base_url()?>admin/contest/show_contest";
