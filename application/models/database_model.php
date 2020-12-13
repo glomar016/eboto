@@ -16,7 +16,7 @@ class Database_model extends CI_Model {
     function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
         $this->db->select("*");
         $this->db->from($tableName);
-        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id');
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
         $this->db->where($statusColumn, "1");
         $this->db->where("$dateEnd >=", $dateToday);
         $query = $this->db->get();

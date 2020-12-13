@@ -234,7 +234,7 @@
                                                 <?php 
                                                 foreach($data as $row)
                                                 { 
-                                                echo '<option value="'.$row->orgName.'">'.$row->orgName.'</option>';
+                                                echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -363,6 +363,7 @@ $(document).ready(function() {
     // view function
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
+        // console.log(id);
 
         window.location.href = "<?php echo base_url()?>admin/election/view_election/"+id;
 
