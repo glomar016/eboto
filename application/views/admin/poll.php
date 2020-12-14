@@ -81,11 +81,11 @@
                                 <!-- DATA TABLE -->
                                 
                                 <div class="table-data__tool">
-                                        <h2>List of Poll</h2>
+                                        <h2>List of poll</h2>
                                     <div class="table-data__tool-right">
                                         <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#pollModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
-                                        Create Poll </button>
+                                        Create poll </button>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
@@ -123,7 +123,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:#900000;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Poll</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create poll</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -134,7 +134,7 @@
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="pollName" name="pollName" placeholder="Name of poll" class="form-control">
@@ -206,7 +206,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:gold;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update Poll</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update poll</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -217,7 +217,7 @@
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
@@ -234,7 +234,7 @@
                                                 <?php 
                                                 foreach($data as $row)
                                                 { 
-                                                echo '<option value="'.$row->orgName.'">'.$row->orgName.'</option>';
+                                                echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -363,6 +363,7 @@ $(document).ready(function() {
     // view function
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
+        // console.log(id);
 
         window.location.href = "<?php echo base_url()?>admin/poll/view_poll/"+id;
 

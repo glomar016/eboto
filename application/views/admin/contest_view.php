@@ -76,7 +76,7 @@
                             <div class="card-body" style="background-color: #ffffff;">
                                     <div class="d-flex justify-content-left">
                                         <div class="col-lg-3">
-                                            <div style="color:black;" class="text-center">
+                                            <div style="color:black;">
                                                 <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
                                                 Voting Ends:
                                                 <span class="badge badge-pill badge-warning" id="liveclock">
@@ -84,20 +84,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                            <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p>
+                                            <!-- <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p> -->
                                             <br>
                                             <br>
                                             <div class="au-card m-b-30">
-                                            <div class="au-card-inner">
-                                                <h2><?php echo $data[0]->contestName?></h2>
-                                                <!-- <p class="text-center">Description: <?php echo $data[0]->contestDescription?></p>
-                                                <p class="text-center">Date Start: <?php echo date("m-d-Y", strtotime($data[0]->contestDateStart))?></p>
-                                                <p class="text-center">Date End: <?php echo date("m-d-Y", strtotime($data[0]->contestDateEnd))?></p> -->
-                                                <!-- </div> -->
-                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addContestant">   
-                                                <i style=padding:3px; class="fa fa-plus"></i> 
-                                                Add Contestant </button>
-                                            </div>
+                                                <div class="au-card-inner contestantList">
+                                                    <h2><?php echo $data[0]->contestName?></h2>
+                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#contestantModal">   
+                                                    <i style=padding:3px; class="fa fa-plus"></i> 
+                                                    Add contestant </button>
+                                                </div>
                                             </div>
                             </div>
                         </div>
@@ -105,9 +101,9 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div> 
     <!-- contestant MODAL -->
-    <div class="modal fade" id="addContestant" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="contestantModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:maroon;>
@@ -118,13 +114,14 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="addcandidateForm">
+                            <form action="" method="post" id="addcontestantForm" name="addcontestantForm">
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
                                             <label for="contestantName" class=" form-control-label">Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
                                             <input type="text" id="contestantName" name="contestantName" placeholder="Name" class="form-control">
                                         </div>
                                     </div>
@@ -195,26 +192,98 @@
 <script>
 $(document).ready(function(){
 
+// Show contest details
+    function loadviewdata(){
+
     var contestName = "<?php echo $data[0]->contestName ?>"
     var contestDateStart = "<?php echo $data[0]->contestDateStart ?>"
     var contestDateEnd = "<?php echo $data[0]->contestDateEnd ?>"
     var contestDescription = "<?php echo $data[0]->contestDescription ?>"
 
+        const clock = document.getElementById('liveclock');
+        $( ".contestantList" ).append("<p>"+contestName+"</p>");
+        setInterval(() => {
+            // clock.textContent 
+            clock.textContent = moment(contestDateEnd).endOf('seconds').fromNow();
+        }, 1000);
 
-    const clock = document.getElementById('liveclock');
-    // $( ".candidateList" ).append("<p>"+contestName+"</p>");
-    setInterval(() => {
-        // clock.textContent 
-        clock.textContent = moment(contestDateEnd).endOf('seconds').fromNow();
-    }, 1000);
+            $( ".contestantList" ).append("<p>Description: "+contestDescription+"</p>");
+            $( ".contestantList" ).append("<p>Date Start: "+(moment(contestDateStart).format('LL'))+"</p>");
+            $( ".contestantList" ).append("<p>Date End: "+(moment(contestDateEnd).format('LL'))+"</p>");
+    }
+     // End of show contest details
 
-        // $( ".candidateList" ).append("<p class='text-center'>Voting Ends: "+(moment(contestDateEnd).endOf('hour').fromNow()) +"</p>");
-        $( ".candidateList" ).append("<p class='text-center'>Description: "+contestDescription+"</p>");
-        $( ".candidateList" ).append("<p class='text-center'>Date Start: "+(moment(contestDateStart).format('LL'))+"</p>");
-        $( ".candidateList" ).append("<p class='text-center'>Date End: "+(moment(contestDateEnd).format('LL'))+"</p>");
+    loadviewdata();
+
+// Create contestant
+$('#addcontestantForm').on('submit', function(e){
+        e.preventDefault();
+
+        var contestantName = document.addcontestantForm.contestantName.value;
+        var contestantDescription = document.addcontestantForm.contestantDescription.value;
+        var contestantImage = document.addcontestantForm.contestantImage.value;
+        var Extension = contestantImage.substring(
+            contestantImage.lastIndexOf('.') + 1).toLowerCase();
+
+        if(contestantName == '' || contestantDescription == ''){
+                        Swal.fire({
+                                title: 'Warning!',
+                                text: 'Please fill out required field.',
+                                icon: 'warning',
+                                confirmButtonText: 'Ok'
+                                })
+        }
+        else{
+            if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+                if($('#contestantImage').val() == ''){
+                        Swal.fire({
+                            title: 'Warning!',
+                            text: 'Please select an image.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                else{
+                    // Ajax call
+                    $.ajax({
+                            url: '<?php echo base_url()?>admin/contestant/add_contestant',
+                            type:"post",
+                            data: new FormData(this),
+                            processData:false,
+                            contentType:false,
+
+                            success: function(data){
+                                Swal.fire({
+                                        title: 'Success!',
+                                        text: 'You successfully created a contestant.',
+                                        icon: 'success',
+                                        confirmButtonText: 'Ok'
+                                        })
+                                    
+                                        $('#contestantModal').modal('hide');
+                                        $('#contestantModal form')[0].reset();
+                                    }
+                        })
+                    // End of Ajax Call
+                }
+            }
+            else{
+                Swal.fire({
+                            title: 'Warning!',
+                            text: 'Invalid image file.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+            }
+        }
+
+
+
+    });
+    // End of Create contestant
 
 });
-
+   
 </script>
 
 </html>

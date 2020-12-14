@@ -89,14 +89,7 @@
                                             <br>
                                             <div class="au-card m-b-30">
                                                 <div class="au-card-inner candidateList">
-                                                    <!-- <h2><?php echo $data[0]->electionName?></h2> -->
-                                                    <?php 
-                                                        foreach($data as $row)
-                                                        { 
-                                                            echo $row->id.$row->electionName.$row->electionDateStart;
-                                                        }
-                                                    ?>
-                                                    <!-- <h5 class="candidateList"></h5> -->
+                                                    <h2><?php echo $data[0]->electionName?></h2>
                                                     <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#candidateModal">   
                                                     <i style=padding:3px; class="fa fa-plus"></i> 
                                                     Add Candidate </button>
@@ -212,7 +205,6 @@ $(document).ready(function(){
     function loadviewdata(){
 
         var electionName = "<?php echo $data[0]->electionName ?>"
-        var electionOrg = "<?php echo $data[0]->electionOrg ?>"
         var electionDateStart = "<?php echo $data[0]->electionDateStart ?>"
         var electionDateEnd = "<?php echo $data[0]->electionDateEnd ?>"
         var electionDescription = "<?php echo $data[0]->electionDescription ?>"
@@ -225,13 +217,13 @@ $(document).ready(function(){
             }, 1000);
 
                 $( ".candidateList" ).append("<p>Description: "+electionDescription+"</p>");
-                $( ".candidateList" ).append("<p>Restriction: "+electionOrg+"</p>");
                 $( ".candidateList" ).append("<p>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
                 $( ".candidateList" ).append("<p>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
     }
     // End of show election details
 
     loadviewdata()
+    
     // Create candidate
     $('#addcandidateForm').on('submit', function(e){
             e.preventDefault();

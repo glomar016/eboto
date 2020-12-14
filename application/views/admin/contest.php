@@ -81,11 +81,11 @@
                                 <!-- DATA TABLE -->
                                 
                                 <div class="table-data__tool">
-                                        <h2>List of Contest</h2>
+                                        <h2>List of contest</h2>
                                     <div class="table-data__tool-right">
                                         <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#contestModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
-                                        Create Contest </button>
+                                        Create contest </button>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
@@ -134,7 +134,7 @@
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="contestName" class=" form-control-label">Contest Name</label>
+                                            <label for="contestName" class=" form-control-label">contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="contestName" name="contestName" placeholder="Name of contest" class="form-control">
@@ -206,7 +206,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:gold;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update Contest</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update contest</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -217,7 +217,7 @@
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="contestName" class=" form-control-label">Contest Name</label>
+                                            <label for="contestName" class=" form-control-label">contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
@@ -234,7 +234,7 @@
                                                 <?php 
                                                 foreach($data as $row)
                                                 { 
-                                                echo '<option value="'.$row->orgName.'">'.$row->orgName.'</option>';
+                                                echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -363,6 +363,7 @@ $(document).ready(function() {
     // view function
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
+        // console.log(id);
 
         window.location.href = "<?php echo base_url()?>admin/contest/view_contest/"+id;
 

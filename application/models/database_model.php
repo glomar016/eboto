@@ -14,7 +14,7 @@ class Database_model extends CI_Model {
 
     // SHOW
     function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
-        $this->db->select("*");
+        $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
         $this->db->from($tableName);
         $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
         $this->db->where($statusColumn, "1");
