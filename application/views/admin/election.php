@@ -77,9 +77,7 @@
                         <!-- Data Table Content -->
                         <div class="au-card m-b-30">
                             <div class="au-card-inner">
-
                                 <!-- DATA TABLE -->
-                                
                                 <div class="table-data__tool">
                                         <h2>List of Election</h2>
                                     <div class="table-data__tool-right">
@@ -108,7 +106,6 @@
                                     </table>
                                 </div>
                                 <!-- END DATA TABLE -->
-                                </div>  
                             </div>
                         </div>
                         <!-- End of Data Table Content -->
@@ -117,6 +114,7 @@
             </div>
         </div>
     </div> 
+    <!-- END MAIN CONTENT-->
 
     <!-- election MODAL -->
     <div class="modal fade" id="electionModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
@@ -279,7 +277,6 @@
         </div>
     </div>
     <!-- END edit election MODAL -->
-        <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
 
@@ -320,7 +317,7 @@
 $(document).ready(function() {
 
     function loadtable(){
-         electionDataTable = $('#electionTable').DataTable( {
+        electionDataTable = $('#electionTable').DataTable( {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>admin/election/show_election",
             "columns": [

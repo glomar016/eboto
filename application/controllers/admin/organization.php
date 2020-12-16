@@ -49,7 +49,7 @@ class Organization extends CI_Controller {
 				$configer =  array(
 					'image_library'   => 'gd2',
 					'source_image'    =>  $data['full_path'],
-					'maintain_ratio'  =>  TRUE,
+					'maintain_ratio'  =>  FALSE,
 					'width'           =>  300,
 					'height'          =>  300,
 				  );
@@ -125,16 +125,16 @@ class Organization extends CI_Controller {
 			else
 			{
 				$data = $this->upload->data();
-				// $configer =  array(
-				// 	'image_library'   => 'gd2',
-				// 	'source_image'    =>  $data['full_path'],
-				// 	'maintain_ratio'  =>  TRUE,
-				// 	'width'           =>  300,
-				// 	'height'          =>  300,
-				//   );
-				// $this->image_lib->clear();
-				// $this->image_lib->initialize($configer);
-				// $this->image_lib->resize();
+				$configer =  array(
+					'image_library'   => 'gd2',
+					'source_image'    =>  $data['full_path'],
+					'maintain_ratio'  =>  FALSE,
+					'width'           =>  300,
+					'height'          =>  300,
+				  );
+				$this->image_lib->clear();
+				$this->image_lib->initialize($configer);
+				$this->image_lib->resize();
 
 				$insert_data = array(
 					'orgName' => $organizationName,

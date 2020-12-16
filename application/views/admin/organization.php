@@ -403,6 +403,7 @@ $(document).ready(function(){
             }
     });
 
+    // View organization
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
 

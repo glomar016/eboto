@@ -12,7 +12,7 @@ class Database_model extends CI_Model {
         return $this->db->insert($tableName, $data);
     }
 
-    // SHOW
+    // get the views of datatables for specific election/contest/poll
     function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
         $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
         $this->db->from($tableName);
@@ -24,6 +24,7 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // get the views of any tables
     function view($statusColumn, $tableName){
         $this->db->select("*");
         $this->db->from($tableName);
@@ -62,9 +63,22 @@ class Database_model extends CI_Model {
     // -- END OF CRUD --
 
 
+    // query to get all restriction
     function get_all($statusColumn, $tableName)
     {
         $this->db->select("*");
+        $this->db->where($statusColumn, "1");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+
+    // query to get candidate of election, contestant of contest, option of poll
+    function show_options($referenceID, $referenceColumn, $statusColumn, $tableName){
+        $this->db->select("*");
+        $this->db->where($referenceColumn, $referenceID);
         $this->db->where($statusColumn, "1");
         $this->db->from($tableName);
         $query = $this->db->get();

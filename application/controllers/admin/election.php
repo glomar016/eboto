@@ -101,7 +101,6 @@ class Election extends CI_Controller {
 
 		echo json_encode($data);
 
-
 	}
 	
 	public function delete_election()
@@ -114,6 +113,7 @@ class Election extends CI_Controller {
 		$this->database_model->delete($id, "electionStatus", "t_election");
 	}
 
+	// get data to pass data to edit modal
 	public function get_election($id)
 	{
 
