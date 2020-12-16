@@ -140,7 +140,7 @@
                                                     <label for="contestantImage" class=" form-control-label">Image</label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
-                                                    <input type="file" id="contestantImage" name="contestantImage" class="form-control-file">
+                                                    <input type="file" id="contestantImage" name="contestantImage" accept="image/*" size="20" class="form-control-file">
                                                 </div>
                                         </div>
                                     <div style= float:right;>
