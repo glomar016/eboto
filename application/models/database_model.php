@@ -13,9 +13,10 @@ class Database_model extends CI_Model {
     }
 
     // SHOW
-    function show($statusColumn, $tableName, $dateEnd, $dateToday){
-        $this->db->select("*");
+    function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
+        $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
         $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
         $this->db->where($statusColumn, "1");
         $this->db->where("$dateEnd >=", $dateToday);
         $query = $this->db->get();
@@ -61,16 +62,13 @@ class Database_model extends CI_Model {
     // -- END OF CRUD --
 
 
-    // function show_poll($tableName, $id){
-    //     $this->db->limit(1);
-    //     $this->db->select("*");
-    //     $this->db->from($tableName);
-    //     $this->db->where("id", $id);
-    //     $this->db->order_by("id", "desc");
-
-    //     $query = $this->db->get();
-    //     $data = $query->row_array();
-
-    //     return $data;
-    // }
+    function get_all($statusColumn, $tableName)
+    {
+        $this->db->select("*");
+        $this->db->where($statusColumn, "1");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 }

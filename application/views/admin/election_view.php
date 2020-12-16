@@ -90,8 +90,7 @@
                                             <div class="au-card m-b-30">
                                                 <div class="au-card-inner candidateList">
                                                     <h2><?php echo $data[0]->electionName?></h2>
-                                                    <!-- <h5 class="candidateList"></h5> -->
-                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addCandidate">   
+                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#candidateModal">   
                                                     <i style=padding:3px; class="fa fa-plus"></i> 
                                                     Add Candidate </button>
                                                 </div>
@@ -104,7 +103,7 @@
         </div>
     </div> 
     <!-- candidate MODAL -->
-    <div class="modal fade" id="addCandidate" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="candidateModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:maroon;>
@@ -115,13 +114,14 @@
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
-                            <form action="" method="post" id="addcandidateForm">
+                            <form action="" method="post" id="addcandidateForm" name="addcandidateForm">
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
                                             <label for="candidateName" class=" form-control-label"> Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
                                             <input type="text" id="candidateName" name="candidateName" placeholder="Name" class="form-control">
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                                             <label for="candidateDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="candidateDescription" id="candidateDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                            <textarea name="candidateDescription" id="candidateDescription" rows="4" placeholder="Description" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -149,11 +149,11 @@
                                                     <label for="candidateImage" class=" form-control-label">Image</label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
-                                                    <input type="file" id="candidateImage" name="candidateImage" class="form-control-file">
+                                                    <input type="file" id="candidateImage" name="candidateImage" accept="image/*" size="20" class="form-control-file">
                                                 </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -200,23 +200,99 @@
 
 <script>
 $(document).ready(function(){
+    // Show election details
 
-    var electionName = "<?php echo $data[0]->electionName ?>"
-    var electionDateStart = "<?php echo $data[0]->electionDateStart ?>"
-    var electionDateEnd = "<?php echo $data[0]->electionDateEnd ?>"
-    var electionDescription = "<?php echo $data[0]->electionDescription ?>"
+    function loadviewdata(){
+
+        var electionName = "<?php echo $data[0]->electionName ?>"
+        var electionDateStart = "<?php echo $data[0]->electionDateStart ?>"
+        var electionDateEnd = "<?php echo $data[0]->electionDateEnd ?>"
+        var electionDescription = "<?php echo $data[0]->electionDescription ?>"
+
+            const clock = document.getElementById('liveclock');
+            $( ".candidateList" ).append("<p>"+electionName+"</p>");
+            setInterval(() => {
+                // clock.textContent 
+                clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
+            }, 1000);
+
+                $( ".candidateList" ).append("<p>Description: "+electionDescription+"</p>");
+                $( ".candidateList" ).append("<p>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
+                $( ".candidateList" ).append("<p>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
+    }
+    // End of show election details
+
+    loadviewdata()
+    
+    // Create candidate
+    $('#addcandidateForm').on('submit', function(e){
+            e.preventDefault();
+
+        var candidateName = document.addcandidateForm.candidateName.value;
+        var candidatePosition = document.addcandidateForm.candidatePosition.value;
+        var candidateDescription = document.addcandidateForm.candidateDescription.value;
+        var candidateImage = document.addcandidateForm.candidateImage.value;
+        var Extension = candidateImage.substring(
+            candidateImage.lastIndexOf('.') + 1).toLowerCase();
+
+        if(candidateName == '' || candidatePosition == '' || candidateDescription == ''){
+                        Swal.fire({
+                                title: 'Warning!',
+                                text: 'Please fill out required field.',
+                                icon: 'warning',
+                                confirmButtonText: 'Ok'
+                                })
+        }
+        else{
+            if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+                if($('#candidateImage').val() == ''){
+                        Swal.fire({
+                            title: 'Warning!',
+                            text: 'Please select an image.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                else{
+                    // Ajax call
+                    $.ajax({
+                            url: '<?php echo base_url()?>admin/candidate/add_candidate',
+                            type:"post",
+                            data: new FormData(this),
+                            processData:false,
+                            contentType:false,
+
+                            success: function(data){
+                                Swal.fire({
+                                        title: 'Success!',
+                                        text: 'You successfully created a candidate.',
+                                        icon: 'success',
+                                        confirmButtonText: 'Ok'
+                                        })
+                                    
+                                        $('#candidateModal').modal('hide');
+                                        $('#candidateModal form')[0].reset();
+                                    }
+                        })
+                    // End of Ajax Call
+                }
+            }
+            else{
+                Swal.fire({
+                            title: 'Warning!',
+                            text: 'Invalid image file.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+            }
+        }
 
 
-    const clock = document.getElementById('liveclock');
-    // $( ".candidateList" ).append("<p>"+electionName+"</p>");
-    setInterval(() => {
-        // clock.textContent 
-        clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
-    }, 1000);
 
-        $( ".candidateList" ).append("<p>Description: "+electionDescription+"</p>");
-        $( ".candidateList" ).append("<p>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
-        $( ".candidateList" ).append("<p>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
+    });
+
+    // End of Create candidate
+
 
 });
 
