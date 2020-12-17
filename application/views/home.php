@@ -335,8 +335,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 p-0">
                     <div class="team__item team__item--four set-bg" data-setbg="<?php echo base_url()?>resources/img/team/team-4.jpg">
                         <div class="team__item__text">
-                            <h4>Erica Cantos</h4>
-                            <p>Best Supporter</p>
+                            <h4>Bernard Teja</h4>
+                            <p>Developer</p>
                             <div class="team__item__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
