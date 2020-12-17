@@ -169,7 +169,7 @@
                                             <label for="electionDateStart" class=" form-control-label">Date Start</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="date" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d")?>"
+                                            <input type="date" value="<?php echo date("Y-d-m")?>" min="<?php echo date("Y-d-m")?>"
                                             id="electionDateStart" name="electionDateStart" class="form-control">
                                         </div>
                                     </div>

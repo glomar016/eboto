@@ -122,7 +122,7 @@
                         <div class="card-body card-block">
                             <form action="" method="post" id="addorganizationForm" name="addorganizationForm">
                             <div class="row form-group">
-                                        <div class="col col-md-3">
+                                        <div class="col col-md-4">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
                                             <label for="organizationName" class=" form-control-label">Organization Name</label>
                                         </div>
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3">
+                                        <div class="col col-md-4">
                                         <i style =padding-right:16px; class="fa fa-calendar"></i>
                                             <label for="organizationLogo" class=" form-control-label">Organization Logo</label>
                                         </div>
