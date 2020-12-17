@@ -296,7 +296,7 @@ $(document).ready(function(){
         var electionName = "<?php echo $data[0]->electionName ?>"
         var electionDateStart = "<?php echo $data[0]->electionDateStart ?>"
         var electionDateEnd = "<?php echo $data[0]->electionDateEnd ?>"
-        var electionDescription = "<?php echo $data[0]->electionDescription ?>"
+        var electionDescription = `<?php echo $data[0]->electionDescription ?>`
         
 
             const clock = document.getElementById('liveclock');
@@ -421,7 +421,7 @@ $(document).ready(function(){
         var Extension = candidateImage.substring(
             candidateImage.lastIndexOf('.') + 1).toLowerCase();
 
-        if(candidateName == '' || candidatePosition == '' || candidateDescription == ''){
+        if(candidateName == '' || candidatePosition == '' || candidateDescription == '' || candidateImage == ''){
                         Swal.fire({
                                 title: 'Warning!',
                                 text: 'Please fill out required field.',
@@ -497,12 +497,14 @@ $(document).ready(function(){
 
         var editcandidateName = document.editcandidateForm.editcandidateName.value;
         var editcandidateImage = document.editcandidateForm.editcandidateImage.value;
+        var editcandidatePosition = document.editcandidateForm.editcandidatePosition.value;
+        var editcandidateDescription = document.editcandidateForm.editcandidateDescription.value;
         var Extension = editcandidateImage.substring(
             editcandidateImage.lastIndexOf('.') + 1).toLowerCase();
 
 
 
-            if(editcandidateName == '' || editcandidateImage == ''){
+            if(editcandidateName == '' || editcandidateImage == ''|| editcandidatePosition == '' || editcandidateDescription == '' ){
                                 Swal.fire({
                                         title: 'Warning!',
                                         text: 'Please fill out required field.',

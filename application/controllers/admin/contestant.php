@@ -36,7 +36,6 @@ class Contestant extends CI_Controller {
 		// getting data from input
 		$id = $this->input->post('id');
 		$contestantName = $this->input->post('contestantName');
-		$contestantPosition = $this->input->post('contestantPosition');
 		$contestantDescription = $this->input->post('contestantDescription');
 
 
@@ -59,7 +58,7 @@ class Contestant extends CI_Controller {
 				$configer =  array(
 					'image_library'   => 'gd2',
 					'source_image'    =>  $data['full_path'],
-					'maintain_ratio'  =>  TRUE,
+					'maintain_ratio'  =>  FALSE,
 					'width'           =>  300,
 					'height'          =>  300,
 				  );
@@ -68,7 +67,7 @@ class Contestant extends CI_Controller {
 				$this->image_lib->resize();
 
 				$insert_data = array(
-                    'contestantContestID' => $id,
+                    'contestantContestID ' => $id,
 					'contestantName' => $contestantName,
 					'contestantDescription' => $contestantDescription,
                     'contestantImage' => $data['file_name'],
@@ -79,7 +78,98 @@ class Contestant extends CI_Controller {
 				$this->database_model->create($insert_data, "t_contestant");
 			}
 		}
-    }
+	}
+	
+	// function to pass data to datatables
+	public function show_contestant($refID)
+	{
+		// loading model that needed
+		$this->load->helper('date');
+		
+		$this->load->model('database_model');
 
+		$data["data"] = $this->database_model->show_options($refID, 'contestantContestID', 'contestantStatus', 't_contestant');
+
+		echo json_encode($data);
+	}
+
+	public function delete_contestant()
+	{
+		// loading model that needed
+		$this->load->model('database_model');
+
+
+		$id = $this->input->get('id');
+		$this->database_model->delete($id, "contestantStatus", "t_contestant");
+	}
+
+		// get data to pass data to edit modal
+	public function get_contestant($id)
+	{
+
+		$this->load->model('database_model');
+
+		$data = $this->database_model->get($id, 't_contestant');
+
+		echo json_encode($data);
+	}
+
+	public function update_contestant()
+	{
+		// loading model that needed
+		$this->load->model('database_model');
+
+		// getting data from input
+		$id = $this->input->post('id');
+		$contestantName = $this->input->post('editcontestantName');
+		$contestantDescription = $this->input->post('editcontestantDescription');
+
+		if(isset($_FILES["editcontestantImage"]["name"]))
+		{
+			$config['upload_path'] = './resources/images';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			
+			$this->load->library('image_lib');
+			$this->load->library('upload', $config);
+			
+			if(!$this->upload->do_upload('editcontestantImage'))
+			{
+				echo $this->upload->display_errors();
+			}
+			else
+			{
+				$data = $this->upload->data();
+				$configer =  array(
+					'image_library'   => 'gd2',
+					'source_image'    =>  $data['full_path'],
+					'maintain_ratio'  =>  FALSE,
+					'width'           =>  300,
+					'height'          =>  300,
+				  );
+				$this->image_lib->clear();
+				$this->image_lib->initialize($configer);
+				$this->image_lib->resize();
+
+				$insert_data = array(
+					'contestantName' => $contestantName,
+					'contestantDescription' => $contestantDescription,
+                    'contestantImage' => $data['file_name'],
+                    // 'path' => $data['full_path']
+					 );
+				
+				print_r($insert_data);
+				$this->database_model->update($id, $insert_data, "t_contestant");
+			}
+		}
+	}
+
+	public function view_contestant($id)
+	{
+		$this->load->model('database_model');
+
+		$data['data']= $this->database_model->get($id, 't_contestant');
+
+		$this->load->view('admin/contestant_view', $data);
+	}
 
 }

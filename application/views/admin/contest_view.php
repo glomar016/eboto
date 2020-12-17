@@ -30,6 +30,9 @@
     <link href="<?php echo base_url()?>resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url()?>resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+
     <!-- Main CSS-->
     <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
 
@@ -70,44 +73,66 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
-                         <!-- Card Header -->
-                    <div class="col-lg-12">
-                        <div class="card" style = float:center;>
-                            <div class="card-body" style="background-color: #ffffff;">
-                                    <div class="d-flex justify-content-left">
-                                        <div class="col-lg-3">
-                                            <div style="color:black;">
-                                                <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
-                                                Voting Ends:
-                                                <span class="badge badge-pill badge-warning" id="liveclock">
-                                                </span>
-                                            </div>
-                                        </div>
+                    <!-- Card Header -->
+                    <div class="card-body" style="background-color: #ffffff;">
+                        <div class="au-card m-b-30">
+                            <div class="d-flex justify-content-left">
+                                <div class="col-lg-3">
+                                    <div style="color:black;">
+                                        <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
+                                        Voting Ends:
+                                        <span class="badge badge-pill badge-warning" id="liveclock">
+                                        </span>
                                     </div>
-                                            <!-- <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p> -->
-                                            <br>
-                                            <br>
-                                            <div class="au-card m-b-30">
-                                                <div class="au-card-inner contestantList">
-                                                    <h2><?php echo $data[0]->contestName?></h2>
-                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#contestantModal">   
-                                                    <i style=padding:3px; class="fa fa-plus"></i> 
-                                                    Add contestant </button>
-                                                </div>
-                                            </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="au-card-inner text-center contestantList">
+                                <h2><?php echo $data[0]->contestName?></h2>
+                            </div>
                     </div>
+                    <!-- End of Card Header -->
+                    <!-- Data Table Content -->
+                    <div class="au-card m-b-30">
+                        <div class="au-card-inner">
+                                <!-- DATA TABLE -->
+                                <div class="table-data__tool">
+                                        <h2>List of Contestant</h2>
+                                    <div class="table-data__tool-right">
+                                        <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#contestantModal">   
+                                        <i style=padding:3px; class="fa fa-plus"></i> 
+                                        Add Contesnant </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table id="contestantTable" class="table table-data3" style="width:100%"> 
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>  
+                        </div>
+                    </diV>
+                    <!-- End of Data Table Content -->
                 </div>
             </div>
         </div>
     </div> 
+
     <!-- contestant MODAL -->
     <div class="modal fade" id="contestantModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:maroon;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Contestant</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add contestant</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -118,7 +143,7 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="contestantName" class=" form-control-label">Name</label>
+                                            <label for="contestantName" class=" form-control-label"> Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
@@ -131,7 +156,7 @@
                                             <label for="contestantDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                            <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Description" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -142,9 +167,63 @@
                                                 <div class="col-4 col-md-8">
                                                     <input type="file" id="contestantImage" name="contestantImage" accept="image/*" size="20" class="form-control-file">
                                                 </div>
-                                        </div>
+                                    </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END contestant MODAL -->
+
+    <!-- edit contestant MODAL -->
+    <div class="modal fade" id="editcontestantModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style=background-color:maroon;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add contestant</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="editcontestantForm" name="editcontestantForm">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-user"></i>
+                                            <label for="editcontestantName" class=" form-control-label"> Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
+                                            <input type="text" id="editcontestantName" name="editcontestantName" placeholder="Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-comment"></i>
+                                            <label for="editcontestantDescription" class=" form-control-label">Description </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <textarea name="editcontestantDescription" id="editcontestantDescription" rows="4" placeholder="Description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                <i style =padding-right:16px; class="fa fa-file-image-o"></i>
+                                                    <label for="editcontestantImage" class=" form-control-label">Image</label>
+                                                </div>
+                                                <div class="col-4 col-md-8">
+                                                    <input type="file" id="editcontestantImage" name="editcontestantImage" value="test" accept="image/*" size="20" class="form-control-file">
+                                                </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -159,11 +238,10 @@
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
-
     </div>
 
     <!-- Jquery JS-->
-    <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script>
+    <!-- <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script> -->
     <!-- Bootstrap JS-->
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -191,33 +269,129 @@
 
 <script>
 $(document).ready(function(){
+    // Show contest details
+    var contestID = "<?php echo $data[0]->id ?>"
 
-// Show contest details
     function loadviewdata(){
 
-    var contestName = "<?php echo $data[0]->contestName ?>"
-    var contestDateStart = "<?php echo $data[0]->contestDateStart ?>"
-    var contestDateEnd = "<?php echo $data[0]->contestDateEnd ?>"
-    var contestDescription = "<?php echo $data[0]->contestDescription ?>"
+        var contestName = "<?php echo $data[0]->contestName ?>"
+        var contestDateStart = "<?php echo $data[0]->contestDateStart ?>"
+        var contestDateEnd = "<?php echo $data[0]->contestDateEnd ?>"
+        var contestDescription = "<?php echo $data[0]->contestDescription ?>"
+        
 
-        const clock = document.getElementById('liveclock');
-        $( ".contestantList" ).append("<p>"+contestName+"</p>");
-        setInterval(() => {
-            // clock.textContent 
-            clock.textContent = moment(contestDateEnd).endOf('seconds').fromNow();
-        }, 1000);
+            const clock = document.getElementById('liveclock');
+            setInterval(() => {
+                // clock.textContent 
+                clock.textContent = moment(contestDateEnd).endOf('seconds').fromNow();
+            }, 1000);
 
-            $( ".contestantList" ).append("<p>Description: "+contestDescription+"</p>");
-            $( ".contestantList" ).append("<p>Date Start: "+(moment(contestDateStart).format('LL'))+"</p>");
-            $( ".contestantList" ).append("<p>Date End: "+(moment(contestDateEnd).format('LL'))+"</p>");
+                $( ".contestantList" ).append("<p>Description: "+contestDescription+"</p>");
+                $( ".contestantList" ).append("<p>Date Start: "+(moment(contestDateStart).format('LL'))+"</p>");
+                $( ".contestantList" ).append("<p>Date End: "+(moment(contestDateEnd).format('LL'))+"</p>");
     }
-     // End of show contest details
+    // End of show contest details
 
+    function loadtable(){
+        contestantDataTable = $('#contestantTable').DataTable({
+            "pageLength": 10,
+            "ajax": "<?php echo base_url()?>admin/contestant/show_contestant/"+contestID,
+            "columns": [
+                { data: "id"},
+                { data: "contestantImage"},
+                { data: "contestantName"},
+                { data: "contestantStatus", render: function(data, type, row){
+                    if(data == 1){
+                        return '<div class="btn-group">'+
+                                '<button class="btn btn-primary btn-sm btn_view" value="'+row.id+'" title="View" type="button" ><i class="zmdi zmdi-eye"></i> </button>'+
+                                '<button class="btn btn-warning btn-sm btn_edit" value="'+row.id+'" title="Edit" type="button" ><i class="zmdi zmdi-edit"></i> </button>'+
+                                '<button class="btn btn-danger btn-sm btn_delete" value="'+row.id+'" title="Delete" type="button"> <i class="zmdi zmdi-delete"> </i></button></div>';
+                    }   
+                    else{
+                        return '<button>Activate</button>';
+                    }
+                }}
+            ],
+
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}, 
+                            { "aTargets": [1],
+                                render: function(data) {
+                                    return '<img src="/eboto/resources/images/'+data+'" length="50" width="50">'
+                                }
+                            }],
+            "order": [[0, "desc"]]
+        })
+    }
+
+    // To auto load the datatables
+    function refresh(){
+        var url = "<?php echo base_url()?>admin/contestant/show_contestant/"+contestID;
+
+        contestantDataTable.ajax.url(url).load();
+    }
+
+    loadtable();
     loadviewdata();
 
-// Create contestant
-$('#addcontestantForm').on('submit', function(e){
-        e.preventDefault();
+    // load data and pass to edit function
+    $(document).on("click", ".btn_edit", function(){
+        var id = this.value;
+
+        $.ajax({
+            url: '<?php echo base_url()?>admin/contestant/get_contestant/'+id,
+            type: "GET",
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+                    var row = parsedResponse[0];
+                    $('[name="id"').val(row.id);
+                    $('[name="editcontestantName"]').val(row.contestantName);
+                    $('[name="editcontestantDescription"]').val(row.contestantDescription);
+                    
+                    $('#editcontestantModal').modal('show'); // show bootstrap modal when complete loaded
+                }
+        })
+       
+    });
+
+    // delete function
+        $(document).on("click", ".btn_delete", function(){
+        var id = this.value;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $.ajax({
+                    url: '<?php echo base_url()?>admin/contestant/delete_contestant',
+                    data: {id: id},
+
+                        success:function(data){
+                            refresh();
+                            Swal.fire(
+                                'Deleted!',
+                                'The contestant has been deleted.',
+                                'success'
+                                )
+                        }
+                });
+
+            }
+        })
+        
+    });
+    
+    // Create contestant
+    $('#addcontestantForm').on('submit', function(e){
+            e.preventDefault();
 
         var contestantName = document.addcontestantForm.contestantName.value;
         var contestantDescription = document.addcontestantForm.contestantDescription.value;
@@ -225,7 +399,7 @@ $('#addcontestantForm').on('submit', function(e){
         var Extension = contestantImage.substring(
             contestantImage.lastIndexOf('.') + 1).toLowerCase();
 
-        if(contestantName == '' || contestantDescription == ''){
+        if(contestantName == '' || contestantDescription == '' || contestantImage == ''){
                         Swal.fire({
                                 title: 'Warning!',
                                 text: 'Please fill out required field.',
@@ -253,6 +427,8 @@ $('#addcontestantForm').on('submit', function(e){
                             contentType:false,
 
                             success: function(data){
+                                refresh();
+
                                 Swal.fire({
                                         title: 'Success!',
                                         text: 'You successfully created a contestant.',
@@ -280,10 +456,107 @@ $('#addcontestantForm').on('submit', function(e){
 
 
     });
+
     // End of Create contestant
 
+    // View contestant
+    $(document).on("click", ".btn_view", function(){
+        var id = this.value;
+
+        window.location.href = "<?php echo base_url()?>admin/contestant/view_contestant/"+id;
+
+    });
+    // End of view contestant
+
+    // Update contestant
+    $('#editcontestantForm').on('submit', function(e){
+                        e.preventDefault();
+                        var id = this.value;
+
+        var editcontestantName = document.editcontestantForm.editcontestantName.value;
+        var editcontestantImage = document.editcontestantForm.editcontestantImage.value;
+        var editcontestantDescription = document.editcontestantForm.editcontestantDescription.value;
+        var Extension = editcontestantImage.substring(
+            editcontestantImage.lastIndexOf('.') + 1).toLowerCase();
+
+
+
+            if(editcontestantName == '' || editcontestantImage == '' || editcontestantDescription == ''){
+                                Swal.fire({
+                                        title: 'Warning!',
+                                        text: 'Please fill out required field.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                                        })
+            }
+            else
+            {
+                if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+                        if($('#editcontestantImage').val() == ''){
+                            Swal.fire({
+                                        title: 'Warning!',
+                                        text: 'Please select an image.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                            })
+                        }
+                        else
+                        {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You are updating an contestant!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, update it!'
+                            }).then((result) => {
+                            if (result.isConfirmed) {                         
+                                // ajax post
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>admin/contestant/update_contestant',
+                                                type:"post",
+                                                data: new FormData(this),
+                                                processData:false,
+                                                contentType:false,
+
+                                                success:function()
+                                                        {
+                                                        
+                                                        refresh();
+                                                    
+                                                        Swal.fire({
+                                                            title: 'Success!',
+                                                            text: 'You successfully updated an contestant.',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'Ok'
+                                                            })
+                                                        
+                                                        $('#editcontestantModal').modal('hide');
+                                                        $('#editcontestantModal form')[0].reset();
+                                                            
+                                                        }
+                                            });
+                                    }       
+                                })
+                        }
+                }
+                else{
+                    Swal.fire({
+                            title: 'Warning!',
+                            text: 'Invalid image file.',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                }
+            }
+    });
+    // End of updating contestant
+
+
 });
-   
+
 </script>
 
 </html>

@@ -30,6 +30,9 @@
     <link href="<?php echo base_url()?>resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url()?>resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+
     <!-- Main CSS-->
     <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
 
@@ -70,44 +73,65 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
-                         <!-- Card Header -->
-                    <div class="col-lg-12">
-                        <div class="card" style = float:center;>
-                            <div class="card-body" style="background-color: #ffffff;">
-                                    <div class="d-flex justify-content-left">
-                                        <div class="col-lg-3">
-                                            <div style="color:black;">
-                                                <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
-                                                Voting Ends:
-                                                <span class="badge badge-pill badge-warning" id="liveclock">
-                                                </span>
-                                            </div>
-                                        </div>
+                    <!-- Card Header -->
+                    <div class="card-body" style="background-color: #ffffff;">
+                        <div class="au-card m-b-30">
+                            <div class="d-flex justify-content-left">
+                                <div class="col-lg-3">
+                                    <div style="color:black;">
+                                        <i style=padding:3px;color:black; class="fa fa-clock-o"></i> 
+                                        Voting Ends:
+                                        <span class="badge badge-pill badge-warning" id="liveclock">
+                                        </span>
                                     </div>
-                                            <!-- <p style="text-align:center;"><img src =https://sis2.pup.edu.ph/student/assets/images/PUPLogo.png></p> -->
-                                            <br>
-                                            <br>
-                                            <div class="au-card m-b-30">
-                                                <div class="au-card-inner optionList">
-                                                    <h2><?php echo $data[0]->pollName?></h2>
-                                                    <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#optionModal">   
-                                                    <i style=padding:3px; class="fa fa-plus"></i> 
-                                                    Add option </button>
-                                                </div>
-                                            </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="au-card-inner text-center optionList">
+                                <h2><?php echo $data[0]->pollName?></h2>
+                            </div>
                     </div>
+                    <!-- End of Card Header -->
+                    <!-- Data Table Content -->
+                    <div class="au-card m-b-30">
+                        <div class="au-card-inner">
+                                <!-- DATA TABLE -->
+                                <div class="table-data__tool">
+                                        <h2>List of option</h2>
+                                    <div class="table-data__tool-right">
+                                        <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#optionModal">   
+                                        <i style=padding:3px; class="fa fa-plus"></i> 
+                                        Add option </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table id="optionTable" class="table table-data3" style="width:100%"> 
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>  
+                        </div>
+                    </diV>
+                    <!-- End of Data Table Content -->
                 </div>
             </div>
         </div>
     </div> 
-     <!-- option MODAL -->
-     <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+
+    <!-- option MODAL -->
+    <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:maroon;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Poll Option</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add option</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -118,15 +142,15 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="optionName" class=" form-control-label">Option</label>
+                                            <label for="optionName" class=" form-control-label"> Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="optionName" name="optionName" placeholder="Option" class="form-control">
+                                            <input type="text" id="optionName" name="optionName" placeholder="Name" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -136,16 +160,51 @@
             </div>
         </div>
     </div>
-    <!-- END polloption MODAL -->
+    <!-- END option MODAL -->
+
+    <!-- edit option MODAL -->
+    <div class="modal fade" id="editoptionModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style=background-color:maroon;>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add option</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="editoptionForm" name="editoptionForm">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:16px; class="fa fa-user"></i>
+                                            <label for="editoptionName" class=" form-control-label"> Name</label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
+                                            <input type="text" id="editoptionName" name="editoptionName" placeholder="Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END option MODAL -->
 
         <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
-
     </div>
 
     <!-- Jquery JS-->
-    <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script>
+    <!-- <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script> -->
     <!-- Bootstrap JS-->
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -173,32 +232,122 @@
 
 <script>
 $(document).ready(function(){
+    // Show poll details
+    var pollID = "<?php echo $data[0]->id ?>"
 
     function loadviewdata(){
 
-    var pollName = "<?php echo $data[0]->pollName ?>"
-    var pollDateStart = "<?php echo $data[0]->pollDateStart ?>"
-    var pollDateEnd = "<?php echo $data[0]->pollDateEnd ?>"
-    var pollDescription = "<?php echo $data[0]->pollDescription ?>"
+        var pollName = "<?php echo $data[0]->pollName ?>"
+        var pollDateStart = "<?php echo $data[0]->pollDateStart ?>"
+        var pollDateEnd = "<?php echo $data[0]->pollDateEnd ?>"
+        var pollDescription = `<?php echo $data[0]->pollDescription ?>`
+        
 
-        const clock = document.getElementById('liveclock');
-        $( ".optionList" ).append("<p>"+pollName+"</p>");
-        setInterval(() => {
-            // clock.textContent 
-            clock.textContent = moment(pollDateEnd).endOf('seconds').fromNow();
-        }, 1000);
+            const clock = document.getElementById('liveclock');
+            setInterval(() => {
+                // clock.textContent 
+                clock.textContent = moment(pollDateEnd).endOf('seconds').fromNow();
+            }, 1000);
 
-            $( ".optionList" ).append("<p>Description: "+pollDescription+"</p>");
-            $( ".optionList" ).append("<p>Date Start: "+(moment(pollDateStart).format('LL'))+"</p>");
-            $( ".optionList" ).append("<p>Date End: "+(moment(pollDateEnd).format('LL'))+"</p>");
+                $( ".optionList" ).append("<p>Description: "+pollDescription+"</p>");
+                $( ".optionList" ).append("<p>Date Start: "+(moment(pollDateStart).format('LL'))+"</p>");
+                $( ".optionList" ).append("<p>Date End: "+(moment(pollDateEnd).format('LL'))+"</p>");
     }
     // End of show poll details
 
-    loadviewdata()
+    function loadtable(){
+        optionDataTable = $('#optionTable').DataTable({
+            "pageLength": 10,
+            "ajax": "<?php echo base_url()?>admin/option/show_option/"+pollID,
+            "columns": [
+                { data: "id"},
+                { data: "optionName"},
+                { data: "optionStatus", render: function(data, type, row){
+                    if(data == 1){
+                        return '<div class="btn-group">'+
+                                '<button class="btn btn-primary btn-sm btn_view" value="'+row.id+'" title="View" type="button" ><i class="zmdi zmdi-eye"></i> </button>'+
+                                '<button class="btn btn-warning btn-sm btn_edit" value="'+row.id+'" title="Edit" type="button" ><i class="zmdi zmdi-edit"></i> </button>'+
+                                '<button class="btn btn-danger btn-sm btn_delete" value="'+row.id+'" title="Delete" type="button"> <i class="zmdi zmdi-delete"> </i></button></div>';
+                    }   
+                    else{
+                        return '<button>Activate</button>';
+                    }
+                }}
+            ],
 
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+            "order": [[0, "desc"]]
+        })
+    }
+
+    // To auto load the datatables
+    function refresh(){
+        var url = "<?php echo base_url()?>admin/option/show_option/"+pollID;
+
+        optionDataTable.ajax.url(url).load();
+    }
+
+    loadtable();
+    loadviewdata();
+
+    // load data and pass to edit function
+    $(document).on("click", ".btn_edit", function(){
+        var id = this.value;
+
+        $.ajax({
+            url: '<?php echo base_url()?>admin/option/get_option/'+id,
+            type: "GET",
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+                    var row = parsedResponse[0];
+                    $('[name="id"').val(row.id);
+                    $('[name="editoptionName"]').val(row.optionName);
+                    
+                    $('#editoptionModal').modal('show'); // show bootstrap modal when complete loaded
+                }
+        })
+       
+    });
+
+    // delete function
+        $(document).on("click", ".btn_delete", function(){
+        var id = this.value;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $.ajax({
+                    url: '<?php echo base_url()?>admin/option/delete_option',
+                    data: {id: id},
+
+                        success:function(data){
+                            refresh();
+                            Swal.fire(
+                                'Deleted!',
+                                'The option has been deleted.',
+                                'success'
+                                )
+                        }
+                });
+
+            }
+        })
+        
+    });
+    
     // Create option
     $('#addoptionForm').on('submit', function(e){
-        e.preventDefault();
+            e.preventDefault();
 
         var optionName = document.addoptionForm.optionName.value;
 
@@ -220,6 +369,8 @@ $(document).ready(function(){
                             contentType:false,
 
                             success: function(data){
+                                refresh();
+
                                 Swal.fire({
                                         title: 'Success!',
                                         text: 'You successfully created a option.',
@@ -227,20 +378,92 @@ $(document).ready(function(){
                                         confirmButtonText: 'Ok'
                                         })
                                     
-                                        $('#pollModal').modal('hide');
-                                        $('#pollModal form')[0].reset();
+                                        $('#optionModal').modal('hide');
+                                        $('#optionModal form')[0].reset();
                                     }
                         })
                     // End of Ajax Call
-        }
-
-
-
-    });
+                }
+            })
+        });
 
     // End of Create option
 
-});
+    // View option
+    $(document).on("click", ".btn_view", function(){
+        var id = this.value;
+
+        window.location.href = "<?php echo base_url()?>admin/option/view_option/"+id;
+
+    });
+    // End of view option
+
+    // Update option
+    $('#editoptionForm').on('submit', function(e){
+                        e.preventDefault();
+                        var id = this.value;
+
+        function refresh(){
+        var pollID = "<?php echo $data[0]->id ?>"
+        var url = "<?php echo base_url()?>admin/option/show_option/"+pollID;
+
+        optionDataTable.ajax.url(url).load();
+    }
+
+        var editoptionName = document.editoptionForm.editoptionName.value;
+
+            if(editoptionName == ''){
+                                Swal.fire({
+                                        title: 'Warning!',
+                                        text: 'Please fill out required field.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Ok'
+                                        })
+            }
+            else
+            {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You are updating an option!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, update it!'
+                            }).then((result) => {
+                            if (result.isConfirmed) {                         
+                                // ajax post
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>admin/option/update_option',
+                                                type:"post",
+                                                data: new FormData(this),
+                                                processData:false,
+                                                contentType:false,
+
+                                                success:function()
+                                                        {
+                                                        
+                                                        refresh();
+                                                    
+                                                        Swal.fire({
+                                                            title: 'Success!',
+                                                            text: 'You successfully updated an option.',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'Ok'
+                                                            })
+                                                        
+                                                        $('#editoptionModal').modal('hide');
+                                                        $('#editoptionModal form')[0].reset();
+                                                            
+                                                        }
+                                            });
+                                    // end of ajax posting
+                                    }       
+                                })
+                            }
+            });
+    // End of updating option
+
 </script>
 
 </html>

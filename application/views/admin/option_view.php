@@ -75,13 +75,7 @@
                         <div class="card">
                             <div class="card-body" style="background-color: #ffffff;">
                                 <div class="au-card m-b-30">
-                                    <div class="au-card-inner text-center candidateInfo">
-                                        <!-- <h2 class="text-center"><?php echo $data[0]->candidateName?></h2> -->
-                                        <!-- <h5 class="candidateList"></h5> -->
-                                        <div class="card-body">
-                                            <img src="<?php echo base_url('resources/images/'.$data[0]->candidateImage); ?>" 
-                                            width="200" height="200">
-                                        </div>
+                                    <div class="au-card-inner text-center optionInfo">
                                     </div>
                                 </div>
                             </div>
@@ -130,14 +124,9 @@ $(document).ready(function(){
 
     function loadviewdata(){
 
-        var candidateName = "<?php echo $data[0]->candidateName ?>"
-        var candidatePosition = "<?php echo $data[0]->candidatePosition ?>"
-        var candidateDescription = `<?php echo $data[0]->candidateDescription ?>`
+        var optionName = "<?php echo $data[0]->optionName ?>"
 
-                $( ".candidateInfo" ).append("<p><strong>Name</strong>: "+candidateName+"</p>");
-                $( ".candidateInfo" ).append("<p><strong>Position</strong>: "+candidatePosition+"</p>");
-                $( ".candidateInfo" ).append("<div class='w-25 p-3 d-flex justify-content-center'>"+
-                "<p><strong>Description</strong>: "+candidateDescription+"</p></div>");
+                $( ".optionInfo" ).append("<p><strong>Name</strong>: "+optionName+"</p>");
         }
 
     loadviewdata();
