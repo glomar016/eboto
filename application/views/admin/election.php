@@ -382,11 +382,9 @@ $(document).ready(function() {
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                
                 $.ajax({
                     url: '<?php echo base_url()?>admin/election/delete_election',
                     data: {id: id},
-
                         success:function(data){
                             refresh();
                             Swal.fire(
@@ -396,11 +394,8 @@ $(document).ready(function() {
                                 )
                         }
                 });
-
-
             }
-            })
-       
+        })
     });
 
     // edit function
