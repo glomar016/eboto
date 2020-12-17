@@ -81,11 +81,11 @@
                                 <!-- DATA TABLE -->
                                 
                                 <div class="table-data__tool">
-                                        <h2>List of Poll</h2>
+                                        <h2>List of poll</h2>
                                     <div class="table-data__tool-right">
                                         <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#pollModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
-                                        Create Poll </button>
+                                        Create poll </button>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
@@ -134,10 +134,10 @@
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="pollName" name="pollName" placeholder="Name of Poll" class="form-control">
+                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -147,10 +147,13 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="pollOrg" id="pollOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Public</option>
-                                                <option value="2">COMMITS</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                    foreach($data as $row)
+                                                    { 
+                                                        echo $row->orgName;
+                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -203,7 +206,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:gold;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update Poll</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update poll</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -214,11 +217,11 @@
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of Poll" class="form-control">
+                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of poll" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -228,10 +231,12 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="editpollOrg" id="editpollOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                foreach($data as $row)
+                                                { 
+                                                echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -329,7 +334,7 @@ $(document).ready(function() {
                 { data: "pollDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
                 }, "orderData":[1]},
-                { data: "pollOrg"},
+                { data: "orgName"},
                 { data: "pollStatus", render: function(data, type, row){
                     if(data == 1){
                         return '<div class="btn-group">'+
@@ -348,6 +353,7 @@ $(document).ready(function() {
         })
     }
 
+
     function refresh(){
         var url = "<?php echo base_url()?>admin/poll/show_poll";
 
@@ -357,6 +363,7 @@ $(document).ready(function() {
     // view function
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
+        // console.log(id);
 
         window.location.href = "<?php echo base_url()?>admin/poll/view_poll/"+id;
 

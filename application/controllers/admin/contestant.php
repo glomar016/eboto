@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Organization extends CI_Controller {
+class Contestant extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,18 +20,27 @@ class Organization extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->model('database_model');
-		$this->load->view('admin/organization');
-	}
-	
-	public function add_organization()
-	{
 		// loading model that needed
 		$this->load->model('database_model');
-		$organizationName = $this->input->post('organizationName');
+
+		$this->load->view('admin/contest_view');
+
+    }
+	
+    public function add_contestant()
+    {
+        $this->load->model('database_model');
+		// loading view 
+		
+
+		// getting data from input
+		$id = $this->input->post('id');
+		$contestantName = $this->input->post('contestantName');
+		$contestantDescription = $this->input->post('contestantDescription');
 
 
-		if(isset($_FILES["organizationLogo"]["name"]))
+		// making data of assoc array to pass to model
+		if(isset($_FILES["contestantImage"]["name"]))
 		{
 			$config['upload_path'] = './resources/images';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -39,7 +48,7 @@ class Organization extends CI_Controller {
 			$this->load->library('image_lib');
 			$this->load->library('upload', $config);
 			
-			if(!$this->upload->do_upload('organizationLogo'))
+			if(!$this->upload->do_upload('contestantImage'))
 			{
 				echo $this->upload->display_errors();
 			}
@@ -58,67 +67,72 @@ class Organization extends CI_Controller {
 				$this->image_lib->resize();
 
 				$insert_data = array(
-					'orgName' => $organizationName,
-                    'orgLogo' => $data['file_name'],
+                    'contestantContestID ' => $id,
+					'contestantName' => $contestantName,
+					'contestantDescription' => $contestantDescription,
+                    'contestantImage' => $data['file_name'],
                     // 'path' => $data['full_path']
 					 );
 
 				print_r($insert_data);
-				$this->database_model->create($insert_data, "r_org");
+				$this->database_model->create($insert_data, "t_contestant");
 			}
 		}
 	}
-
-	public function show_organization()
+	
+	// function to pass data to datatables
+	public function show_contestant($refID)
 	{
-		$this->load->model('database_model');
+		// loading model that needed
+		$this->load->helper('date');
 		
-		$data["data"] = $this->database_model->view('orgStatus', "r_org");
+		$this->load->model('database_model');
+
+		$data["data"] = $this->database_model->show_options($refID, 'contestantContestID', 'contestantStatus', 't_contestant');
 
 		echo json_encode($data);
-
-
 	}
-	
-	
-	public function delete_organization()
+
+	public function delete_contestant()
 	{
 		// loading model that needed
 		$this->load->model('database_model');
 
 
 		$id = $this->input->get('id');
-		$this->database_model->delete($id, "orgStatus", "r_org");
+		$this->database_model->delete($id, "contestantStatus", "t_contestant");
 	}
 
-	public function get_organization($id)
+		// get data to pass data to edit modal
+	public function get_contestant($id)
 	{
 
 		$this->load->model('database_model');
 
-		$data = $this->database_model->get($id, 'r_org');
+		$data = $this->database_model->get($id, 't_contestant');
 
 		echo json_encode($data);
 	}
 
-	public function update_organization()
+	public function update_contestant()
 	{
 		// loading model that needed
 		$this->load->model('database_model');
 
 		// getting data from input
 		$id = $this->input->post('id');
-		$organizationName = $this->input->post('editorganizationName');
+		$contestantName = $this->input->post('editcontestantName');
+		$contestantDescription = $this->input->post('editcontestantDescription');
 
-		if(isset($_FILES["editorganizationLogo"]["name"]))
+		if(isset($_FILES["editcontestantImage"]["name"]))
 		{
 			$config['upload_path'] = './resources/images';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
 			
-			// $this->load->library('image_lib');
+			$this->load->library('image_lib');
 			$this->load->library('upload', $config);
 			
-			if(!$this->upload->do_upload('editorganizationLogo'))
+			if(!$this->upload->do_upload('editcontestantImage'))
 			{
 				echo $this->upload->display_errors();
 			}
@@ -137,24 +151,25 @@ class Organization extends CI_Controller {
 				$this->image_lib->resize();
 
 				$insert_data = array(
-					'orgName' => $organizationName,
-                    'orgLogo' => $data['file_name'],
+					'contestantName' => $contestantName,
+					'contestantDescription' => $contestantDescription,
+                    'contestantImage' => $data['file_name'],
                     // 'path' => $data['full_path']
 					 );
 				
 				print_r($insert_data);
-				$this->database_model->update($id, $insert_data, "r_org");
+				$this->database_model->update($id, $insert_data, "t_contestant");
 			}
 		}
 	}
 
-	public function view_organization($id)
+	public function view_contestant($id)
 	{
 		$this->load->model('database_model');
 
-		$data['data']= $this->database_model->get($id, 'r_org');
+		$data['data']= $this->database_model->get($id, 't_contestant');
 
-		$this->load->view('admin/organization_view', $data);
+		$this->load->view('admin/contestant_view', $data);
 	}
 
 }

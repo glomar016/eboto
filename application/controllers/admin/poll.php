@@ -23,7 +23,9 @@ class Poll extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-		$this->load->view('admin/poll');
+		$data['data'] = $this->database_model->get_all('orgStatus', 'r_org');
+
+		$this->load->view('admin/poll', $data);
 
     }
 	
@@ -47,7 +49,7 @@ class Poll extends CI_Controller {
 		$data = array(
 			"pollName" => $pollName, 
 			"pollDescription" => $pollDescription,
-			// "pollOrg" => $pollOrg, 
+			"pollOrg" => $pollOrg, 
 			"pollDateStart" =>$pollDateStart,
 			"pollDateEnd" => $pollDateEnd
 		);
@@ -74,7 +76,7 @@ class Poll extends CI_Controller {
 		$data = array(
 				"pollName" => $pollName, 
 				"pollDescription" => $pollDescription,
-                // "pollOrg" => $pollOrg, 
+                "pollOrg" => $pollOrg, 
                 "pollDateStart" => $pollDateStart,
                 "pollDateEnd" => $pollDateEnd
 		);
@@ -94,7 +96,8 @@ class Poll extends CI_Controller {
 		$this->load->model('database_model');
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
-		$data["data"] = $this->database_model->show('pollStatus', "t_poll", "pollDateEnd", $dateToday);
+
+		$data["data"] = $this->database_model->show('pollStatus', "t_poll", "r_org", "pollOrg", "pollDateEnd", $dateToday);
 
 		echo json_encode($data);
 
@@ -129,5 +132,6 @@ class Poll extends CI_Controller {
 
 		$this->load->view('admin/poll_view', $data);
 	}
+
 
 }

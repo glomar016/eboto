@@ -23,7 +23,9 @@ class Election extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-		$this->load->view('admin/election');
+		$data['data'] = $this->database_model->get_all('orgStatus', 'r_org');
+
+		$this->load->view('admin/election', $data);
 
     }
 	
@@ -47,7 +49,7 @@ class Election extends CI_Controller {
 		$data = array(
 			"electionName" => $electionName, 
 			"electionDescription" => $electionDescription,
-			// "electionOrg" => $electionOrg, 
+			"electionOrg" => $electionOrg, 
 			"electionDateStart" =>$electionDateStart,
 			"electionDateEnd" => $electionDateEnd
 		);
@@ -74,7 +76,7 @@ class Election extends CI_Controller {
 		$data = array(
 				"electionName" => $electionName, 
 				"electionDescription" => $electionDescription,
-                // "electionOrg" => $electionOrg, 
+                "electionOrg" => $electionOrg, 
                 "electionDateStart" => $electionDateStart,
                 "electionDateEnd" => $electionDateEnd
 		);
@@ -94,10 +96,10 @@ class Election extends CI_Controller {
 		$this->load->model('database_model');
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
-		$data["data"] = $this->database_model->show('electionStatus', "t_election", "electionDateEnd", $dateToday);
+
+		$data["data"] = $this->database_model->show('electionStatus', "t_election", "r_org", "electionOrg", "electionDateEnd", $dateToday);
 
 		echo json_encode($data);
-
 
 	}
 	
@@ -111,6 +113,7 @@ class Election extends CI_Controller {
 		$this->database_model->delete($id, "electionStatus", "t_election");
 	}
 
+	// get data to pass data to edit modal
 	public function get_election($id)
 	{
 
@@ -129,5 +132,6 @@ class Election extends CI_Controller {
 
 		$this->load->view('admin/election_view', $data);
 	}
+
 
 }

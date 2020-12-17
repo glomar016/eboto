@@ -12,10 +12,11 @@ class Database_model extends CI_Model {
         return $this->db->insert($tableName, $data);
     }
 
-    // SHOW
-    function show($statusColumn, $tableName, $dateEnd, $dateToday){
-        $this->db->select("*");
+    // get the views of datatables for specific election/contest/poll
+    function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
+        $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
         $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
         $this->db->where($statusColumn, "1");
         $this->db->where("$dateEnd >=", $dateToday);
         $query = $this->db->get();
@@ -23,6 +24,7 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // get the views of any tables
     function view($statusColumn, $tableName){
         $this->db->select("*");
         $this->db->from($tableName);
@@ -61,16 +63,26 @@ class Database_model extends CI_Model {
     // -- END OF CRUD --
 
 
-    // function show_poll($tableName, $id){
-    //     $this->db->limit(1);
-    //     $this->db->select("*");
-    //     $this->db->from($tableName);
-    //     $this->db->where("id", $id);
-    //     $this->db->order_by("id", "desc");
+    // query to get all restriction
+    function get_all($statusColumn, $tableName)
+    {
+        $this->db->select("*");
+        $this->db->where($statusColumn, "1");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 
-    //     $query = $this->db->get();
-    //     $data = $query->row_array();
 
-    //     return $data;
-    // }
+    // query to get candidate of election, contestant of contest, option of poll
+    function show_options($referenceID, $referenceColumn, $statusColumn, $tableName){
+        $this->db->select("*");
+        $this->db->where($referenceColumn, $referenceID);
+        $this->db->where($statusColumn, "1");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 }

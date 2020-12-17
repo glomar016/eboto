@@ -77,9 +77,7 @@
                         <!-- Data Table Content -->
                         <div class="au-card m-b-30">
                             <div class="au-card-inner">
-
                                 <!-- DATA TABLE -->
-                                
                                 <div class="table-data__tool">
                                         <h2>List of Election</h2>
                                     <div class="table-data__tool-right">
@@ -108,7 +106,6 @@
                                     </table>
                                 </div>
                                 <!-- END DATA TABLE -->
-                                </div>  
                             </div>
                         </div>
                         <!-- End of Data Table Content -->
@@ -117,6 +114,7 @@
             </div>
         </div>
     </div> 
+    <!-- END MAIN CONTENT-->
 
     <!-- election MODAL -->
     <div class="modal fade" id="electionModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
@@ -147,10 +145,13 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="electionOrg" id="electionOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Public</option>
-                                                <option value="2">COMMITS</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                    foreach($data as $row)
+                                                    { 
+                                                        echo $row->orgName;
+                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -228,10 +229,12 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <select name="editelectionOrg" id="editelectionOrg" class="form-control">
-                                                <option value="0">Please select your Restriction</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
+                                                <?php 
+                                                foreach($data as $row)
+                                                { 
+                                                echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -274,7 +277,6 @@
         </div>
     </div>
     <!-- END edit election MODAL -->
-        <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
 
@@ -315,7 +317,7 @@
 $(document).ready(function() {
 
     function loadtable(){
-         electionDataTable = $('#electionTable').DataTable( {
+        electionDataTable = $('#electionTable').DataTable( {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>admin/election/show_election",
             "columns": [
@@ -329,7 +331,7 @@ $(document).ready(function() {
                 { data: "electionDateEnd", render: function(data, type, row){
                     return moment(data).format('LL');
                 }, "orderData":[1]},
-                { data: "electionOrg"},
+                { data: "orgName"},
                 { data: "electionStatus", render: function(data, type, row){
                     if(data == 1){
                         return '<div class="btn-group">'+
@@ -348,6 +350,7 @@ $(document).ready(function() {
         })
     }
 
+
     function refresh(){
         var url = "<?php echo base_url()?>admin/election/show_election";
 
@@ -357,6 +360,7 @@ $(document).ready(function() {
     // view function
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
+        // console.log(id);
 
         window.location.href = "<?php echo base_url()?>admin/election/view_election/"+id;
 

@@ -167,7 +167,7 @@
                         <div class="card-body card-block">
                             <form action="" method="post" id="editorganizationForm" name="editorganizationForm">
                             <div class="row form-group">
-                                        <div class="col col-md-3">
+                                        <div class="col col-md-4">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
                                             <label for="editorganizationName" class=" form-control-label">Organization Name</label>
                                         </div>
@@ -177,7 +177,7 @@
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3">
+                                        <div class="col col-md-4">
                                         <i style =padding-right:16px; class="fa fa-calendar"></i>
                                             <label for="editorganizationLogo" class=" form-control-label">Organization Logo</label>
                                         </div>
@@ -403,6 +403,7 @@ $(document).ready(function(){
             }
     });
 
+    // View organization
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
 

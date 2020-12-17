@@ -23,7 +23,9 @@ class Contest extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-		$this->load->view('admin/contest');
+		$data['data'] = $this->database_model->get_all('orgStatus', 'r_org');
+
+		$this->load->view('admin/contest', $data);
 
     }
 	
@@ -47,7 +49,7 @@ class Contest extends CI_Controller {
 		$data = array(
 			"contestName" => $contestName, 
 			"contestDescription" => $contestDescription,
-			// "contestOrg" => $contestOrg, 
+			"contestOrg" => $contestOrg, 
 			"contestDateStart" =>$contestDateStart,
 			"contestDateEnd" => $contestDateEnd
 		);
@@ -74,7 +76,7 @@ class Contest extends CI_Controller {
 		$data = array(
 				"contestName" => $contestName, 
 				"contestDescription" => $contestDescription,
-                // "contestOrg" => $contestOrg, 
+                "contestOrg" => $contestOrg, 
                 "contestDateStart" => $contestDateStart,
                 "contestDateEnd" => $contestDateEnd
 		);
@@ -94,7 +96,8 @@ class Contest extends CI_Controller {
 		$this->load->model('database_model');
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
-		$data["data"] = $this->database_model->show('contestStatus', "t_contest", "contestDateEnd", $dateToday);
+
+		$data["data"] = $this->database_model->show('contestStatus', "t_contest", "r_org", "contestOrg", "contestDateEnd", $dateToday);
 
 		echo json_encode($data);
 
@@ -129,5 +132,6 @@ class Contest extends CI_Controller {
 
 		$this->load->view('admin/contest_view', $data);
 	}
+
 
 }
