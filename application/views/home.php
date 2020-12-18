@@ -60,7 +60,7 @@
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo2.gif">
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homepage.png">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo2.gif">
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homepage.png">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo2.gif">
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homepage.png">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
