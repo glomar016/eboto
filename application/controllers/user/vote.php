@@ -20,11 +20,15 @@ class Vote extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->model('database_model');
+        $this->load->model('database_model');
+        $this->load->helper('date');
 
-        $data['election'] = $this->database_model->get_two_table('electionStatus', 't_election', 'r_org', 'electionOrg');
-        $data['contest'] = $this->database_model->get_two_table('contestStatus', 't_contest', 'r_org', 'contestOrg');
-        $data['poll'] = $this->database_model->get_two_table('pollStatus', 't_poll', 'r_org', 'pollOrg');
+
+        $dateToday = mdate("%Y-%m-%d %h:%i:%s");
+
+        $data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
+        $data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
+        $data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
 
 		$this->load->view('user/vote', $data);
     }
