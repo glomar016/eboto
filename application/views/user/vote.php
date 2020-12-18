@@ -58,13 +58,16 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="portfolio__filter">
-                        <li class="active" data-filter=".election">Election</li>
+                        <li class="active" data-filter="*">All</li>
+                        <li data-filter=".election">Election</li>
                         <li data-filter=".contest">Contest</li>
                         <li data-filter=".poll">Poll</li>
                     </ul>
                 </div>
             </div>
             <div class="row portfolio__gallery">
+
+            <!-- Election Data -->
                 <?php foreach($election as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix election">
                         <div class="portfolio__item">
@@ -72,13 +75,17 @@
                             </div>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->electionName ?></h4>
-                                <ul>
-                                    <span><?php echo $row->orgName ?></span>
-                                </ul>
+                                    <span><?php echo $row->orgName ?> / Election</span>
+                                    <div style="padding:10px;">
+                                        <button class="btn btn-outline-primary" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+            <!-- End of Election Data -->
+
+            <!-- Contest Data -->
                 <?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
                         <div class="portfolio__item">
@@ -86,13 +93,17 @@
                             </div>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->contestName ?></h4>
-                                <ul>
-                                    <span><?php echo $row->orgName ?></span>
-                                </ul>
+                                    <span><?php echo $row->orgName?> / Contest</span>
+                                    <div style="padding:10px;">
+                                        <button class="btn btn-outline-primary" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+            <!-- End of Contest Data -->
+
+            <!-- Poll Data -->
                 <?php foreach($poll as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix poll">
                         <div class="portfolio__item">
@@ -100,13 +111,15 @@
                             </div>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->pollName ?></h4>
-                                <ul>
-                                    <span><?php echo $row->orgName ?></span>
-                                </ul>
+                                    <span><?php echo $row->orgName ?> / Poll</span>
+                                    <div style="padding:10px;">
+                                        <button class="btn btn-outline-primary" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+            <!-- End of Poll Data -->
             </div>
             <!-- <div class="row">
                 <div class="col-lg-12">
