@@ -60,10 +60,7 @@
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo.gif">
-            <div style="position:absolute; left:800px; top:75px; padding:100px; height:650px; width:650px">
-                                <img src="<?php echo base_url()?>resources/img/hero/puplogo.png">
-            </div>
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo2.gif">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -76,10 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo.gif">
-            <div style="position:absolute; left:800px; top:75px; padding:100px; height:650px; width:650px">
-                                <img src="<?php echo base_url()?>resources/img/hero/puplogo.png">
-            </div>
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo2.gif">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -92,10 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo.gif">
-            <div style="position:absolute; left:800px; top:75px; padding:100px; height:650px; width:650px">
-                                <img src="<?php echo base_url()?>resources/img/hero/puplogo.png">
-            </div>
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo2.gif">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
