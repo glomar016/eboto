@@ -49,13 +49,6 @@
 
                             </ul>
                         </nav>
-                        <div class="header__nav__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -67,7 +60,10 @@
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/puplogo.png">
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo.gif">
+            <div style="position:absolute; left:800px; top:75px; padding:100px; height:650px; width:650px">
+                                <img src="<?php echo base_url()?>resources/img/hero/puplogo.png">
+            </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -80,7 +76,10 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/puplogo.png">
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo.gif">
+            <div style="position:absolute; left:800px; top:75px; padding:100px; height:650px; width:650px">
+                                <img src="<?php echo base_url()?>resources/img/hero/puplogo.png">
+            </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -93,7 +92,10 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/puplogo.png">
+            <div class="hero__item set-bg" data-setbg="<?php echo base_url()?>resources/img/hero/homelogo.gif">
+            <div style="position:absolute; left:800px; top:75px; padding:100px; height:650px; width:650px">
+                                <img src="<?php echo base_url()?>resources/img/hero/puplogo.png">
+            </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
@@ -117,12 +119,11 @@
                 <div class="col-lg-4">
                     <div class="services__title">
                         <div class="section-title">
-                            <span>Our services</span>
-                            <h2>What We do?</h2>
+                            <span>Online Voting</span>
+                            <h2>How it works?</h2>
                         </div>
-                        <p>If you hire a videographer of our team you will get a video professional to make a custom
-                            video for your business and, once the project is over.</p>
-                        <a href="#" class="primary-btn">View all services</a>
+                        <p>This website will be used for online voting for election, contest, and poll.</p>
+                        <a href="#" class="primary-btn">View list</a>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -132,9 +133,8 @@
                                 <div class="services__item__icon">
                                     <img src="<?php echo base_url()?>resources/img/icons/si-1.png" alt="">
                                 </div>
-                                <h4>Motion graphics</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Step: 1</h4>
+                                <p>Login your account.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -142,9 +142,8 @@
                                 <div class="services__item__icon">
                                     <img src="<?php echo base_url()?>resources/img/icons/si-2.png" alt="">
                                 </div>
-                                <h4>Scriptwriting and editing</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Step 2:</h4>
+                                <p>Select specific election, contest, or poll.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -152,9 +151,8 @@
                                 <div class="services__item__icon">
                                     <img src="<?php echo base_url()?>resources/img/icons/si-3.png" alt="">
                                 </div>
-                                <h4>Video distribution</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Step 3:</h4>
+                                <p>Select checkboxes to vote the candidate, option, contestant you think deserve to win.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -162,9 +160,8 @@
                                 <div class="services__item__icon">
                                     <img src="<?php echo base_url()?>resources/img/icons/si-4.png" alt="">
                                 </div>
-                                <h4>Video hosting</h4>
-                                <p>Whether you’re halfway through the editing process, or you haven’t even started, our
-                                    post production services can put the finishing touches.</p>
+                                <h4>Step 4:</h4>
+                                <p>View progress of the election, contest, poll to check which is currently had the highest vote.</p>
                             </div>
                         </div>
                     </div>
@@ -174,112 +171,8 @@
     </section>
     <!-- Services Section End -->
 
-    <!-- Work Section Begin -->
-    <section class="work">
-        <div class="work__gallery">
-            <div class="grid-sizer"></div>
-            <div class="work__item wide__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-1.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-                <div class="work__item__hover">
-                    <h4>VIP Auto Tires & Service</h4>
-                    <ul>
-                        <li>eCommerce</li>
-                        <li>Magento</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="work__item small__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-2.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-            </div>
-            <div class="work__item small__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-3.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-            </div>
-            <div class="work__item large__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-4.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-                <div class="work__item__hover">
-                    <h4>VIP Auto Tires & Service</h4>
-                    <ul>
-                        <li>eCommerce</li>
-                        <li>Magento</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="work__item small__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-5.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-            </div>
-            <div class="work__item small__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-6.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-            </div>
-            <div class="work__item wide__item set-bg" data-setbg="<?php echo base_url()?>resources/img/work/work-7.jpg">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                        class="fa fa-play"></i></a>
-                <div class="work__item__hover">
-                    <h4>VIP Auto Tires & Service</h4>
-                    <ul>
-                        <li>eCommerce</li>
-                        <li>Magento</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Work Section End -->
-
-    <!-- Counter Section Begin -->
-    <section class="counter">
-        <div class="container">
-            <div class="counter__content">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-1.png" alt="">
-                                <h2 class="counter_num">230</h2>
-                                <p>Compled Projects</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item second__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-2.png" alt="">
-                                <h2 class="counter_num">1068</h2>
-                                <p>Happy clients</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item third__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-3.png" alt="">
-                                <h2 class="counter_num">230</h2>
-                                <p>Perspective clients</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item four__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-4.png" alt="">
-                                <h2 class="counter_num">230</h2>
-                                <p>Compled Projects</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Counter Section End -->
-
-    <!-- Team Section Begin -->
-    <section class="team spad set-bg" data-setbg="<?php echo base_url()?>resources/img/team-bg.jpg">
+     <!-- Team Section Begin -->
+     <section class="team spad set-bg" data-setbg="<?php echo base_url()?>resources/img/team-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -356,124 +249,56 @@
     </section>
     <!-- Team Section End -->
 
-    <!-- Latest Blog Section Begin -->
-    <section class="latest spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title center-title">
-                        <span>Our Blog</span>
-                        <h2>Blog Update</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="latest__slider owl-carousel">
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>Bumper Ads: How to Tell a Story in 6 Seconds</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>Bumper Ads: How to Tell a Story in 6 Seconds</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Latest Blog Section End -->
 
-    <!-- Call To Action Section Begin -->
-    <section class="callto spad set-bg" data-setbg="<?php echo base_url()?>resources/img/callto-bg.jpg">
+    <!-- Counter Section Begin -->
+    <section class="counter">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="callto__text">
-                        <h2>Fresh Ideas, Fresh Moments Giving Wings to your Stories.</h2>
-                        <p>INC5000, Best places to work 2019</p>
-                        <a href="#">Start your stories</a>
+            <div class="counter__content">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="counter__item">
+                            <div class="counter__item__text">
+                                <img src="<?php echo base_url()?>resources/img/icons/ci-1.png" alt="">
+                                <h2 class="counter_num">230</h2>
+                                <p>Total Active List to Vote</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="counter__item second__item">
+                            <div class="counter__item__text">
+                                <img src="<?php echo base_url()?>resources/img/icons/ci-2.png" alt="">
+                                <h2 class="counter_num">1068</h2>
+                                <p>Total students</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="counter__item third__item">
+                            <div class="counter__item__text">
+                                <img src="<?php echo base_url()?>resources/img/icons/ci-3.png" alt="">
+                                <h2 class="counter_num">5024</h2>
+                                <p>Total Votes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="counter__item four__item">
+                            <div class="counter__item__text">
+                                <img src="<?php echo base_url()?>resources/img/icons/ci-4.png" alt="">
+                                <h2 class="counter_num">530</h2>
+                                <p>Total Completed Transactions</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Call To Action Section End -->
+    <!-- Counter Section End -->
+
+   
+
 
     <!-- Footer Section Begin -->
     <footer class="footer">
