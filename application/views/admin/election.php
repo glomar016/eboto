@@ -65,9 +65,9 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <?php $this->load->view('includes/header_desktop.php'); ?>
-            <!-- HEADER DESKTOP-->
+        <!-- HEADER DESKTOP-->
+        <?php $this->load->view('includes/header_desktop.php'); ?>
+        <!-- HEADER DESKTOP-->
         <!-- MAIN CONTENT-->
     <div class='main-content'>
         <div class="section__content section__content--p30">

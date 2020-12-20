@@ -85,4 +85,15 @@ class Database_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
+    function get_two_table($statusColumn, $tableName, $tableName2, $fkColumn)
+    {
+        $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
+        $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
+        $this->db->where($statusColumn, "1");
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 }
