@@ -32,7 +32,17 @@ class Vote extends CI_Controller {
 
 		$this->load->view('user/vote', $data);
     }
-    
+	
+	public function view($id, $tableName, $refColumn, $columnStatus)
+	{
+		$this->load->model('database_model');
+
+		$data['data'] = $this->database_model->get_candidate($id, $tableName, $refColumn, $columnStatus);
+
+		$data['table'] = ['tableName' => $tableName];
+	
+		$this->load->view('user/view', $data);
+	}
     
 
 }

@@ -96,4 +96,14 @@ class Database_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
+    function get_candidate($id, $tableName, $refColumn, $columnStatus){
+        $this->db->select("*");
+        $this->db->where($refColumn, $id);
+        $this->db->where($columnStatus, "1");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 }
