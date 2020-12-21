@@ -134,10 +134,10 @@
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="contestName" class=" form-control-label">contest Name</label>
+                                            <label for="contestName" class=" form-control-label">Contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="contestName" name="contestName" placeholder="Name of contest" class="form-control">
+                                            <input type="text" id="contestName" name="contestName" placeholder="Name of contest" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -189,7 +189,7 @@
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input style=background-color:#28a745; type="submit" id="btnCreate" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of contest" class="form-control">
+                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of contest" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input style=background-color:#28a745; type="submit" id="btnUpdate" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -320,7 +320,7 @@
 $(document).ready(function() {
 
     function loadtable(){
-         contestDataTable = $('#contestTable').DataTable( {
+        contestDataTable = $('#contestTable').DataTable( {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>admin/contest/show_contest",
             "columns": [
@@ -385,11 +385,9 @@ $(document).ready(function() {
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                
                 $.ajax({
                     url: '<?php echo base_url()?>admin/contest/delete_contest',
                     data: {id: id},
-
                         success:function(data){
                             refresh();
                             Swal.fire(
@@ -399,11 +397,8 @@ $(document).ready(function() {
                                 )
                         }
                 });
-
-
             }
-            })
-       
+        })
     });
 
     // edit function
@@ -435,31 +430,67 @@ $(document).ready(function() {
 
     // Create contest
     $('#addcontestForm').on('submit', function(e){
-                        e.preventDefault();
+        
+        e.preventDefault();
+        $("#btnCreate").attr("disabled", true);
 
-                        var contestName = document.addcontestForm.contestName.value;
-                        var contestDateStart = document.addcontestForm.contestDateStart.value;
-                        var contestDateEnd = document.addcontestForm.contestDateEnd.value;
+        var contestName = document.addcontestForm.contestName.value;
+        var contestDateStart = document.addcontestForm.contestDateStart.value;
+        var contestDateEnd = document.addcontestForm.contestDateEnd.value;
 
-                        var dateStart = new Date(contestDateStart);
-                        var dateEnd = new Date(contestDateEnd);
+        var dateStart = new Date(contestDateStart);
+        var dateEnd = new Date(contestDateEnd);
 
+        var arrName = [];
+        console.log(contestName);
+
+        // Check if name is already exist
+        $.ajax({
+            url: '<?php echo base_url()?>admin/contest/show_contest',
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
+                    // var row = parsedResponse[0];
+
+                    // Push all names to array
+                    for(i=0; i < parsedResponse.length; i++){
+                        var row = parsedResponse[i];
+                        arrName.push(row.contestName);
+                    }
+                    console.log(arrName);
+                    // Check if a value exists in the name array
+                    if(arrName.includes(contestName)){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Name is already existing in active list!',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
+                                                    })
+                    }
+                    else{
                         if(contestName == '' || contestDateStart == '' || contestDateEnd == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Please fill out required field.',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
                                                     })
                         }
                         else{
 
-                            if(dateStart >= dateEnd){
+                            if(dateStart > dateEnd){
                                 Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Invalid Date Start and Date End',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
                                                     })
                             }
                             
@@ -483,22 +514,36 @@ $(document).ready(function() {
                                                 text: 'You successfully created a contest.',
                                                 icon: 'success',
                                                 confirmButtonText: 'Ok'
-                                                })
-                                            
-                                            $('#contestModal').modal('hide');
-                                            $('#contestModal form')[0].reset();
-                                                
+                                                }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
+                                                        $('#contestModal').modal('hide');
+                                                        $('#contestModal form')[0].reset();
+                                                    })
+  
                                             }
                                 });
                                 // end of ajax call
                             }   
                         }
-                });
+                        // End of conditions
+
+                    }
+                }
+        })
+        
+
+                        
+        // End of check if name is already exist
+                    
+                        
+                        
+    });
     // END OF // Create contest
 
     // Update contest
     $('#editcontestForm').on('submit', function(e){
                         e.preventDefault();
+                        $("#btnUpdate").attr("disabled", true);
 
                         var editcontestName = document.editcontestForm.editcontestName.value;
                         var editcontestDateStart = document.editcontestForm.editcontestDateStart.value;
@@ -506,6 +551,11 @@ $(document).ready(function() {
 
                         var dateStart = new Date(editcontestDateStart);
                         var dateEnd = new Date(editcontestDateEnd);
+
+                        var arrName = [];
+
+                        var form = ( $( this ).serialize() );
+                        
                         
                         if(editcontestName == '' || editcontestDateStart == '' || editcontestDateEnd == ''){
                                             Swal.fire({
@@ -513,65 +563,105 @@ $(document).ready(function() {
                                                     text: 'Please fill out required field.',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnUpdate").attr("disabled", false);
                                                     })
                         }
                         else{
                         
-                            if(dateStart >= dateEnd){
+                            if(dateStart > dateEnd){
                                 Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Invalid Date Start and Date End',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnUpdate").attr("disabled", false);
                                                     })
                             }
                             
                             else{
-                           
-                            // ajax call
-                            console.log( $( this ).serialize() );
-                            var form = ( $( this ).serialize() );
+                                // Check if name is already exist
+                                    $.ajax({
+                                        url: '<?php echo base_url()?>admin/contest/show_contest',
+                                        dataType: "JSON",
 
-                            // var form = $('#editcontestForm');
+                                            success:function(data){
+                                                var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
+                                                var user = parsedResponse.find(item => item.id == 197);
 
-                            Swal.fire({
-                                title: 'Are you sure?',
-                                text: "You are updating an contest!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, update it!'
-                                }).then((result) => {
-                                if (result.isConfirmed) {                         
-                                    // ajax post
-                                    console.log(form);
-                                                $.ajax({
-                                                    url: '<?php echo base_url()?>admin/contest/update_contest',
-                                                    type: 'post',
-                                                    data: form,
-                                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                // Push all names to array
+                                                for(i=0; i < parsedResponse.length; i++){
+                                                    var row = parsedResponse[i];
+                                                    arrName.push(row.contestName);
+                                                }
+                                                // Check if a reusing name in the name array
+                                                if(user.contestName == editcontestName){
+                                                    // ajax call
+                                                    console.log( $( this ).serialize() );
 
-                                                    success:function()
-                                                            {
-                                                            
-                                                            refresh();
-                                                        
-                                                            Swal.fire({
-                                                                title: 'Success!',
-                                                                text: 'You successfully updated an contest.',
-                                                                icon: 'success',
-                                                                confirmButtonText: 'Ok'
-                                                                })
-                                                            
-                                                            $('#editcontestModal').modal('hide');
-                                                            $('#editcontestModal form')[0].reset();
-                                                                
-                                                            }
-                                                });
-                                }
-                            })
-                            // end of ajax call
+                                                    // var form = $('#editcontestForm');
+
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: "You are updating an contest!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, update it!'
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {                         
+                                                            // ajax post
+                                                            console.log(form);
+                                                                        $.ajax({
+                                                                            url: '<?php echo base_url()?>admin/contest/update_contest',
+                                                                            type: 'post',
+                                                                            data: form,
+                                                                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                                            success:function()
+                                                                                    {
+                                                                                    
+                                                                                    refresh();
+                                                                                
+                                                                                    Swal.fire({
+                                                                                        title: 'Success!',
+                                                                                        text: 'You successfully updated an contest.',
+                                                                                        icon: 'success',
+                                                                                        confirmButtonText: 'Ok'
+                                                                                        }).then((result) => {
+                                                                                            $("#btnUpdate").attr("disabled", false);
+                                                                                            $('#editcontestModal').modal('hide');
+                                                                                            $('#editcontestModal form')[0].reset();
+                                                                                        })
+                                                                                        
+                                                                                    }
+                                                                        });
+                                                        }
+                                                        else{
+                                                            $("#btnUpdate").attr("disabled", false);
+                                                        }
+                                                    })
+                                                    // end of ajax call
+                                                
+                                                }
+                                                // Check if a value exists in the name array
+                                                else if(arrName.includes(editcontestName)){
+                                                                        Swal.fire({
+                                                                                title: 'Warning!',
+                                                                                text: 'Name is already existing in active list!',
+                                                                                icon: 'warning',
+                                                                                confirmButtonText: 'Ok'
+                                                                                }).then((result) => {
+                                                                                    $("#btnUpdate").attr("disabled", false);
+                                                                                })
+                                                }
+                                                else{
+                                                    
+                                                }
+                                            }
+                                    })
                         }
                     }
                 });
@@ -579,17 +669,10 @@ $(document).ready(function() {
     // END OF // Update contest
             
 
-                        
-    
 });
 
-        
-
+    
 </script>
-
-
- <!-- Ajax form posting -->
-<script>
         
 
 </script>

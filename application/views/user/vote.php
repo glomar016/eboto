@@ -73,6 +73,7 @@
                         <div class="portfolio__item">
                             <div class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
+                            <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->electionName ?></h4>
                                     <span><?php echo $row->orgName ?> / Election</span>
@@ -91,6 +92,7 @@
                         <div class="portfolio__item">
                             <div class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
+                            <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->contestName ?></h4>
                                     <span><?php echo $row->orgName?> / Contest</span>
@@ -109,6 +111,7 @@
                         <div class="portfolio__item">
                             <div class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
+                            <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->pollName ?></h4>
                                     <span><?php echo $row->orgName ?> / Poll</span>

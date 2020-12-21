@@ -134,8 +134,8 @@ $(document).ready(function(){
         var contestantDescription = `<?php echo $data[0]->contestantDescription ?>`
 
                 $( ".contestantInfo" ).append("<p><strong>Name</strong>: "+contestantName+"</p>");
-                $( ".contestantInfo" ).append("<div class='w-25 p-3'>"+
-                "<p><strong>Description</strong>: "+contestantDescription+"</p></div>");
+                $( ".contestantInfo" ).append("<div class='text-center'>"+
+                "<span style='white-space: pre-wrap;'><strong>Description</strong>: "+contestantDescription+"</span></div>");
         }
 
     loadviewdata();

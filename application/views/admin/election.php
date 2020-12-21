@@ -135,7 +135,7 @@
                                             <label for="electionName" class=" form-control-label">Election Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="electionName" name="electionName" placeholder="Name of Election" class="form-control">
+                                            <input type="text" id="electionName" name="electionName" placeholder="Name of Election" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -181,13 +181,13 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="date" 
-                                            value="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>" 
-                                            min="<?php echo date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d'))))?>"
+                                            value="<?php echo date("Y-m-d")?>" 
+                                            min="<?php echo date("Y-m-d")?>"
                                             id="electionDateEnd" name="electionDateEnd" class="form-control">
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input style=background-color:#28a745; type="submit" id="btnCreate" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -219,7 +219,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editelectionName" name="editelectionName" placeholder="Name of Election" class="form-control">
+                                            <input type="text" id="editelectionName" name="editelectionName" placeholder="Name of Election" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -266,7 +266,7 @@
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input style=background-color:#28a745; type="submit" id="btnUpdate" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -357,6 +357,8 @@ $(document).ready(function() {
         electionDataTable.ajax.url(url).load();
     }
 
+
+
     // view function
     $(document).on("click", ".btn_view", function(){
         var id = this.value;
@@ -427,31 +429,67 @@ $(document).ready(function() {
 
     // Create election
     $('#addelectionForm').on('submit', function(e){
-                        e.preventDefault();
+        
+        e.preventDefault();
+        $("#btnCreate").attr("disabled", true);
 
-                        var electionName = document.addelectionForm.electionName.value;
-                        var electionDateStart = document.addelectionForm.electionDateStart.value;
-                        var electionDateEnd = document.addelectionForm.electionDateEnd.value;
+        var electionName = document.addelectionForm.electionName.value;
+        var electionDateStart = document.addelectionForm.electionDateStart.value;
+        var electionDateEnd = document.addelectionForm.electionDateEnd.value;
 
-                        var dateStart = new Date(electionDateStart);
-                        var dateEnd = new Date(electionDateEnd);
+        var dateStart = new Date(electionDateStart);
+        var dateEnd = new Date(electionDateEnd);
 
+        var arrName = [];
+        console.log(electionName);
+
+        // Check if name is already exist
+        $.ajax({
+            url: '<?php echo base_url()?>admin/election/show_election',
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
+                    // var row = parsedResponse[0];
+
+                    // Push all names to array
+                    for(i=0; i < parsedResponse.length; i++){
+                        var row = parsedResponse[i];
+                        arrName.push(row.electionName);
+                    }
+                    console.log(arrName);
+                    // Check if a value exists in the name array
+                    if(arrName.includes(electionName)){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Name is already existing in active list!',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
+                                                    })
+                    }
+                    else{
                         if(electionName == '' || electionDateStart == '' || electionDateEnd == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Please fill out required field.',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
                                                     })
                         }
                         else{
 
-                            if(dateStart >= dateEnd){
+                            if(dateStart > dateEnd){
                                 Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Invalid Date Start and Date End',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
                                                     })
                             }
                             
@@ -475,22 +513,36 @@ $(document).ready(function() {
                                                 text: 'You successfully created a election.',
                                                 icon: 'success',
                                                 confirmButtonText: 'Ok'
-                                                })
-                                            
-                                            $('#electionModal').modal('hide');
-                                            $('#electionModal form')[0].reset();
-                                                
+                                                }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
+                                                        $('#electionModal').modal('hide');
+                                                        $('#electionModal form')[0].reset();
+                                                    })
+  
                                             }
                                 });
                                 // end of ajax call
                             }   
                         }
-                });
+                        // End of conditions
+
+                    }
+                }
+        })
+        
+
+                        
+        // End of check if name is already exist
+                    
+                        
+                        
+    });
     // END OF // Create election
 
     // Update election
     $('#editelectionForm').on('submit', function(e){
                         e.preventDefault();
+                        $("#btnUpdate").attr("disabled", true);
 
                         var editelectionName = document.editelectionForm.editelectionName.value;
                         var editelectionDateStart = document.editelectionForm.editelectionDateStart.value;
@@ -498,6 +550,11 @@ $(document).ready(function() {
 
                         var dateStart = new Date(editelectionDateStart);
                         var dateEnd = new Date(editelectionDateEnd);
+
+                        var arrName = [];
+
+                        var form = ( $( this ).serialize() );
+                        
                         
                         if(editelectionName == '' || editelectionDateStart == '' || editelectionDateEnd == ''){
                                             Swal.fire({
@@ -505,65 +562,105 @@ $(document).ready(function() {
                                                     text: 'Please fill out required field.',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnUpdate").attr("disabled", false);
                                                     })
                         }
                         else{
                         
-                            if(dateStart >= dateEnd){
+                            if(dateStart > dateEnd){
                                 Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Invalid Date Start and Date End',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnUpdate").attr("disabled", false);
                                                     })
                             }
                             
                             else{
-                           
-                            // ajax call
-                            console.log( $( this ).serialize() );
-                            var form = ( $( this ).serialize() );
+                                // Check if name is already exist
+                                    $.ajax({
+                                        url: '<?php echo base_url()?>admin/election/show_election',
+                                        dataType: "JSON",
 
-                            // var form = $('#editelectionForm');
+                                            success:function(data){
+                                                var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
+                                                var user = parsedResponse.find(item => item.id == 197);
 
-                            Swal.fire({
-                                title: 'Are you sure?',
-                                text: "You are updating an election!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, update it!'
-                                }).then((result) => {
-                                if (result.isConfirmed) {                         
-                                    // ajax post
-                                    console.log(form);
-                                                $.ajax({
-                                                    url: '<?php echo base_url()?>admin/election/update_election',
-                                                    type: 'post',
-                                                    data: form,
-                                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                // Push all names to array
+                                                for(i=0; i < parsedResponse.length; i++){
+                                                    var row = parsedResponse[i];
+                                                    arrName.push(row.electionName);
+                                                }
+                                                // Check if a reusing name in the name array
+                                                if(user.electionName == editelectionName){
+                                                    // ajax call
+                                                    console.log( $( this ).serialize() );
 
-                                                    success:function()
-                                                            {
-                                                            
-                                                            refresh();
-                                                        
-                                                            Swal.fire({
-                                                                title: 'Success!',
-                                                                text: 'You successfully updated an election.',
-                                                                icon: 'success',
-                                                                confirmButtonText: 'Ok'
-                                                                })
-                                                            
-                                                            $('#editelectionModal').modal('hide');
-                                                            $('#editelectionModal form')[0].reset();
-                                                                
-                                                            }
-                                                });
-                                }
-                            })
-                            // end of ajax call
+                                                    // var form = $('#editelectionForm');
+
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: "You are updating an election!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, update it!'
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {                         
+                                                            // ajax post
+                                                            console.log(form);
+                                                                        $.ajax({
+                                                                            url: '<?php echo base_url()?>admin/election/update_election',
+                                                                            type: 'post',
+                                                                            data: form,
+                                                                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                                            success:function()
+                                                                                    {
+                                                                                    
+                                                                                    refresh();
+                                                                                
+                                                                                    Swal.fire({
+                                                                                        title: 'Success!',
+                                                                                        text: 'You successfully updated an election.',
+                                                                                        icon: 'success',
+                                                                                        confirmButtonText: 'Ok'
+                                                                                        }).then((result) => {
+                                                                                            $("#btnUpdate").attr("disabled", false);
+                                                                                            $('#editelectionModal').modal('hide');
+                                                                                            $('#editelectionModal form')[0].reset();
+                                                                                        })
+                                                                                        
+                                                                                    }
+                                                                        });
+                                                        }
+                                                        else{
+                                                            $("#btnUpdate").attr("disabled", false);
+                                                        }
+                                                    })
+                                                    // end of ajax call
+                                                
+                                                }
+                                                // Check if a value exists in the name array
+                                                else if(arrName.includes(editelectionName)){
+                                                                        Swal.fire({
+                                                                                title: 'Warning!',
+                                                                                text: 'Name is already existing in active list!',
+                                                                                icon: 'warning',
+                                                                                confirmButtonText: 'Ok'
+                                                                                }).then((result) => {
+                                                                                    $("#btnUpdate").attr("disabled", false);
+                                                                                })
+                                                }
+                                                else{
+                                                    
+                                                }
+                                            }
+                                    })
                         }
                     }
                 });
@@ -571,8 +668,6 @@ $(document).ready(function() {
     // END OF // Update election
             
 
-                        
-    
 });
 
         
