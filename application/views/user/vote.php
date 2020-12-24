@@ -76,6 +76,7 @@
                             <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->electionName ?></h4>
+                                
                                     <span><?php echo $row->orgName ?> / Election</span>
                                     <div style="padding:10px;">
                                         <button class="btn btn-outline-primary btn_vote_election" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
@@ -167,6 +168,7 @@ $(document).ready(function(){
             var tableName = "t_candidate";
             var refColumn = "candidateElectionID";
             var columnStatus = "candidateStatus";
+        
 
             window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
         });

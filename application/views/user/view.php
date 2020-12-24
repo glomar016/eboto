@@ -25,6 +25,27 @@
 
     <!-- Checkbox css -->
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/checkbox.css" type="text/css">
+
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
+
+    <!-- Jquery-->
+    <script src="<?php echo base_url()?>resources/js/jquery-3.5.1.min.js"></script>
+
+    <!-- Data Tables JS-->
+    <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
+
+    <!-- Data Time JS-->
+    <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
+
+    <!-- Moment w locales JS-->
+    <script src="<?php echo base_url()?>resources/js/moment.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="<?php echo base_url()?>resources/js/sweetalert2@10.js"></script>
     
 
 
@@ -64,7 +85,9 @@
             <div class="row portfolio__gallery">
 
     <!-- Election Data -->
+    <h6 id="refTableID" hidden><?php echo $refTable;?></h6>
     <?php
+        
         if($table['tableName'] == 't_candidate'){ ?>
             <!-- Election HTML Display -->
             <?php foreach($data as $row){ ?>
@@ -79,7 +102,7 @@
                                     <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>
                                 <ul class="ks-cboxtags">
                                 <li>
-                                    <input type="checkbox" id="<?php echo $row->id ?>" value="<?php echo $row->id ?>">
+                                    <input type="checkbox" id="<?php echo $row->id ?>" name="selected_candidate" value="<?php echo $row->id ?>">
                                     <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
                                 </li>
                             </ul>                        
@@ -92,28 +115,15 @@
     <?php } ?>
     <!-- End of election data -->
 
-
-    <!-- Contest Data -->
-    <?php
-        if($table['tableName'] == 't_contest'){ ?>
-            <div>
-            
-            </div>
-    <?php } ?>
-    <!-- End of contest data -->
-
-
-    <!-- Poll Data -->
-    <?php
-        if($table['tableName'] == 't_poll'){ ?>
-            <div>
-            
-            </div>
-    <?php } ?>
-    <!-- End of poll data -->
-
+        <!-- Submit Vote Button -->
+        <div class="col-lg-12 text-center">
+            <button class="btn btn-success btn_vote_candidate" title="Submit Vote" type="button">Submit Vote</button>
         </div>
-        </div>
+
+    <!-- End of Submit Vote Button -->
+
+            </div>
+        </div>  
     </section>
     <!-- Portfolio Section End -->
 
@@ -124,7 +134,7 @@
     
 
     <!-- Js Plugins -->
-    <script src="<?php echo base_url()?>resources/js/jquery-3.3.1.min.js"></script>
+    <!-- <script src="<?php echo base_url()?>resources/js/jquery-3.3.1.min.js"></script> -->
     <script src="<?php echo base_url()?>resources/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url()?>resources/js/jquery.magnific-popup.min.js"></script>
     <script src="<?php echo base_url()?>resources/js/mixitup.min.js"></script>
@@ -138,28 +148,56 @@
 // Start of script
 $(document).ready(function(){
 
+    // Voting Candidate
+    $(document).on("click", ".btn_vote_candidate", function(){
+        $("#btn_vote_candidate").attr("disabled", true)
 
+        var refTableID = $("#refTableID");
+        var refTableID = refTableID.text();
+        var selected = [];
+        console.log(refTableID)
+        
+        // Insert selected candidate ID
+        $('input[name="selected_candidate"]:checked').each(function() {
+            selected.push(this.value);
+        });
+        console.log(selected)
+                            Swal.fire({
+                                title: 'Are you sure on your votes?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes!'
+                                }).then((result) => {
+                                    $("#btn_vote_candidate").attr("disabled", false);
+                                if (result.isConfirmed) {
+                                    // Ajax call
+                                        $.ajax({
+                                            url: '<?php echo base_url()?>user/vote/vote_candidate',
+                                            type: 'post',
+                                            data: {'selected': selected,
+                                                    'refTableID': refTableID},
 
-    // Voting
-    $(document).on("click", ".btn_vote_election", function(){
-        var id = this.value;
-        var tableName = "t_election";
-
-        // ajax call
-        var form = $('#addelectionForm');                                
-                                // ajax post
-                                $.ajax({
-                                    url: '<?php echo base_url()?>user/vote/view',
-                                    type: 'post',
-                                    data: {id: id, tableName: tableName},
-
-                                    success:function()
-                                            {
-                                            
-                                            }
-                                });
-                                // end of ajax call
+                                                        success: function(){
+                                                            Swal.fire({
+                                                                title: 'Success!',
+                                                                text: 'You successfully voted.',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ok'
+                                                                }).then((result) => {
+                                                                    window.location.href = "<?php echo base_url()?>user/vote";
+                                                                })
+                                                        }
+                                        })
+                                    // End of ajax call 
+                                }
+                        })
     });
+    // End of Voting Candidate
+
+    
 });
 // End of script
 

@@ -106,4 +106,12 @@ class Database_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
+    function insert_vote($voteID, $voteColumn, $refTableID, $refTableColumn, $tableName){
+        $data = array(
+            $voteColumn=>$voteID,
+            $refTableColumn=>$refTableID,
+            );
+        return $this->db->insert($tableName, $data);
+    }   
 }
