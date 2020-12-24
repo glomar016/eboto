@@ -63,4 +63,34 @@ class Vote extends CI_Controller {
 		}
 	}
 
+	public function vote_contestant()
+	{
+		$this->load->model('database_model');
+
+		// $data['data'] = $this->database_model->function()
+		$data = $this->input->post("selected");
+		$refTableID = $this->input->post('refTableID');
+
+		// echo $selected;
+		print_r($data);
+		echo $refTableID;
+		
+		$this->database_model->insert_vote($data, 'vote_contestantID', $refTableID, 'vote_contestID', 't_vote_contestant');
+	}
+
+	public function vote_option()
+	{
+		$this->load->model('database_model');
+
+		// $data['data'] = $this->database_model->function()
+		$data = $this->input->post("selected");
+		$refTableID = $this->input->post('refTableID');
+
+		// echo $selected;
+		print_r($data);
+		echo $refTableID;
+		
+		$this->database_model->insert_vote($data, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option');
+	}
+
 }

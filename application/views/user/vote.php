@@ -187,7 +187,7 @@ $(document).ready(function(){
         $(document).on("click", ".btn_vote_poll", function(){
             var id = this.value;
             var tableName = "t_option";
-            var refColumn = "pollOptionID";
+            var refColumn = "optionPollID";
             var columnStatus = "optionStatus";
 
             window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;

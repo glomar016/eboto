@@ -84,11 +84,11 @@
         <div class="container">
             <div class="row portfolio__gallery">
 
-    <!-- Election Data -->
+    <!-- Ref Table ID -->
     <h6 id="refTableID" hidden><?php echo $refTable;?></h6>
-    <?php
-        
-        if($table['tableName'] == 't_candidate'){ ?>
+
+    <!-- Election Data -->
+    <?php if($table['tableName'] == 't_candidate'){ ?>
             <!-- Election HTML Display -->
             <?php foreach($data as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix election">
@@ -110,17 +110,87 @@
                         </div>
                     </div>
                 <?php } ?>
+
+            <!-- Election Submit Vote Button -->
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-success" id="btn_vote_candidate" title="Submit Vote" type="button">Submit Vote</button>
+            </div>
+            <!-- End of Election Submit Vote Button -->
                 
             <!-- End Election HTML Display-->
     <?php } ?>
     <!-- End of election data -->
 
-        <!-- Submit Vote Button -->
-        <div class="col-lg-12 text-center">
-            <button class="btn btn-success btn_vote_candidate" title="Submit Vote" type="button">Submit Vote</button>
-        </div>
 
-    <!-- End of Submit Vote Button -->
+    <!-- Contest Data -->
+    <?php if($table['tableName'] == 't_contestant'){ ?>
+            <!-- Contest HTML Display -->
+            <?php foreach($data as $row){ ?>
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
+                        <div class="portfolio__item">
+                            <div class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->contestantImage); ?>">
+                            </div>
+                            <br>
+                            <div class="portfolio__item__text">
+                                <h4><?php echo $row->contestantName ?></h4>
+                                    <span style="white-space: pre-wrap;"><?php echo $row->contestantDescription ?></span>
+                                <ul class="ks-cboxtags">
+                                <li>
+                                    <input type="radio" id="<?php echo $row->id ?>" name="selected_contestant"
+                                     value="<?php echo $row->id ?>">
+                                    <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
+                                </li>
+                            </ul>                        
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+
+            <!-- Contest Submit Vote Button -->
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-success" id="btn_vote_contestant" title="Submit Vote" type="button">Submit Vote</button>
+            </div>
+            <!-- End of Contest Submit Vote Button -->
+                
+        <!-- End Contest HTML Display-->
+    <?php } ?>
+    <!-- End of Contest data -->
+
+            
+    <!-- Poll Data -->
+    <?php if($table['tableName'] == 't_option'){ ?>
+            <!-- Poll HTML Display -->
+            <?php foreach($data as $row){ ?>
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
+                        <div class="portfolio__item">
+                            <br>
+                            <div class="portfolio__item__text">
+                                <h4 style="white-space: pre-wrap;"><?php echo $row->optionName ?></h4>
+                                <ul class="ks-cboxtags">
+                                <li>
+                                    <input type="radio" id="<?php echo $row->id ?>" name="selected_option"
+                                     value="<?php echo $row->id ?>">
+                                    <label for="<?php echo $row->id ?>"><strong>Select this option</strong></label>
+                                </li>
+                            </ul>                        
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+
+            <!-- Poll Submit Vote Button -->
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-success" id="btn_vote_option" title="Submit Vote" type="button">Submit Vote</button>
+            </div>
+            <!-- End of Poll Submit Vote Button -->
+                
+        <!-- End Poll HTML Display-->
+    <?php } ?>
+    <!-- End of Poll data -->
+
+            
+            
+
 
             </div>
         </div>  
@@ -149,7 +219,7 @@
 $(document).ready(function(){
 
     // Voting Candidate
-    $(document).on("click", ".btn_vote_candidate", function(){
+    $(document).on("click", "#btn_vote_candidate", function(){
         $("#btn_vote_candidate").attr("disabled", true)
 
         var refTableID = $("#refTableID");
@@ -197,6 +267,96 @@ $(document).ready(function(){
     });
     // End of Voting Candidate
 
+    // Voting Contestant
+    $(document).on("click", "#btn_vote_contestant", function(){
+        $("#btn_vote_contestant").attr("disabled", true)
+
+        var refTableID = $("#refTableID");
+        var refTableID = refTableID.text();
+        
+        var selected = $('input[name="selected_contestant"]:checked').val();
+        
+        console.log(selected)
+                            Swal.fire({
+                                title: 'Are you sure on your votes?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes!'
+                                }).then((result) => {
+                                    $("#btn_vote_contestant").attr("disabled", false);
+                                if (result.isConfirmed) {
+                                    // Ajax call
+                                        $.ajax({
+                                            url: '<?php echo base_url()?>user/vote/vote_contestant',
+                                            type: 'post',
+                                            data: {'selected': selected,
+                                                    'refTableID': refTableID},
+
+                                                        success: function(){
+                                                            Swal.fire({
+                                                                title: 'Success!',
+                                                                text: 'You successfully voted.',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ok'
+                                                                }).then((result) => {
+                                                                    window.location.href = "<?php echo base_url()?>user/vote";
+                                                                })
+                                                        }
+                                        })
+                                    // End of ajax call 
+                                }
+                        })
+    });
+    // End of Voting Contestant
+
+
+        // Voting option
+        $(document).on("click", "#btn_vote_option", function(){
+        $("#btn_vote_option").attr("disabled", true)
+
+        var refTableID = $("#refTableID");
+        var refTableID = refTableID.text();
+        
+        var selected = $('input[name="selected_option"]:checked').val();
+
+        console.log(selected)
+                            Swal.fire({
+                                title: 'Are you sure on your votes?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes!'
+                                }).then((result) => {
+                                    $("#btn_vote_option").attr("disabled", false);
+                                if (result.isConfirmed) {
+                                    // Ajax call
+                                        $.ajax({
+                                            url: '<?php echo base_url()?>user/vote/vote_option',
+                                            type: 'post',
+                                            data: {'selected': selected,
+                                                    'refTableID': refTableID},
+
+                                                        success: function(){
+                                                            Swal.fire({
+                                                                title: 'Success!',
+                                                                text: 'You successfully voted.',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ok'
+                                                                }).then((result) => {
+                                                                    window.location.href = "<?php echo base_url()?>user/vote";
+                                                                })
+                                                        }
+                                        })
+                                    // End of ajax call 
+                                }
+                        })
+    });
+    // End of Voting option
     
 });
 // End of script
