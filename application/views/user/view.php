@@ -91,21 +91,29 @@
     <?php if($table['tableName'] == 't_candidate'){ ?>
             <!-- Election HTML Display -->
             <?php foreach($data as $row){ ?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 mix election">
-                        <div class="portfolio__item">
-                            <div class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->candidateImage); ?>">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix election d-flex justify-content-center align-self-stretch">
+                        <div class="d-flex flex-column">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 200px;
+                                        width: 200px;"
+                                        class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->candidateImage); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->candidateName ?></h4>
-                                    <span>Position: <?php echo $row->candidatePosition ?></span>
-                                    <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>
+                                    <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>                  
+                            </div>
+                            <div class="mt-auto" style="margin: auto;">
                                 <ul class="ks-cboxtags">
-                                <li>
-                                    <input type="checkbox" id="<?php echo $row->id ?>" name="selected_candidate" value="<?php echo $row->id ?>">
-                                    <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
-                                </li>
-                            </ul>                        
+                                    <li>
+                                        <input type="checkbox" id="<?php echo $row->id ?>" name="selected_candidate"
+                                        value="<?php echo $row->id ?>">
+                                        <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
+                                        <br>
+                                        <br>
+                                    </li>
+                                </ul>      
                             </div>
                         </div>
                     </div>
@@ -117,30 +125,38 @@
             </div>
             <!-- End of Election Submit Vote Button -->
                 
-            <!-- End Election HTML Display-->
+        <!-- End Election HTML Display-->
     <?php } ?>
-    <!-- End of election data -->
+    <!-- End of Election data -->
 
 
     <!-- Contest Data -->
     <?php if($table['tableName'] == 't_contestant'){ ?>
             <!-- Contest HTML Display -->
             <?php foreach($data as $row){ ?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
-                        <div class="portfolio__item">
-                            <div class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->contestantImage); ?>">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix contest d-flex justify-content-center align-self-stretch">
+                        <div class="d-flex flex-column">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 200px;
+                                        width: 200px;"
+                                        class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->contestantImage); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->contestantName ?></h4>
-                                    <span style="white-space: pre-wrap;"><?php echo $row->contestantDescription ?></span>
+                                    <span style="white-space: pre-wrap;"><?php echo $row->contestantDescription ?></span>                  
+                            </div>
+                            <div class="mt-auto">
                                 <ul class="ks-cboxtags">
-                                <li>
-                                    <input type="radio" id="<?php echo $row->id ?>" name="selected_contestant"
-                                     value="<?php echo $row->id ?>">
-                                    <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
-                                </li>
-                            </ul>                        
+                                    <li>
+                                        <input type="radio" id="<?php echo $row->id ?>" name="selected_contestant"
+                                        value="<?php echo $row->id ?>">
+                                        <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
+                                        <br>
+                                        <br>
+                                    </li>
+                                </ul>      
                             </div>
                         </div>
                     </div>
@@ -161,8 +177,8 @@
     <?php if($table['tableName'] == 't_option'){ ?>
             <!-- Poll HTML Display -->
             <?php foreach($data as $row){ ?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
-                        <div class="portfolio__item">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix poll d-flex justify-content-center align-self-stretch">
+                        <div>
                             <br>
                             <div class="portfolio__item__text">
                                 <h4 style="white-space: pre-wrap;"><?php echo $row->optionName ?></h4>
@@ -177,6 +193,7 @@
                         </div>
                     </div>
                 <?php } ?>
+                
 
             <!-- Poll Submit Vote Button -->
             <div class="col-lg-12 text-center">

@@ -71,7 +71,11 @@
                 <?php foreach($election as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix election">
                         <div class="portfolio__item">
-                            <div class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 150px;
+                                        width: 150px;"
+                            class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
@@ -91,7 +95,11 @@
                 <?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
                         <div class="portfolio__item">
-                            <div class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 150px;
+                                        width: 150px;"
+                            class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
@@ -110,7 +118,11 @@
                 <?php foreach($poll as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix poll">
                         <div class="portfolio__item">
-                            <div class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 150px;
+                                        width: 150px;"
+                            class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
