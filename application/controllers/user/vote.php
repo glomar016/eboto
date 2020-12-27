@@ -28,7 +28,9 @@ class Vote extends CI_Controller {
 
         $data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
         $data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
-        $data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
+		$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
+		
+		print_r($data);
 
 		$this->load->view('user/vote', $data);
     }
@@ -92,5 +94,6 @@ class Vote extends CI_Controller {
 		
 		$this->database_model->insert_vote($data, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option');
 	}
+
 
 }

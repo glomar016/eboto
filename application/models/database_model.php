@@ -114,4 +114,16 @@ class Database_model extends CI_Model {
             );
         return $this->db->insert($tableName, $data);
     }   
+
+
+    function get_votes($candidateID, $tableName, $tableName2, $fkColumn, $name){
+        $this->db->select("COUNT(*) as vote_counts, $tableName2.$name");
+        $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn. '='.$tableName2.'.id');
+        $this->db->where($tableName2.'.id', $candidateID);
+        $this->db->group_by($tableName2.'.'.$name);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 }

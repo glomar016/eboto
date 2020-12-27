@@ -87,6 +87,7 @@
     <!-- Ref Table ID -->
     <h6 id="refTableID" hidden><?php echo $refTable;?></h6>
 
+
     <!-- Election Data -->
     <?php if($table['tableName'] == 't_candidate'){ ?>
             <!-- Election HTML Display -->
@@ -235,9 +236,25 @@
 // Start of script
 $(document).ready(function(){
 
+    // // participants and count var
+    // var participantsID = new Array();
+    // var count = <?php echo count($data); ?>;
+
+    // // Store ID's of candidate/contestant/option
+    // <?php for($i=0; $i<(count($data)); $i++){
+    //     ?>
+    //     participantsID.push('<?php echo $data[$i]->id; ?>');
+    // <?php } ?>
+
+    // console.log(participantsID)
+
+    
+
     // Voting Candidate
     $(document).on("click", "#btn_vote_candidate", function(){
         $("#btn_vote_candidate").attr("disabled", true)
+        
+        var tableName = "t_candidate";
 
         var refTableID = $("#refTableID");
         var refTableID = refTableID.text();
@@ -274,7 +291,7 @@ $(document).ready(function(){
                                                                 icon: 'success',
                                                                 confirmButtonText: 'Ok'
                                                                 }).then((result) => {
-                                                                    window.location.href = "<?php echo base_url()?>user/vote";
+                                                                    window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
                                                                 })
                                                         }
                                         })
@@ -291,6 +308,8 @@ $(document).ready(function(){
         var refTableID = $("#refTableID");
         var refTableID = refTableID.text();
         
+        var tableName = "t_contestant";
+
         var selected = $('input[name="selected_contestant"]:checked').val();
         
         console.log(selected)
@@ -319,7 +338,7 @@ $(document).ready(function(){
                                                                 icon: 'success',
                                                                 confirmButtonText: 'Ok'
                                                                 }).then((result) => {
-                                                                    window.location.href = "<?php echo base_url()?>user/vote";
+                                                                    window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
                                                                 })
                                                         }
                                         })
@@ -336,6 +355,8 @@ $(document).ready(function(){
 
         var refTableID = $("#refTableID");
         var refTableID = refTableID.text();
+
+        var tableName = "t_option";
         
         var selected = $('input[name="selected_option"]:checked').val();
 
@@ -365,7 +386,7 @@ $(document).ready(function(){
                                                                 icon: 'success',
                                                                 confirmButtonText: 'Ok'
                                                                 }).then((result) => {
-                                                                    window.location.href = "<?php echo base_url()?>user/vote";
+                                                                    window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
                                                                 })
                                                         }
                                         })
