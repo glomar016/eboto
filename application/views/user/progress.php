@@ -101,21 +101,62 @@
 
     <!-- MAIN CONTENT -->
 
-    <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
-        <div class="card-header">
-            <h4>Voting Live Tally</h4>
-        </div>
-        <?php foreach($data as $row) { ?>
-            <div class="card-body">
-                <h6><?php echo $row->candidateName; ?></h6>
-                <div class="progress mb-2">
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
-                            aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
-                </div>
+    <!-- Candidate Live Tally -->
+    <?php if($tableName == 't_candidate'){ ?>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
+            <div class="card-header">
+                <h4>Voting Live Tally</h4>
             </div>
-        <?php } ?>
-        
-    </div>
+            <?php foreach($data as $row) { ?>
+                <div class="card-body">
+                    <h6><?php echo $row->candidateName; ?></h6>
+                    <div class="progress mb-2">
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    <!-- End of Candidate Live Tally -->
+
+    <!-- Contestant Live Tally -->
+    <?php if($tableName == 't_contestant'){ ?>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
+            <div class="card-header">
+                <h4>Voting Live Tally</h4>
+            </div>
+            <?php foreach($data as $row) { ?>
+                <div class="card-body">
+                    <h6><?php echo $row->contestantName; ?></h6>
+                    <div class="progress mb-2">
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    <!-- End of Contestant Live Tally -->
+
+    <!-- Option Live Tally -->
+    <?php if($tableName == 't_option'){ ?>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
+            <div class="card-header">
+                <h4>Voting Live Tally</h4>
+            </div>
+            <?php foreach($data as $row) { ?>
+                <div class="card-body">
+                    <h6><?php echo $row->optionName; ?></h6>
+                    <div class="progress mb-2">
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    <!-- End of Option Live Tally -->
 
     <!-- END OF MAIN CONTENT -->
 

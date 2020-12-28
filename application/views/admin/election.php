@@ -543,6 +543,8 @@ $(document).ready(function() {
     $('#editelectionForm').on('submit', function(e){
                         e.preventDefault();
                         $("#btnUpdate").attr("disabled", true);
+                        
+                        var id = document.editelectionForm.id.value
 
                         var editelectionName = document.editelectionForm.editelectionName.value;
                         var editelectionDateStart = document.editelectionForm.editelectionDateStart.value;
@@ -587,12 +589,16 @@ $(document).ready(function() {
 
                                             success:function(data){
                                                 var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
-                                                var user = parsedResponse.find(item => item.id == 197);
+                                                console.log(parsedResponse);
+                                                var user = parsedResponse.find(item => item.id == id);
+                                                
 
                                                 // Push all names to array
                                                 for(i=0; i < parsedResponse.length; i++){
                                                     var row = parsedResponse[i];
                                                     arrName.push(row.electionName);
+                                                    // console.log(user.electionName);
+                                                    
                                                 }
                                                 // Check if a reusing name in the name array
                                                 if(user.electionName == editelectionName){
@@ -657,7 +663,47 @@ $(document).ready(function() {
                                                                                 })
                                                 }
                                                 else{
-                                                    
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: "You are updating an election!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, update it!'
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {                         
+                                                            // ajax post
+                                                            console.log(form);
+                                                                        $.ajax({
+                                                                            url: '<?php echo base_url()?>admin/election/update_election',
+                                                                            type: 'post',
+                                                                            data: form,
+                                                                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                                            success:function()
+                                                                                    {
+                                                                                    
+                                                                                    refresh();
+                                                                                
+                                                                                    Swal.fire({
+                                                                                        title: 'Success!',
+                                                                                        text: 'You successfully updated an election.',
+                                                                                        icon: 'success',
+                                                                                        confirmButtonText: 'Ok'
+                                                                                        }).then((result) => {
+                                                                                            $("#btnUpdate").attr("disabled", false);
+                                                                                            $('#editelectionModal').modal('hide');
+                                                                                            $('#editelectionModal form')[0].reset();
+                                                                                        })
+                                                                                        
+                                                                                    }
+                                                                        });
+                                                        }
+                                                        else{
+                                                            $("#btnUpdate").attr("disabled", false);
+                                                        }
+                                                    })
                                                 }
                                             }
                                     })
