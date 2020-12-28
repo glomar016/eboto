@@ -136,8 +136,8 @@ $(document).ready(function(){
 
                 $( ".candidateInfo" ).append("<p><strong>Name</strong>: "+candidateName+"</p>");
                 $( ".candidateInfo" ).append("<p><strong>Position</strong>: "+candidatePosition+"</p>");
-                $( ".candidateInfo" ).append("<div class='w-25 p-3 d-flex justify-content-center'>"+
-                "<p><strong>Description</strong>: "+candidateDescription+"</p></div>");
+                $( ".candidateInfo" ).append("<div class='text-center'>"+
+                "<p style='white-space: pre-wrap;'><strong>Description</strong>: "+candidateDescription+"</p></div>");
         }
 
     loadviewdata();

@@ -96,4 +96,37 @@ class Database_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
+    function get_candidate($id, $tableName, $refColumn, $columnStatus){
+        $this->db->select("*");
+        $this->db->where($refColumn, $id);
+        $this->db->where($columnStatus, "1");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function insert_vote($voteID, $voteColumn, $refTableID, $refTableColumn, $tableName){
+        $data = array(
+            $voteColumn=>$voteID,
+            $refTableColumn=>$refTableID,
+            );
+        return $this->db->insert($tableName, $data);
+    }   
+
+
+    function get_votes($refTableID, $refColumn, $tableName, $tableName2, $fkColumn, $name){
+        $this->db->select("COUNT(".$tableName2.".id) as vote_counts
+                                , COUNT(".$tableName2.".id) * 100 / SUM(COUNT(".$tableName2.".id)) OVER() as vote_percentage
+                                , $tableName.$name");
+        $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName2.'.'.$fkColumn. '='.$tableName.'.id', 'left');
+        $this->db->where($tableName.".".$refColumn, $refTableID);
+        $this->db->group_by($tableName.'.'.$name);
+        $this->db->order_by('vote_counts', "DESC");
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 }

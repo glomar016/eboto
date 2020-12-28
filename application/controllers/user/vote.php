@@ -28,11 +28,70 @@ class Vote extends CI_Controller {
 
         $data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
         $data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
-        $data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
+		$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
 
 		$this->load->view('user/vote', $data);
     }
-    
-    
+	
+	public function view($id, $tableName, $refColumn, $columnStatus)
+	{
+		$this->load->model('database_model');
+
+		$data['data'] = $this->database_model->get_candidate($id, $tableName, $refColumn, $columnStatus);
+
+		$data['table'] = ['tableName' => $tableName];
+
+		$data['refTable'] = $id;
+
+		$this->load->view('user/view', $data);
+	}
+	
+	public function vote_candidate()
+	{
+		$this->load->model('database_model');
+
+		// $data['data'] = $this->database_model->function()
+		$data = $this->input->post("selected");
+		$refTableID = $this->input->post('refTableID');
+
+		// echo $selected;
+		print_r($data);
+		echo $refTableID;
+		
+		foreach($data as $candidateID){
+			$this->database_model->insert_vote($candidateID, 'vote_candidateID', $refTableID, 'vote_electionID', 't_vote_candidate');
+		}
+	}
+
+	public function vote_contestant()
+	{
+		$this->load->model('database_model');
+
+		// $data['data'] = $this->database_model->function()
+		$data = $this->input->post("selected");
+		$refTableID = $this->input->post('refTableID');
+
+		// echo $selected;
+		print_r($data);
+		echo $refTableID;
+		
+		$this->database_model->insert_vote($data, 'vote_contestantID', $refTableID, 'vote_contestID', 't_vote_contestant');
+	}
+
+	public function vote_option()
+	{
+		$this->load->model('database_model');
+
+		// $data['data'] = $this->database_model->function()
+		$data = $this->input->post("selected");
+		$refTableID = $this->input->post('refTableID');
+
+		// echo $selected;
+		print_r($data);
+		echo $refTableID;
+		
+		$this->database_model->insert_vote($data, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option');
+	}
+
 
 }

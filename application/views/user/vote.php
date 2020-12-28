@@ -71,13 +71,19 @@
                 <?php foreach($election as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix election">
                         <div class="portfolio__item">
-                            <div class="portfolio__item__video set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 150px;
+                                        width: 150px;"
+                            class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
+                            <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->electionName ?></h4>
+                                
                                     <span><?php echo $row->orgName ?> / Election</span>
                                     <div style="padding:10px;">
-                                        <button class="btn btn-outline-primary" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
+                                        <button class="btn btn-outline-primary btn_vote_election" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
                                     </div>
                             </div>
                         </div>
@@ -89,13 +95,18 @@
                 <?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
                         <div class="portfolio__item">
-                            <div class="portfolio__item__video set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 150px;
+                                        width: 150px;"
+                            class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
+                            <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->contestName ?></h4>
                                     <span><?php echo $row->orgName?> / Contest</span>
                                     <div style="padding:10px;">
-                                        <button class="btn btn-outline-primary" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
+                                        <button class="btn btn-outline-primary btn_vote_contest" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
                                     </div>
                             </div>
                         </div>
@@ -107,13 +118,18 @@
                 <?php foreach($poll as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix poll">
                         <div class="portfolio__item">
-                            <div class="portfolio__item__video set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 150px;
+                                        width: 150px;"
+                            class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
+                            <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->pollName ?></h4>
                                     <span><?php echo $row->orgName ?> / Poll</span>
                                     <div style="padding:10px;">
-                                        <button class="btn btn-outline-primary" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
+                                        <button class="btn btn-outline-primary btn_vote_poll" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
                                     </div>
                             </div>
                         </div>
@@ -151,5 +167,49 @@
     <script src="<?php echo base_url()?>resources/js/owl.carousel.min.js"></script>
     <script src="<?php echo base_url()?>resources/js/user-main.js"></script>
 </body>
+
+<script>
+// Start of script
+$(document).ready(function(){
+
+
+    // Viewing
+        // Voting in election
+        $(document).on("click", ".btn_vote_election", function(){
+            var id = this.value;
+            var tableName = "t_candidate";
+            var refColumn = "candidateElectionID";
+            var columnStatus = "candidateStatus";
+        
+
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
+        });
+
+        // Voting in election
+        $(document).on("click", ".btn_vote_contest", function(){
+            var id = this.value;
+            var tableName = "t_contestant";
+            var refColumn = "contestantContestID";
+            var columnStatus = "contestantStatus";
+
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
+        });
+
+        // Voting in election
+        $(document).on("click", ".btn_vote_poll", function(){
+            var id = this.value;
+            var tableName = "t_option";
+            var refColumn = "optionPollID";
+            var columnStatus = "optionStatus";
+
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
+        });
+    // End of viewing
+
+
+});
+// End of script
+
+</script>
 
 </html>

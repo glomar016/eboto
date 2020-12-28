@@ -134,10 +134,10 @@
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">poll Name</label>
+                                            <label for="pollName" class=" form-control-label">Poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" class="form-control">
+                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -189,7 +189,7 @@
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input style=background-color:#28a745; type="submit" id="btnCreate" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -217,11 +217,11 @@
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">poll Name</label>
+                                            <label for="pollName" class=" form-control-label">Poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of poll" class="form-control">
+                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of poll" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input style=background-color:#28a745; type="submit" class="btn btn-primary">
+                                        <input style=background-color:#28a745; type="submit" id="btnUpdate" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -320,7 +320,7 @@
 $(document).ready(function() {
 
     function loadtable(){
-         pollDataTable = $('#pollTable').DataTable( {
+        pollDataTable = $('#pollTable').DataTable( {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>admin/poll/show_poll",
             "columns": [
@@ -385,11 +385,9 @@ $(document).ready(function() {
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                
                 $.ajax({
                     url: '<?php echo base_url()?>admin/poll/delete_poll',
                     data: {id: id},
-
                         success:function(data){
                             refresh();
                             Swal.fire(
@@ -399,11 +397,8 @@ $(document).ready(function() {
                                 )
                         }
                 });
-
-
             }
-            })
-       
+        })
     });
 
     // edit function
@@ -435,31 +430,67 @@ $(document).ready(function() {
 
     // Create poll
     $('#addpollForm').on('submit', function(e){
-                        e.preventDefault();
+        
+        e.preventDefault();
+        $("#btnCreate").attr("disabled", true);
 
-                        var pollName = document.addpollForm.pollName.value;
-                        var pollDateStart = document.addpollForm.pollDateStart.value;
-                        var pollDateEnd = document.addpollForm.pollDateEnd.value;
+        var pollName = document.addpollForm.pollName.value;
+        var pollDateStart = document.addpollForm.pollDateStart.value;
+        var pollDateEnd = document.addpollForm.pollDateEnd.value;
 
-                        var dateStart = new Date(pollDateStart);
-                        var dateEnd = new Date(pollDateEnd);
+        var dateStart = new Date(pollDateStart);
+        var dateEnd = new Date(pollDateEnd);
 
+        var arrName = [];
+        console.log(pollName);
+
+        // Check if name is already exist
+        $.ajax({
+            url: '<?php echo base_url()?>admin/poll/show_poll',
+            dataType: "JSON",
+
+                success:function(data){
+                    var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
+                    // var row = parsedResponse[0];
+
+                    // Push all names to array
+                    for(i=0; i < parsedResponse.length; i++){
+                        var row = parsedResponse[i];
+                        arrName.push(row.pollName);
+                    }
+                    console.log(arrName);
+                    // Check if a value exists in the name array
+                    if(arrName.includes(pollName)){
+                                            Swal.fire({
+                                                    title: 'Warning!',
+                                                    text: 'Name is already existing in active list!',
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
+                                                    })
+                    }
+                    else{
                         if(pollName == '' || pollDateStart == '' || pollDateEnd == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Please fill out required field.',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
                                                     })
                         }
                         else{
 
-                            if(dateStart >= dateEnd){
+                            if(dateStart > dateEnd){
                                 Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Invalid Date Start and Date End',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
                                                     })
                             }
                             
@@ -483,22 +514,38 @@ $(document).ready(function() {
                                                 text: 'You successfully created a poll.',
                                                 icon: 'success',
                                                 confirmButtonText: 'Ok'
-                                                })
-                                            
-                                            $('#pollModal').modal('hide');
-                                            $('#pollModal form')[0].reset();
-                                                
+                                                }).then((result) => {
+                                                        $("#btnCreate").attr("disabled", false);
+                                                        $('#pollModal').modal('hide');
+                                                        $('#pollModal form')[0].reset();
+                                                    })
+  
                                             }
                                 });
                                 // end of ajax call
                             }   
                         }
-                });
+                        // End of conditions
+
+                    }
+                }
+        })
+        
+
+                        
+        // End of check if name is already exist
+                    
+                        
+                        
+    });
     // END OF // Create poll
 
     // Update poll
     $('#editpollForm').on('submit', function(e){
                         e.preventDefault();
+                        $("#btnUpdate").attr("disabled", true);
+                        
+                        var id = document.editpollForm.id.value
 
                         var editpollName = document.editpollForm.editpollName.value;
                         var editpollDateStart = document.editpollForm.editpollDateStart.value;
@@ -506,6 +553,11 @@ $(document).ready(function() {
 
                         var dateStart = new Date(editpollDateStart);
                         var dateEnd = new Date(editpollDateEnd);
+
+                        var arrName = [];
+
+                        var form = ( $( this ).serialize() );
+                        
                         
                         if(editpollName == '' || editpollDateStart == '' || editpollDateEnd == ''){
                                             Swal.fire({
@@ -513,65 +565,149 @@ $(document).ready(function() {
                                                     text: 'Please fill out required field.',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnUpdate").attr("disabled", false);
                                                     })
                         }
                         else{
                         
-                            if(dateStart >= dateEnd){
+                            if(dateStart > dateEnd){
                                 Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Invalid Date Start and Date End',
                                                     icon: 'warning',
                                                     confirmButtonText: 'Ok'
+                                                    }).then((result) => {
+                                                        $("#btnUpdate").attr("disabled", false);
                                                     })
                             }
                             
                             else{
-                           
-                            // ajax call
-                            console.log( $( this ).serialize() );
-                            var form = ( $( this ).serialize() );
+                                // Check if name is already exist
+                                    $.ajax({
+                                        url: '<?php echo base_url()?>admin/poll/show_poll',
+                                        dataType: "JSON",
 
-                            // var form = $('#editpollForm');
+                                            success:function(data){
+                                                var parsedResponse = jQuery.parseJSON(JSON.stringify(data['data']));
+                                                console.log(parsedResponse);
+                                                var user = parsedResponse.find(item => item.id == id);
+                                                
 
-                            Swal.fire({
-                                title: 'Are you sure?',
-                                text: "You are updating an poll!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, update it!'
-                                }).then((result) => {
-                                if (result.isConfirmed) {                         
-                                    // ajax post
-                                    console.log(form);
-                                                $.ajax({
-                                                    url: '<?php echo base_url()?>admin/poll/update_poll',
-                                                    type: 'post',
-                                                    data: form,
-                                                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                // Push all names to array
+                                                for(i=0; i < parsedResponse.length; i++){
+                                                    var row = parsedResponse[i];
+                                                    arrName.push(row.pollName);
+                                                    // console.log(user.pollName);
+                                                    
+                                                }
+                                                // Check if a reusing name in the name array
+                                                if(user.pollName == editpollName){
+                                                    // ajax call
+                                                    console.log( $( this ).serialize() );
 
-                                                    success:function()
-                                                            {
-                                                            
-                                                            refresh();
-                                                        
-                                                            Swal.fire({
-                                                                title: 'Success!',
-                                                                text: 'You successfully updated an poll.',
-                                                                icon: 'success',
-                                                                confirmButtonText: 'Ok'
-                                                                })
-                                                            
-                                                            $('#editpollModal').modal('hide');
-                                                            $('#editpollModal form')[0].reset();
-                                                                
-                                                            }
-                                                });
-                                }
-                            })
-                            // end of ajax call
+                                                    // var form = $('#editpollForm');
+
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: "You are updating an poll!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, update it!'
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {                         
+                                                            // ajax post
+                                                            console.log(form);
+                                                                        $.ajax({
+                                                                            url: '<?php echo base_url()?>admin/poll/update_poll',
+                                                                            type: 'post',
+                                                                            data: form,
+                                                                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                                            success:function()
+                                                                                    {
+                                                                                    
+                                                                                    refresh();
+                                                                                
+                                                                                    Swal.fire({
+                                                                                        title: 'Success!',
+                                                                                        text: 'You successfully updated an poll.',
+                                                                                        icon: 'success',
+                                                                                        confirmButtonText: 'Ok'
+                                                                                        }).then((result) => {
+                                                                                            $("#btnUpdate").attr("disabled", false);
+                                                                                            $('#editpollModal').modal('hide');
+                                                                                            $('#editpollModal form')[0].reset();
+                                                                                        })
+                                                                                        
+                                                                                    }
+                                                                        });
+                                                        }
+                                                        else{
+                                                            $("#btnUpdate").attr("disabled", false);
+                                                        }
+                                                    })
+                                                    // end of ajax call
+                                                
+                                                }
+                                                // Check if a value exists in the name array
+                                                else if(arrName.includes(editpollName)){
+                                                                        Swal.fire({
+                                                                                title: 'Warning!',
+                                                                                text: 'Name is already existing in active list!',
+                                                                                icon: 'warning',
+                                                                                confirmButtonText: 'Ok'
+                                                                                }).then((result) => {
+                                                                                    $("#btnUpdate").attr("disabled", false);
+                                                                                })
+                                                }
+                                                else{
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: "You are updating an poll!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, update it!'
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {                         
+                                                            // ajax post
+                                                            console.log(form);
+                                                                        $.ajax({
+                                                                            url: '<?php echo base_url()?>admin/poll/update_poll',
+                                                                            type: 'post',
+                                                                            data: form,
+                                                                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                                                                            success:function()
+                                                                                    {
+                                                                                    
+                                                                                    refresh();
+                                                                                
+                                                                                    Swal.fire({
+                                                                                        title: 'Success!',
+                                                                                        text: 'You successfully updated an poll.',
+                                                                                        icon: 'success',
+                                                                                        confirmButtonText: 'Ok'
+                                                                                        }).then((result) => {
+                                                                                            $("#btnUpdate").attr("disabled", false);
+                                                                                            $('#editpollModal').modal('hide');
+                                                                                            $('#editpollModal form')[0].reset();
+                                                                                        })
+                                                                                        
+                                                                                    }
+                                                                        });
+                                                        }
+                                                        else{
+                                                            $("#btnUpdate").attr("disabled", false);
+                                                        }
+                                                    })
+                                                }
+                                            }
+                                    })
                         }
                     }
                 });
@@ -579,9 +715,8 @@ $(document).ready(function() {
     // END OF // Update poll
             
 
-                        
-    
 });
+
 
         
 

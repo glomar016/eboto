@@ -127,7 +127,7 @@
                                             <label for="organizationName" class=" form-control-label">Organization Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="organizationName" name="organizationName" placeholder="Name of Organization" class="form-control">
+                                            <input type="text" id="organizationName" name="organizationName" placeholder="Name of Organization" maxlength="40" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -173,7 +173,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editorganizationName" name="editorganizationName" placeholder="Name of Organization" class="form-control">
+                                            <input type="text" id="editorganizationName" name="editorganizationName" placeholder="Name of Organization" maxlength="30" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
