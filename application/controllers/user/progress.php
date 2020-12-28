@@ -41,11 +41,9 @@ class Progress extends CI_Controller {
         }
         else if($tableName == 't_option'){
             $data['data'] = $this->database_model->get_votes($refTableID, 'optionPollID'
-                                                            , "t_poll", "t_vote_option"
+                                                            , "t_option", "t_vote_option"
                                                             , "vote_optionID", "optionName");
         }
-        
-        print_r($data['data']);
 
 		$this->load->view('user/progress', $data);
     }

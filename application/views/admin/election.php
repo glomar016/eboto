@@ -219,7 +219,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editelectionName" name="editelectionName" placeholder="Name of Election" maxlength="40" class="form-control">
+                                            <input type="text" id="editelectionName" name="editelectionName" placeholder="Name of Election" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
