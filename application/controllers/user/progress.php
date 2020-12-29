@@ -28,9 +28,9 @@ class Progress extends CI_Controller {
         $tableName = $this->uri->segment(5);
 
         $data['tableName'] = $tableName;
-        
+
         if($tableName == 't_candidate'){
-            $data['data'] = $this->database_model->get_votes($refTableID, 'candidateElectionID'
+            $data['data'] = $this->database_model->get_candidate_votes($refTableID, 'candidateElectionID'
                                                             , "t_candidate", "t_vote_candidate"
                                                             , "vote_candidateID", "candidateName");
         }
@@ -41,11 +41,22 @@ class Progress extends CI_Controller {
         }
         else if($tableName == 't_option'){
             $data['data'] = $this->database_model->get_votes($refTableID, 'optionPollID'
-                                                            , "t_poll", "t_vote_option"
+                                                            , "t_option", "t_vote_option"
                                                             , "vote_optionID", "optionName");
         }
-        
-        print_r($data['data']);
+
+        // Ref Table Info
+        if($tableName == 't_candidate'){
+            $refTableName = 't_election';
+        }
+        else if($tableName == 't_contestant'){
+            $refTableName = 't_contest';
+        }
+        else if($tableName == 't_option'){
+            $refTableName = 't_poll';
+        }
+
+        $data['refInfo'] = $this->database_model->get($refTableID, $refTableName);
 
 		$this->load->view('user/progress', $data);
     }

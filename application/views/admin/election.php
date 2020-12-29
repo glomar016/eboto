@@ -218,7 +218,11 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
+<<<<<<< HEAD
                                             <input type="text" id="editelectionName" name="editelectionName" placeholder="Name of Election" class="form-control" maxlength="50">
+=======
+                                            <input type="text" id="editelectionName" name="editelectionName" placeholder="Name of Election" maxlength="50" class="form-control">
+>>>>>>> 279564c9116626bd1c6ed88a53b4ae087ec28484
                                         </div>
                                     </div>
                                     <div class="row form-group">
