@@ -97,6 +97,7 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // It is used to get all candidates/contestant/options in specific election/contestant/polls
     function get_candidate($id, $tableName, $refColumn, $columnStatus){
         $this->db->select("*");
         $this->db->where($refColumn, $id);
@@ -107,6 +108,7 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // It is used to insert specific vote
     function insert_vote($voteID, $voteColumn, $refTableID, $refTableColumn, $tableName){
         $data = array(
             $voteColumn=>$voteID,
@@ -116,6 +118,7 @@ class Database_model extends CI_Model {
     }   
 
 
+    // To get live tally of voting
     function get_votes($refTableID, $refColumn, $tableName, $tableName2, $fkColumn, $name){
         $this->db->select("COUNT(".$tableName2.".id) as vote_counts
                                 , COUNT(".$tableName2.".id) * 100 / SUM(COUNT(".$tableName2.".id)) OVER() as vote_percentage
