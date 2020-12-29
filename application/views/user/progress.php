@@ -80,16 +80,16 @@
     <!-- HEADER DESKTOP-->
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option spad set-bg" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
+    <div class="breadcrumb-option spad set-bg" style="padding-bottom: 20px;" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Tally</h2>
+                        <h2>Result</h2>
                         <div class="breadcrumb__links">
                             <a href="<?php echo base_url()?>home">Home</a>
                             <a href="<?php echo base_url()?>user/vote">Vote</a>
-                            <span>Tally</span>
+                            <span>Result</span>
                         </div>
                     </div>
                 </div>
@@ -98,20 +98,123 @@
     </div>
     <!-- Breadcrumb End -->
 
+    <!-- Portfolio Section Start -->
+    <section class="portfolio spad" style="padding-top: 20px;">
+        <div class="container">
+
+            <!-- Ref Info -->
+                <!-- Election Info -->
+                <?php if($tableName == 't_candidate'){ ?>
+                    <h2 style="text-align:center; color:white;">Election</h2>
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:50px;">
+                            <div class="w-50 p-3">
+                                <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
+                                <br><p><?php echo $refInfo[0]->electionDescription?><p></h2>
+                            </div>
+                            <!-- Live Clock -->
+                            <div style="padding-top:25px" class="text-center">
+                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:gold;" id="liveclock">
+                                    </p>
+                                </h4> 
+                            </div>
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd = "<?php echo $refInfo[0]->electionDateEnd?>";
+
+                                        var clock = document.getElementById('liveclock');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock.textContent = moment(dateEnd).endOf('seconds').fromNow();
+                                        }, 100);
+                                </script>
+                                <!-- End of Script for live clock -->
+                            <!-- End of Live Clock -->
+                    </div>
+                <?php } ?>
+                <!-- End of election info -->
+
+                <!-- Contest Info -->
+                <?php if($tableName == 't_contestant'){ ?>
+                    <h2 style="text-align:center; color:white;">Contest</h2>
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
+                            <div class="w-50 p-3">
+                                <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
+                                <br><p><?php echo $refInfo[0]->contestDescription?><p></h2>
+                            </div>
+                            <!-- Live Clock -->
+                            <div style="padding-top:25px" class="text-center">
+                                This Contest
+                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:gold;" id="liveclock">
+                                    </p>
+                                </h4> 
+                            </div>
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd = "<?php echo $refInfo[0]->contestDateEnd?>";
+
+                                        var clock = document.getElementById('liveclock');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock.textContent = moment(dateEnd).endOf('seconds').fromNow();
+                                        }, 100);
+                                </script>
+                                <!-- End of Script for live clock -->
+                            <!-- End of Live Clock -->
+                    </div>
+                <?php } ?>
+                <!-- End of contest info -->
+
+                <!-- Poll Info -->
+                <?php if($tableName == 't_option'){ ?>
+                    <h2 style="text-align:center; color:white;">Poll</h2>
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
+                                <div class="w-50 p-3">
+                                    <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>
+                                    <br><p><?php echo $refInfo[0]->pollDescription?><p></h2>
+                                </div>
+                            <!-- Live Clock -->
+                            <div style="padding-top:25px" class="text-center">
+                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:gold;" id="liveclock">
+                                    </p>
+                                </h4> 
+                            </div>
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd = "<?php echo $refInfo[0]->pollDateEnd?>";
+
+                                        var clock = document.getElementById('liveclock');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock.textContent = moment(dateEnd).endOf('seconds').fromNow();
+                                        }, 100);
+                                </script>
+                                <!-- End of Script for live clock -->
+                            <!-- End of Live Clock -->
+                    </div>
+                <?php } ?>
+                <br>
+                <!-- End of Poll info -->
+
+            <!-- End of Ref Info -->
+
 
     <!-- MAIN CONTENT -->
 
     <!-- Candidate Live Tally -->
     <?php if($tableName == 't_candidate'){ ?>
-        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
-            <div class="card-header">
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:cyan">
+            <div class="card-header" style="background-color:cyan">
                 <h4>Voting Live Tally</h4>
             </div>
             <?php foreach($data as $row) { ?>
                 <div class="card-body">
-                    <h6><?php echo $row->candidateName; ?></h6>
+                    <h6><?php echo $row->candidateName; ?> - <?php echo $row->candidatePosition ?></h6>
                     <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" 
+                            style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
                                 aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
                     </div>
                 </div>
@@ -157,6 +260,9 @@
         </div>
     <?php } ?>
     <!-- End of Option Live Tally -->
+
+        <div>
+    </section>
 
     <!-- END OF MAIN CONTENT -->
 
