@@ -58,7 +58,7 @@
     <!-- HEADER DESKTOP-->
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option spad set-bg" style="padding-bottom:20px" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
+    <div class="breadcrumb-option spad set-bg" style="padding-bottom:50px" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -76,7 +76,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Portfolio Section Begin -->
-    <section class="portfolio spad">
+    <section class="portfolio spad"  style="padding-top: 50px;>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

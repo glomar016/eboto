@@ -62,7 +62,7 @@
     <!-- HEADER DESKTOP-->
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option spad set-bg" style="padding-bottom:20px" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
+    <div class="breadcrumb-option spad set-bg" style="padding-bottom:50px" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
         <div class="container">
         <div class="row">
                 <div class="col-lg-12 text-center">
@@ -87,10 +87,11 @@
             <!-- Ref Info -->
                 <!-- Election Info -->
                 <?php if($table['tableName'] == 't_candidate'){ ?>
-                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
-                            <div class="w-50 p-3">
-                                <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
-                                <br><p><?php echo $refInfo[0]->electionDescription?><p></h2>
+                    <h2 style="text-align:center; color:white;"><?php echo $refInfo[0]->electionName?></h2>
+                    <br>
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
+                            <div class="w-25 p-3">
+                                <h5 style=color:white;><?php echo $refInfo[0]->electionDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
@@ -117,10 +118,11 @@
 
                 <!-- Contest Info -->
                 <?php if($table['tableName'] == 't_contestant'){ ?>
-                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
-                            <div class="w-50 p-3">
-                                <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
-                                <br><p><?php echo $refInfo[0]->contestDescription?><p></h2>
+                    <h2 style="text-align:center; color:white;"><?php echo $refInfo[0]->contestName?></h2>
+                    <br>
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
+                            <div class="w-25 p-3">
+                                <h5 style=color:white;><?php echo $refInfo[0]->contestDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
@@ -143,15 +145,16 @@
                             <!-- End of Live Clock -->
                     </div>
                 <?php } ?>
-                <!-- End of contest info -->
+                <!-- End of Contest info -->
 
-                <!-- Poll Info -->
+                <!-- poll Info -->
                 <?php if($table['tableName'] == 't_option'){ ?>
-                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
-                                <div class="w-50 p-3">
-                                    <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>
-                                    <br><p><?php echo $refInfo[0]->pollDescription?><p></h2>
-                                </div>
+                    <h2 style="text-align:center; color:white;"><?php echo $refInfo[0]->pollName?></h2>
+                    <br>
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
+                            <div class="w-25 p-3">
+                                <h5 style=color:white;><?php echo $refInfo[0]->pollDescription?><p></h5>
+                            </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
                                 <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
@@ -173,7 +176,7 @@
                             <!-- End of Live Clock -->
                     </div>
                 <?php } ?>
-                <!-- End of Poll info -->
+                <!-- End of poll info -->
 
             <!-- End of Ref Info -->
             <br>
