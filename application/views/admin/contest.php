@@ -137,7 +137,7 @@
                                             <label for="contestName" class=" form-control-label">Contest Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="contestName" name="contestName" placeholder="Name of contest" maxlength="40" class="form-control">
+                                            <input type="text" id="contestName" name="contestName" placeholder="Name of contest" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -163,7 +163,7 @@
                                             <label for="contestDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="contestDescription" id="contestDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                            <textarea name="contestDescription" id="contestDescription" rows="4" placeholder="Content" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of contest" maxlength="40" class="form-control">
+                                            <input type="text" id="editcontestName" name="editcontestName" placeholder="Name of contest" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -246,7 +246,7 @@
                                             <label for="contestDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="editcontestDescription" id="editcontestDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                            <textarea name="editcontestDescription" id="editcontestDescription" rows="4" placeholder="Content" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">

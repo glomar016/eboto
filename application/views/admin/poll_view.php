@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="optionName" name="optionName" placeholder="Name" class="form-control">
+                                            <input type="text" id="optionName" name="optionName" placeholder="Name" class="form-control" maxlength="100">
                                         </div>
                                     </div>
                                     <div style= float:right;>
@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="editoptionName" name="editoptionName" placeholder="Name" class="form-control">
+                                            <input type="text" id="editoptionName" name="editoptionName" placeholder="Name" class="form-control" maxlength="100">
                                         </div>
                                     </div>
                                     <div style= float:right;>
