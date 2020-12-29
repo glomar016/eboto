@@ -86,6 +86,7 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // Get two tables with foreign key
     function get_two_table($statusColumn, $tableName, $tableName2, $fkColumn)
     {
         $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
@@ -132,4 +133,5 @@ class Database_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
 }

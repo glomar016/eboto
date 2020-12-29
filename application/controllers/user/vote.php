@@ -30,10 +30,21 @@ class Vote extends CI_Controller {
         $data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
 		$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
 
+
+		// Sort by date end
+		$electionDateEnd = array_column($data['election'], 'electionDateEnd');
+		array_multisort($data['election'], SORT_DESC, $electionDateEnd);
+
+		$contestDateEnd = array_column($data['contest'], 'contestDateEnd');
+		array_multisort($data['contest'], SORT_DESC, $contestDateEnd);
+
+		$pollDateEnd = array_column($data['poll'], 'pollDateEnd');
+		array_multisort($data['poll'], SORT_DESC, $pollDateEnd);
+
 		$this->load->view('user/vote', $data);
     }
 	
-	public function view($id, $tableName, $refColumn, $columnStatus)
+	public function view($id, $tableName, $refColumn, $columnStatus, $refTableName)
 	{
 		$this->load->model('database_model');
 
@@ -42,6 +53,8 @@ class Vote extends CI_Controller {
 		$data['table'] = ['tableName' => $tableName];
 
 		$data['refTable'] = $id;
+
+		$data['refInfo'] = $this->database_model->get($id, $refTableName);
 
 		$this->load->view('user/view', $data);
 	}

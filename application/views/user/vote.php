@@ -22,6 +22,29 @@
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/style.css" type="text/css">
+
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
+
+    <!-- Jquery-->
+    <script src="<?php echo base_url()?>resources/js/jquery-3.5.1.min.js"></script>
+    
+    <!-- Data Tables JS-->
+    <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
+
+    <!-- Data Time JS-->
+    <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
+
+    <!-- Moment w locales JS-->
+    <script src="<?php echo base_url()?>resources/js/moment.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="<?php echo base_url()?>resources/js/sweetalert2@10.js"></script>
+
+
 </head>
 
 <body>
@@ -35,7 +58,7 @@
     <!-- HEADER DESKTOP-->
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option spad set-bg" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
+    <div class="breadcrumb-option spad set-bg" style="padding-bottom:20px" data-setbg="<?php echo base_url()?>resources/img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -43,7 +66,7 @@
                         <h2>Vote</h2>
                         <div class="breadcrumb__links">
                             <a href="<?php echo base_url()?>home">Home</a>
-                            <span>Vote</span>
+                            <span>List</span>
                         </div>
                     </div>
                 </div>
@@ -73,14 +96,38 @@
                         <div class="portfolio__item">
                             <div style="margin: auto;
                                         border-radius: 50%;
-                                        height: 150px;
-                                        width: 150px;"
+                                        height: 180px;
+                                        width: 180px;"
                             class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
+
+                                <!-- Live Clock -->
+                                <div >
+                                        <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
+                                            <p 
+                                            style=" color:yellow;
+                                                    font-family: 'Times New Roman', Times, serif;text-align:center;" 
+                                            id="<?php echo "liveclock".$row->id ?>">
+                                            </p>
+                                        </h3> 
+                                </div>   
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd_<?php echo $row->id ?> = "<?php echo $row->electionDateEnd ?>";
+
+                                        var clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock".$row->id ?>');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                        }, 100);
+                                    </script>
+                                    <!-- End of Script for live clock -->
+                                <!-- End of Live Clock -->
+
+                                <br>
                                 <h4><?php echo $row->electionName ?></h4>
-                                
                                     <span><?php echo $row->orgName ?> / Election</span>
                                     <div style="padding:10px;">
                                         <button class="btn btn-outline-primary btn_vote_election" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
@@ -97,12 +144,37 @@
                         <div class="portfolio__item">
                             <div style="margin: auto;
                                         border-radius: 50%;
-                                        height: 150px;
-                                        width: 150px;"
+                                        height: 180px;
+                                        width: 180px;"
                             class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
+                                
+                                <!-- Live Clock -->
+                                <div >
+                                        <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
+                                            <p 
+                                            style=" color:yellow;
+                                                    font-family: 'Times New Roman', Times, serif;text-align:center;" 
+                                            id="<?php echo "liveclock".$row->id ?>">
+                                            </p>
+                                        </h3> 
+                                </div>   
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd_<?php echo $row->id ?> = "<?php echo $row->contestDateEnd ?>";
+
+                                        var clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock".$row->id ?>');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                        }, 100);
+                                    </script>
+                                    <!-- End of Script for live clock -->
+                                <!-- End of Live Clock -->
+                                
+                                <br>
                                 <h4><?php echo $row->contestName ?></h4>
                                     <span><?php echo $row->orgName?> / Contest</span>
                                     <div style="padding:10px;">
@@ -120,12 +192,37 @@
                         <div class="portfolio__item">
                             <div style="margin: auto;
                                         border-radius: 50%;
-                                        height: 150px;
-                                        width: 150px;"
+                                        height: 180px;
+                                        width: 180px;"
                             class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
+                                
+                                <!-- Live Clock -->
+                                <div >
+                                        <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
+                                            <p 
+                                            style=" color:yellow;
+                                                    font-family: 'Times New Roman', Times, serif;text-align:center;" 
+                                            id="<?php echo "liveclock".$row->id ?>">
+                                            </p>
+                                        </h3> 
+                                </div>   
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd_<?php echo $row->id ?> = "<?php echo $row->pollDateEnd ?>";
+
+                                        var clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock".$row->id ?>');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                        }, 100);
+                                    </script>
+                                    <!-- End of Script for live clock -->
+                                <!-- End of Live Clock -->
+
+                                <br>
                                 <h4><?php echo $row->pollName ?></h4>
                                     <span><?php echo $row->orgName ?> / Poll</span>
                                     <div style="padding:10px;">
@@ -172,6 +269,7 @@
 // Start of script
 $(document).ready(function(){
 
+        
 
     // Viewing
         // Voting in election
@@ -180,29 +278,32 @@ $(document).ready(function(){
             var tableName = "t_candidate";
             var refColumn = "candidateElectionID";
             var columnStatus = "candidateStatus";
+            var refTableName = "t_election";
         
 
-            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
         });
 
-        // Voting in election
+        // Voting in contest
         $(document).on("click", ".btn_vote_contest", function(){
             var id = this.value;
             var tableName = "t_contestant";
             var refColumn = "contestantContestID";
             var columnStatus = "contestantStatus";
+            var refTableName = "t_contest";
 
-            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
         });
 
-        // Voting in election
+        // Voting in poll
         $(document).on("click", ".btn_vote_poll", function(){
             var id = this.value;
             var tableName = "t_option";
             var refColumn = "optionPollID";
             var columnStatus = "optionStatus";
+            var refTableName = "t_poll";
 
-            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus;
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
         });
     // End of viewing
 
