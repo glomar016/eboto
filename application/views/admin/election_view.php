@@ -148,7 +148,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="candidateName" name="candidateName" placeholder="Name" class="form-control">
+                                            <input type="text" id="candidateName" name="candidateName" placeholder="Name" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -157,7 +157,7 @@
                                             <label for="candidatePosition" class=" form-control-label">Position</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="candidatePosition" name="candidatePosition" placeholder="Position" class="form-control">
+                                            <input type="text" id="candidatePosition" name="candidatePosition" placeholder="Position" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -166,7 +166,7 @@
                                             <label for="candidateDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="candidateDescription" id="candidateDescription" rows="4" placeholder="Description" class="form-control"></textarea>
+                                            <textarea name="candidateDescription" id="candidateDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -211,7 +211,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="editcandidateName" name="editcandidateName" placeholder="Name" class="form-control">
+                                            <input type="text" id="editcandidateName" name="editcandidateName" placeholder="Name" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -220,7 +220,7 @@
                                             <label for="editcandidatePosition" class=" form-control-label">Position</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="editcandidatePosition" name="editcandidatePosition" placeholder="Position" class="form-control">
+                                            <input type="text" id="editcandidatePosition" name="editcandidatePosition" placeholder="Position" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -229,7 +229,7 @@
                                             <label for="editcandidateDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="editcandidateDescription" id="editcandidateDescription" rows="4" placeholder="Description" class="form-control"></textarea>
+                                            <textarea name="editcandidateDescription" id="editcandidateDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">

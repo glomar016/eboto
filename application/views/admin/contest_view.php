@@ -147,7 +147,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="contestantName" name="contestantName" placeholder="Name" class="form-control">
+                                            <input type="text" id="contestantName" name="contestantName" placeholder="Name" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -156,7 +156,7 @@
                                             <label for="contestantDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Description" class="form-control"></textarea>
+                                            <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -201,7 +201,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
-                                            <input type="text" id="editcontestantName" name="editcontestantName" placeholder="Name" class="form-control">
+                                            <input type="text" id="editcontestantName" name="editcontestantName" placeholder="Name" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -210,7 +210,7 @@
                                             <label for="editcontestantDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="editcontestantDescription" id="editcontestantDescription" rows="4" placeholder="Description" class="form-control"></textarea>
+                                            <textarea name="editcontestantDescription" id="editcontestantDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">

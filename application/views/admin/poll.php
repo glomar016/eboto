@@ -137,7 +137,7 @@
                                             <label for="pollName" class=" form-control-label">Poll Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" maxlength="40" class="form-control">
+                                            <input type="text" id="pollName" name="pollName" placeholder="Name of poll" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -163,7 +163,7 @@
                                             <label for="pollDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="pollDescription" id="pollDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                            <textarea name="pollDescription" id="pollDescription" rows="4" placeholder="Content" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" hidden>
-                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of poll" maxlength="40" class="form-control">
+                                            <input type="text" id="editpollName" name="editpollName" placeholder="Name of poll" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -246,7 +246,7 @@
                                             <label for="pollDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="editpollDescription" id="editpollDescription" rows="4" placeholder="Content" class="form-control"></textarea>
+                                            <textarea name="editpollDescription" id="editpollDescription" rows="4" placeholder="Content" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">
