@@ -18,30 +18,41 @@ class Vote extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+
 	public function index()
 	{
         $this->load->model('database_model');
-        $this->load->helper('date');
+		$this->load->helper('date');
+		
+		$session = 1;
+
+		// Check if already logged in
+		if($session != 1){
+			$this->load->view('user/login');
+			echo 'something';
+		}
+		else{
+
+			$dateToday = mdate("%Y-%m-%d %h:%i:%s");
+
+			$data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
+			$data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
+			$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
 
 
-        $dateToday = mdate("%Y-%m-%d %h:%i:%s");
+			// Sort by date end
+			$electionDateEnd = array_column($data['election'], 'electionDateEnd');
+			array_multisort($data['election'], SORT_DESC, $electionDateEnd);
 
-        $data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
-        $data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
-		$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
+			$contestDateEnd = array_column($data['contest'], 'contestDateEnd');
+			array_multisort($data['contest'], SORT_DESC, $contestDateEnd);
 
+			$pollDateEnd = array_column($data['poll'], 'pollDateEnd');
+			array_multisort($data['poll'], SORT_DESC, $pollDateEnd);
 
-		// Sort by date end
-		$electionDateEnd = array_column($data['election'], 'electionDateEnd');
-		array_multisort($data['election'], SORT_DESC, $electionDateEnd);
-
-		$contestDateEnd = array_column($data['contest'], 'contestDateEnd');
-		array_multisort($data['contest'], SORT_DESC, $contestDateEnd);
-
-		$pollDateEnd = array_column($data['poll'], 'pollDateEnd');
-		array_multisort($data['poll'], SORT_DESC, $pollDateEnd);
-
-		$this->load->view('user/vote', $data);
+			$this->load->view('user/vote', $data);
+		}
     }
 	
 	public function view($id, $tableName, $refColumn, $columnStatus, $refTableName)

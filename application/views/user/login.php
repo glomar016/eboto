@@ -1,3 +1,9 @@
+<?php 
+    if (isset($this->session->userdata['logged_in'])) {
+        header("location: ".base_url()."user/login/submit");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,22 +52,23 @@
                                 <img src="<?php echo base_url()?>resources/images/icon/eLogoFont.png" alt="E-Boto">
                             </a>
                         </div>
+                    
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="<?php echo base_url()?>user/login/submit" method="post">
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <label>Student Number</label>
+                                    <input class="au-input au-input--full" type="text" name="userStudentNo" placeholder="Student Number">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="userPassword" placeholder="Password">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember">Remember Me
+                                        <!-- <input type="checkbox" name="remember">Remember Me -->
                                     </label>
                                     <label>
-                                        <a href="#">Forgotten Password?</a>
+                                        <a href="<?php echo base_url()?>user/forgotten">Forgotten Password?</a>
                                     </label>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>

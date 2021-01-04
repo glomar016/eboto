@@ -1,3 +1,14 @@
+<?php
+
+    if (isset($this->session->userdata['logged_in'])) {
+            $userStudentNo = ($this->session->userdata['logged_in']['userStudentNo']);
+            $userPassword = ($this->session->userdata['logged_in']['userPassword']);
+        } 
+        else {
+            header("location: ".base_url()."user/login");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 

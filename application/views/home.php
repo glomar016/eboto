@@ -31,7 +31,13 @@
     </div>
 
     <!-- HEADER DESKTOP-->
-    <?php $this->load->view('includes/userheader.php'); ?>
+    <?php if (isset($this->session->userdata['logged_in'])) {
+        $this->load->view('includes/userheader.php');
+    }
+    else{
+        $this->load->view('includes/homeheader.php');
+    } ?>
+
     <!-- HEADER DESKTOP-->
 
     <!-- Hero Section Begin -->
