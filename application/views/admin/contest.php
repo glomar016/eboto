@@ -415,7 +415,7 @@ $(document).ready(function() {
                     var row = parsedResponse[0];
                     $('[name="id"').val(row.id);
                     $('[name="editcontestName"]').val(row.contestName);
-                    $('[name="editcontestRestriction"]').val(row.contestOrg);
+                    $('[name="editcontestOrg"]').val(row.contestOrg);
                     $('[name="editcontestDescription"]').val(row.contestDescription);
                     $('[name="editcontestDateStart"]').val(row.contestDateStart.slice(0, 10));
                     $('[name="editcontestDateEnd"]').val(row.contestDateEnd.slice(0, 10));

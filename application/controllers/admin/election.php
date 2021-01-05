@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Election extends CI_Controller {
+class election extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -101,6 +101,7 @@ class Election extends CI_Controller {
 
 		echo json_encode($data);
 
+
 	}
 	
 	public function delete_election()
@@ -113,7 +114,6 @@ class Election extends CI_Controller {
 		$this->database_model->delete($id, "electionStatus", "t_election");
 	}
 
-	// get data to pass data to edit modal
 	public function get_election($id)
 	{
 

@@ -24,6 +24,19 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // get the views of datatables for specific election/contest/poll
+    function display_voting($statusColumn, $tableName, $tableName2, $tableName3, $fkColumn, $fkColumn3, $dateEnd, $dateToday){
+        $this->db->select("*, $tableName.id, $tableName3.id AS $tableName3".'_id'," $tableName2.id AS $tableName2".'_id');
+        $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
+        $this->db->join($tableName3, $tableName.'.id = '.$tableName3.'.'.$fkColumn3, 'left');
+        $this->db->where($statusColumn, "1");
+        $this->db->where("$dateEnd >=", $dateToday);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
     // get the views of any tables
     function view($statusColumn, $tableName){
         $this->db->select("*");
@@ -110,10 +123,11 @@ class Database_model extends CI_Model {
     }
 
     // It is used to insert specific vote
-    function insert_vote($voteID, $voteColumn, $refTableID, $refTableColumn, $tableName){
+    function insert_vote($voteID, $voteColumn, $refTableID, $refTableColumn, $tableName, $vote_userID){
         $data = array(
             $voteColumn=>$voteID,
             $refTableColumn=>$refTableID,
+            'vote_userID'=>$vote_userID
             );
         return $this->db->insert($tableName, $data);
     }   
@@ -149,6 +163,23 @@ class Database_model extends CI_Model {
         $query = $this->db->get();
         $data = $query->result();
         return $data;
+    }
+
+    // Check if user already voted in election/contest/poll
+    function already_voted($userId, $tableId, $refTableName, $tableName){
+        $this->db->select('*');
+        $this->db->from($tableName);
+        $this->db->where("vote_userID", $userId);
+        $this->db->where($refTableName, $tableId);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 1) {
+            return TRUE;
+        } 
+        else {
+            return FALSE;
+        }
     }
 
 }

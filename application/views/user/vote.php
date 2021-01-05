@@ -2,7 +2,7 @@
 
     if (isset($this->session->userdata['logged_in'])) {
             $userStudentNo = ($this->session->userdata['logged_in']['userStudentNo']);
-            $userPassword = ($this->session->userdata['logged_in']['userPassword']);
+            $userId = ($this->session->userdata['logged_in']['userId']);
         } 
         else {
             header("location: ".base_url()."user/login");
@@ -123,7 +123,29 @@
                                             id="<?php echo "liveclock".$row->id ?>">
                                             </p>
                                         </h3> 
-                                </div>   
+                                </div>  
+                                <br>
+                                <h4><?php echo $row->electionName ?></h4>
+                                    <span><?php echo $row->orgName ?> / Election</span>
+                            
+                            <!-- Check if user already voted -->
+                                    <?php if($row->vote_userID == $userId){?>
+                                        <button class="btn btn-outline-success btn_view_election"
+                                         id="<?php echo "viewing_button".$row->id?>" 
+                                         value="<?php echo $row->id?>" 
+                                         title="View" type="button">View Progress
+                                         </button>
+                                    <?php } 
+                                    else{ ?>
+                                        <div style="padding:10px;">
+                                            <button class="btn btn-outline-primary btn_vote_election"
+                                            id="<?php echo "voting_button".$row->id?>" 
+                                            value="<?php echo $row->id?>" 
+                                            title="Vote" type="button">Vote
+                                            </button>
+                                        </div>
+                                    <?php }?>
+
                                 <!-- Script for live clock -->
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->electionDateEnd ?>";
@@ -133,35 +155,29 @@
                                                     // clock.textContent 
                                                     clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
-                                    </script>
+                                        
+                                </script>
                                     <!-- End of Script for live clock -->
                                 <!-- End of Live Clock -->
-
-                                <br>
-                                <h4><?php echo $row->electionName ?></h4>
-                                    <span><?php echo $row->orgName ?> / Election</span>
-                                    <div style="padding:10px;">
-                                        <button class="btn btn-outline-primary btn_vote_election" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
-                                    </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
             <!-- End of Election Data -->
 
-            <!-- Contest Data -->
-                <?php foreach($contest as $row){ ?>
+            <!-- contest Data -->
+            <?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
                         <div class="portfolio__item">
                             <div style="margin: auto;
                                         border-radius: 50%;
                                         height: 180px;
                                         width: 180px;"
-                            class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
                             </div>
                             <br>
                             <div class="portfolio__item__text">
-                                
+
                                 <!-- Live Clock -->
                                 <div >
                                         <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
@@ -171,7 +187,29 @@
                                             id="<?php echo "liveclock".$row->id ?>">
                                             </p>
                                         </h3> 
-                                </div>   
+                                </div>  
+                                <br>
+                                <h4><?php echo $row->contestName ?></h4>
+                                    <span><?php echo $row->orgName ?> / contest</span>
+                            
+                            <!-- Check if user already voted -->
+                                    <?php if($row->vote_userID == $userId){?>
+                                        <button class="btn btn-outline-success btn_view_contest"
+                                         id="<?php echo "viewing_button".$row->id?>" 
+                                         value="<?php echo $row->id?>" 
+                                         title="View" type="button">View Progress
+                                         </button>
+                                    <?php } 
+                                    else{ ?>
+                                        <div style="padding:10px;">
+                                            <button class="btn btn-outline-primary btn_vote_contest"
+                                            id="<?php echo "voting_button".$row->id?>" 
+                                            value="<?php echo $row->id?>" 
+                                            title="Vote" type="button">Vote
+                                            </button>
+                                        </div>
+                                    <?php }?>
+
                                 <!-- Script for live clock -->
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->contestDateEnd ?>";
@@ -181,24 +219,18 @@
                                                     // clock.textContent 
                                                     clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
-                                    </script>
+                                        
+                                </script>
                                     <!-- End of Script for live clock -->
                                 <!-- End of Live Clock -->
-                                
-                                <br>
-                                <h4><?php echo $row->contestName ?></h4>
-                                    <span><?php echo $row->orgName?> / Contest</span>
-                                    <div style="padding:10px;">
-                                        <button class="btn btn-outline-primary btn_vote_contest" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
-                                    </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
-            <!-- End of Contest Data -->
+            <!-- End of contest Data -->
 
-            <!-- Poll Data -->
-                <?php foreach($poll as $row){ ?>
+            <!-- poll Data -->
+            <?php foreach($poll as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix poll">
                         <div class="portfolio__item">
                             <div style="margin: auto;
@@ -209,7 +241,7 @@
                             </div>
                             <br>
                             <div class="portfolio__item__text">
-                                
+
                                 <!-- Live Clock -->
                                 <div >
                                         <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
@@ -219,7 +251,29 @@
                                             id="<?php echo "liveclock".$row->id ?>">
                                             </p>
                                         </h3> 
-                                </div>   
+                                </div>  
+                                <br>
+                                <h4><?php echo $row->pollName ?></h4>
+                                    <span><?php echo $row->orgName ?> / poll</span>
+                            
+                            <!-- Check if user already voted -->
+                                    <?php if($row->vote_userID == $userId){?>
+                                        <button class="btn btn-outline-success btn_view_poll"
+                                         id="<?php echo "viewing_button".$row->id?>" 
+                                         value="<?php echo $row->id?>" 
+                                         title="View" type="button">View Progress
+                                         </button>
+                                    <?php } 
+                                    else{ ?>
+                                        <div style="padding:10px;">
+                                            <button class="btn btn-outline-primary btn_vote_poll"
+                                            id="<?php echo "voting_button".$row->id?>" 
+                                            value="<?php echo $row->id?>" 
+                                            title="Vote" type="button">Vote
+                                            </button>
+                                        </div>
+                                    <?php }?>
+
                                 <!-- Script for live clock -->
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->pollDateEnd ?>";
@@ -229,21 +283,15 @@
                                                     // clock.textContent 
                                                     clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
-                                    </script>
+                                        
+                                </script>
                                     <!-- End of Script for live clock -->
                                 <!-- End of Live Clock -->
-
-                                <br>
-                                <h4><?php echo $row->pollName ?></h4>
-                                    <span><?php echo $row->orgName ?> / Poll</span>
-                                    <div style="padding:10px;">
-                                        <button class="btn btn-outline-primary btn_vote_poll" value="<?php echo $row->id?>" title="Vote" type="button">Vote</button>
-                                    </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
-            <!-- End of Poll Data -->
+            <!-- End of poll Data -->
             </div>
             <!-- <div class="row">
                 <div class="col-lg-12">
@@ -279,7 +327,6 @@
 <script>
 // Start of script
 $(document).ready(function(){
-
         
 
     // Viewing
@@ -317,6 +364,34 @@ $(document).ready(function(){
             window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
         });
     // End of viewing
+
+    // Viewing Result
+        // Voting in election
+        $(document).on("click", ".btn_view_election", function(){
+            var refTableID = this.value;
+            var tableName = "t_candidate";
+        
+
+            window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
+        });
+
+        // Voting in contest
+        $(document).on("click", ".btn_view_contest", function(){
+            var refTableID = this.value;
+            var tableName = "t_contestant";
+
+
+            window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
+        });
+
+        // Voting in poll
+        $(document).on("click", ".btn_view_poll", function(){
+            var refTableID = this.value;
+            var tableName = "t_option";
+
+            window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
+        });
+    // End of viewing result
 
 
 });

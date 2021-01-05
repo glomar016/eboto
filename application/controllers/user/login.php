@@ -60,6 +60,7 @@ class Login extends CI_Controller {
 							$session_data = array(
 								'userStudentNo' => $result[0]->userStudentNo,
 								'userPassword' => $result[0]->userPassword,
+								'userId' => $result[0]->id,
 								);
 						// Add user data in session
 						$this->session->set_userdata('logged_in', $session_data);

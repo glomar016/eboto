@@ -36,10 +36,9 @@ class Vote extends CI_Controller {
 
 			$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-			$data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
-			$data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
-			$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
-
+			$data['election'] = $this->database_model->display_voting('electionStatus', 't_election', 'r_org', 't_vote_candidate' ,'electionOrg', 'vote_electionID' ,'electionDateEnd', $dateToday);
+			$data['contest'] = $this->database_model->display_voting('contestStatus', 't_contest', 'r_org', 't_vote_contestant' ,'contestOrg', 'vote_contestID' ,'contestDateEnd', $dateToday);
+			$data['poll'] = $this->database_model->display_voting('pollStatus', 't_poll', 'r_org', 't_vote_option' ,'pollOrg', 'vote_pollID' ,'pollDateEnd', $dateToday);
 
 			// Sort by date end
 			$electionDateEnd = array_column($data['election'], 'electionDateEnd');
@@ -77,13 +76,14 @@ class Vote extends CI_Controller {
 		// $data['data'] = $this->database_model->function()
 		$data = $this->input->post("selected");
 		$refTableID = $this->input->post('refTableID');
+		$vote_userID = $this->input->post('vote_userID');
 
 		// echo $selected;
 		print_r($data);
 		echo $refTableID;
 		
 		foreach($data as $candidateID){
-			$this->database_model->insert_vote($candidateID, 'vote_candidateID', $refTableID, 'vote_electionID', 't_vote_candidate');
+			$this->database_model->insert_vote($candidateID, 'vote_candidateID', $refTableID, 'vote_electionID', 't_vote_candidate', $vote_userID);
 		}
 	}
 
@@ -94,12 +94,13 @@ class Vote extends CI_Controller {
 		// $data['data'] = $this->database_model->function()
 		$data = $this->input->post("selected");
 		$refTableID = $this->input->post('refTableID');
+		$vote_userID = $this->input->post('vote_userID');
 
 		// echo $selected;
 		print_r($data);
 		echo $refTableID;
 		
-		$this->database_model->insert_vote($data, 'vote_contestantID', $refTableID, 'vote_contestID', 't_vote_contestant');
+		$this->database_model->insert_vote($data, 'vote_contestantID', $refTableID, 'vote_contestID', 't_vote_contestant', $vote_userID);
 	}
 
 	public function vote_option()
@@ -109,12 +110,24 @@ class Vote extends CI_Controller {
 		// $data['data'] = $this->database_model->function()
 		$data = $this->input->post("selected");
 		$refTableID = $this->input->post('refTableID');
+		$vote_userID = $this->input->post('vote_userID');
 
 		// echo $selected;
 		print_r($data);
 		echo $refTableID;
 		
-		$this->database_model->insert_vote($data, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option');
+		$this->database_model->insert_vote($data, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option', $vote_userID);
+	}
+
+	// This is to check if user is already voted to election/contest/poll/
+	public function already_voted($userId, $tableId, $refTableName, $tableName)
+	{
+		$this->load->model('database_model');
+
+		$data = $this->database_model->already_voted($userId, $tableId, $refTableName, $tableName);
+
+		echo $data;
+
 	}
 
 

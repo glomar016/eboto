@@ -144,7 +144,6 @@
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                This Contest
                                 <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
                                     <p style=" color:gold;" id="liveclock">
                                     </p>

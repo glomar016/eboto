@@ -1,3 +1,14 @@
+<?php
+
+    if (isset($this->session->userdata['logged_in'])) {
+            $userStudentNo = ($this->session->userdata['logged_in']['userStudentNo']);
+            $userId = ($this->session->userdata['logged_in']['userId']);
+        } 
+        else {
+            header("location: ".base_url()."user/login");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -334,20 +345,9 @@
 <script>
 // Start of script
 $(document).ready(function(){
-
-    // // participants and count var
-    // var participantsID = new Array();
-    // var count = <?php echo count($data); ?>;
-
-    // // Store ID's of candidate/contestant/option
-    // <?php for($i=0; $i<(count($data)); $i++){
-    //     ?>
-    //     participantsID.push('<?php echo $data[$i]->id; ?>');
-    // <?php } ?>
-
-    // console.log(participantsID)
-
-    
+    // Var for userId
+    var vote_userID = <?php echo $userId ?>;
+    console.log(vote_userID);
 
     // Voting Candidate
     $(document).on("click", "#btn_vote_candidate", function(){
@@ -357,6 +357,7 @@ $(document).ready(function(){
 
         var refTableID = $("#refTableID");
         var refTableID = refTableID.text();
+
         var selected = [];
         console.log(refTableID)
         
@@ -381,7 +382,8 @@ $(document).ready(function(){
                                             url: '<?php echo base_url()?>user/vote/vote_candidate',
                                             type: 'post',
                                             data: {'selected': selected,
-                                                    'refTableID': refTableID},
+                                                    'refTableID': refTableID,
+                                                    'vote_userID': vote_userID},
 
                                                         success: function(){
                                                             Swal.fire({
@@ -428,7 +430,8 @@ $(document).ready(function(){
                                             url: '<?php echo base_url()?>user/vote/vote_contestant',
                                             type: 'post',
                                             data: {'selected': selected,
-                                                    'refTableID': refTableID},
+                                                    'refTableID': refTableID,
+                                                    'vote_userID': vote_userID},
 
                                                         success: function(){
                                                             Swal.fire({
@@ -476,7 +479,8 @@ $(document).ready(function(){
                                             url: '<?php echo base_url()?>user/vote/vote_option',
                                             type: 'post',
                                             data: {'selected': selected,
-                                                    'refTableID': refTableID},
+                                                    'refTableID': refTableID,
+                                                    'vote_userID': vote_userID},
 
                                                         success: function(){
                                                             Swal.fire({

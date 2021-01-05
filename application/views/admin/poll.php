@@ -415,7 +415,7 @@ $(document).ready(function() {
                     var row = parsedResponse[0];
                     $('[name="id"').val(row.id);
                     $('[name="editpollName"]').val(row.pollName);
-                    $('[name="editpollRestriction"]').val(row.pollOrg);
+                    $('[name="editpollOrg"]').val(row.pollOrg);
                     $('[name="editpollDescription"]').val(row.pollDescription);
                     $('[name="editpollDateStart"]').val(row.pollDateStart.slice(0, 10));
                     $('[name="editpollDateEnd"]').val(row.pollDateEnd.slice(0, 10));
