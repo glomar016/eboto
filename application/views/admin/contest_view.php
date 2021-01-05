@@ -277,7 +277,7 @@ $(document).ready(function(){
         var contestName = "<?php echo $data[0]->contestName ?>"
         var contestDateStart = "<?php echo $data[0]->contestDateStart ?>"
         var contestDateEnd = "<?php echo $data[0]->contestDateEnd ?>"
-        var contestDescription = "<?php echo $data[0]->contestDescription ?>"
+        var contestDescription = `<?php echo $data[0]->contestDescription ?>`
         
 
             const clock = document.getElementById('liveclock');

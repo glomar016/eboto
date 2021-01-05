@@ -234,7 +234,7 @@
                                                 <?php 
                                                 foreach($data as $row)
                                                 { 
-                                                echo '<candidate value="'.$row->id.'">'.$row->orgName.'</candidate>';
+                                                echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
                                                 }
                                                 ?>
                                             </select>

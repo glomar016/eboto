@@ -36,9 +36,9 @@ class Vote extends CI_Controller {
 
 			$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-			$data['election'] = $this->database_model->display_voting('electionStatus', 't_election', 'r_org', 't_vote_candidate' ,'electionOrg', 'vote_electionID' ,'electionDateEnd', $dateToday);
-			$data['contest'] = $this->database_model->display_voting('contestStatus', 't_contest', 'r_org', 't_vote_contestant' ,'contestOrg', 'vote_contestID' ,'contestDateEnd', $dateToday);
-			$data['poll'] = $this->database_model->display_voting('pollStatus', 't_poll', 'r_org', 't_vote_option' ,'pollOrg', 'vote_pollID' ,'pollDateEnd', $dateToday);
+			$data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
+			$data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
+			$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
 
 			// Sort by date end
 			$electionDateEnd = array_column($data['election'], 'electionDateEnd');

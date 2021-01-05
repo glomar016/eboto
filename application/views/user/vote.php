@@ -127,24 +127,13 @@
                                 <br>
                                 <h4><?php echo $row->electionName ?></h4>
                                     <span><?php echo $row->orgName ?> / Election</span>
-                            
-                            <!-- Check if user already voted -->
-                                    <?php if($row->vote_userID == $userId){?>
-                                        <button class="btn btn-outline-success btn_view_election"
-                                         id="<?php echo "viewing_button".$row->id?>" 
-                                         value="<?php echo $row->id?>" 
-                                         title="View" type="button">View Progress
-                                         </button>
-                                    <?php } 
-                                    else{ ?>
-                                        <div style="padding:10px;">
+                                    <div style="padding:10px;">
                                             <button class="btn btn-outline-primary btn_vote_election"
                                             id="<?php echo "voting_button".$row->id?>" 
                                             value="<?php echo $row->id?>" 
                                             title="Vote" type="button">Vote
                                             </button>
-                                        </div>
-                                    <?php }?>
+                                    </div>
 
                                 <!-- Script for live clock -->
                                 <script>
@@ -191,24 +180,15 @@
                                 <br>
                                 <h4><?php echo $row->contestName ?></h4>
                                     <span><?php echo $row->orgName ?> / contest</span>
-                            
-                            <!-- Check if user already voted -->
-                                    <?php if($row->vote_userID == $userId){?>
-                                        <button class="btn btn-outline-success btn_view_contest"
-                                         id="<?php echo "viewing_button".$row->id?>" 
-                                         value="<?php echo $row->id?>" 
-                                         title="View" type="button">View Progress
-                                         </button>
-                                    <?php } 
-                                    else{ ?>
-                                        <div style="padding:10px;">
+                                    
+                                    <div style="padding:10px;">
                                             <button class="btn btn-outline-primary btn_vote_contest"
                                             id="<?php echo "voting_button".$row->id?>" 
                                             value="<?php echo $row->id?>" 
                                             title="Vote" type="button">Vote
                                             </button>
-                                        </div>
-                                    <?php }?>
+                                    </div>
+                            
 
                                 <!-- Script for live clock -->
                                 <script>
@@ -255,25 +235,15 @@
                                 <br>
                                 <h4><?php echo $row->pollName ?></h4>
                                     <span><?php echo $row->orgName ?> / poll</span>
-                            
-                            <!-- Check if user already voted -->
-                                    <?php if($row->vote_userID == $userId){?>
-                                        <button class="btn btn-outline-success btn_view_poll"
-                                         id="<?php echo "viewing_button".$row->id?>" 
-                                         value="<?php echo $row->id?>" 
-                                         title="View" type="button">View Progress
-                                         </button>
-                                    <?php } 
-                                    else{ ?>
-                                        <div style="padding:10px;">
+                                    
+                                    <div style="padding:10px;">
                                             <button class="btn btn-outline-primary btn_vote_poll"
                                             id="<?php echo "voting_button".$row->id?>" 
                                             value="<?php echo $row->id?>" 
                                             title="Vote" type="button">Vote
                                             </button>
-                                        </div>
-                                    <?php }?>
-
+                                    </div>
+                                    
                                 <!-- Script for live clock -->
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->pollDateEnd ?>";
