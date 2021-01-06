@@ -58,15 +58,29 @@ class Vote extends CI_Controller {
 	{
 		$this->load->model('database_model');
 
-		$data['data'] = $this->database_model->get_candidate($id, $tableName, $refColumn, $columnStatus);
+		$userId = ($this->session->userdata['logged_in']['userId']);
+		
+		if($tableName == 't_candidate'){
+			$check = $this->database_model->already_voted($userId, $id, 'vote_electionID', 't_vote_candidate');
+		}
+		else if($tableName == 't_contestant'){
+			$check = $this->database_model->already_voted($userId, $id, 'vote_contestID', 't_vote_contestant');
+		}
+		else if($tableName == 't_option'){
+			$check = $this->database_model->already_voted($userId, $id, 'vote_pollID', 't_vote_option');
+		}
 
-		$data['table'] = ['tableName' => $tableName];
-
-		$data['refTable'] = $id;
-
-		$data['refInfo'] = $this->database_model->get($id, $refTableName);
-
-		$this->load->view('user/view', $data);
+		// Condition to check if user already voted
+		if($check == 1){
+			$this->load->view('user/already_voted');
+		}
+		else{
+			$data['data'] = $this->database_model->get_candidate($id, $tableName, $refColumn, $columnStatus);
+			$data['table'] = ['tableName' => $tableName];
+			$data['refTable'] = $id;
+			$data['refInfo'] = $this->database_model->get($id, $refTableName);
+			$this->load->view('user/view', $data);
+		}
 	}
 	
 	public function vote_candidate()
