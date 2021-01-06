@@ -163,7 +163,7 @@
                                             <label for="contestDescription" class=" form-control-label">Description </label>
                                         </div>
                                         <div class="col-4 col-md-8">
-                                            <textarea name="contestDescription" id="contestDescription" rows="4" placeholder="Content" class="form-control" maxlength="200"></textarea>
+                                            <textarea name="contestDescription" id="contestDescription" placeholder="Content" class="form-control" maxlength="200"></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group">

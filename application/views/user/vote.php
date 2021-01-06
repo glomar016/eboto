@@ -127,24 +127,13 @@
                                 <br>
                                 <h4><?php echo $row->electionName ?></h4>
                                     <span><?php echo $row->orgName ?> / Election</span>
-                            
-                            <!-- Check if user already voted -->
-                                    <?php if($row->vote_userID == $userId){?>
-                                        <button class="btn btn-outline-success btn_view_election"
-                                         id="<?php echo "viewing_button".$row->id?>" 
-                                         value="<?php echo $row->id?>" 
-                                         title="View" type="button">View Progress
-                                         </button>
-                                    <?php } 
-                                    else{ ?>
-                                        <div style="padding:10px;">
-                                            <button class="btn btn-outline-primary btn_vote_election"
-                                            id="<?php echo "voting_button".$row->id?>" 
-                                            value="<?php echo $row->id?>" 
-                                            title="Vote" type="button">Vote
-                                            </button>
-                                        </div>
-                                    <?php }?>
+                                    <div style="padding:10px;">
+                                                <button id = <?php echo 'btn_election'.$row->id ?> class=''
+                                                    id='<?php echo "voting_button".$row->id?>'
+                                                    value='<?php echo $row->id?>'
+                                                    type='button'>
+                                                </button>
+                                    </div>
 
                                 <!-- Script for live clock -->
                                 <script>
@@ -155,6 +144,31 @@
                                                     // clock.textContent 
                                                     clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
+
+                                        // check if already voted function
+                                        var userId = <?php echo $userId ?>;
+                                            var tableId = <?php echo $row->id ?>;
+                                            var refTableName = 'vote_electionID';
+                                            var tableName = 't_vote_candidate';
+
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>user/vote/already_voted/'+userId+'/'+tableId+'/'+refTableName+'/'+tableName,
+                                                type: "GET",
+                                                // dataType: "JSON",
+
+                                                    success:function(data){
+                                                        if(data == 1){
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-outline-success', 'btn_view_election');
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "View Progress";
+                                                        }
+                                                        else{
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-outline-primary', 'btn_vote_election');
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "Vote";
+                                                        }
+                                                    }
+                                                    // End of success function
+                                            })
+                                            // End of ajax
                                         
                                 </script>
                                     <!-- End of Script for live clock -->
@@ -166,7 +180,7 @@
             <!-- End of Election Data -->
 
             <!-- contest Data -->
-            <?php foreach($contest as $row){ ?>
+<?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
                         <div class="portfolio__item">
                             <div style="margin: auto;
@@ -191,24 +205,13 @@
                                 <br>
                                 <h4><?php echo $row->contestName ?></h4>
                                     <span><?php echo $row->orgName ?> / contest</span>
-                            
-                            <!-- Check if user already voted -->
-                                    <?php if($row->vote_userID == $userId){?>
-                                        <button class="btn btn-outline-success btn_view_contest"
-                                         id="<?php echo "viewing_button".$row->id?>" 
-                                         value="<?php echo $row->id?>" 
-                                         title="View" type="button">View Progress
-                                         </button>
-                                    <?php } 
-                                    else{ ?>
-                                        <div style="padding:10px;">
-                                            <button class="btn btn-outline-primary btn_vote_contest"
-                                            id="<?php echo "voting_button".$row->id?>" 
-                                            value="<?php echo $row->id?>" 
-                                            title="Vote" type="button">Vote
-                                            </button>
-                                        </div>
-                                    <?php }?>
+                                    <div style="padding:10px;">
+                                                <button id = <?php echo 'btn_contest'.$row->id ?> class=''
+                                                    id='<?php echo "voting_button".$row->id?>'
+                                                    value='<?php echo $row->id?>'
+                                                    type='button'>
+                                                </button>
+                                    </div>
 
                                 <!-- Script for live clock -->
                                 <script>
@@ -219,6 +222,31 @@
                                                     // clock.textContent 
                                                     clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
+
+                                        // check if already voted function
+                                        var userId = <?php echo $userId ?>;
+                                            var tableId = <?php echo $row->id ?>;
+                                            var refTableName = 'vote_contestID';
+                                            var tableName = 't_vote_contestant';
+
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>user/vote/already_voted/'+userId+'/'+tableId+'/'+refTableName+'/'+tableName,
+                                                type: "GET",
+                                                // dataType: "JSON",
+
+                                                    success:function(data){
+                                                        if(data == 1){
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-outline-success', 'btn_view_contest');
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "View Progress";
+                                                        }
+                                                        else{
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-outline-primary', 'btn_vote_contest');
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "Vote";
+                                                        }
+                                                    }
+                                                    // End of success function
+                                            })
+                                            // End of ajax
                                         
                                 </script>
                                     <!-- End of Script for live clock -->
@@ -255,24 +283,13 @@
                                 <br>
                                 <h4><?php echo $row->pollName ?></h4>
                                     <span><?php echo $row->orgName ?> / poll</span>
-                            
-                            <!-- Check if user already voted -->
-                                    <?php if($row->vote_userID == $userId){?>
-                                        <button class="btn btn-outline-success btn_view_poll"
-                                         id="<?php echo "viewing_button".$row->id?>" 
-                                         value="<?php echo $row->id?>" 
-                                         title="View" type="button">View Progress
-                                         </button>
-                                    <?php } 
-                                    else{ ?>
-                                        <div style="padding:10px;">
-                                            <button class="btn btn-outline-primary btn_vote_poll"
-                                            id="<?php echo "voting_button".$row->id?>" 
-                                            value="<?php echo $row->id?>" 
-                                            title="Vote" type="button">Vote
-                                            </button>
-                                        </div>
-                                    <?php }?>
+                                    <div style="padding:10px;">
+                                                <button id = <?php echo 'btn_poll'.$row->id ?> class=''
+                                                    id='<?php echo "voting_button".$row->id?>'
+                                                    value='<?php echo $row->id?>'
+                                                    type='button'>
+                                                </button>
+                                    </div>
 
                                 <!-- Script for live clock -->
                                 <script>
@@ -283,6 +300,31 @@
                                                     // clock.textContent 
                                                     clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
+
+                                        // check if already voted function
+                                        var userId = <?php echo $userId ?>;
+                                            var tableId = <?php echo $row->id ?>;
+                                            var refTableName = 'vote_pollID';
+                                            var tableName = 't_vote_option';
+
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>user/vote/already_voted/'+userId+'/'+tableId+'/'+refTableName+'/'+tableName,
+                                                type: "GET",
+                                                // dataType: "JSON",
+
+                                                    success:function(data){
+                                                        if(data == 1){
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-outline-success', 'btn_view_poll');
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "View Progress";
+                                                        }
+                                                        else{
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-outline-primary', 'btn_vote_poll');
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "Vote";
+                                                        }
+                                                    }
+                                                    // End of success function
+                                            })
+                                            // End of ajax
                                         
                                 </script>
                                     <!-- End of Script for live clock -->

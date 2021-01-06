@@ -78,9 +78,15 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+<<<<<<< HEAD
 	//'hostname' => 'DESKTOP-564AP4H',
 	//'hostname' => 'DESKTOP-0C1LSAP',
 	 'hostname' => 'LAPTOP-4JFKTN3K\SQLEXPRESS',
+=======
+	// 'hostname' => 'DESKTOP-564AP4H',
+	'hostname' => 'DESKTOP-0C1LSAP',
+	// 'hostname' => 'LAPTOP-4JFKTN3K\SQLEXPRESS',
+>>>>>>> 0d9ae2adda29fab132ec0f7448ef77b6819f7206
 	'username' => 'sa',
 	'password' => 'qwerty',
 	'database' => 'eboto',

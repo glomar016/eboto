@@ -175,10 +175,10 @@ class Database_model extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() == 1) {
-            return TRUE;
+            return 1;
         } 
         else {
-            return FALSE;
+            return 0;
         }
     }
 
