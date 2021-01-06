@@ -115,7 +115,7 @@ class Organization extends CI_Controller {
 			$config['upload_path'] = './resources/images';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
 			
-			// $this->load->library('image_lib');
+			$this->load->library('image_lib');
 			$this->load->library('upload', $config);
 			
 			if(!$this->upload->do_upload('editorganizationLogo'))
