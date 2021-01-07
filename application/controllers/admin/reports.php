@@ -20,9 +20,50 @@ class reports extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('admin/reports');
-    }
-    
-    
 
+		$this->load->view('admin/reports');
+	}
+
+	public function view($tableName)
+	{
+		if($tableName == 'election'){
+			$this->load->view('admin/election_vote_reports');
+		}
+		if($tableName == 'contest'){
+			$this->load->view('admin/contest_vote_reports');
+		}
+		if($tableName == 'poll'){
+			$this->load->view('admin/poll_vote_reports');
+		}
+	}
+    
+	public function get_election_votes()
+	{
+		$this->load->model('reports_model');
+
+		$data['data'] = $this->reports_model->get_all_election_votes();
+
+		echo json_encode($data);
+
+	}
+
+	public function get_contest_votes()
+	{
+		$this->load->model('reports_model');
+
+		$data['data'] = $this->reports_model->get_all_contest_votes();
+
+		echo json_encode($data);
+
+	}
+
+	public function get_poll_votes()
+	{
+		$this->load->model('reports_model');
+
+		$data['data'] = $this->reports_model->get_all_poll_votes();
+
+		echo json_encode($data);
+
+	}
 }

@@ -88,7 +88,16 @@ else {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="dropdown">
+                        <!-- Election Data Table Content -->
+                        <div class="au-card m-b-30">
+                            <div class="au-card-inner">
+                                
+                        
+                                <!-- DATA TABLE -->
+                                
+                                <div class="table-data__tool">
+                                        <h2>History of Election Votes</h2>
+                                        <div class="dropdown">
                                             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Election
                                             </button>
@@ -97,16 +106,7 @@ else {
                                                 <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/contest">Contest</a>
                                                 <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/poll">Poll</a>
                                             </div>
-                        </div>
-                                <br>
-                        <!-- Election Data Table Content -->
-                        <div class="au-card m-b-30">
-                            <div class="au-card-inner">
-                                <!-- DATA TABLE -->
-                                
-                                <div class="table-data__tool">
-                                        <h2>History of Election Votes</h2>
-                                        
+                                        </div>         
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
                                     <table id="election_vote_table" class="table table-data3" style="width:100%"> 
@@ -129,73 +129,6 @@ else {
                             </div>
                         </div>
                     </div>
-                        <!-- End of Data Table Content -->
-
-                    <div class="col-lg-12">
-                        <!-- Contest Data Table Content -->
-                        <div class="au-card m-b-30">
-                            <div class="au-card-inner">
-
-                                <!-- DATA TABLE -->
-                                
-                                <div class="table-data__tool">
-                                        <h2>History of Contest Votes</h2>
-                                </div>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table id="contest_vote_table" class="table table-data3" style="width:100%"> 
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>Contest Name</th>
-                                                <th>Contestant Name</th>
-                                                <th>Voter Name</th>
-                                                <th>Voter Student Number</th>
-                                                <th>Vote Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE -->
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                        <!-- End of Data Table Content -->
-
-                    <div class="col-lg-12">
-                        <!-- Poll Table Content -->
-                        <div class="au-card m-b-30">
-                            <div class="au-card-inner">
-
-                                <!-- DATA TABLE -->
-                                
-                                <div class="table-data__tool">
-                                        <h2>History of Poll Votes</h2>
-                                </div>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table id="poll_vote_table" class="table table-data3" style="width:100%"> 
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>Poll Name</th>
-                                                <th>Option Name</th>
-                                                <th>Voter Name</th>
-                                                <th>Voter Student Number</th>
-                                                <th>Vote Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE -->
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                        <!-- End of Data Table Content -->
                 </div>
             </div>
         </div>
@@ -251,51 +184,10 @@ $(document).ready(function() {
                 { data: "voteDateCreated"},
             ],
 
-            "order": [[4, "desc"]]
         })
     }
 
     load_election_votes()
-    // End of loadtable
-
-    // loadtable
-    function load_contest_votes(){
-        contestDataTable = $('#contest_vote_table').DataTable( {
-            "pageLength": 10,
-            "ajax": "<?php echo base_url()?>admin/reports/get_contest_votes",
-            "columns": [
-                { data: "contestName"},
-                { data: "contestantName"},
-                { data: "voterName"},
-                { data: "userStudentNo"},
-                { data: "voteDateCreated"},
-            ],
-
-            "order": [[4, "desc"]]
-        })
-    }
-
-    load_contest_votes()
-    // End of loadtable
-
-    // loadtable
-    function load_poll_votes(){
-        pollDataTable = $('#poll_vote_table').DataTable( {
-            "pageLength": 10,
-            "ajax": "<?php echo base_url()?>admin/reports/get_poll_votes",
-            "columns": [
-                { data: "pollName"},
-                { data: "optionName"},
-                { data: "voterName"},
-                { data: "userStudentNo"},
-                { data: "voteDateCreated"},
-            ],
-
-            "order": [[4, "desc"]]
-        })
-    }
-
-    load_poll_votes()
     // End of loadtable
 
 });
