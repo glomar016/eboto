@@ -61,10 +61,18 @@ class Login extends CI_Controller {
 								'userStudentNo' => $result[0]->userStudentNo,
 								'userPassword' => $result[0]->userPassword,
 								'userId' => $result[0]->id,
+								'userType' => $result[0]->userType,
 								);
 						// Add user data in session
 						$this->session->set_userdata('logged_in', $session_data);
-						redirect(base_url().'user/vote', 'refresh');
+
+						if($result[0]->userType == 1){
+							redirect(base_url().'user/vote', 'refresh');
+						}
+						else if($result[0]->userType == 2){
+							redirect(base_url().'admin/dashboard', 'refresh');
+						}
+						
 					}
 				} 
 				else {

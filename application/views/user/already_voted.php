@@ -77,7 +77,8 @@
                         <h2>Vote</h2>
                         <div class="breadcrumb__links">
                             <a href="<?php echo base_url()?>home">Home</a>
-                            <span>List</span>
+                            <a href="<?php echo base_url()?>user/vote">List</a>
+                            <span>Vote</span>
                         </div>
                     </div>
                 </div>

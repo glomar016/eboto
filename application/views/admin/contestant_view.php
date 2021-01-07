@@ -1,3 +1,18 @@
+<?php 
+if (isset($this->session->userdata['logged_in'])) {
+    $userType = ($this->session->userdata['logged_in']['userType']);
+    $userId = ($this->session->userdata['logged_in']['userId']);
+
+        if($userType == 1){
+            header("location: ".base_url()."user/forbidden");
+        }
+
+} 
+else {
+    header("location: ".base_url()."user/login");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
