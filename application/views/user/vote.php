@@ -120,7 +120,7 @@
                                             <p 
                                             style=" color:yellow;
                                                     font-family: 'Times New Roman', Times, serif;text-align:center;" 
-                                            id="<?php echo "liveclock".$row->id ?>">
+                                            id="<?php echo "liveclock_election".$row->id ?>">
                                             </p>
                                         </h3> 
                                 </div>  
@@ -129,20 +129,19 @@
                                     <span><?php echo $row->orgName ?> / Election</span>
                                     <div style="padding:10px;">
                                                 <button id = <?php echo 'btn_election'.$row->id ?> class=''
-                                                    id='<?php echo "voting_button".$row->id?>'
                                                     value='<?php echo $row->id?>'
                                                     type='button'>
                                                 </button>
                                     </div>
 
-                                <!-- Script for live clock -->
+                                    <!-- Script for live clock -->
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->electionDateEnd ?>";
 
-                                        var clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock".$row->id ?>');
+                                        var election_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_election".$row->id ?>');
                                                 setInterval(() => {
                                                     // clock.textContent 
-                                                    clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    election_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
 
                                         // check if already voted function
@@ -180,7 +179,7 @@
             <!-- End of Election Data -->
 
             <!-- contest Data -->
-<?php foreach($contest as $row){ ?>
+            <?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
                         <div class="portfolio__item">
                             <div style="margin: auto;
@@ -198,7 +197,7 @@
                                             <p 
                                             style=" color:yellow;
                                                     font-family: 'Times New Roman', Times, serif;text-align:center;" 
-                                            id="<?php echo "liveclock".$row->id ?>">
+                                            id="<?php echo "liveclock_contest".$row->id ?>">
                                             </p>
                                         </h3> 
                                 </div>  
@@ -207,7 +206,6 @@
                                     <span><?php echo $row->orgName ?> / contest</span>
                                     <div style="padding:10px;">
                                                 <button id = <?php echo 'btn_contest'.$row->id ?> class=''
-                                                    id='<?php echo "voting_button".$row->id?>'
                                                     value='<?php echo $row->id?>'
                                                     type='button'>
                                                 </button>
@@ -217,10 +215,10 @@
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->contestDateEnd ?>";
 
-                                        var clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock".$row->id ?>');
+                                        var contest_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_contest".$row->id ?>');
                                                 setInterval(() => {
                                                     // clock.textContent 
-                                                    clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    contest_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
 
                                         // check if already voted function
@@ -276,7 +274,7 @@
                                             <p 
                                             style=" color:yellow;
                                                     font-family: 'Times New Roman', Times, serif;text-align:center;" 
-                                            id="<?php echo "liveclock".$row->id ?>">
+                                            id="<?php echo "liveclock_poll".$row->id ?>">
                                             </p>
                                         </h3> 
                                 </div>  
@@ -285,7 +283,6 @@
                                     <span><?php echo $row->orgName ?> / poll</span>
                                     <div style="padding:10px;">
                                                 <button id = <?php echo 'btn_poll'.$row->id ?> class=''
-                                                    id='<?php echo "voting_button".$row->id?>'
                                                     value='<?php echo $row->id?>'
                                                     type='button'>
                                                 </button>
@@ -295,10 +292,10 @@
                                 <script>
                                         var dateEnd_<?php echo $row->id ?> = "<?php echo $row->pollDateEnd ?>";
 
-                                        var clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock".$row->id ?>');
+                                        var poll_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_poll".$row->id ?>');
                                                 setInterval(() => {
                                                     // clock.textContent 
-                                                    clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    poll_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
                                         }, 100);
 
                                         // check if already voted function
