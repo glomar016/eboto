@@ -111,6 +111,7 @@ else {
                                     <table id="poll_vote_table" class="table table-data3" style="width:100%"> 
                                         <thead class="thead-dark">
                                             <tr>
+                                                <th>Hidden ID</th>
                                                 <th>Poll Name</th>
                                                 <th>Option Name</th>
                                                 <th>Voter Name</th>
@@ -177,13 +178,15 @@ $(document).ready(function() {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>admin/reports/get_poll_votes",
             "columns": [
+                { data: "id"},
                 { data: "pollName"},
                 { data: "optionName"},
                 { data: "voterName"},
                 { data: "userStudentNo"},
                 { data: "voteDateCreated"},
             ],
-
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+            "order": [[0, "desc"]]
             
         })
     }

@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Reports_model extends CI_Model {
 
     function get_all_election_votes(){
-        $this->db->select("electionName
+        $this->db->select("t_vote_candidate.id
+                        , electionName
                         , candidateName 
                         , (userFirstName+' '+userLastName+' ') AS voterName
                         , userStudentNo
@@ -20,7 +21,8 @@ class Reports_model extends CI_Model {
     }
 
     function get_all_contest_votes(){
-        $this->db->select("contestName
+        $this->db->select("t_vote_contestant.id
+                        , contestName
                         , contestantName 
                         , (userFirstName+' '+userLastName+' ') AS voterName
                         , userStudentNo
@@ -36,7 +38,8 @@ class Reports_model extends CI_Model {
     }
 
     function get_all_poll_votes(){
-        $this->db->select("pollName
+        $this->db->select("t_vote_option.id
+                        , pollName
                         , optionName 
                         , (userFirstName+' '+userLastName+' ') AS voterName
                         , userStudentNo
@@ -50,4 +53,117 @@ class Reports_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
+    function get_user_count(){
+        $this->db->select("COUNT(*) as user_count");
+        $this->db->from("t_user");
+        $this->db->where("userStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_election_count(){
+        $this->db->select("COUNT(*) as election_count");
+        $this->db->from("t_election");
+        $this->db->where("electionStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_contest_count(){
+        $this->db->select("COUNT(*) as contest_count");
+        $this->db->from("t_contest");
+        $this->db->where("contestStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_poll_count(){
+        $this->db->select("COUNT(*) as poll_count");
+        $this->db->from("t_poll");
+        $this->db->where("pollStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_active_election_count(){
+        $dateToday = mdate("%Y-%m-%d %h:%i:%s");
+        
+        $this->db->select("COUNT(*) as active_election_count");
+        $this->db->from("t_election");
+        $this->db->where("electionStatus", 1);
+        $this->db->where("electionDateEnd >=", $dateToday);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_active_contest_count(){
+        $dateToday = mdate("%Y-%m-%d %h:%i:%s");
+        
+        $this->db->select("COUNT(*) as active_contest_count");
+        $this->db->from("t_contest");
+        $this->db->where("contestStatus", 1);
+        $this->db->where("contestDateEnd >=", $dateToday);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_active_poll_count(){
+        $dateToday = mdate("%Y-%m-%d %h:%i:%s");
+        
+        $this->db->select("COUNT(*) as active_poll_count");
+        $this->db->from("t_poll");
+        $this->db->where("pollStatus", 1);
+        $this->db->where("pollDateEnd >=", $dateToday);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    
+    function get_candidate_count(){
+        $this->db->select("COUNT(*) as candidate_count");
+        $this->db->from("t_candidate");
+        $this->db->where("candidateStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_contestant_count(){
+        $this->db->select("COUNT(*) as contestant_count");
+        $this->db->from("t_contestant");
+        $this->db->where("contestantStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_option_count(){
+        $this->db->select("COUNT(*) as option_count");
+        $this->db->from("t_option");
+        $this->db->where("optionStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_org_count(){
+        $this->db->select("COUNT(*) as org_count");
+        $this->db->from("r_org");
+        $this->db->where("orgStatus", 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+
+
+
 }

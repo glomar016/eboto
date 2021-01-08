@@ -113,6 +113,7 @@ else {
                                     <table id="contest_vote_table" class="table table-data3" style="width:100%"> 
                                         <thead class="thead-dark">
                                             <tr>
+                                                <th>Hidden ID</th>
                                                 <th>Contest Name</th>
                                                 <th>Contestant Name</th>
                                                 <th>Voter Name</th>
@@ -179,13 +180,15 @@ $(document).ready(function() {
             "pageLength": 10,
             "ajax": "<?php echo base_url()?>admin/reports/get_contest_votes",
             "columns": [
+                { data: "id"},
                 { data: "contestName"},
                 { data: "contestantName"},
                 { data: "voterName"},
                 { data: "userStudentNo"},
                 { data: "voteDateCreated"},
             ],
-
+            "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+            "order": [[0, "desc"]]
             
         })
     }

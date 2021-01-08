@@ -72,6 +72,102 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                        
+                    <div class="au-card m-b-30">
+                        <div class="au-card-inner">
+
+                            <h2>Dashboard</h2>
+
+                        <!-- STATISTIC-->
+                        <section class="statistic statistic2">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="overview-item overview-item--c1">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="text">
+                                                        <h2><?php echo $user_count[0]->user_count; ?></h2>
+                                                        <span>Active Users</span>
+                                                        
+                                                        <h2><?php echo $org_count[0]->org_count; ?></h2>
+                                                        <span>Total Restriction</span>
+                                                    </div>
+                                                </div>
+                                                <div class="overview-chart">
+                                                    <canvas id="widgetChart1"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="overview-item overview-item--c2">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="text">
+                                                        <h2><?php echo $election_count[0]->election_count; ?></h2>
+                                                        <span>Total Election</span>
+                                                        <h2><?php echo $active_election_count[0]->active_election_count; ?></h2>
+                                                        <span>Active</span>
+                                                        <h2><?php echo $candidate_count[0]->candidate_count; ?></h2>
+                                                        <span>Total Candidate</span>
+                                                    </div>
+                                                </div>
+                                                <div class="overview-chart">
+                                                    <canvas id="widgetChart2"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="overview-item overview-item--c3">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="text">
+                                                        <h2><?php echo $contest_count[0]->contest_count; ?></h2>
+                                                        <span>Total Contest</span>
+                                                        <h2><?php echo $active_contest_count[0]->active_contest_count; ?></h2>
+                                                        <span>Active</span>
+                                                        <h2><?php echo $contestant_count[0]->contestant_count; ?></h2>
+                                                        <span>Total Contestant</span>
+                                                    </div>
+                                                </div>
+                                                <div class="overview-chart">
+                                                    <canvas id="widgetChart3"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="overview-item overview-item--c4">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="text">
+                                                        <h2><?php echo $poll_count[0]->poll_count; ?></h2>
+                                                        <span>Total Poll</span>
+                                                        <h2><?php echo $active_poll_count[0]->active_poll_count; ?></h2>
+                                                        <span>Active</span>
+                                                        <h2><?php echo $option_count[0]->option_count; ?></h2>
+                                                        <span>Total Option</span>
+                                                    </div>
+                                                </div>
+                                                <div class="overview-chart">
+                                                    <canvas id="widgetChart4"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <!-- END STATISTIC-->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
