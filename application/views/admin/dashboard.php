@@ -47,8 +47,26 @@
     <link href="<?php echo base_url()?>resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url()?>resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+
     <!-- Main CSS-->
     <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
+
+    <!-- Jquery-->
+    <script src="<?php echo base_url()?>resources/js/jquery-3.5.1.min.js"></script>
+
+    <!-- Data Tables JS-->
+    <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
+
+    <!-- Data Time JS-->
+    <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
+
+    <!-- Moment w locales JS-->
+    <script src="<?php echo base_url()?>resources/js/moment.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="<?php echo base_url()?>resources/js/sweetalert2@10.js"></script>
 
 </head>
 <body class="animsition">
@@ -73,8 +91,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         
-                    <div class="au-card m-b-30">
-                        <div class="au-card-inner">
 
                             <h2>Dashboard</h2>
 
@@ -166,8 +182,62 @@
                             </div>
                         </section>
                         <!-- END STATISTIC-->
+                        
+                        <div class="page-content">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <!-- RECENT REPORT-->
+                                        <div class="recent-report3 m-b-40">
+                                            <div class="title-wrap">
+                                                <h3 class="title-3">Votes Count Reports</h3>
+                                                <div class="chart-info-wrap">
+                                                    <div class="chart-note">
+                                                        <span class="dot dot--blue"></span>
+                                                        <span>Election</span>
+                                                    </div>
+                                                    <div class="chart-note">
+                                                        <span class="dot dot--green"></span>
+                                                        <span>Contest</span>
+                                                    </div>
+                                                    <div class="chart-note">
+                                                        <span class="dot dot--red"></span>
+                                                        <span>Poll</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart-wrap">
+                                                <canvas id="recent-rep3-chart"></canvas>
+                                            </div>
+                                        </div>
+                                        <!-- END RECENT REPORT-->
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <!-- CHART PERCENT-->
+                                        <div class="chart-percent-3 m-b-40">
+                                            <h3 class="title-3 m-b-25">Chart %</h3>
+                                            <div class="chart-note m-b-5">
+                                                <span class="dot dot--blue"></span>
+                                                <span>Election</span>
+                                            </div>
+                                            <div class="chart-note m-b-5">
+                                                <span class="dot dot--green"></span>
+                                                <span>Contest</span>
+                                            </div>
+                                            <div class="chart-note">
+                                                <span class="dot dot--red"></span>
+                                                <span>Poll</span>
+                                            </div>
+                                            <div class="chart-wrap m-t-60">
+                                                <canvas id="percent-chart2"></canvas>
+                                            </div>
+                                        </div>
+                                        <!-- END CHART PERCENT-->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                        <!-- End of div container -->
+
                     </div>
                 </div>
             </div>

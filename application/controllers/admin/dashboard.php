@@ -39,7 +39,19 @@ class Dashboard extends CI_Controller {
 
 		$this->load->view('admin/dashboard', $data);
     }
-    
+	
+	public function get_chart_percent(){
+		$this->load->model('reports_model');
+
+		$data['election_count'] = $this->reports_model->get_election_count();
+		$data['contest_count'] = $this->reports_model->get_contest_count();
+		$data['poll_count'] = $this->reports_model->get_poll_count();
+
+		$data['sum'] = ($data['election_count'][0]->election_count + $data['contest_count'][0]->contest_count + $data['poll_count'][0]->poll_count);  
+
+
+		echo json_encode($data);
+	}
     
 
 }

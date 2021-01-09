@@ -33,7 +33,7 @@
                         </li>
                         <li <?php if($this->router->fetch_class() == 'reports') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/reports">
-                                <i class="fas fa-flag"></i>Reports</a>
+                                <i class="fas fa-flag"></i>Vote Logs</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'livepreview') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/livepreview">

@@ -489,39 +489,50 @@
   try {
 
     // Recent Report 3
-    const bd_brandProduct3 = 'rgba(0,181,233,0.9)';
-    const bd_brandService3 = 'rgba(0,173,95,0.9)';
+    const bd_election = 'rgba(0,181,233,0.9)';
+    const bd_contest = 'rgba(0,173,95,0.9)';
+    const bd_poll = 'rgba(250,66,81,1.9)';
     const brandProduct3 = 'transparent';
     const brandService3 = 'transparent';
 
-    var data5 = [52, 60, 55, 50, 65, 80, 57, 115];
-    var data6 = [102, 70, 80, 100, 56, 53, 80, 90];
+    var election_votes_data = [52, 60, 55, 50, 65, 80, 57, 115, 50, 120, 230, 250];
+    var contest_votes_data = [102, 70, 80, 100, 56, 53, 80, 90, 230, 120, 150, 300];
+    var poll_votes_data = [115, 55, 65, 100, 65, 230, 150, 90, 120, 104, 203, 180, 284];
 
     var ctx = document.getElementById("recent-rep3-chart");
     if (ctx) {
-      ctx.height = 230;
+      ctx.height = 375;
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', ''],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           datasets: [
             {
-              label: 'My First dataset',
+              label: 'Election Votes',
               backgroundColor: brandService3,
-              borderColor: bd_brandService3,
+              borderColor: bd_election,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 0,
-              data: data5,
-              pointBackgroundColor: bd_brandService3
+              data: election_votes_data,
+              pointBackgroundColor: bd_election
             },
             {
-              label: 'My Second dataset',
-              backgroundColor: brandProduct3,
-              borderColor: bd_brandProduct3,
+              label: 'Contest Votes',
+              backgroundColor: brandService3,
+              borderColor: bd_contest,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 0,
-              data: data6,
-              pointBackgroundColor: bd_brandProduct3
+              data: contest_votes_data,
+              pointBackgroundColor: bd_contest
+            },
+            {
+              label: 'Poll Votes',
+              backgroundColor: brandProduct3,
+              borderColor: bd_poll,
+              pointHoverBackgroundColor: '#fff',
+              borderWidth: 0,
+              data: poll_votes_data,
+              pointBackgroundColor: bd_poll
 
             }
           ]
@@ -547,8 +558,8 @@
               ticks: {
                 beginAtZero: true,
                 maxTicksLimit: 5,
-                stepSize: 50,
-                max: 150,
+                stepSize: 200,
+                max: 1000,
                 fontFamily: "Poppins",
                 fontSize: 12
               },
@@ -620,37 +631,71 @@
 
   try {
 
+
     // Percent Chart 2
     var ctx = document.getElementById("percent-chart2");
+    
     if (ctx) {
-      ctx.height = 209;
+
+      // ajax call
+      var election_percentage = 0
+      var contest_percentage = 0
+      var poll_percentage = 0
+  
+      $.ajax({
+        url: 'dashboard/get_chart_percent',
+        type: "GET",
+        dataType: "JSON",
+        async: false,
+  
+            success:function(data){
+                // var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+                // var parsedResponse = JSON.parse(data);
+                // var row = parsedResponse[0];
+                // election_percentage = (parsedResponse.election_count / parsedResponse.sum) * 100;
+                // contest_percentage = (parsedResponse.contest_count / parsedResponse.sum) * 100;
+                // poll_percentage = (parsedResponse.poll_count / parsedResponse.sum) * 100;
+                // alert(election_percentage);
+                var data = jQuery.parseJSON(JSON.stringify(data));
+                election_percentage = (data.election_count[0].election_count / data.sum) * 100;
+                contest_percentage = (data.contest_count[0].contest_count / data.sum) * 100;
+                poll_percentage = (data.poll_count[0].poll_count / data.sum) * 100;
+                
+                }
+      })
+      // end of ajax call
+      ctx.height = 230;
       var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
           datasets: [
             {
               label: "My First dataset",
-              data: [60, 40],
+              data: [Math.round(election_percentage), Math.round(contest_percentage), Math.round(poll_percentage)],
               backgroundColor: [
                 '#00b5e9',
+                '#00ad5f',
                 '#fa4251'
               ],
               hoverBackgroundColor: [
                 '#00b5e9',
+                '#00ad5f',
                 '#fa4251'
               ],
               borderWidth: [
-                0, 0
+                0, 0, 0
               ],
               hoverBorderColor: [
+                'transparent',
                 'transparent',
                 'transparent'
               ]
             }
           ],
           labels: [
-            'Products',
-            'Services'
+            'Election',
+            'Contest',
+            'Poll'
           ]
         },
         options: {

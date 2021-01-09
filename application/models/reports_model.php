@@ -66,7 +66,6 @@ class Reports_model extends CI_Model {
     function get_election_count(){
         $this->db->select("COUNT(*) as election_count");
         $this->db->from("t_election");
-        $this->db->where("electionStatus", 1);
         $query = $this->db->get();
         $data = $query->result();
         return $data;
@@ -75,7 +74,6 @@ class Reports_model extends CI_Model {
     function get_contest_count(){
         $this->db->select("COUNT(*) as contest_count");
         $this->db->from("t_contest");
-        $this->db->where("contestStatus", 1);
         $query = $this->db->get();
         $data = $query->result();
         return $data;
@@ -84,7 +82,6 @@ class Reports_model extends CI_Model {
     function get_poll_count(){
         $this->db->select("COUNT(*) as poll_count");
         $this->db->from("t_poll");
-        $this->db->where("pollStatus", 1);
         $query = $this->db->get();
         $data = $query->result();
         return $data;
