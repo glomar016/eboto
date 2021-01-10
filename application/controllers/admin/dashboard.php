@@ -52,6 +52,23 @@ class Dashboard extends CI_Controller {
 
 		echo json_encode($data);
 	}
-    
+	
+	public function get_month_count(){
+		$this->load->model('reports_model');
+
+		$data['election_month'] = $this->reports_model->election_month_count();
+		$data['contest_month'] = $this->reports_model->contest_month_count();
+		$data['poll_month'] = $this->reports_model->poll_month_count();
+
+		echo json_encode($data);
+	}
+	
+	public function get_user_month_count(){
+		$this->load->model('reports_model');
+
+		$data['user_month'] = $this->reports_model->user_month_count();
+
+		echo json_encode($data);
+	}
 
 }

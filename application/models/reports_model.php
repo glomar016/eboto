@@ -160,7 +160,45 @@ class Reports_model extends CI_Model {
         return $data;
     }
 
+    function election_month_count(){
+        $this->db->select("MONTH(voteDateCreated) as month, COUNT(*) as count");
+        $this->db->from("t_vote_candidate");
+        $this->db->where('YEAR(voteDateCreated)', date("Y"));
+        $this->db->group_by('MONTH(voteDateCreated)');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 
+    function contest_month_count(){
+        $this->db->select("MONTH(voteDateCreated) as month, COUNT(*) as count");
+        $this->db->from("t_vote_contestant");
+        $this->db->where('YEAR(voteDateCreated)', date("Y"));
+        $this->db->group_by('month(voteDateCreated)');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 
+    function poll_month_count(){
+        $this->db->select("MONTH(voteDateCreated) as month, COUNT(*) as count");
+        $this->db->from("t_vote_option");
+        $this->db->where('YEAR(voteDateCreated)', date("Y"));
+        $this->db->group_by('month(voteDateCreated)');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function user_month_count(){
+        $this->db->select("MONTH(userDateCreated) as month, COUNT(*) as count");
+        $this->db->from("t_user");
+        $this->db->where('YEAR(userDateCreated)', date("Y"));
+        $this->db->where('userStatus', 1);
+        $this->db->group_by('MONTH(userDateCreated)');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
 
 }

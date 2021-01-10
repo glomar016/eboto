@@ -91,14 +91,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         
-
-                            <h2>Dashboard</h2>
-
                         <!-- STATISTIC-->
-                        <section class="statistic statistic2">
-                            <div class="container">
-                                <div class="row">
-
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">Dashboard</h2>
+                                </div>
+                            </div>
+                                <div class="row m-t-25">
                                     <div class="col-sm-6 col-lg-3">
                                         <div class="overview-item overview-item--c1">
                                             <div class="overview__inner">
@@ -177,7 +176,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    
                                 </div>
                             </div>
                         </section>
@@ -217,15 +216,15 @@
                                             <h3 class="title-3 m-b-25">Chart %</h3>
                                             <div class="chart-note m-b-5">
                                                 <span class="dot dot--blue"></span>
-                                                <span>Election</span>
+                                                <span>Election Made</span>
                                             </div>
                                             <div class="chart-note m-b-5">
                                                 <span class="dot dot--green"></span>
-                                                <span>Contest</span>
+                                                <span>Contest Made</span>
                                             </div>
                                             <div class="chart-note">
                                                 <span class="dot dot--red"></span>
-                                                <span>Poll</span>
+                                                <span>Poll Made</span>
                                             </div>
                                             <div class="chart-wrap m-t-60">
                                                 <canvas id="percent-chart2"></canvas>
@@ -235,6 +234,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                         <!-- End of div container -->
 

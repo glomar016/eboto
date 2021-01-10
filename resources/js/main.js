@@ -6,16 +6,41 @@
   try {
     //WidgetChart 1
     var ctx = document.getElementById("widgetChart1");
+
+    // ajax call
+    var user_month = new Array()
+
+    // Ajax call
+    $.ajax({
+      url: 'dashboard/get_user_month_count',
+      type: "GET",
+      dataType: "JSON",
+      async: false,
+
+          success:function(data){
+              var data = jQuery.parseJSON(JSON.stringify(data));
+              var i = 0;
+              for(i=0; i<data.user_month.length; i++){
+                user_month[data.user_month[i].month -1] = (data.user_month[i].count)
+              }
+              }
+    })
+    // end of ajax call
+    
+    var user_month_data = [user_month[0], user_month[1], user_month[2], user_month[3]
+                              , user_month[4], user_month[5], user_month[6], user_month[7]
+                              , user_month[8], user_month[9], user_month[10], user_month[11]]
+
     if (ctx) {
       ctx.height = 130;
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           type: 'line',
           datasets: [{
-            data: [78, 81, 80, 45, 34, 12, 40],
-            label: 'Dataset',
+            data: [78, 81, 80, 45, 34, 12, 40, 20, 30, 42, 34, 24],
+            label: 'Active User',
             backgroundColor: 'rgba(255,255,255,.1)',
             borderColor: 'rgba(255,255,255,.55)',
           },]
@@ -77,10 +102,10 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           type: 'line',
           datasets: [{
-            data: [1, 18, 9, 17, 34, 22],
+            data: [17, 18, 9, 17, 12, 22, 23, 34, 12, 15, 23, 4],
             label: 'Dataset',
             backgroundColor: 'transparent',
             borderColor: 'rgba(255,255,255,.55)',
@@ -148,10 +173,10 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           type: 'line',
           datasets: [{
-            data: [65, 59, 84, 84, 51, 55],
+            data: [65, 59, 84, 84, 51, 55, 23, 56, 67, 42, 46, 53],
             label: 'Dataset',
             backgroundColor: 'transparent',
             borderColor: 'rgba(255,255,255,.55)',
@@ -495,9 +520,43 @@
     const brandProduct3 = 'transparent';
     const brandService3 = 'transparent';
 
-    var election_votes_data = [52, 60, 55, 50, 65, 80, 57, 115, 50, 120, 230, 250];
-    var contest_votes_data = [102, 70, 80, 100, 56, 53, 80, 90, 230, 120, 150, 300];
-    var poll_votes_data = [115, 55, 65, 100, 65, 230, 150, 90, 120, 104, 203, 180, 284];
+    // ajax call
+    var election_month = new Array()
+    var contest_month = new Array()
+    var poll_month = new Array()
+
+    // Ajax call
+    $.ajax({
+      url: 'dashboard/get_month_count',
+      type: "GET",
+      dataType: "JSON",
+      async: false,
+
+          success:function(data){
+              var data = jQuery.parseJSON(JSON.stringify(data));
+              var i = 0;
+              for(i=0; i<data.election_month.length; i++){
+                election_month[data.election_month[i].month -1] = (data.election_month[i].count)
+              }
+              for(i=0; i<data.contest_month.length; i++){
+                contest_month[data.contest_month[i].month -1] = (data.contest_month[i].count)
+              }
+              for(i=0; i<data.poll_month.length; i++){
+                poll_month[data.poll_month[i].month -1] = (data.poll_month[i].count)
+              }
+              }
+    })
+    // end of ajax call
+    
+    var election_votes_data = [election_month[0], election_month[1], election_month[2], election_month[3]
+                              , election_month[4], election_month[5], election_month[6], election_month[7]
+                              , election_month[8], election_month[9], election_month[10], election_month[11]]
+    var contest_votes_data = [contest_month[0], contest_month[1], contest_month[2], contest_month[3]
+                              , contest_month[4], contest_month[5], contest_month[6], contest_month[7]
+                              , contest_month[8], contest_month[9], contest_month[10], contest_month[11]]
+    var poll_votes_data = [poll_month[0], poll_month[1], poll_month[2], poll_month[3]
+                              , poll_month[4], poll_month[5], poll_month[6], poll_month[7]
+                              , poll_month[8], poll_month[9], poll_month[10], poll_month[11]]
 
     var ctx = document.getElementById("recent-rep3-chart");
     if (ctx) {
@@ -558,8 +617,8 @@
               ticks: {
                 beginAtZero: true,
                 maxTicksLimit: 5,
-                stepSize: 200,
-                max: 1000,
+                stepSize: 100,
+                max: 500,
                 fontFamily: "Poppins",
                 fontSize: 12
               },
@@ -642,6 +701,7 @@
       var contest_percentage = 0
       var poll_percentage = 0
   
+      // Ajax call
       $.ajax({
         url: 'dashboard/get_chart_percent',
         type: "GET",
@@ -649,14 +709,8 @@
         async: false,
   
             success:function(data){
-                // var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
-                // var parsedResponse = JSON.parse(data);
-                // var row = parsedResponse[0];
-                // election_percentage = (parsedResponse.election_count / parsedResponse.sum) * 100;
-                // contest_percentage = (parsedResponse.contest_count / parsedResponse.sum) * 100;
-                // poll_percentage = (parsedResponse.poll_count / parsedResponse.sum) * 100;
-                // alert(election_percentage);
                 var data = jQuery.parseJSON(JSON.stringify(data));
+                console.log(data)
                 election_percentage = (data.election_count[0].election_count / data.sum) * 100;
                 contest_percentage = (data.contest_count[0].contest_count / data.sum) * 100;
                 poll_percentage = (data.poll_count[0].poll_count / data.sum) * 100;
