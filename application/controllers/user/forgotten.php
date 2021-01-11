@@ -32,15 +32,21 @@ class Forgotten extends CI_Controller {
 
         $config = Array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 587,
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_crypto' => 'ssl',
             'smtp_user' => 'pup.eboto@gmail.com',
             'smtp_pass' => 'passwordforPUPeboto',
             'mailtype'  => 'html', 
-            'charset'   => 'iso-8859-1'
+            'charset'   => 'iso-8859-1',
+            'wordwrap'  => TRUE,
+            'validate'  => FALSE
         );
-        $this->load->library('email', $config);
+
+        $this->email->initialize($config);
+
         $this->email->set_newline("\r\n");
+        
 
         $this->email->from('pup_eboto@gmail.com', 'PUP Eboto');
         $this->email->to('jrglomar016@gmail.com');
