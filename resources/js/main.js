@@ -96,6 +96,33 @@
 
 
     //WidgetChart 2
+
+    // ajax call
+    var election_month = new Array()
+
+    // Ajax call
+    $.ajax({
+      url: 'dashboard/get_month_count',
+      type: "GET",
+      dataType: "JSON",
+      async: false,
+
+          success:function(data){
+              var data = jQuery.parseJSON(JSON.stringify(data));
+              var i = 0;
+              for(i=0; i<data.election_month.length; i++){
+                election_month[data.election_month[i].month -1] = (data.election_month[i].count)
+              }
+            
+              }
+    })
+    // end of ajax call
+    
+    var election_votes_data = [election_month[0], election_month[1], election_month[2], election_month[3]
+                              , election_month[4], election_month[5], election_month[6], election_month[7]
+                              , election_month[8], election_month[9], election_month[10], election_month[11]]
+    
+
     var ctx = document.getElementById("widgetChart2");
     if (ctx) {
       ctx.height = 130;
@@ -167,6 +194,31 @@
 
 
     //WidgetChart 3
+    // ajax call
+    var contest_month = new Array()
+    
+
+    // Ajax call
+    $.ajax({
+      url: 'dashboard/get_month_count',
+      type: "GET",
+      dataType: "JSON",
+      async: false,
+
+          success:function(data){
+              var data = jQuery.parseJSON(JSON.stringify(data));
+              var i = 0;
+              for(i=0; i<data.contest_month.length; i++){
+                contest_month[data.contest_month[i].month -1] = (data.contest_month[i].count)
+              }
+              }
+    })
+    // end of ajax call
+   
+    var contest_votes_data = [contest_month[0], contest_month[1], contest_month[2], contest_month[3]
+                              , contest_month[4], contest_month[5], contest_month[6], contest_month[7]
+                              , contest_month[8], contest_month[9], contest_month[10], contest_month[11]]
+    
     var ctx = document.getElementById("widgetChart3");
     if (ctx) {
       ctx.height = 130;
@@ -176,7 +228,7 @@
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           type: 'line',
           datasets: [{
-            data: [65, 59, 84, 84, 51, 55, 23, 56, 67, 42, 46, 53],
+            data: [40, 59, 84, 84, 51, 55, 23, 56, 67, 42, 46, 53],
             label: 'Dataset',
             backgroundColor: 'transparent',
             borderColor: 'rgba(255,255,255,.55)',
@@ -237,6 +289,32 @@
 
 
     //WidgetChart 4
+
+    // ajax call
+    var poll_month = new Array()
+
+    // Ajax call
+    $.ajax({
+      url: 'dashboard/get_month_count',
+      type: "GET",
+      dataType: "JSON",
+      async: false,
+
+          success:function(data){
+              var data = jQuery.parseJSON(JSON.stringify(data));
+              var i = 0;
+              for(i=0; i<data.poll_month.length; i++){
+                poll_month[data.poll_month[i].month -1] = (data.poll_month[i].count)
+              }
+              }
+    })
+    // end of ajax call
+    
+    
+    var poll_votes_data = [poll_month[0], poll_month[1], poll_month[2], poll_month[3]
+                              , poll_month[4], poll_month[5], poll_month[6], poll_month[7]
+                              , poll_month[8], poll_month[9], poll_month[10], poll_month[11]]
+
     var ctx = document.getElementById("widgetChart4");
     if (ctx) {
       ctx.height = 115;
@@ -572,7 +650,7 @@
               borderColor: bd_election,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 0,
-              data: election_votes_data,
+              data: [17, 18, 9, 17, 12, 22, 23, 34, 12, 15, 23, 4],
               pointBackgroundColor: bd_election
             },
             {
@@ -581,7 +659,7 @@
               borderColor: bd_contest,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 0,
-              data: contest_votes_data,
+              data: [40, 59, 84, 84, 51, 55, 23, 56, 67, 42, 46, 53],
               pointBackgroundColor: bd_contest
             },
             {
@@ -590,7 +668,7 @@
               borderColor: bd_poll,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 0,
-              data: poll_votes_data,
+              data: [78, 81, 80, 65, 58, 75, 60, 75, 65, 60, 60, 75],
               pointBackgroundColor: bd_poll
 
             }
@@ -710,7 +788,6 @@
   
             success:function(data){
                 var data = jQuery.parseJSON(JSON.stringify(data));
-                console.log(data)
                 election_percentage = (data.election_count[0].election_count / data.sum) * 100;
                 contest_percentage = (data.contest_count[0].contest_count / data.sum) * 100;
                 poll_percentage = (data.poll_count[0].poll_count / data.sum) * 100;
