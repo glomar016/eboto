@@ -120,7 +120,7 @@
 <script>
 $('#forgot_pass_form').on('submit', function(e){
     e.preventDefault();
-    $("#btn_sendmail").val("Please Wait...").attr("disabled", true);
+    $("#btn_sendmail").val("Sending Mail...").attr("disabled", true);
 
     var studentNumber = document.forgot_pass_form.studentNumber.value;
     var email = document.forgot_pass_form.email.value;
@@ -140,7 +140,8 @@ $('#forgot_pass_form').on('submit', function(e){
                                 type: 'post',
                                 data: form.serialize(),
 
-                                    success: function(){Swal.fire({
+                                    success: function(){
+                                        Swal.fire({
                                         title: 'Success!',
                                         text: 'Please check your mail.',
                                         icon: 'success',

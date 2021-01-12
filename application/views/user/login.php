@@ -36,8 +36,26 @@
     <link href="<?php echo base_url()?>resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="<?php echo base_url()?>resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
+    <!-- Data Tables CSS-->
+    <link href="<?php echo base_url()?>resources/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+
     <!-- Main CSS-->
     <link href="<?php echo base_url()?>resources/css/theme.css" rel="stylesheet" media="all">
+
+    <!-- Jquery-->
+    <script src="<?php echo base_url()?>resources/js/jquery-3.5.1.min.js"></script>
+
+    <!-- Data Tables JS-->
+    <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
+
+    <!-- Data Time JS-->
+    <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
+
+    <!-- Moment w locales JS-->
+    <script src="<?php echo base_url()?>resources/js/moment.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="<?php echo base_url()?>resources/js/sweetalert2@10.js"></script>
 
 </head>
 
@@ -54,7 +72,7 @@
                         </div>
                     
                         <div class="login-form">
-                            <form action="<?php echo base_url()?>user/login/submit" method="post">
+                            <form action="" id="login_form" name="login_form" method="post">
                                 <div class="form-group">
                                     <label>Student Number</label>
                                     <input class="au-input au-input--full" type="text" name="userStudentNo" placeholder="Student Number">
@@ -65,14 +83,13 @@
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <!-- <input type="checkbox" name="remember">Remember Me -->
-                                    </label>
-                                    <label>
                                         <a href="<?php echo base_url()?>user/forgotten">Forgotten Password?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                            </div>
+                                <div>
+                                    <input class="btn btn-success btn-lg btn-block" id="btn_login" value="Sign In" name="btn_login" type="submit">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -82,7 +99,7 @@
     </div>
 
     <!-- Jquery JS-->
-    <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script>
+    <!-- <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script> -->
     <!-- Bootstrap JS-->
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -106,6 +123,51 @@
     <script src="<?php echo base_url()?>resources/js/main.js"></script>
 
 </body>
+
+<script>
+$('#login_form').on('submit', function(e){
+    e.preventDefault();
+    $("#btn_login").val("Logging in...").attr("disabled", true);
+
+    var studentNumber = document.login_form.userStudentNo.value;
+    var password = document.login_form.userPassword.value;
+
+    var form = $('#login_form');                                
+    // ajax post
+    $.ajax({
+        url: '<?php echo base_url()?>user/login/submit',
+        type: 'post',
+        data: form.serialize(),
+
+            success: function(data){
+                    var data = jQuery.parseJSON(data)
+                    if(data.result == 'Error'){
+                        Swal.fire({
+                        title: 'Failed!',
+                        text: 'Invalid Student Number and Password.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                        }).then((result) => {
+                                $("#btn_login").val("Submit").attr("disabled", false);
+                                $('#login_form')[0].reset();
+                        })
+                        // End of Swal
+                    }
+                    else if(data.result == 'Success' && data.userType == 'User'){
+                        window.location.href = "<?php echo base_url()?>user/vote";
+                    }
+                    else if(data.result == 'Success' && data.userType == 'Admin'){
+                        window.location.href = "<?php echo base_url()?>admin/dashboard";
+                    }
+                
+                }
+            // End of success function
+    })
+    // End of ajax post
+})
+
+
+</script>
 
 </html>
 <!-- end document-->

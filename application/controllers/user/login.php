@@ -67,29 +67,24 @@ class Login extends CI_Controller {
 						$this->session->set_userdata('logged_in', $session_data);
 
 						if($result[0]->userType == 1){
-							redirect(base_url().'user/vote', 'refresh');
+							$data['result'] = 'Success';
+							$data['userType'] = 'User';
+							echo json_encode($data);
 						}
 						else if($result[0]->userType == 2){
-							redirect(base_url().'admin/dashboard', 'refresh');
+							$data['result'] = 'Success';
+							$data['userType'] = 'Admin';
+							echo json_encode($data);
 						}
 						
 					}
 				} 
 				else {
-					$data['error'] = array(
-						'error_message' => 'Invalid Username or Password'
-					);
-					$this->load->view('user/login', $data);
-					}
+					$data['result'] = 'Error';
+					echo json_encode($data);
 				}
 			}
-		
-		
-
-
-		// Load to vote page
-		
-		// 
+	}
     
 
 }
