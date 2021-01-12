@@ -20,7 +20,7 @@ class Auth_model extends CI_Model {
         }
     }
 
-    public function read_user_information($userStudentNo) {
+    function read_user_information($userStudentNo) {
 
         $condition = "userStudentNo =" . "'" . $userStudentNo . "'";
         $this->db->select('*');
@@ -35,6 +35,34 @@ class Auth_model extends CI_Model {
         else {
             return false;
         }
+    }
+
+    function forgot_password($userStudentNo, $email){
+        $this->db->select('*');
+        $this->db->from('t_user');
+        $this->db->where('userStudentNo', $userStudentNo);
+        $this->db->where('userEmail', $email);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 1) {
+            return 1;
+        } 
+        else {
+            return 0;
+        }
+
+    }
+
+    function get_user_info($userStudentNo, $email){
+        $this->db->select('*');
+        $this->db->from('t_user');
+        $this->db->where('userStudentNo', $userStudentNo);
+        $this->db->where('userEmail', $email);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
     }
 
 }

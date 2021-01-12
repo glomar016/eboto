@@ -18,45 +18,50 @@ class Forgotten extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+    function __construct() {
+        parent::__construct();
+        $this->load->library('email');
+    }
+
 	public function index()
 	{
 		$this->load->view('user/forgotten');
     }
 
-    public function send_email()
-    {
-        $studentNumber = '2018-00232-CM-0';
-        $studentPassword = '123456';
+    public function check_exist(){
+        $this->load->model('auth_model');
 
-        $this->load->library('email');
+        $studentNumber = $this->input->post('studentNumber');
+        $email = $this->input->post('email');
 
-        $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.gmail.com',
-            'smtp_port' => 465,
-            'smtp_crypto' => 'ssl',
-            'smtp_user' => 'pup.eboto@gmail.com',
-            'smtp_pass' => 'passwordforPUPeboto',
-            'mailtype'  => 'html', 
-            'charset'   => 'iso-8859-1',
-            'wordwrap'  => TRUE,
-            'validate'  => FALSE
-        );
+        $data = $this->auth_model->forgot_password($studentNumber, $email);
 
-        $this->email->initialize($config);
-
-        $this->email->set_newline("\r\n");
+        echo $data;
         
+    }
+
+    public function send_mail()
+    {
+        $this->load->model('auth_model');
+
+        $studentNumber = $this->input->post('studentNumber');
+        $email = $this->input->post('email');
+
+        // Get user info
+        $data = $this->auth_model->get_user_info($studentNumber, $email);
+        $name = $data[0]->userFirstName.' '.$data[0]->userMiddleName.' '.$data[0]->userLastName;
+        $password = $data[0]->userPassword; 
+
+        $message = 'Name: '.$name. '<br>Email: '.$email.' <br>Student Number: '.$studentNumber. '<br>Password:'. $password;
 
         $this->email->from('pup_eboto@gmail.com', 'PUP Eboto');
-        $this->email->to('jrglomar016@gmail.com');
+        $this->email->to($email);
 
         $this->email->subject('Forgotten Password');
-        $this->email->message('Student Number: '.$studentNumber);
+        $this->email->message($message);
 
-        $result = $this->email->send();
+        $this->email->send();
 
-        echo $this->email->print_debugger();
     }
     
     

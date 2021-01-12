@@ -250,8 +250,6 @@
 
     </div>
 
-    <!-- Jquery JS-->
-    <script src="<?php echo base_url()?>resources/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?php echo base_url()?>resources/vendor/bootstrap-4.1/bootstrap.min.js"></script>
