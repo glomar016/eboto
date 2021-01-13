@@ -105,16 +105,16 @@
             <!-- Ref Info -->
                 <!-- Election Info -->
                 <?php if($tableName == 't_candidate'){ ?>
-                    <h2 style="text-align:center; color:white;">Election</h2>
+                    <h2 style="text-align:center; color:black;">Election</h2>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:50px;">
                             <div class="w-50 p-3">
-                                <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
-                                <br><p><?php echo $refInfo[0]->electionDescription?><p></h2>
+                                <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
+                                <br><p style=color:black;><?php echo $refInfo[0]->electionDescription?><p></h2>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
-                                    <p style=" color:gold;" id="liveclock">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
                             </div>
@@ -136,16 +136,16 @@
 
                 <!-- Contest Info -->
                 <?php if($tableName == 't_contestant'){ ?>
-                    <h2 style="text-align:center; color:white;">Contest</h2>
+                    <h2 style="text-align:center; color:black;">Contest</h2>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
                             <div class="w-50 p-3">
-                                <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
-                                <br><p><?php echo $refInfo[0]->contestDescription?><p></h2>
+                                <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
+                                <br><p style=color:black;><?php echo $refInfo[0]->contestDescription?><p></h2>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
-                                    <p style=" color:gold;" id="liveclock">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
                             </div>
@@ -167,16 +167,16 @@
 
                 <!-- Poll Info -->
                 <?php if($tableName == 't_option'){ ?>
-                    <h2 style="text-align:center; color:white;">Poll</h2>
+                    <h2 style="text-align:center; color:black;">Poll</h2>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
                                 <div class="w-50 p-3">
-                                    <h2 style="color:cyan;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>
-                                    <br><p><?php echo $refInfo[0]->pollDescription?><p></h2>
+                                    <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>
+                                    <br><p style=color:black;><?php echo $refInfo[0]->pollDescription?><p></h2>
                                 </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
-                                    <p style=" color:gold;" id="liveclock">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
                             </div>
@@ -204,15 +204,15 @@
 
     <!-- Candidate Live Tally -->
     <?php if($tableName == 't_candidate'){ ?>
-        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:cyan">
-            <div class="card-header" style="background-color:cyan">
-                <h4>Voting Live Tally</h4>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:#00295e">
+            <div class="card-header" style="background-color:#00295e">
+                <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
             <?php foreach($data as $row) { ?>
                 <div class="card-body">
-                    <h6><?php echo $row->candidateName; ?> - <?php echo $row->candidatePosition ?></h6>
+                    <h6 style="color:white"><?php echo $row->candidateName; ?> - <?php echo $row->candidatePosition ?></h6>
                     <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" 
+                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
                             style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
                                 aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
                     </div>
@@ -224,15 +224,15 @@
 
     <!-- Contestant Live Tally -->
     <?php if($tableName == 't_contestant'){ ?>
-        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
-            <div class="card-header">
-                <h4>Voting Live Tally</h4>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:#00295e">
+            <div class="card-header" style="background-color:#00295e">
+                <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
             <?php foreach($data as $row) { ?>
                 <div class="card-body">
-                    <h6><?php echo $row->contestantName; ?></h6>
+                    <h6 style="color:white"><?php echo $row->contestantName; ?></h6>
                     <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
                                 aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
                     </div>
                 </div>
@@ -243,15 +243,15 @@
 
     <!-- Option Live Tally -->
     <?php if($tableName == 't_option'){ ?>
-        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch">
-            <div class="card-header">
-                <h4>Voting Live Tally</h4>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:#00295e">
+            <div class="card-header" style="background-color:#00295e">
+                <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
             <?php foreach($data as $row) { ?>
                 <div class="card-body">
-                    <h6><?php echo $row->optionName; ?></h6>
+                    <h6 style="color:white"><?php echo $row->optionName; ?></h6>
                     <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
                                 aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
                     </div>
                 </div>

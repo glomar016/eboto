@@ -98,16 +98,16 @@
             <!-- Ref Info -->
                 <!-- Election Info -->
                 <?php if($table['tableName'] == 't_candidate'){ ?>
-                    <h2 style="text-align:center; color:white;"><?php echo $refInfo[0]->electionName?></h2>
+                    <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->electionName?></h2>
                     <br>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
                             <div class="w-25 p-3">
-                                <h5 style=color:white;><?php echo $refInfo[0]->electionDescription?><p></h5>
+                                <h5 style=color:black;><?php echo $refInfo[0]->electionDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
-                                    <p style=" color:gold;" id="liveclock">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
                             </div>
@@ -129,16 +129,16 @@
 
                 <!-- Contest Info -->
                 <?php if($table['tableName'] == 't_contestant'){ ?>
-                    <h2 style="text-align:center; color:white;"><?php echo $refInfo[0]->contestName?></h2>
+                    <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->contestName?></h2>
                     <br>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
                             <div class="w-25 p-3">
-                                <h5 style=color:white;><?php echo $refInfo[0]->contestDescription?><p></h5>
+                                <h5 style=color:black;><?php echo $refInfo[0]->contestDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
-                                    <p style=" color:gold;" id="liveclock">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
                             </div>
@@ -160,16 +160,16 @@
 
                 <!-- poll Info -->
                 <?php if($table['tableName'] == 't_option'){ ?>
-                    <h2 style="text-align:center; color:white;"><?php echo $refInfo[0]->pollName?></h2>
+                    <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->pollName?></h2>
                     <br>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
                             <div class="w-25 p-3">
-                                <h5 style=color:white;><?php echo $refInfo[0]->pollDescription?><p></h5>
+                                <h5 style=color:black;><?php echo $refInfo[0]->pollDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:white; class="fa fa-clock-o"> Voting Ends in: 
-                                    <p style=" color:gold;" id="liveclock">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
                             </div>

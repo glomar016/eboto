@@ -116,9 +116,9 @@
 
                                 <!-- Live Clock -->
                                 <div >
-                                        <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
+                                        <h3 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
                                             <p 
-                                            style=" color:yellow;
+                                            style=" color:red;
                                                     font-family: 'Times New Roman', Times, serif;text-align:center;" 
                                             id="<?php echo "liveclock_election".$row->id ?>">
                                             </p>
@@ -157,11 +157,11 @@
 
                                                     success:function(data){
                                                         if(data == 1){
-                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-outline-success', 'btn_view_election');
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_election');
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "View Progress";
                                                         }
                                                         else{
-                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-outline-primary', 'btn_vote_election');
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_election');
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "Vote";
                                                         }
                                                     }
@@ -193,9 +193,9 @@
 
                                 <!-- Live Clock -->
                                 <div >
-                                        <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
+                                        <h3 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
                                             <p 
-                                            style=" color:yellow;
+                                            style=" color:red;
                                                     font-family: 'Times New Roman', Times, serif;text-align:center;" 
                                             id="<?php echo "liveclock_contest".$row->id ?>">
                                             </p>
@@ -234,11 +234,11 @@
 
                                                     success:function(data){
                                                         if(data == 1){
-                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-outline-success', 'btn_view_contest');
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_contest');
                                                             document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "View Progress";
                                                         }
                                                         else{
-                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-outline-primary', 'btn_vote_contest');
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_contest');
                                                             document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "Vote";
                                                         }
                                                     }
@@ -270,9 +270,9 @@
 
                                 <!-- Live Clock -->
                                 <div >
-                                        <h3 style=color:lightcyan; class="fa fa-clock-o"> Voting Ends in: 
+                                        <h3 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
                                             <p 
-                                            style=" color:yellow;
+                                            style=" color:red;
                                                     font-family: 'Times New Roman', Times, serif;text-align:center;" 
                                             id="<?php echo "liveclock_poll".$row->id ?>">
                                             </p>
@@ -311,11 +311,11 @@
 
                                                     success:function(data){
                                                         if(data == 1){
-                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-outline-success', 'btn_view_poll');
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_poll');
                                                             document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "View Progress";
                                                         }
                                                         else{
-                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-outline-primary', 'btn_vote_poll');
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_poll');
                                                             document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "Vote";
                                                         }
                                                     }

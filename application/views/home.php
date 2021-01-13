@@ -32,7 +32,7 @@
 
     <!-- HEADER DESKTOP-->
     <?php if (isset($this->session->userdata['logged_in'])) {
-        $this->load->view('includes/userheader.php');
+        $this->load->view('includes/userhomeheader.php');
     }
     else{
         $this->load->view('includes/homeheader.php');
@@ -50,7 +50,7 @@
                             <div class="hero__text">
                                 <span>Welcome to</span>
                                 <h2>PUP E-BOTO</h2>
-                                <a href="#" class="primary-btn">See more about us</a>
+                                <a style="color:black;" href="#" class="primary-btn">See more about us</a>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <div class="hero__text">
                                 <span>Welcome to</span>
                                 <h2>PUP E-BOTO</h2>
-                                <a href="#" class="primary-btn">See more about us</a>
+                                <a style="color:black;" href="#" class="primary-btn">See more about us</a>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             <div class="hero__text">
                                 <span>Welcome to</span>
                                 <h2>PUP E-BOTO</h2>
-                                <a href="#" class="primary-btn">See more about us</a>
+                                <a style="color:black;" href="#" class="primary-btn">See more about us</a>
                             </div>
                         </div>
                     </div>
@@ -145,8 +145,13 @@
     </section>
     <!-- Services Section End -->
 
-     <!-- Team Section Begin -->
-     <section class="team spad set-bg" data-setbg="<?php echo base_url()?>resources/img/team-bg.jpg">
+     
+
+
+    
+
+    <!-- Team Section Begin -->
+    <!-- <section class="team spad set-bg" data-setbg="<?php echo base_url()?>resources/img/team-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -163,7 +168,7 @@
                             <h4>John Raven Glomar</h4>
                             <p>Developer</p>
                             <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.facebook.com/raven016/"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-dribbble"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
@@ -220,56 +225,8 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Team Section End -->
-
-
-    <!-- Counter Section Begin -->
-    <section class="counter">
-        <div class="container">
-            <div class="counter__content">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-1.png" alt="">
-                                <h2 class="counter_num">230</h2>
-                                <p>Total Active List to Vote</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item second__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-2.png" alt="">
-                                <h2 class="counter_num">1068</h2>
-                                <p>Total students</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item third__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-3.png" alt="">
-                                <h2 class="counter_num">5024</h2>
-                                <p>Total Votes</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="counter__item four__item">
-                            <div class="counter__item__text">
-                                <img src="<?php echo base_url()?>resources/img/icons/ci-4.png" alt="">
-                                <h2 class="counter_num">530</h2>
-                                <p>Total Completed Transactions</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Counter Section End -->
 
    <!-- FOOTER DESKTOP-->
    <?php $this->load->view('includes/userfooter.php'); ?>
