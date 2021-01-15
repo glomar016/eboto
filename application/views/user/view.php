@@ -101,7 +101,7 @@
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->electionName?></h2>
                     <br>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
-                            <div class="w-25 p-3">
+                            <div class="w-50 p-3">
                                 <h5 style=color:black;><?php echo $refInfo[0]->electionDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
@@ -132,7 +132,7 @@
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->contestName?></h2>
                     <br>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
-                            <div class="w-25 p-3">
+                            <div class="w-50 p-3">
                                 <h5 style=color:black;><?php echo $refInfo[0]->contestDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->
@@ -163,7 +163,7 @@
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->pollName?></h2>
                     <br>
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
-                            <div class="w-25 p-3">
+                            <div class="w-50 p-3">
                                 <h5 style=color:black;><?php echo $refInfo[0]->pollDescription?><p></h5>
                             </div>
                             <!-- Live Clock -->

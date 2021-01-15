@@ -87,7 +87,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Portfolio Section Begin -->
-    <section class="portfolio spad"  style="padding-top: 50px;>
+    <section class="portfolio spad"  style="padding-top: 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

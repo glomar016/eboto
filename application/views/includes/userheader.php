@@ -17,6 +17,9 @@
                                 <li <?php if($this->router->fetch_class() == 'vote') {?> class="active has-sub" <?php } ?>>
                                     <a style="color:white;" href="<?php echo base_url()?>user/vote">Vote Now</a>
                                 </li>
+                                <li <?php if($this->router->fetch_class() == 'profile') {?> class="active has-sub" <?php } ?>>
+                                    <a style="color:white;" href="<?php echo base_url()?>user/profile">Profile</a>
+                                </li>
                                 <li <?php if($this->router->fetch_class() == 'logout') {?> class="active has-sub" <?php } ?>>
                                     <a style="color:white;" href="<?php echo base_url()?>user/logout">Logout</a>
                                 </li>
