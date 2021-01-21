@@ -100,12 +100,13 @@
                 <?php if($table['tableName'] == 't_candidate'){ ?>
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->electionName?></h2>
                     <br>
-                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
-                            <div class="w-50 p-3">
-                                <h5 style=color:black;><?php echo $refInfo[0]->electionDescription?><p></h5>
+                    <div class="d-flex justify-content-center breadcrumb__text">
+                            <div class=" text-center">
+                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->electionDescription?><p></h5>
                             </div>
+                    </div>
                             <!-- Live Clock -->
-                            <div style="padding-top:25px" class="text-center">
+                            <div style="padding-top:25px" class="d-flex justify-content-end text-center">
                                 <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
                                     <p style=" color:red;" id="liveclock">
                                     </p>
@@ -123,7 +124,7 @@
                                 </script>
                                 <!-- End of Script for live clock -->
                             <!-- End of Live Clock -->
-                    </div>
+                    
                 <?php } ?>
                 <!-- End of election info -->
 
@@ -131,13 +132,14 @@
                 <?php if($table['tableName'] == 't_contestant'){ ?>
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->contestName?></h2>
                     <br>
-                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
-                            <div class="w-50 p-3">
-                                <h5 style=color:black;><?php echo $refInfo[0]->contestDescription?><p></h5>
+                    <div class="d-flex justify-content-center breadcrumb__text">
+                            <div class=" text-center">
+                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->contestDescription?><p></h5>
                             </div>
+                    </div>
                             <!-- Live Clock -->
-                            <div style="padding-top:25px" class="text-center">
-                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                            <div style="padding-top:25px" class="d-flex justify-content-end text-center">
+                                <h4 style="color:black;" class="fa fa-clock-o"> Voting Ends in: 
                                     <p style=" color:red;" id="liveclock">
                                     </p>
                                 </h4> 
@@ -162,12 +164,13 @@
                 <?php if($table['tableName'] == 't_option'){ ?>
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->pollName?></h2>
                     <br>
-                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:150px; padding-left:50px">
-                            <div class="w-50 p-3">
-                                <h5 style=color:black;><?php echo $refInfo[0]->pollDescription?><p></h5>
+                    <div class="d-flex justify-content-center breadcrumb__text">
+                            <div class=" text-center">
+                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->pollDescription?><p></h5>
                             </div>
+                    </div>
                             <!-- Live Clock -->
-                            <div style="padding-top:25px" class="text-center">
+                            <div style="padding-top:25px" class="d-flex justify-content-end text-center">
                                 <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
                                     <p style=" color:red;" id="liveclock">
                                     </p>
