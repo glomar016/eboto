@@ -222,7 +222,7 @@
                                         }, 100);
 
                                         // check if already voted function
-                                        var userId = <?php echo $userId ?>;
+                                            var userId = <?php echo $userId ?>;
                                             var tableId = <?php echo $row->id ?>;
                                             var refTableName = 'vote_contestID';
                                             var tableName = 't_vote_contestant';

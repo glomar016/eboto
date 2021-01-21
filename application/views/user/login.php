@@ -81,7 +81,7 @@
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="userPassword" placeholder="Password">
                                 </div>
-                                <div class="login-checkbox">
+                                <div class="login-checkbox float-right">
                                     <label>
                                         <a href="<?php echo base_url()?>user/forgotten">Forgotten Password?</a>
                                     </label>

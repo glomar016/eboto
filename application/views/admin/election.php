@@ -57,7 +57,7 @@ else {
     <!-- Data Tables JS-->
     <script src="<?php echo base_url()?>resources/js/jquery.dataTables.min.js"></script>
 
-    <!-- Data Time JS-->
+    <!-- Date Time JS-->
     <script src="<?php echo base_url()?>resources/js/datetime.js"></script>
 
     <!-- Moment w locales JS-->
