@@ -132,6 +132,10 @@
                             <input type="text" value="<?php echo $userInfo[0]->userStudentNo; ?>" name="nf-email" disabled class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="nf-email" class=" form-control-label">Course</label>
+                            <input type="text" value="<?php echo $userInfo[0]->userCourse; ?>" name="nf-email" disabled class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="nf-email" class=" form-control-label">Email</label>
                             <input type="email" id="newEmail" value="<?php echo $userInfo[0]->userEmail; ?>" name="newEmail" placeholder="Enter Email.." class="form-control">
                         </div>

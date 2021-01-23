@@ -201,7 +201,7 @@ else {
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input type="submit" name="upload" id="upload" value="Upload" class="btn btn-primary">
+                                        <input type="submit" name="editupload" id="editupload" value="Upload" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -431,6 +431,7 @@ $(document).ready(function(){
 // Create org
     $('#addorganizationForm').on('submit', function(e){
             e.preventDefault();
+            $("#upload").attr("disabled", true);
 
         var addorganizationName = document.addorganizationForm.organizationName.value;
         var addorganizationLogo = document.addorganizationForm.organizationLogo.value;
@@ -445,6 +446,7 @@ $(document).ready(function(){
                                         icon: 'warning',
                                         confirmButtonText: 'Ok'
                                         })
+                                        $("#upload").attr("disabled", false);
         }
         else
         {
@@ -458,6 +460,7 @@ $(document).ready(function(){
                             icon: 'warning',
                             confirmButtonText: 'Ok'
                         })
+                        $("#upload").attr("disabled", false);
                     }
                     else
                     {
@@ -477,7 +480,7 @@ $(document).ready(function(){
                                         icon: 'success',
                                         confirmButtonText: 'Ok'
                                         })
-                                    
+                                        $("#upload").attr("disabled", false);
                                         $('#organizationModal').modal('hide');
                                         $('#organizationModal form')[0].reset();
                                     }
@@ -491,6 +494,7 @@ $(document).ready(function(){
                             icon: 'warning',
                             confirmButtonText: 'Ok'
                         })
+                        $("#upload").attr("disabled", false);
             }
         }
     });

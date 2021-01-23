@@ -201,7 +201,7 @@ else {
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
+                                        <input type="submit" name="editupload" id="editupload" value="Submit" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -363,6 +363,7 @@ $(document).ready(function(){
     // Create option
     $('#addoptionForm').on('submit', function(e){
             e.preventDefault();
+            $("#upload").attr("disabled", true);
 
         var optionName = document.addoptionForm.optionName.value;
 
@@ -373,6 +374,7 @@ $(document).ready(function(){
                                 icon: 'warning',
                                 confirmButtonText: 'Ok'
                                 })
+                                $("#upload").attr("disabled", false);
         }
         else{
                     // Ajax call
@@ -392,7 +394,7 @@ $(document).ready(function(){
                                         icon: 'success',
                                         confirmButtonText: 'Ok'
                                         })
-                                    
+                                        $("#upload").attr("disabled", false);
                                         $('#optionModal').modal('hide');
                                         $('#optionModal form')[0].reset();
                                     }

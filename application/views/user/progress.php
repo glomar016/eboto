@@ -105,7 +105,7 @@
             <!-- Ref Info -->
                 <!-- Election Info -->
                 <?php if($tableName == 't_candidate'){ ?>
-                    <h2 style="text-align:center; color:black;">Election</h2>
+                    <!-- <h2 style="text-align:center; color:black;">Election</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:50px;">
                             <div class="w-50 p-3">
                                 <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
@@ -136,7 +136,7 @@
 
                 <!-- Contest Info -->
                 <?php if($tableName == 't_contestant'){ ?>
-                    <h2 style="text-align:center; color:black;">Contest</h2>
+                    <!-- <h2 style="text-align:center; color:black;">Contest</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
                             <div class="w-50 p-3">
                                 <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
@@ -167,7 +167,7 @@
 
                 <!-- Poll Info -->
                 <?php if($tableName == 't_option'){ ?>
-                    <h2 style="text-align:center; color:black;">Poll</h2>
+                    <!-- <h2 style="text-align:center; color:black;">Poll</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
                                 <div class="w-50 p-3">
                                     <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>

@@ -50,7 +50,7 @@
                             <div class="hero__text">
                                 <span>Welcome to</span>
                                 <h2>PUP E-BOTO</h2>
-                                <a style="color:black;" href="#" class="primary-btn">See more about us</a>
+                                <a style="color:black;" href="<?php echo base_url()?>user/vote" class="primary-btn">Vote now!</a>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <div class="hero__text">
                                 <span>Welcome to</span>
                                 <h2>PUP E-BOTO</h2>
-                                <a style="color:black;" href="#" class="primary-btn">See more about us</a>
+                                <a style="color:black;" href="<?php echo base_url()?>user/vote" class="primary-btn">Vote now!</a>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             <div class="hero__text">
                                 <span>Welcome to</span>
                                 <h2>PUP E-BOTO</h2>
-                                <a style="color:black;" href="#" class="primary-btn">See more about us</a>
+                                <a style="color:black;" href="<?php echo base_url()?>user/vote" class="primary-btn">Vote now!</a>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             <h2>How it works?</h2>
                         </div>
                         <p>This website will be used for online voting for election, contest, and poll.</p>
-                        <a href="#" class="primary-btn">View list</a>
+                        <a href="<?php echo base_url()?>user/vote" class="primary-btn">View list</a>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -108,7 +108,7 @@
                                     <img src="<?php echo base_url()?>resources/img/icons/si-1.png" alt="">
                                 </div>
                                 <h4>Step: 1</h4>
-                                <p>Login your account.</p>
+                                <p>Login your account by clicking the "Vote Now" on the upper right corner of the page. Use the student number given to you by PUP to login the website.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -117,7 +117,7 @@
                                     <img src="<?php echo base_url()?>resources/img/icons/si-2.png" alt="">
                                 </div>
                                 <h4>Step 2:</h4>
-                                <p>Select specific election, contest, or poll.</p>
+                                <p>Click the "Vote Now" on the upper right corner of the page to check out the Election, Contest, and Poll that are ongoing.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -126,7 +126,9 @@
                                     <img src="<?php echo base_url()?>resources/img/icons/si-3.png" alt="">
                                 </div>
                                 <h4>Step 3:</h4>
-                                <p>Select checkboxes to vote the candidate, option, contestant you think deserve to win.</p>
+                                <p>Select a specific Election, Contest, or Poll that you want to participate
+                                    Use the provided check boxes to vote your chosen answer or candidate.
+                                    Click "Submit" button to submit your ballot. Wait for the receipt as proof that you have successfully voted.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -135,7 +137,7 @@
                                     <img src="<?php echo base_url()?>resources/img/icons/si-4.png" alt="">
                                 </div>
                                 <h4>Step 4:</h4>
-                                <p>View progress of the election, contest, poll to check which is currently had the highest vote.</p>
+                                <p>After submitting and checking the receipt, you can now check the progress of your chosen Election, Contest, or Poll.</p>
                             </div>
                         </div>
                     </div>

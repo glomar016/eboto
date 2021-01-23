@@ -257,7 +257,7 @@ else {
                                                 </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-primary">
+                                        <input type="submit" name="editupload" id="editupload" value="Submit" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -428,6 +428,7 @@ $(document).ready(function(){
     // Create candidate
     $('#addcandidateForm').on('submit', function(e){
             e.preventDefault();
+            $("#upload").attr("disabled", true);
 
         var candidateName = document.addcandidateForm.candidateName.value;
         var candidatePosition = document.addcandidateForm.candidatePosition.value;
@@ -443,6 +444,7 @@ $(document).ready(function(){
                                 icon: 'warning',
                                 confirmButtonText: 'Ok'
                                 })
+                                $("#upload").attr("disabled", false);
         }
         else{
             if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
@@ -453,6 +455,7 @@ $(document).ready(function(){
                             icon: 'warning',
                             confirmButtonText: 'Ok'
                         })
+                        $("#upload").attr("disabled", false);
                     }
                 else{
                     // Ajax call
@@ -472,7 +475,7 @@ $(document).ready(function(){
                                         icon: 'success',
                                         confirmButtonText: 'Ok'
                                         })
-                                    
+                                        $("#upload").attr("disabled", false);
                                         $('#candidateModal').modal('hide');
                                         $('#candidateModal form')[0].reset();
                                     }
@@ -487,6 +490,7 @@ $(document).ready(function(){
                             icon: 'warning',
                             confirmButtonText: 'Ok'
                         })
+                        $("#upload").attr("disabled", false);
             }
         }
 
