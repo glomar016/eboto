@@ -22,9 +22,14 @@ class Forbidden extends CI_Controller {
 
 	public function index()
 	{
-		// Removing session data
-        $this->load->view('errors/index');
-    }
+		$data['error'] = "Forbidden Access";
+        $this->load->view('errors/index', $data);
+	}
+
+	public function already_ended(){
+		$data['error'] = "Voting Already Ended";
+		$this->load->view('errors/index', $data);
+	}
 
 
 }

@@ -70,6 +70,7 @@ class Vote extends CI_Controller {
 			$check = $this->database_model->already_voted($userId, $id, 'vote_pollID', 't_vote_option');
 		}
 
+
 		// Condition to check if user already voted
 		if($check == 1){
 			$this->load->view('user/already_voted');

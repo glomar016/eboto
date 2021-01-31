@@ -87,7 +87,7 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <h1 class="text-center"><?php echo $error ?></h1>
+    <h1 class="text-center">Voting already ends</h1>
             </div>
             <!-- <div class="row">
                 <div class="col-lg-12">

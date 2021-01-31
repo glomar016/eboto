@@ -7,6 +7,15 @@
         else {
             header("location: ".base_url()."user/login");
     }
+
+    date_default_timezone_set('Asia/Manila');
+    $dateToday = date("Y-m-d h:i:sa");
+    $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->electionDateEnd));
+
+    
+    if($dateEnd <= $dateToday){
+        header("location: ".base_url()."user/forbidden/already_ended");
+    }
 ?>
 
 <!DOCTYPE html>

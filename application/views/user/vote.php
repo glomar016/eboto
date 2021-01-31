@@ -103,6 +103,7 @@
 
             <!-- Election Data -->
                 <?php foreach($election as $row){ ?>
+                    
                     <div class="col-lg-4 col-md-6 col-sm-6 mix election">
                         <div class="portfolio__item">
                             <div style="margin: auto;
@@ -136,16 +137,22 @@
 
                                     <!-- Script for live clock -->
                                 <script>
-                                        var dateEnd_<?php echo $row->id ?> = "<?php echo $row->electionDateEnd ?>";
+                                    var dateEnd_<?php echo $row->id ?> = "<?php echo $row->electionDateEnd ?>";
 
                                         var election_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_election".$row->id ?>');
                                                 setInterval(() => {
                                                     // clock.textContent 
-                                                    election_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+
+                                                    if(moment().diff("<?php echo $row->electionDateEnd ?>", 'hours') > 0){
+                                                        election_clock_<?php echo $row->id ?>.textContent = "Already ended."
+                                                    }
+                                                    else{
+                                                        election_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    }
                                         }, 100);
 
                                         // check if already voted function
-                                        var userId = <?php echo $userId ?>;
+                                            var userId = <?php echo $userId ?>;
                                             var tableId = <?php echo $row->id ?>;
                                             var refTableName = 'vote_electionID';
                                             var tableName = 't_vote_candidate';
@@ -156,7 +163,7 @@
                                                 // dataType: "JSON",
 
                                                     success:function(data){
-                                                        if(data == 1){
+                                                        if(data == 1 || moment().diff("<?php echo $row->electionDateEnd ?>", 'hours') > 0){
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_election');
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "View Progress";
                                                         }
