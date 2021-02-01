@@ -81,6 +81,7 @@ class Vote extends CI_Controller {
 			$data['refTable'] = $id;
 			$data['refInfo'] = $this->database_model->get($id, $refTableName);
 			$this->load->view('user/view', $data);
+			
 		}
 	}
 	

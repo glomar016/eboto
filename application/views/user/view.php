@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/style.css" type="text/css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
     <!-- Checkbox css -->
     <link rel="stylesheet" href="<?php echo base_url()?>resources/css/checkbox.css" type="text/css">
 
@@ -357,6 +359,42 @@
 <script>
 // Start of script
 $(document).ready(function(){
+
+    var tablePassword = "<?php echo $refInfo[0]->electionPassword ?>"
+
+    if (tablePassword != ""){
+
+        (async () => {
+        const { value: password } = await Swal.fire({
+            title: 'Enter your password',
+            input: 'password',
+            inputLabel: 'Password',
+            inputPlaceholder: 'Enter your password',
+            inputAttributes: {
+                maxlength: 10,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+            }
+            })
+
+            if (CryptoJS.MD5(password) == tablePassword) {
+                
+            }
+            else{
+                Swal.fire({
+                        title: 'Failed!',
+                        text: 'Incorrect Password.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            location.reload();
+                        })
+                        // End of Swal
+
+            }
+        })()
+        }
+
     // Var for userId
     var vote_userID = <?php echo $userId ?>;
     console.log(vote_userID);
