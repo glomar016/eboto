@@ -146,32 +146,36 @@ else {
                 <div class="card">   
                         <div class="card-body card-block">
                             <form action="" method="post" name="addelectionForm" id="addelectionForm">
-                            <div class="row form-group">
+                                <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="electionName" class=" form-control-label">election Name</label>
+                                            <label for="electionName" class=" form-control-label">Election Name</label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="electionName" name="electionName" placeholder="Name of election" maxlength="50" class="form-control">
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-group"></i>
-                                            <label for="electionRestriction" class=" form-control-label">Restriction</label>
+                                </div>
+                                    <div id="divelectionOrg">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                            <i style =padding-right:16px; class="fa fa-group"></i>
+                                                <label for="electionOrg" class=" form-control-label">Restriction</label>
+                                            </div>
+                                            <div class="col-4 col-md-8">
+                                                <select name="electionOrg" id="electionOrg" class="form-control">
+                                                    <option value=""></option>
+                                                    <?php 
+                                                        foreach($data as $row)
+                                                        { 
+                                                        echo $row->orgName;
+                                                        echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-4 col-md-8">
-                                            <select name="electionOrg" id="electionOrg" class="form-control">
-                                                <?php 
-                                                    foreach($data as $row)
-                                                    { 
-                                                    echo $row->orgName;
-                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
                                     </div>
+                                    
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
@@ -449,9 +453,11 @@ $(document).ready(function() {
         e.preventDefault();
         $("#btnCreate").attr("disabled", true);
 
+
         var electionName = document.addelectionForm.electionName.value;
         var electionDateStart = document.addelectionForm.electionDateStart.value;
         var electionDateEnd = document.addelectionForm.electionDateEnd.value;
+        var electionOrg = document.addelectionForm.electionOrg.value;
 
         var dateStart = new Date(electionDateStart);
         var dateEnd = new Date(electionDateEnd);
@@ -486,7 +492,7 @@ $(document).ready(function() {
                                                     })
                     }
                     else{
-                        if(electionName == '' || electionDateStart == '' || electionDateEnd == ''){
+                        if(electionName == '' || electionDateStart == '' || electionDateEnd == '' || electionOrg == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Please fill out required field.',
@@ -731,6 +737,40 @@ $(document).ready(function() {
             
 
 });
+
+$(document).on("change", "#electionOrg", function(){
+    var orgSelected = document.getElementById("electionOrg").value;
+    $.ajax({
+        url: '<?php echo base_url()?>admin/election/get_private',
+        type: "GET",
+        dataType: "JSON",
+
+        success: function(data){
+            var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+            var row = parsedResponse[0]
+            var electionPassword = jQuery(`<div class="row form-group" id="divelectionPassword">
+                                                <div class="col col-md-3">
+                                                    <i style =padding-right:16px; class="fa fa-lock"></i>
+                                                    <label for="electionPassword" class=" form-control-label">Password</label>
+                                                </div>
+                                                <div class="col-4 col-md-8">
+                                                    <input type="password" id="electionPassword" name="electionPassword" placeholder="Password" maxlength="50" class="form-control">
+                                                </div>
+                                            </div>`)
+            
+            if(orgSelected == row.id){
+                
+                jQuery('#divelectionOrg').append(electionPassword);
+            }
+            else{
+                jQuery('#divelectionPassword').remove();
+            }
+        }
+    })
+
+    
+})
+
 
 
         

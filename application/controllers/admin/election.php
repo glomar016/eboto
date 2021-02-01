@@ -35,10 +35,10 @@ class election extends CI_Controller {
 		$this->load->model('database_model');
 		// loading view 
 		
-
 		// getting data from input
 		$electionName = $this->input->post('electionName');
 		$electionOrg = $this->input->post('electionOrg');
+		$electionPassword = $this->input->post('electionPassword');
 		$electionDescription = $this->input->post('electionDescription');
 		$electionDateStart = $this->input->post('electionDateStart');
 		$electionDateEnd = $this->input->post('electionDateEnd');
@@ -51,7 +51,8 @@ class election extends CI_Controller {
 			"electionDescription" => $electionDescription,
 			"electionOrg" => $electionOrg, 
 			"electionDateStart" =>$electionDateStart,
-			"electionDateEnd" => $electionDateEnd
+			"electionDateEnd" => $electionDateEnd,
+			"electionPassword" => md5($electionPassword)
 		);
 
 		$this->database_model->create($data, "t_election");
@@ -133,5 +134,13 @@ class election extends CI_Controller {
 		$this->load->view('admin/election_view', $data);
 	}
 
+	public function get_private()
+	{
+		$this->load->model('database_model');
+
+		$data = $this->database_model->get_private();
+
+		echo json_encode($data);
+	}
 
 }

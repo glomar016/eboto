@@ -183,4 +183,14 @@ class Database_model extends CI_Model {
         }
     }
 
+    function get_private(){
+        $this->db->select('id');
+        $this->db->from('r_org');
+        $this->db->where("orgName", "PRIVATE");
+        $query = $this->db->get();
+        $data = $query->result();
+        
+        return $data;
+    }
+
 }
