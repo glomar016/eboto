@@ -155,21 +155,24 @@ else {
                                             <input type="text" id="contestName" name="contestName" placeholder="Name of contest" maxlength="50" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-group"></i>
-                                            <label for="contestRestriction" class=" form-control-label">Restriction</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <select name="contestOrg" id="contestOrg" class="form-control">
-                                                <?php 
-                                                    foreach($data as $row)
-                                                    { 
-                                                        echo $row->orgName;
-                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
-                                                    }
-                                                ?>
-                                            </select>
+                                    <div id="divcontestOrg">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                            <i style =padding-right:16px; class="fa fa-group"></i>
+                                                <label for="contestRestriction" class=" form-control-label">Restriction</label>
+                                            </div>
+                                            <div class="col-4 col-md-8">
+                                                <select name="contestOrg" id="contestOrg" class="form-control">
+                                                <option value=""></option>
+                                                    <?php 
+                                                        foreach($data as $row)
+                                                        { 
+                                                            echo $row->orgName;
+                                                        echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -728,6 +731,39 @@ $(document).ready(function() {
                 });
 
     // END OF // Update contest
+
+    // POPPING Password Input If PRIVATE mode is selected
+$(document).on("change", "#contestOrg", function(){
+    var orgSelected = document.getElementById("contestOrg").value;
+    $.ajax({
+        url: '<?php echo base_url()?>admin/contest/get_private',
+        type: "GET",
+        dataType: "JSON",
+
+        success: function(data){
+            var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+            var row = parsedResponse[0]
+            var contestPassword = jQuery(`<div class="row form-group" id="divcontestPassword">
+                                                <div class="col col-md-3">
+                                                    <i style =padding-right:16px; class="fa fa-lock"></i>
+                                                    <label for="contestPassword" class=" form-control-label">Password</label>
+                                                </div>
+                                                <div class="col-4 col-md-8">
+                                                    <input type="password" id="contestPassword" name="contestPassword" placeholder="Password" maxlength="50" class="form-control">
+                                                </div>
+                                            </div>`)
+            
+            if(orgSelected == row.id){
+                
+                jQuery('#divcontestOrg').append(contestPassword);
+            }
+            else{
+                jQuery('#divcontestPassword').remove();
+            }
+        }
+    })
+})
+// End of POPPING Password
 
 });
 

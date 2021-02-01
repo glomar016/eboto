@@ -738,6 +738,8 @@ $(document).ready(function() {
 
 });
 
+
+// POPPING Password Input If PRIVATE mode is selected
 $(document).on("change", "#electionOrg", function(){
     var orgSelected = document.getElementById("electionOrg").value;
     $.ajax({
@@ -767,10 +769,8 @@ $(document).on("change", "#electionOrg", function(){
             }
         }
     })
-
-    
 })
-
+// End of POPPING Password
 
 
         

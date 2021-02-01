@@ -35,10 +35,10 @@ class Poll extends CI_Controller {
 		$this->load->model('database_model');
 		// loading view 
 		
-
 		// getting data from input
 		$pollName = $this->input->post('pollName');
 		$pollOrg = $this->input->post('pollOrg');
+		$pollPassword = $this->input->post('pollPassword');
 		$pollDescription = $this->input->post('pollDescription');
 		$pollDateStart = $this->input->post('pollDateStart');
 		$pollDateEnd = $this->input->post('pollDateEnd');
@@ -51,7 +51,8 @@ class Poll extends CI_Controller {
 			"pollDescription" => $pollDescription,
 			"pollOrg" => $pollOrg, 
 			"pollDateStart" =>$pollDateStart,
-			"pollDateEnd" => $pollDateEnd
+			"pollDateEnd" => $pollDateEnd,
+			"pollPassword" => md5($pollPassword)
 		);
 
 		$this->database_model->create($data, "t_poll");
@@ -133,5 +134,13 @@ class Poll extends CI_Controller {
 		$this->load->view('admin/poll_view', $data);
 	}
 
+	public function get_private()
+	{
+		$this->load->model('database_model');
+
+		$data = $this->database_model->get_private();
+
+		echo json_encode($data);
+	}
 
 }

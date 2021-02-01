@@ -155,23 +155,27 @@ else {
                                             <input type="text" id="pollName" name="pollName" placeholder="Name of poll" maxlength="50" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                        <i style =padding-right:16px; class="fa fa-group"></i>
-                                            <label for="pollRestriction" class=" form-control-label">Restriction</label>
-                                        </div>
-                                        <div class="col-4 col-md-8">
-                                            <select name="pollOrg" id="pollOrg" class="form-control">
-                                                <?php 
-                                                    foreach($data as $row)
-                                                    { 
-                                                        echo $row->orgName;
-                                                    echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
-                                                    }
-                                                ?>
-                                            </select>
+                                    <div id="divpollOrg">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                            <i style =padding-right:16px; class="fa fa-group"></i>
+                                                <label for="pollRestriction" class=" form-control-label">Restriction</label>
+                                            </div>
+                                            <div class="col-4 col-md-8">
+                                                <select name="pollOrg" id="pollOrg" class="form-control">
+                                                    <option value=""></option>
+                                                    <?php 
+                                                        foreach($data as $row)
+                                                        { 
+                                                            echo $row->orgName;
+                                                        echo '<option value="'.$row->id.'">'.$row->orgName.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
@@ -731,6 +735,39 @@ $(document).ready(function() {
             
 
 });
+
+// POPPING Password Input If PRIVATE mode is selected
+$(document).on("change", "#pollOrg", function(){
+    var orgSelected = document.getElementById("pollOrg").value;
+    $.ajax({
+        url: '<?php echo base_url()?>admin/poll/get_private',
+        type: "GET",
+        dataType: "JSON",
+
+        success: function(data){
+            var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
+            var row = parsedResponse[0]
+            var pollPassword = jQuery(`<div class="row form-group" id="divpollPassword">
+                                                <div class="col col-md-3">
+                                                    <i style =padding-right:16px; class="fa fa-lock"></i>
+                                                    <label for="pollPassword" class=" form-control-label">Password</label>
+                                                </div>
+                                                <div class="col-4 col-md-8">
+                                                    <input type="password" id="pollPassword" name="pollPassword" placeholder="Password" maxlength="50" class="form-control">
+                                                </div>
+                                            </div>`)
+            
+            if(orgSelected == row.id){
+                
+                jQuery('#divpollOrg').append(pollPassword);
+            }
+            else{
+                jQuery('#divpollPassword').remove();
+            }
+        }
+    })
+})
+// End of POPPING Password
 
 
         

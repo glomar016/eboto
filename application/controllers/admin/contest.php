@@ -35,10 +35,10 @@ class Contest extends CI_Controller {
 		$this->load->model('database_model');
 		// loading view 
 		
-
 		// getting data from input
 		$contestName = $this->input->post('contestName');
 		$contestOrg = $this->input->post('contestOrg');
+		$contestPassword = $this->input->post('contestPassword');
 		$contestDescription = $this->input->post('contestDescription');
 		$contestDateStart = $this->input->post('contestDateStart');
 		$contestDateEnd = $this->input->post('contestDateEnd');
@@ -51,7 +51,8 @@ class Contest extends CI_Controller {
 			"contestDescription" => $contestDescription,
 			"contestOrg" => $contestOrg, 
 			"contestDateStart" =>$contestDateStart,
-			"contestDateEnd" => $contestDateEnd
+			"contestDateEnd" => $contestDateEnd,
+			"contestPassword" => md5($contestPassword)
 		);
 
 		$this->database_model->create($data, "t_contest");
@@ -133,5 +134,13 @@ class Contest extends CI_Controller {
 		$this->load->view('admin/contest_view', $data);
 	}
 
+	public function get_private()
+	{
+		$this->load->model('database_model');
+
+		$data = $this->database_model->get_private();
+
+		echo json_encode($data);
+	}
 
 }
