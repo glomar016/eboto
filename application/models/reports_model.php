@@ -9,6 +9,7 @@ class Reports_model extends CI_Model {
                         , candidateName 
                         , (userFirstName+' '+userLastName+' ') AS voterName
                         , userStudentNo
+                        , userCourse
                         , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
         $this->db->from('t_vote_candidate');
         $this->db->join('t_election', 't_election.id = t_vote_candidate.vote_electionID', 'left');
@@ -26,6 +27,7 @@ class Reports_model extends CI_Model {
                         , contestantName 
                         , (userFirstName+' '+userLastName+' ') AS voterName
                         , userStudentNo
+                        , userCourse
                         , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
         $this->db->from('t_vote_contestant');
         $this->db->join('t_contest', 't_contest.id = t_vote_contestant.vote_contestID', 'left');
@@ -43,6 +45,7 @@ class Reports_model extends CI_Model {
                         , optionName 
                         , (userFirstName+' '+userLastName+' ') AS voterName
                         , userStudentNo
+                        , userCourse
                         , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
         $this->db->from('t_vote_option');
         $this->db->join('t_poll', 't_poll.id = t_vote_option.vote_pollID', 'left');
@@ -200,5 +203,63 @@ class Reports_model extends CI_Model {
         $data = $query->result();
         return $data;
     }
+
+    function get_specific_election_votes($id){
+        $this->db->select("t_vote_candidate.id
+                        , electionName
+                        , candidateName 
+                        , (userFirstName+' '+userLastName+' ') AS voterName
+                        , userStudentNo
+                        , userCourse
+                        , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
+        $this->db->from('t_vote_candidate');
+        $this->db->join('t_election', 't_election.id = t_vote_candidate.vote_electionID', 'left');
+        $this->db->join('t_user', 't_user.id = t_vote_candidate.vote_userID', 'left');
+        $this->db->join('t_candidate', 't_candidate.id = t_vote_candidate.vote_candidateID', 'left');
+        $this->db->where('t_vote_candidate.vote_electionID', $id);
+        $this->db->order_by('voteDateCreated');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_specific_contest_votes($id){
+        $this->db->select("t_vote_contestant.id
+                        , contestName
+                        , contestantName 
+                        , (userFirstName+' '+userLastName+' ') AS voterName
+                        , userStudentNo
+                        , userCourse
+                        , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
+        $this->db->from('t_vote_contestant');
+        $this->db->join('t_contest', 't_contest.id = t_vote_contestant.vote_contestID', 'left');
+        $this->db->join('t_user', 't_user.id = t_vote_contestant.vote_userID', 'left');
+        $this->db->join('t_contestant', 't_contestant.id = t_vote_contestant.vote_contestantID', 'left');
+        $this->db->where('t_vote_contestant.vote_contestID', $id);
+        $this->db->order_by('voteDateCreated');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function get_specific_poll_votes($id){
+        $this->db->select("t_vote_option.id
+                        , pollName
+                        , optionName 
+                        , (userFirstName+' '+userLastName+' ') AS voterName
+                        , userStudentNo
+                        , userCourse
+                        , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
+        $this->db->from('t_vote_option');
+        $this->db->join('t_poll', 't_poll.id = t_vote_option.vote_pollID', 'left');
+        $this->db->join('t_user', 't_user.id = t_vote_option.vote_userID', 'left');
+        $this->db->join('t_option', 't_option.id = t_vote_option.vote_optionID', 'left');
+        $this->db->where('t_vote_option.vote_pollID', $id);
+        $this->db->order_by('voteDateCreated');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+    
 
 }

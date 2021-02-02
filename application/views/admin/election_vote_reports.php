@@ -91,41 +91,39 @@ else {
                         <!-- Election Data Table Content -->
                         <div class="au-card m-b-30">
                             <div class="au-card-inner">
-                                
-                        
-                                <!-- DATA TABLE -->
-                                
-                                <div class="table-data__tool">
-                                        <h2>History of Election Votes</h2>
-                                        <div class="dropdown">
-                                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Election
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/election">Election</a>
-                                                <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/contest">Contest</a>
-                                                <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/poll">Poll</a>
-                                            </div>
-                                        </div>         
-                                </div>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table id="election_vote_table" class="table table-data3" style="width:100%"> 
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>Hidden ID</th>
-                                                <th>Election Name</th>
-                                                <th>Candidate Name</th>
-                                                <th>Voter Name</th>
-                                                <th>Voter Student Number</th>
-                                                <th>Vote Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <!-- DATA TABLE -->
+                                    <div class="table-data__tool">
+                                            <h2>History of Election Votes</h2>
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Election
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/election">Election</a>
+                                                    <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/contest">Contest</a>
+                                                    <a class="dropdown-item" href="<?php echo base_url()?>admin/reports/view/poll">Poll</a>
+                                                </div>
+                                            </div>         
+                                    </div>
+                                    <div class="table-responsive table-responsive-data2">
+                                        <table id="election_vote_table" class="table table-data3" style="width:100%"> 
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Hidden ID</th>
+                                                    <th>Election Name</th>
+                                                    <th>Candidate Name</th>
+                                                    <th>Voter Name</th>
+                                                    <th>Voter Student Number</th>
+                                                    <th>Voter Course</th>
+                                                    <th>Vote Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- END DATA TABLE -->
                                 </div>  
                             </div>
                         </div>
@@ -183,6 +181,7 @@ $(document).ready(function() {
                 { data: "candidateName"},
                 { data: "voterName"},
                 { data: "userStudentNo"},
+                { data: "userCourse"},
                 { data: "voteDateCreated"},
             ],
             

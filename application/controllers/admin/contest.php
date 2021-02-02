@@ -52,7 +52,7 @@ class Contest extends CI_Controller {
 			"contestOrg" => $contestOrg, 
 			"contestDateStart" =>$contestDateStart,
 			"contestDateEnd" => $contestDateEnd,
-			"contestPassword" => md5($contestPassword)
+			"contestPassword" => $contestPassword
 		);
 
 		$this->database_model->create($data, "t_contest");

@@ -66,4 +66,23 @@ class reports extends CI_Controller {
 		echo json_encode($data);
 
 	}
+
+	public function get_specific_votes($id, $tableName)
+	{
+		$this->load->model('reports_model');
+
+		if($tableName == "t_election"){
+			$data['data'] = $this->reports_model->get_specific_election_votes($id);
+		}
+		else if($tableName == "t_contest"){
+			$data['data'] = $this->reports_model->get_specific_contest_votes($id);
+		}
+		else if($tableName == "t_poll"){
+			$data['data'] = $this->reports_model->get_specific_poll_votes($id);
+		}
+
+		
+
+		echo json_encode($data);
+	}
 }

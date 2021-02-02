@@ -52,7 +52,7 @@ class election extends CI_Controller {
 			"electionOrg" => $electionOrg, 
 			"electionDateStart" =>$electionDateStart,
 			"electionDateEnd" => $electionDateEnd,
-			"electionPassword" => md5($electionPassword)
+			"electionPassword" => $electionPassword
 		);
 
 		$this->database_model->create($data, "t_election");

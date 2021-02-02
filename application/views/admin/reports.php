@@ -117,6 +117,7 @@ else {
                                                 <th>Candidate Name</th>
                                                 <th>Voter Name</th>
                                                 <th>Voter Student Number</th>
+                                                <th>Voter Course</th>
                                                 <th>Vote Date</th>
                                             </tr>
                                         </thead>
@@ -183,6 +184,7 @@ $(document).ready(function() {
                 { data: "candidateName"},
                 { data: "voterName"},
                 { data: "userStudentNo"},
+                { data: "userCourse"},
                 { data: "voteDateCreated"},
             ],
             

@@ -377,7 +377,7 @@ $(document).ready(function(){
             }
             })
 
-            if (CryptoJS.MD5(password) == tablePassword) {
+            if (password == tablePassword) {
                 
             }
             else{

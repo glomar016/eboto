@@ -52,7 +52,7 @@ class Poll extends CI_Controller {
 			"pollOrg" => $pollOrg, 
 			"pollDateStart" =>$pollDateStart,
 			"pollDateEnd" => $pollDateEnd,
-			"pollPassword" => md5($pollPassword)
+			"pollPassword" => $pollPassword
 		);
 
 		$this->database_model->create($data, "t_poll");
