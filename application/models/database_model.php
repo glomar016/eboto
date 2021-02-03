@@ -100,6 +100,18 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // query to get candidate of election, contestant of contest, option of poll
+    function show_ep_options($referenceID, $partylistID, $referenceColumn, $statusColumn, $tableName){
+        $this->db->select("*");
+        $this->db->where($statusColumn, "1");
+        $this->db->where($referenceColumn, $referenceID);
+        $this->db->where("candidatePartylist", $partylistID);
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
     // Get two tables with foreign key
     function get_two_table($statusColumn, $tableName, $tableName2, $fkColumn)
     {
