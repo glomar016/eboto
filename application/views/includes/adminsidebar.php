@@ -15,6 +15,10 @@
                             <a href="<?php echo base_url()?>admin/election">
                                 <i class="fas fa-archive"></i>Election</a>
                         </li>
+                        <li <?php if($this->router->fetch_class() == 'ep') {?> class="active has-sub" <?php } ?>> 
+                            <a href="<?php echo base_url()?>admin/ep">
+                                <i class="fas fa-object-group"></i>Election + Partylist</a>
+                        </li>
                         <li <?php if($this->router->fetch_class() == 'contest') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/contest">
                                 <i class="fas fa-trophy"></i>Contest</a>
@@ -29,15 +33,11 @@
                         </li>
                         <li <?php if($this->router->fetch_class() == 'userrole') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/userrole">
-                                <i class="fas fa-bar-chart-o"></i>User Role</a>
+                                <i class="fas fa-user"></i>User Role</a>
                         </li>
                         <li <?php if($this->router->fetch_class() == 'reports') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/reports">
                                 <i class="fas fa-flag"></i>Vote Logs</a>
-                        </li>
-                        <li <?php if($this->router->fetch_class() == 'livepreview') {?> class="active has-sub" <?php } ?>> 
-                            <a href="<?php echo base_url()?>admin/livepreview">
-                                <i class="fas fa-users"></i>Live Preview</a>
                         </li>
                     </ul>
                 </nav>

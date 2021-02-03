@@ -102,36 +102,5 @@
 </body>
 
 
-<script>
-        $('#addElectionForm').on('submit', function(e){
-                e.preventDefault();
-
-                var form = $('#addElectionForm');
-
-
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'You successfully created an election.',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                    })
-
-
-                // ajax post
-                $.ajax({
-                    url: '<?php echo base_url()?>election/add_election',
-                    type: 'post',
-                    data: form.serialize(),
-
-                    success:function()
-                            {
-                               $('#electionModal').modal('hide');
-                            }
-                });
-        });
-
-
-    </script>
-
 </html>
 <!-- end document-->
