@@ -466,7 +466,7 @@ $(document).ready(function(){
                     {
                         $.ajax({
                             url: '<?php echo base_url()?>admin/organization/add_organization',
-                            type:"post",
+                            type: "post",
                             data: new FormData(this),
                             processData:false,
                             contentType:false,

@@ -129,33 +129,6 @@ else {
                                 </div>
                                 </div>  
                         </div>
-                                <!-- Vote Logs -->
-                                
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner">
-                                            <div class="table-data__tool">
-                                                <h2>Vote Logs</h2>
-                                            </div>
-                                            <div class="table-responsive table-responsive-data2">
-                                                <table id="partylist_vote_table" class="table table-data3" style="width:100%"> 
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th>Hidden ID</th>
-                                                            <th>Candidate Name</th>
-                                                            <th>Voter Name</th>
-                                                            <th>Voter Student Number</th>
-                                                            <th>Voter Course</th>
-                                                            <th>Vote Date</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                    </div>
-                                </div>
-                                <!-- End of Vote Logs -->
                                 <!-- END DATA TABLE -->
                             
                     </diV>
@@ -394,9 +367,9 @@ $(document).ready(function(){
                     var parsedResponse = jQuery.parseJSON(JSON.stringify(data));
                     var row = parsedResponse[0];
                     $('[name="id"').val(row.id);
-                    $('[name="editep_candidateName"]').val(row.ep_candidateName);
-                    $('[name="editep_candidatePosition"]').val(row.ep_candidatePosition);
-                    $('[name="editep_candidateDescription"]').val(row.ep_candidateDescription);
+                    $('[name="editep_candidateName"]').val(row.candidateName);
+                    $('[name="editep_candidatePosition"]').val(row.candidatePosition);
+                    $('[name="editep_candidateDescription"]').val(row.candidateDescription);
                     
                     $('#editep_candidateModal').modal('show'); // show bootstrap modal when complete loaded
                 }

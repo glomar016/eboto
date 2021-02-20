@@ -109,9 +109,8 @@ class EP_candidate extends CI_Controller {
 	}
 
 		// get data to pass data to edit modal
-	public function get_candidate($id)
+	public function get_ep_candidate($id)
 	{
-
 		$this->load->model('database_model');
 
 		$data = $this->database_model->get($id, 't_candidate');
@@ -176,7 +175,7 @@ class EP_candidate extends CI_Controller {
 
 		$data['data']= $this->database_model->get($id, 't_candidate');
 
-		$this->load->view('admin/ep_candidate_view', $data);
+		$this->load->view('admin/ep_view_candidate', $data);
 	}
 
 }

@@ -37,12 +37,16 @@ class Vote extends CI_Controller {
 			$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
 			$data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
+			$data['ep'] = $this->database_model->show('epStatus', 't_ep', 'r_org', 'epOrg', 'epDateEnd', $dateToday);
 			$data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
 			$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
 
 			// Sort by date end
 			$electionDateEnd = array_column($data['election'], 'electionDateEnd');
 			array_multisort($data['election'], SORT_DESC, $electionDateEnd);
+
+			$epDateEnd = array_column($data['ep'], 'epDateEnd');
+			array_multisort($data['ep'], SORT_DESC, $epDateEnd);
 
 			$contestDateEnd = array_column($data['contest'], 'contestDateEnd');
 			array_multisort($data['contest'], SORT_DESC, $contestDateEnd);
@@ -60,8 +64,11 @@ class Vote extends CI_Controller {
 
 		$userId = ($this->session->userdata['logged_in']['userId']);
 		
-		if($tableName == 't_candidate'){
+		if($tableName == 't_candidate' && $refColumn == 'candidateElectionID'){
 			$check = $this->database_model->already_voted($userId, $id, 'vote_electionID', 't_vote_candidate');
+		}
+		else if($tableName == 't_candidate' && $refColumn == 'candidateEpID'){
+			$check = $this->database_model->already_voted($userId, $id, 'vote_epID', 't_vote_ep_candidate');
 		}
 		else if($tableName == 't_contestant'){
 			$check = $this->database_model->already_voted($userId, $id, 'vote_contestID', 't_vote_contestant');
@@ -77,11 +84,32 @@ class Vote extends CI_Controller {
 		}
 		else{
 			$data['data'] = $this->database_model->get_candidate($id, $tableName, $refColumn, $columnStatus);
-			$data['table'] = ['tableName' => $tableName];
+			$data['table'] = ['tableName' => $refTableName];
 			$data['refTable'] = $id;
 			$data['refInfo'] = $this->database_model->get($id, $refTableName);
 			$this->load->view('user/view', $data);
-			
+		}
+	}
+
+	public function view_ep($id, $tableName, $refColumn, $columnStatus, $refTableName){
+		$this->load->model('database_model');
+
+		$userId = ($this->session->userdata['logged_in']['userId']);
+
+		$check = $this->database_model->already_voted($userId, $id, 'vote_epID', 't_vote_ep_candidate');
+		
+
+
+		// Condition to check if user already voted
+		if($check == 1){
+			$this->load->view('user/already_voted');
+		}
+		else{
+			$data['data'] = $this->database_model->get_ep_candidate($id, $tableName, $refColumn, $columnStatus);
+			$data['table'] = ['tableName' => $refTableName];
+			$data['refTable'] = $id;
+			$data['refInfo'] = $this->database_model->get($id, $refTableName);
+			$this->load->view('user/view', $data);
 		}
 	}
 	
@@ -100,6 +128,24 @@ class Vote extends CI_Controller {
 		
 		foreach($data as $candidateID){
 			$this->database_model->insert_vote($candidateID, 'vote_candidateID', $refTableID, 'vote_electionID', 't_vote_candidate', $vote_userID);
+		}
+	}
+
+	public function vote_ep_candidate()
+	{
+		$this->load->model('database_model');
+
+		// $data['data'] = $this->database_model->function()
+		$data = $this->input->post("selected");
+		$refTableID = $this->input->post('refTableID');
+		$vote_userID = $this->input->post('vote_userID');
+
+		// echo $selected;
+		print_r($data);
+		echo $refTableID;
+		
+		foreach($data as $candidateID){
+			$this->database_model->insert_vote($candidateID, 'vote_candidateID', $refTableID, 'vote_epID', 't_vote_ep_candidate', $vote_userID);
 		}
 	}
 

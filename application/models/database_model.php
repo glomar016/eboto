@@ -135,6 +135,18 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    function get_ep_candidate($id, $tableName, $refColumn, $columnStatus){
+        $this->db->select("*");
+        $this->db->where($refColumn, $id);
+        $this->db->where($columnStatus, "1");
+        $this->db->from('t_partylist');
+        $this->db->join($tableName, $tableName.'.candidatePartyList = t_partylist.id');
+        $this->db->order_by('candidatePosition', "DESC");
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
     // It is used to insert specific vote
     function insert_vote($voteID, $voteColumn, $refTableID, $refTableColumn, $tableName, $vote_userID){
         $data = array(

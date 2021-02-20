@@ -74,6 +74,9 @@ class reports extends CI_Controller {
 		if($tableName == "t_election"){
 			$data['data'] = $this->reports_model->get_specific_election_votes($id);
 		}
+		if($tableName == "t_ep"){
+			$data['data'] = $this->reports_model->get_specific_ep_votes($id);
+		}
 		else if($tableName == "t_contest"){
 			$data['data'] = $this->reports_model->get_specific_contest_votes($id);
 		}

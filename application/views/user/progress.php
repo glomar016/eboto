@@ -134,6 +134,37 @@
                 <?php } ?>
                 <!-- End of election info -->
 
+                <!-- EP Info -->
+                <?php if($tableName == 't_ep'){ ?>
+                    <!-- <h2 style="text-align:center; color:black;">Election</h2> -->
+                    <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:50px;">
+                            <div class="w-50 p-3">
+                                <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->epName?>
+                                <br><p style=color:black;><?php echo $refInfo[0]->epDescription?><p></h2>
+                            </div>
+                            <!-- Live Clock -->
+                            <div style="padding-top:25px" class="text-center">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
+                                    </p>
+                                </h4> 
+                            </div>
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd = "<?php echo $refInfo[0]->epDateEnd?>";
+
+                                        var clock = document.getElementById('liveclock');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock.textContent = moment(dateEnd).endOf('seconds').fromNow();
+                                        }, 100);
+                                </script>
+                                <!-- End of Script for live clock -->
+                            <!-- End of Live Clock -->
+                    </div>
+                <?php } ?>
+                <!-- End of EP info -->
+
                 <!-- Contest Info -->
                 <?php if($tableName == 't_contestant'){ ?>
                     <!-- <h2 style="text-align:center; color:black;">Contest</h2> -->
@@ -204,6 +235,26 @@
 
     <!-- Candidate Live Tally -->
     <?php if($tableName == 't_candidate'){ ?>
+        <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:#00295e">
+            <div class="card-header" style="background-color:#00295e">
+                <h2 style="color:white" class="text-center">Voting Live Tally</h2>
+            </div>
+            <?php foreach($data as $row) { ?>
+                <div class="card-body">
+                    <h6 style="color:white"><?php echo $row->candidateName; ?> - <?php echo $row->candidatePosition ?></h6>
+                    <div class="progress mb-2">
+                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
+                            style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
+                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    <!-- End of Candidate Live Tally -->
+
+    <!-- Candidate Live Tally -->
+    <?php if($tableName == 't_ep'){ ?>
         <div class="card col-lg-12 col-md-6 col-sm-6 d-flex justify-content-center align-self-stretch" style="background-color:#00295e">
             <div class="card-header" style="background-color:#00295e">
                 <h2 style="color:white" class="text-center">Voting Live Tally</h2>

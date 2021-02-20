@@ -138,6 +138,33 @@ else {
                                     <!-- END DATA TABLE -->
                                 </div>
                             </div>
+                            <!-- Vote Logs -->
+                                
+                            <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                            <div class="table-data__tool">
+                                                <h2>Vote Logs</h2>
+                                            </div>
+                                            <div class="table-responsive table-responsive-data2">
+                                                <table id="election_vote_table" class="table table-data3" style="width:100%"> 
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Hidden ID</th>
+                                                            <th>Candidate Name</th>
+                                                            <th>Voter Name</th>
+                                                            <th>Voter Student Number</th>
+                                                            <th>Voter Course</th>
+                                                            <th>Vote Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!-- End of Vote Logs -->
                             <!-- End of Data Table Content -->
                         </div>
 
@@ -580,6 +607,30 @@ $(document).on("click", ".btn_edit", function(){
     // End of updating partylist
 
 
+    // Load vote logs table
+    function load_ep_votes(){
+            var electionID = "<?php echo $data[0]->id ?>"
+            
+            electionDataTable = $('#election_vote_table').DataTable( {
+                "pageLength": 10,
+                "ajax": "<?php echo base_url()?>admin/reports/get_specific_votes/"+electionID+"/t_ep",
+                "columns": [
+                    { data: "id"},
+                    { data: "candidateName"},
+                    { data: "voterName"},
+                    { data: "userStudentNo"},
+                    { data: "userCourse"},
+                    { data: "voteDateCreated"},
+                ],
+                
+                "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
+                "order": [[0, "desc"]]
+
+            })
+        }
+
+        load_ep_votes()
+        // End of loadtable
 
 
 });

@@ -185,6 +185,90 @@
                 <?php } ?>
             <!-- End of Election Data -->
 
+            <!-- EP Data -->
+            <?php foreach($ep as $row){ ?>
+                    
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix election">
+                        <div class="portfolio__item">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 180px;
+                                        width: 180px;"
+                            class="team__item set-bg set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->orgLogo); ?>">
+                            </div>
+                            <br>
+                            <div class="portfolio__item__text">
+
+                                <!-- Live Clock -->
+                                <div >
+                                        <h3 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                            <p 
+                                            style=" color:red;
+                                                    font-family: 'Times New Roman', Times, serif;text-align:center;" 
+                                            id="<?php echo "liveclock_election".$row->id ?>">
+                                            </p>
+                                        </h3> 
+                                </div>  
+                                <br>
+                                <h4><?php echo $row->epName ?></h4>
+                                    <span><?php echo $row->orgName ?> / Election</span>
+                                    <div style="padding:10px;">
+                                                <button id = <?php echo 'btn_ep'.$row->id ?> class=''
+                                                    value='<?php echo $row->id?>'
+                                                    type='button'>
+                                                </button>
+                                    </div>
+
+                                    <!-- Script for live clock -->
+                                <script>
+                                    var dateEnd_<?php echo $row->id ?> = "<?php echo $row->epDateEnd ?>";
+
+                                        var ep_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_election".$row->id ?>');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+
+                                                    if(moment().diff("<?php echo $row->epDateEnd ?>", 'hours') > 0){
+                                                        ep_clock_<?php echo $row->id ?>.textContent = "Already ended."
+                                                    }
+                                                    else{
+                                                        ep_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    }
+                                        }, 100);
+
+                                        // check if already voted function
+                                            var userId = <?php echo $userId ?>;
+                                            var tableId = <?php echo $row->id ?>;
+                                            var refTableName = 'vote_epID';
+                                            var tableName = 't_vote_ep_candidate';
+
+                                            $.ajax({
+                                                url: '<?php echo base_url()?>user/vote/already_voted/'+userId+'/'+tableId+'/'+refTableName+'/'+tableName,
+                                                type: "GET",
+                                                // dataType: "JSON",
+
+                                                    success:function(data){
+                                                        if(data == 1 || moment().diff("<?php echo $row->epDateEnd ?>", 'hours') > 0){
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_ep');
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').textContent = "View Progress";
+                                                        }
+                                                        else{
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_ep');
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').textContent = "Vote";
+                                                        }
+                                                    }
+                                                    // End of success function
+                                            })
+                                            // End of ajax
+                                        
+                                </script>
+                                    <!-- End of Script for live clock -->
+                                <!-- End of Live Clock -->
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <!-- End of EP Data -->
+
             <!-- contest Data -->
             <?php foreach($contest as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest">
@@ -388,6 +472,19 @@ $(document).ready(function(){
             window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
         });
 
+        // Voting in ep
+        $(document).on("click", ".btn_vote_ep", function(){
+            var id = this.value;
+            var tableName = "t_candidate";
+            var refColumn = "candidateEpID";
+            var columnStatus = "candidateStatus";
+            var refTableName = "t_ep";
+        
+
+            window.location.href = "<?php echo base_url()?>user/vote/view_ep/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
+        }); 
+
+
         // Voting in contest
         $(document).on("click", ".btn_vote_contest", function(){
             var id = this.value;
@@ -416,6 +513,15 @@ $(document).ready(function(){
         $(document).on("click", ".btn_view_election", function(){
             var refTableID = this.value;
             var tableName = "t_candidate";
+        
+
+            window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
+        });
+
+        // Voting in EP
+        $(document).on("click", ".btn_view_ep", function(){
+            var refTableID = this.value;
+            var tableName = "t_ep";
         
 
             window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;

@@ -10,12 +10,28 @@
 
     date_default_timezone_set('Asia/Manila');
     $dateToday = date("Y-m-d h:i:sa");
-    $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->electionDateEnd));
+    if($table['tableName'] == 't_election'){
+        $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->electionDateEnd));
+        $password = $refInfo[0]->electionPassword;
+    }
+    else if($table['tableName'] == 't_ep'){
+        $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->epDateEnd));
+        $password = $refInfo[0]->epPassword;
+    }
+    else if($table['tableName'] == 't_contest'){
+        $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->contestDateEnd));
+        $password = $refInfo[0]->contestPassword;
+    }
+    else if($table['tableName'] == 't_poll'){
+        $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->pollDateEnd));
+        $password = $refInfo[0]->pollPassword;
+    }
+    
 
     
-    if($dateEnd <= $dateToday){
-        header("location: ".base_url()."user/forbidden/already_ended");
-    }
+    // if($dateEnd <= $dateToday){
+    //     header("location: ".base_url()."user/forbidden/already_ended");
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +124,7 @@
 
             <!-- Ref Info -->
                 <!-- Election Info -->
-                <?php if($table['tableName'] == 't_candidate'){ ?>
+                <?php if($table['tableName'] == 't_election'){ ?>
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->electionName?></h2>
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
@@ -139,8 +155,40 @@
                 <?php } ?>
                 <!-- End of election info -->
 
+                <!-- EP Info -->
+                <?php if($table['tableName'] == 't_ep'){ ?>
+                    <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->epName?></h2>
+                    <br>
+                    <div class="d-flex justify-content-center breadcrumb__text">
+                            <div class=" text-center">
+                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->epDescription?><p></h5>
+                            </div>
+                    </div>
+                            <!-- Live Clock -->
+                            <div style="padding-top:25px" class="d-flex justify-content-end text-center">
+                                <h4 style=color:black; class="fa fa-clock-o"> Voting Ends in: 
+                                    <p style=" color:red;" id="liveclock">
+                                    </p>
+                                </h4> 
+                            </div>
+                                <!-- Script for live clock -->
+                                <script>
+                                        var dateEnd = "<?php echo $refInfo[0]->epDateEnd?>";
+
+                                        var clock = document.getElementById('liveclock');
+                                                setInterval(() => {
+                                                    // clock.textContent 
+                                                    clock.textContent = moment(dateEnd).endOf('seconds').fromNow();
+                                        }, 100);
+                                </script>
+                                <!-- End of Script for live clock -->
+                            <!-- End of Live Clock -->
+                    
+                <?php } ?>
+                <!-- End of EP info -->
+
                 <!-- Contest Info -->
-                <?php if($table['tableName'] == 't_contestant'){ ?>
+                <?php if($table['tableName'] == 't_contest'){ ?>
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->contestName?></h2>
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
@@ -172,7 +220,7 @@
                 <!-- End of Contest info -->
 
                 <!-- poll Info -->
-                <?php if($table['tableName'] == 't_option'){ ?>
+                <?php if($table['tableName'] == 't_poll'){ ?>
                     <h2 style="text-align:center; color:black;"><?php echo $refInfo[0]->pollName?></h2>
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
@@ -213,7 +261,7 @@
 
 
     <!-- Election Data -->
-    <?php if($table['tableName'] == 't_candidate'){ ?>
+    <?php if($table['tableName'] == 't_election'){ ?>
             <!-- Election HTML Display -->
             <?php foreach($data as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix election d-flex justify-content-center align-self-stretch">
@@ -227,12 +275,13 @@
                             <br>
                             <div class="portfolio__item__text">
                                 <h4><?php echo $row->candidateName ?></h4>
+                                <h6><?php echo $row->candidatePosition ?></h6>
                                     <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>                  
                             </div>
                             <div class="mt-auto" style="margin: auto;">
                                 <ul class="ks-cboxtags">
                                     <li>
-                                        <input type="checkbox" id="<?php echo $row->id ?>" name="selected_candidate"
+                                        <input type="checkbox" id="<?php echo $row->id ?>" class="selected_candidate"
                                         value="<?php echo $row->id ?>">
                                         <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
                                         <br>
@@ -254,9 +303,54 @@
     <?php } ?>
     <!-- End of Election data -->
 
+    <!-- EP Data -->
+    <?php if($table['tableName'] == 't_ep'){ ?>
+            <!-- EP HTML Display -->
+            <?php foreach($data as $row){ ?>
+                    <?php $position;?>
+                    <div class="col-lg-4 col-md-6 col-sm-6 mix election d-flex justify-content-center align-self-stretch">
+                        <div class="d-flex flex-column">
+                            <div style="margin: auto;
+                                        border-radius: 50%;
+                                        height: 200px;
+                                        width: 200px;"
+                                        class="team__item set-bg" data-setbg="<?php echo base_url('resources/images/'.$row->candidateImage); ?>">
+                            </div>
+                            <br>
+                            <div class="portfolio__item__text">
+                                <h4><?php echo $row->candidateName ?></h4>
+                                <h5 style="color:red"><?php echo $row->candidatePosition ?></h5>
+                                <h6><?php echo $row->partylistName ?></h6><br>
+                                <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>                  
+                            </div>
+                            <div class="mt-auto" style="margin: auto;">
+                                <ul class="ks-cboxtags">
+                                    <li>
+                                        <input type="radio" id="<?php echo $row->id ?>" class="selected_candidate" name="<?php echo $row->candidatePosition;?>"
+                                        value="<?php echo $row->id ?>">
+                                        <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
+                                        <br>
+                                        <br>
+                                    </li>
+                                </ul>      
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+
+            <!-- EP Submit Vote Button -->
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-success" id="btn_vote_ep_candidate" title="Submit Vote" type="button">Submit Vote</button>
+            </div>
+            <!-- End of EP Submit Vote Button -->
+                
+        <!-- End EP HTML Display-->
+    <?php } ?>
+    <!-- End of EP data -->
+
 
     <!-- Contest Data -->
-    <?php if($table['tableName'] == 't_contestant'){ ?>
+    <?php if($table['tableName'] == 't_contest'){ ?>
             <!-- Contest HTML Display -->
             <?php foreach($data as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix contest d-flex justify-content-center align-self-stretch">
@@ -299,7 +393,7 @@
 
             
     <!-- Poll Data -->
-    <?php if($table['tableName'] == 't_option'){ ?>
+    <?php if($table['tableName'] == 't_poll'){ ?>
             <!-- Poll HTML Display -->
             <?php foreach($data as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix poll d-flex justify-content-center align-self-stretch">
@@ -359,8 +453,9 @@
 <script>
 // Start of script
 $(document).ready(function(){
+    var tableName = "<?php echo $table['tableName']?>"
+    var tablePassword = "<?php echo $password ?>"
 
-    var tablePassword = "<?php echo $refInfo[0]->electionPassword ?>"
 
     if (tablePassword != ""){
 
@@ -412,7 +507,7 @@ $(document).ready(function(){
         console.log(refTableID)
         
         // Insert selected candidate ID
-        $('input[name="selected_candidate"]:checked').each(function() {
+        $('input[class="selected_candidate"]:checked').each(function() {
             selected.push(this.value);
         });
         console.log(selected)
@@ -450,7 +545,60 @@ $(document).ready(function(){
                                 }
                         })
     });
-    // End of Voting Candidate
+    // End of Voting EP Candidate
+
+    // Voting Candidate
+    $(document).on("click", "#btn_vote_ep_candidate", function(){
+        $("#btn_vote_ep_candidate").attr("disabled", true)
+        
+        var tableName = "t_ep";
+
+        var refTableID = $("#refTableID");
+        var refTableID = refTableID.text();
+
+        var selected = [];
+        console.log(refTableID)
+        
+        // Insert selected candidate ID
+        $('input[class="selected_candidate"]:checked').each(function() {
+            selected.push(this.value);
+        });
+        console.log(selected)
+                            Swal.fire({
+                                title: 'Are you sure on your votes?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes!'
+                                }).then((result) => {
+                                    $("#btn_vote_ep_candidate").attr("disabled", false);
+                                if (result.isConfirmed) {
+                                    // Ajax call
+                                        $.ajax({
+                                            url: '<?php echo base_url()?>user/vote/vote_ep_candidate',
+                                            type: 'post',
+                                            data: {'selected': selected,
+                                                    'refTableID': refTableID,
+                                                    'vote_userID': vote_userID},
+
+                                                        success: function(){
+                                                            Swal.fire({
+                                                                title: 'Success!',
+                                                                text: 'You successfully voted.',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ok'
+                                                                }).then((result) => {
+                                                                    window.location.href = "<?php echo base_url()?>user/progress/index/"+refTableID+"/"+tableName;
+                                                                })
+                                                        }
+                                        })
+                                    // End of ajax call 
+                                }
+                        })
+    });
+    // End of Voting EP Candidate
 
     // Voting Contestant
     $(document).on("click", "#btn_vote_contestant", function(){

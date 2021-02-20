@@ -24,9 +24,9 @@
                 user_month[data.user_month[i].month -1] = (data.user_month[i].count)
               }
               }
+              // end of ajax call
     })
-    // end of ajax call
-    
+
     var user_month_data = [user_month[0], user_month[1], user_month[2], user_month[3]
                               , user_month[4], user_month[5], user_month[6], user_month[7]
                               , user_month[8], user_month[9], user_month[10], user_month[11]]

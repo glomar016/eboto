@@ -223,6 +223,25 @@ class Reports_model extends CI_Model {
         return $data;
     }
 
+    function get_specific_ep_votes($id){
+        $this->db->select("t_vote_ep_candidate.id
+                        , epName
+                        , candidateName 
+                        , (userFirstName+' '+userLastName+' ') AS voterName
+                        , userStudentNo
+                        , userCourse
+                        , FORMAT(voteDateCreated, 'MMM dd, yyyy - hh:mm tt') as voteDateCreated");
+        $this->db->from('t_vote_ep_candidate');
+        $this->db->join('t_ep', 't_ep.id = t_vote_ep_candidate.vote_epID', 'left');
+        $this->db->join('t_user', 't_user.id = t_vote_ep_candidate.vote_userID', 'left');
+        $this->db->join('t_candidate', 't_candidate.id = t_vote_ep_candidate.vote_candidateID', 'left');
+        $this->db->where('t_vote_ep_candidate.vote_epID', $id);
+        $this->db->order_by('voteDateCreated');
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
     function get_specific_contest_votes($id){
         $this->db->select("t_vote_contestant.id
                         , contestName

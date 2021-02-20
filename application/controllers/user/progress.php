@@ -34,6 +34,13 @@ class Progress extends CI_Controller {
                                                             , "t_candidate", "t_vote_candidate"
                                                             , "vote_candidateID", "candidateName");
         }
+
+        if($tableName == 't_ep'){
+            $data['data'] = $this->database_model->get_candidate_votes($refTableID, 'candidateEpID'
+                                                            , "t_candidate", "t_vote_ep_candidate"
+                                                            , "vote_candidateID", "candidateName");
+        }
+
         else if($tableName == 't_contestant'){
             $data['data'] = $this->database_model->get_votes($refTableID, 'contestantContestID'
                                                             , "t_contestant", "t_vote_contestant"
@@ -48,6 +55,9 @@ class Progress extends CI_Controller {
         // Ref Table Info
         if($tableName == 't_candidate'){
             $refTableName = 't_election';
+        }
+        if($tableName == 't_ep'){
+            $refTableName = 't_ep';
         }
         else if($tableName == 't_contestant'){
             $refTableName = 't_contest';
