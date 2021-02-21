@@ -185,7 +185,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="contestantName" class=" form-control-label"> Name</label>
+                                            <label for="contestantName" class=" form-control-label"> Name <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
@@ -195,7 +195,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
-                                            <label for="contestantDescription" class=" form-control-label">Description </label>
+                                            <label for="contestantDescription" class=" form-control-label">Description <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <textarea name="contestantDescription" id="contestantDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
@@ -204,7 +204,7 @@ else {
                                     <div class="row form-group">
                                                 <div class="col col-md-3">
                                                 <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="contestantImage" class=" form-control-label">Image</label>
+                                                    <label for="contestantImage" class=" form-control-label">Image<small style=color:red> *</small></label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
                                                     <input type="file" id="contestantImage" name="contestantImage" accept="image/*" size="20" class="form-control-file">
@@ -239,7 +239,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="editcontestantName" class=" form-control-label"> Name</label>
+                                            <label for="editcontestantName" class=" form-control-label"> Name  </label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>

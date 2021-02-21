@@ -139,7 +139,7 @@ else {
                             <div class="row form-group">
                                         <div class="col col-md-4">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="organizationName" class=" form-control-label">Organization Name</label>
+                                            <label for="organizationName" class=" form-control-label">Organization Name <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="organizationName" name="organizationName" placeholder="Name of Organization" maxlength="40" class="form-control">
@@ -148,7 +148,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-4">
                                         <i style =padding-right:16px; class="fa fa-calendar"></i>
-                                            <label for="organizationLogo" class=" form-control-label">Organization Logo</label>
+                                            <label for="organizationLogo" class=" form-control-label">Organization Logo <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                         <input type="file" name="organizationLogo" id="organizationLogo" accept="image/*" size="20" class="form-control"/>

@@ -187,7 +187,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="candidateName" class=" form-control-label"> Name</label>
+                                            <label for="candidateName" class=" form-control-label"> Name <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
@@ -197,7 +197,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-address-card"></i>
-                                            <label for="candidatePosition" class=" form-control-label">Position</label>
+                                            <label for="candidatePosition" class=" form-control-label">Position <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="candidatePosition" name="candidatePosition" placeholder="Position" class="form-control" maxlength="50">
@@ -206,7 +206,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
-                                            <label for="candidateDescription" class=" form-control-label">Description </label>
+                                            <label for="candidateDescription" class=" form-control-label">Description <small style=color:red> *</small> </label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <textarea name="candidateDescription" id="candidateDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
@@ -215,7 +215,7 @@ else {
                                     <div class="row form-group">
                                                 <div class="col col-md-3">
                                                 <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="candidateImage" class=" form-control-label">Image</label>
+                                                    <label for="candidateImage" class=" form-control-label">Image <small style=color:red> *</small></label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
                                                     <input type="file" id="candidateImage" name="candidateImage" accept="image/*" size="20" class="form-control-file">
