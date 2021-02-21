@@ -1,6 +1,6 @@
 <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+                <a href="<?php echo base_url()?>admin/dashboard">
                     <img src="<?php echo base_url()?>resources/images/icon/eLogoFont.png" alt="PUP E-Boto" />
                 </a>
             </div>

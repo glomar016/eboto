@@ -281,7 +281,7 @@
                             <div class="mt-auto" style="margin: auto;">
                                 <ul class="ks-cboxtags">
                                     <li>
-                                        <input type="checkbox" id="<?php echo $row->id ?>" class="selected_candidate"
+                                        <input type="radio" id="<?php echo $row->id ?>" class="selected_candidate" name="<?php echo $row->candidatePosition;?>"
                                         value="<?php echo $row->id ?>">
                                         <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
                                         <br>

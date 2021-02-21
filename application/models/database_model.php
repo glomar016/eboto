@@ -184,6 +184,7 @@ class Database_model extends CI_Model {
         $this->db->where($tableName.".".$refColumn, $refTableID);
         $this->db->group_by($tableName.'.'.$name);
         $this->db->group_by($tableName.'.candidatePosition');
+        $this->db->group_by($tableName.'.id');
         $this->db->order_by('vote_counts', "DESC");
         $query = $this->db->get();
         $data = $query->result();

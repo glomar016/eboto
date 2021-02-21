@@ -58,7 +58,7 @@
 
 </head>
 
-<body>
+<body style="background-color:#00295e">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -87,7 +87,7 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <h1 class="text-center"> You already voted </h1>
+    <h1 class="text-center" style="color:white"> You already voted </h1>
             </div>
             <!-- <div class="row">
                 <div class="col-lg-12">
