@@ -96,11 +96,11 @@ else {
                                 <!-- DATA TABLE -->
                                 
                                 <div class="table-data__tool">
-                                        <h2>List of poll</h2>
+                                        <h2>List of Poll</h2>
                                     <div class="table-data__tool-right">
                                         <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#pollModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
-                                        Create poll </button>
+                                        Create Poll </button>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
@@ -138,7 +138,7 @@ else {
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:#900000;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create poll</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Poll</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -149,7 +149,7 @@ else {
                             <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="pollName" class=" form-control-label">Poll Name</label>
+                                            <label for="pollName" class=" form-control-label">Poll Name <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="pollName" name="pollName" placeholder="Name of poll" maxlength="50" class="form-control">
@@ -159,7 +159,7 @@ else {
                                         <div class="row form-group">
                                             <div class="col col-md-3">
                                             <i style =padding-right:16px; class="fa fa-group"></i>
-                                                <label for="pollRestriction" class=" form-control-label">Restriction</label>
+                                                <label for="pollRestriction" class=" form-control-label">Restriction<small style=color:red> *</small></label>
                                             </div>
                                             <div class="col-4 col-md-8">
                                                 <select name="pollOrg" id="pollOrg" class="form-control">

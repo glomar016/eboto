@@ -143,7 +143,7 @@ else {
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:maroon;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add ep_candidate</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Election Partylist Candidate </h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -154,7 +154,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="ep_candidateName" class=" form-control-label"> Name</label>
+                                            <label for="ep_candidateName" class=" form-control-label"> Name <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
@@ -165,7 +165,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-address-card"></i>
-                                            <label for="ep_candidatePosition" class=" form-control-label">Position</label>
+                                            <label for="ep_candidatePosition" class=" form-control-label">Position <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="ep_candidatePosition" name="ep_candidatePosition" placeholder="Position" class="form-control" maxlength="50">
@@ -174,7 +174,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
-                                            <label for="ep_candidateDescription" class=" form-control-label">Description </label>
+                                            <label for="ep_candidateDescription" class=" form-control-label">Description<small style=color:red> *</small> </label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <textarea name="ep_candidateDescription" id="ep_candidateDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
@@ -183,7 +183,7 @@ else {
                                     <div class="row form-group">
                                                 <div class="col col-md-3">
                                                 <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="ep_candidateImage" class=" form-control-label">Image</label>
+                                                    <label for="ep_candidateImage" class=" form-control-label">Image <small style=color:red> *</small></label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
                                                     <input type="file" id="ep_candidateImage" name="ep_candidateImage" accept="image/*" size="20" class="form-control-file">

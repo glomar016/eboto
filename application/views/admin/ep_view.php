@@ -197,7 +197,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-user"></i>
-                                            <label for="partylistName" class=" form-control-label"> Name</label>
+                                            <label for="partylistName" class=" form-control-label"> Name <small style=color:red> *</small></label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="id" name="id" value="<?php echo $data[0]->id?>" hidden>
@@ -207,7 +207,7 @@ else {
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
-                                            <label for="partylistDescription" class=" form-control-label">Description </label>
+                                            <label for="partylistDescription" class=" form-control-label">Description <small style=color:red> *</small> </label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <textarea name="partylistDescription" id="partylistDescription" rows="4" placeholder="Description" class="form-control" maxlength="200"></textarea>
@@ -216,7 +216,7 @@ else {
                                     <div class="row form-group">
                                                 <div class="col col-md-3">
                                                 <i style =padding-right:16px; class="fa fa-file-image-o"></i>
-                                                    <label for="partylistImage" class=" form-control-label">Image</label>
+                                                    <label for="partylistImage" class=" form-control-label">Image <small style=color:red> *</small></label>
                                                 </div>
                                                 <div class="col-4 col-md-8">
                                                     <input type="file" id="partylistImage" name="partylistImage" accept="image/*" size="20" class="form-control-file">

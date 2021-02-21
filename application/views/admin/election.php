@@ -96,11 +96,11 @@ else {
                                 <!-- DATA TABLE -->
                                 
                                 <div class="table-data__tool">
-                                        <h2>List of election</h2>
+                                        <h2>List of Election</h2>
                                     <div class="table-data__tool-right">
                                         <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#electionModal">   
                                         <i style=padding:3px; class="fa fa-plus"></i> 
-                                        Create election </button>
+                                        Create Election </button>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
@@ -138,7 +138,7 @@ else {
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:#900000;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create election</h3>
+							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Election</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -149,7 +149,7 @@ else {
                                 <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-trophy"></i>
-                                            <label for="electionName" class=" form-control-label">Election Name</label>
+                                            <label for="electionName" class=" form-control-label">Election Name <small style=color:red> *</small> </label>
                                         </div>
                                         <div class="col-4 col-md-8">
                                             <input type="text" id="electionName" name="electionName" placeholder="Name of election" maxlength="50" class="form-control">
@@ -159,7 +159,7 @@ else {
                                         <div class="row form-group">
                                             <div class="col col-md-3">
                                             <i style =padding-right:16px; class="fa fa-group"></i>
-                                                <label for="electionOrg" class=" form-control-label">Restriction</label>
+                                                <label for="electionOrg" class=" form-control-label">Restriction <small style=color:red> *</small></label>
                                             </div>
                                             <div class="col-4 col-md-8">
                                                 <select name="electionOrg" id="electionOrg" class="form-control">
