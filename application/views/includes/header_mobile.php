@@ -2,8 +2,9 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="<?php echo base_url()?>resources/images/icon/logo.png" alt="CoolAdmin" />
+                        
+                        <a href="<?php echo base_url()?>">
+                            <img src="<?php echo base_url()?>resources/images/icon/eLogoFont.png" alt="PUP E-Boto" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">

@@ -334,7 +334,7 @@ function loadviewdata(){
             clock.textContent = moment(epDateEnd).endOf('seconds').fromNow();
         }, 1000);
 
-            $( ".partylistList" ).append("<p>Description: "+epDescription+"</p>");
+            $( ".partylistList" ).append("<p style='white-space: pre-wrap;'>Description: "+epDescription+"</p>");
             $( ".partylistList" ).append("<p>Date Start: "+(moment(epDateStart).format('LL'))+"</p>");
             $( ".partylistList" ).append("<p>Date End: "+(moment(epDateEnd).format('LL'))+"</p>");
 }

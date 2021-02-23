@@ -129,7 +129,7 @@
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
                             <div class=" text-center">
-                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->electionDescription?><p></h5>
+                                <p style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->electionDescription?></p>
                             </div>
                     </div>
                             <!-- Live Clock -->
@@ -161,7 +161,7 @@
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
                             <div class=" text-center">
-                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->epDescription?><p></h5>
+                                <p style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->epDescription?></p>
                             </div>
                     </div>
                             <!-- Live Clock -->
@@ -193,7 +193,7 @@
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
                             <div class=" text-center">
-                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->contestDescription?><p></h5>
+                                <p style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->contestDescription?></p>
                             </div>
                     </div>
                             <!-- Live Clock -->
@@ -225,7 +225,7 @@
                     <br>
                     <div class="d-flex justify-content-center breadcrumb__text">
                             <div class=" text-center">
-                                <h5 style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->pollDescription?><p></h5>
+                                <p style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->pollDescription?></p>
                             </div>
                     </div>
                             <!-- Live Clock -->
@@ -281,12 +281,19 @@
                             <div class="mt-auto" style="margin: auto;">
                                 <ul class="ks-cboxtags">
                                     <li>
+                                    <div class="text-center">
                                         <input type="radio" id="<?php echo $row->id ?>" class="selected_candidate" name="<?php echo $row->candidatePosition;?>"
                                         value="<?php echo $row->id ?>">
                                         <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
                                         <br>
+                                        <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                        type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
+                                        "document.getElementById('<?php echo $row->id ?>').checked = false">
+                                    </div>
+                                        <br>
                                         <br>
                                     </li>
+
                                 </ul>      
                             </div>
                         </div>
@@ -326,9 +333,15 @@
                             <div class="mt-auto" style="margin: auto;">
                                 <ul class="ks-cboxtags">
                                     <li>
-                                        <input type="radio" id="<?php echo $row->id ?>" class="selected_candidate" name="<?php echo $row->candidatePosition;?>"
-                                        value="<?php echo $row->id ?>">
-                                        <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
+                                        <div class="text-center">
+                                            <input type="radio" id="<?php echo $row->id ?>" class="selected_candidate" name="<?php echo $row->candidatePosition;?>"
+                                            value="<?php echo $row->id ?>">
+                                            <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
+                                            <br>
+                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                            type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
+                                            "document.getElementById('<?php echo $row->id ?>').checked = false">
+                                        </div>
                                         <br>
                                         <br>
                                     </li>
@@ -366,12 +379,19 @@
                                 <h4><?php echo $row->contestantName ?></h4>
                                     <span style="white-space: pre-wrap;"><?php echo $row->contestantDescription ?></span>                  
                             </div>
-                            <div class="mt-auto">
+                            <div class="mt-auto"  style="margin: auto;">
                                 <ul class="ks-cboxtags">
                                     <li>
-                                        <input type="radio" id="<?php echo $row->id ?>" name="selected_contestant"
-                                        value="<?php echo $row->id ?>">
-                                        <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
+                                        <div class="text-center">
+                                            <input type="checkbox" id="<?php echo $row->id ?>" name="selected_contestant"
+                                            value="<?php echo $row->id ?>">
+                                            <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
+                                            <br>
+                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                            type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
+                                            "document.getElementById('<?php echo $row->id ?>').checked = false">
+                                        </div>
+                                        
                                         <br>
                                         <br>
                                     </li>
@@ -397,18 +417,28 @@
             <!-- Poll HTML Display -->
             <?php foreach($data as $row){ ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 mix poll d-flex justify-content-center align-self-stretch">
-                        <div>
+                        <div class="d-flex flex-column">
                             <br>
                             <div class="portfolio__item__text">
                                 <h4 style="white-space: pre-wrap;"><?php echo $row->optionName ?></h4>
-                                <ul class="ks-cboxtags">
-                                <li>
-                                    <input type="radio" id="<?php echo $row->id ?>" name="selected_option"
-                                     value="<?php echo $row->id ?>">
-                                    <label for="<?php echo $row->id ?>"><strong>Select this option</strong></label>
-                                </li>
-                            </ul>                        
                             </div>
+                            <div class="mt-auto" style="margin: auto;">
+                                <ul class="ks-cboxtags">
+                                    <li>
+                                        <div class="text-center">
+                                            <input type="checkbox" id="<?php echo $row->id ?>" name="selected_option"
+                                            value="<?php echo $row->id ?>">
+                                            <label for="<?php echo $row->id ?>"><strong>Select this option</strong></label>
+                                            <br>
+                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                            type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
+                                            "document.getElementById('<?php echo $row->id ?>').checked = false">
+                                        </div>
+                                        <br>
+                                        <br>
+                                    </li>
+                                </ul>   
+                            </div>            
                         </div>
                     </div>
                 <?php } ?>
@@ -453,6 +483,8 @@
 <script>
 // Start of script
 $(document).ready(function(){
+
+
     var tableName = "<?php echo $table['tableName']?>"
     var tablePassword = "<?php echo $password ?>"
 

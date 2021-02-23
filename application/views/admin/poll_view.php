@@ -291,7 +291,7 @@ $(document).ready(function(){
                 clock.textContent = moment(pollDateEnd).endOf('seconds').fromNow();
             }, 1000);
 
-                $( ".optionList" ).append("<p>Description: "+pollDescription+"</p>");
+                $( ".optionList" ).append("<p style='white-space: pre-wrap;'>Description: "+pollDescription+"</p>");
                 $( ".optionList" ).append("<p>Date Start: "+(moment(pollDateStart).format('LL'))+"</p>");
                 $( ".optionList" ).append("<p>Date End: "+(moment(pollDateEnd).format('LL'))+"</p>");
     }

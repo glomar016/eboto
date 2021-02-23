@@ -294,7 +294,7 @@
                                 </div>  
                                 <br>
                                 <h4><?php echo $row->contestName ?></h4>
-                                    <span><?php echo $row->orgName ?> / contest</span>
+                                    <span><?php echo $row->orgName ?> / Contest</span>
                                     <div style="padding:10px;">
                                                 <button id = <?php echo 'btn_contest'.$row->id ?> class=''
                                                     value='<?php echo $row->id?>'
@@ -371,7 +371,7 @@
                                 </div>  
                                 <br>
                                 <h4><?php echo $row->pollName ?></h4>
-                                    <span><?php echo $row->orgName ?> / poll</span>
+                                    <span><?php echo $row->orgName ?> / Poll</span>
                                     <div style="padding:10px;">
                                                 <button id = <?php echo 'btn_poll'.$row->id ?> class=''
                                                     value='<?php echo $row->id?>'

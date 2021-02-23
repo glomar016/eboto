@@ -348,7 +348,7 @@ $(document).ready(function(){
                 clock.textContent = moment(electionDateEnd).endOf('seconds').fromNow();
             }, 1000);
 
-                $( ".candidateList" ).append("<p>Description: "+electionDescription+"</p>");
+                $( ".candidateList" ).append("<p style='white-space: pre-wrap;''>Description: "+electionDescription+"</p>");
                 $( ".candidateList" ).append("<p>Date Start: "+(moment(electionDateStart).format('LL'))+"</p>");
                 $( ".candidateList" ).append("<p>Date End: "+(moment(electionDateEnd).format('LL'))+"</p>");
     }

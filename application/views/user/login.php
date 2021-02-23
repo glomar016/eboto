@@ -132,38 +132,55 @@ $('#login_form').on('submit', function(e){
     var studentNumber = document.login_form.userStudentNo.value;
     var password = document.login_form.userPassword.value;
 
-    var form = $('#login_form');                                
-    // ajax post
-    $.ajax({
-        url: '<?php echo base_url()?>user/login/submit',
-        type: 'post',
-        data: form.serialize(),
 
-            success: function(data){
-                    var data = jQuery.parseJSON(data)
-                    if(data.result == 'Error'){
-                        Swal.fire({
-                        title: 'Failed!',
-                        text: 'Invalid Student Number and Password.',
-                        icon: 'error',
-                        confirmButtonText: 'Ok'
-                        }).then((result) => {
-                                $("#btn_login").val("Submit").attr("disabled", false);
-                                $('#login_form')[0].reset();
-                        })
-                        // End of Swal
+    if(studentNumber == "" && password == ""){
+        Swal.fire({
+                    title: 'Failed!',
+                    text: 'Invalid Student Number and Password.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                    }).then((result) => {
+                            $("#btn_login").val("Submit").attr("disabled", false);
+                            $('#login_form')[0].reset();
+                    })
+                    $("#btn_login").val("Submit").attr("disabled", false);
+                    $('#login_form')[0].reset();
+    }
+    else{
+        var form = $('#login_form');                                
+        // ajax post
+        $.ajax({
+            url: '<?php echo base_url()?>user/login/submit',
+            type: 'post',
+            data: form.serialize(),
+
+                success: function(data){
+                        var data = jQuery.parseJSON(data)
+                        if(data.result == 'Error'){
+                            Swal.fire({
+                            title: 'Failed!',
+                            text: 'Invalid Student Number and Password.',
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                    $("#btn_login").val("Submit").attr("disabled", false);
+                                    $('#login_form')[0].reset();
+                            })
+                            // End of Swal
+                        }
+                        else if(data.result == 'Success' && data.userType == 'User'){
+                            window.location.href = "<?php echo base_url()?>user/vote";
+                        }
+                        else if(data.result == 'Success' && data.userType == 'Admin'){
+                            window.location.href = "<?php echo base_url()?>admin/dashboard";
+                        }
+                    
                     }
-                    else if(data.result == 'Success' && data.userType == 'User'){
-                        window.location.href = "<?php echo base_url()?>user/vote";
-                    }
-                    else if(data.result == 'Success' && data.userType == 'Admin'){
-                        window.location.href = "<?php echo base_url()?>admin/dashboard";
-                    }
-                
-                }
-            // End of success function
-    })
-    // End of ajax post
+                // End of success function
+        })
+        // End of ajax post
+    }
+    
 })
 
 

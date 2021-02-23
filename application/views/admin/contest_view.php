@@ -328,7 +328,7 @@ $(document).ready(function(){
                 clock.textContent = moment(contestDateEnd).endOf('seconds').fromNow();
             }, 1000);
 
-                $( ".contestantList" ).append("<p>Description: "+contestDescription+"</p>");
+                $( ".contestantList" ).append("<p style='white-space: pre-wrap;'>Description: "+contestDescription+"</p>");
                 $( ".contestantList" ).append("<p>Date Start: "+(moment(contestDateStart).format('LL'))+"</p>");
                 $( ".contestantList" ).append("<p>Date End: "+(moment(contestDateEnd).format('LL'))+"</p>");
     }
