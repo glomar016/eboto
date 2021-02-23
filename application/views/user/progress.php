@@ -353,7 +353,7 @@ $refTableID = $this->uri->segment(4);
                             var div = "";
 
                             for(var i= 0; i < data['data'].length; i++){
-                                div += `<div class="card-body" id="constestant_votes${data['data'][i].id}">
+                                div += `<div class="card-body" id="contestant_votes${data['data'][i].id}">
                                             </div>`
                             }
                             $('.contestantList').html(div)
