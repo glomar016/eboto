@@ -383,7 +383,7 @@
                                 <ul class="ks-cboxtags">
                                     <li>
                                         <div class="text-center">
-                                            <input type="checkbox" id="<?php echo $row->id ?>" name="selected_contestant"
+                                            <input type="radio" id="<?php echo $row->id ?>" name="selected_contestant"
                                             value="<?php echo $row->id ?>">
                                             <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
                                             <br>
@@ -426,7 +426,7 @@
                                 <ul class="ks-cboxtags">
                                     <li>
                                         <div class="text-center">
-                                            <input type="checkbox" id="<?php echo $row->id ?>" name="selected_option"
+                                            <input type="radio" id="<?php echo $row->id ?>" name="selected_option"
                                             value="<?php echo $row->id ?>">
                                             <label for="<?php echo $row->id ?>"><strong>Select this option</strong></label>
                                             <br>

@@ -1,3 +1,7 @@
+<?php
+$refTableID = $this->uri->segment(4);
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -108,8 +112,8 @@
                     <!-- <h2 style="text-align:center; color:black;">Election</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:50px;">
                             <div class="w-50 p-3">
-                                <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
-                                <br><p style=color:black;><?php echo $refInfo[0]->electionDescription?><p></h2>
+                                <h1 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->electionName?>
+                                <br><br><p style=color:black;><?php echo $refInfo[0]->electionDescription?><p></h2>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
@@ -139,8 +143,8 @@
                     <!-- <h2 style="text-align:center; color:black;">Election</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:50px;">
                             <div class="w-50 p-3">
-                                <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->epName?>
-                                <br><p style=color:black;><?php echo $refInfo[0]->epDescription?><p></h2>
+                                <h1 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->epName?>
+                                <br><br><p style=color:black;><?php echo $refInfo[0]->epDescription?><p></h2>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
@@ -170,8 +174,8 @@
                     <!-- <h2 style="text-align:center; color:black;">Contest</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
                             <div class="w-50 p-3">
-                                <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
-                                <br><p style=color:black;><?php echo $refInfo[0]->contestDescription?><p></h2>
+                                <h1 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->contestName?>
+                                <br><br><p style=color:black;><?php echo $refInfo[0]->contestDescription?><p></h2>
                             </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
@@ -201,8 +205,8 @@
                     <!-- <h2 style="text-align:center; color:black;">Poll</h2> -->
                     <div class="d-flex justify-content-between breadcrumb__text" style="padding-right:100px; padding-left:50px">
                                 <div class="w-50 p-3">
-                                    <h2 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>
-                                    <br><p style=color:black;><?php echo $refInfo[0]->pollDescription?><p></h2>
+                                    <h1 style="color:black;white-space:pre-wrap;"><?php echo $refInfo[0]->pollName?>
+                                    <br><br><p style=color:black;><?php echo $refInfo[0]->pollDescription?><p></h2>
                                 </div>
                             <!-- Live Clock -->
                             <div style="padding-top:25px" class="text-center">
@@ -239,16 +243,43 @@
             <div class="card-header" style="background-color:#00295e">
                 <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
-            <?php foreach($data as $row) { ?>
-                <div class="card-body">
-                    <h6 style="color:white"><?php echo $row->candidateName; ?> - <?php echo $row->candidatePosition ?></h6>
-                    <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
-                            style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
-                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
-                    </div>
-                </div>
-            <?php } ?>
+            <div class="candidateList">
+            
+            </div>
+
+            <script>
+                setInterval(() => {
+                    $.ajax({
+                        url: '<?php echo base_url() ?>user/progress/get_votes/'+'<?php echo $tableName.'/'.$refTableID;?>',
+                        type: 'GET',
+                        datatype: 'JSON',
+
+                        success:function(data){
+                            var data = jQuery.parseJSON(data)
+                            var div = "";
+
+                            for(var i= 0; i < data['data'].length; i++){
+                                div += `<div class="card-body" id="candidate_votes${data['data'][i].id}">
+                                            </div>`
+                            }
+                            $('.candidateList').html(div)
+
+                            for(var i=0; i < data['data'].length; i++){
+                                var div_id = 'candidate_votes'+(data['data'][i].id);
+
+                                document.getElementById(div_id).innerHTML = `
+                                    <h6 style="color:white">${data['data'][i].candidateName} - ${data['data'][i].candidatePosition}</h6>
+                                        <div class="progress mb-2" >
+                                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
+                                            style="width: ${data['data'][i].vote_percentage}%" aria-valuenow="${data['data'][i].vote_counts}"
+                                            aria-valuemin="0">${data['data'][i].vote_counts}
+                                        </div>`
+                                
+                            }
+                        }
+                    })
+                }, 100); 
+            </script>
         </div>
     <?php } ?>
     <!-- End of Candidate Live Tally -->
@@ -259,16 +290,43 @@
             <div class="card-header" style="background-color:#00295e">
                 <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
-            <?php foreach($data as $row) { ?>
-                <div class="card-body">
-                    <h6 style="color:white"><?php echo $row->candidateName; ?> - <?php echo $row->candidatePosition ?></h6>
-                    <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
-                            style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
-                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
-                    </div>
-                </div>
-            <?php } ?>
+            <div class="epCandidateList">
+            
+            </div>
+
+            <script>
+                setInterval(() => {
+                    $.ajax({
+                        url: '<?php echo base_url() ?>user/progress/get_votes/'+'<?php echo $tableName.'/'.$refTableID;?>',
+                        type: 'GET',
+                        datatype: 'JSON',
+
+                        success:function(data){
+                            var data = jQuery.parseJSON(data)
+                            var div = "";
+
+                            for(var i= 0; i < data['data'].length; i++){
+                                div += `<div class="card-body" id="ep_candidate_votes${data['data'][i].id}">
+                                            </div>`
+                            }
+                            $('.epCandidateList').html(div)
+
+                            for(var i=0; i < data['data'].length; i++){
+                                var div_id = 'ep_candidate_votes'+(data['data'][i].id);
+
+                                document.getElementById(div_id).innerHTML = `
+                                    <h6 style="color:white">${data['data'][i].candidateName} - ${data['data'][i].candidatePosition}</h6>
+                                        <div class="progress mb-2" >
+                                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
+                                            style="width: ${data['data'][i].vote_percentage}%" aria-valuenow="${data['data'][i].vote_counts}"
+                                            aria-valuemin="0">${data['data'][i].vote_counts}
+                                        </div>`
+                                
+                            }
+                        }
+                    })
+                }, 100); 
+            </script>
         </div>
     <?php } ?>
     <!-- End of Candidate Live Tally -->
@@ -279,15 +337,43 @@
             <div class="card-header" style="background-color:#00295e">
                 <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
-            <?php foreach($data as $row) { ?>
-                <div class="card-body">
-                    <h6 style="color:white"><?php echo $row->contestantName; ?></h6>
-                    <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
-                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
-                    </div>
-                </div>
-            <?php } ?>
+            <div class="contestantList">
+            
+            </div>
+
+            <script>
+                setInterval(() => {
+                    $.ajax({
+                        url: '<?php echo base_url() ?>user/progress/get_votes/'+'<?php echo $tableName.'/'.$refTableID;?>',
+                        type: 'GET',
+                        datatype: 'JSON',
+
+                        success:function(data){
+                            var data = jQuery.parseJSON(data)
+                            var div = "";
+
+                            for(var i= 0; i < data['data'].length; i++){
+                                div += `<div class="card-body" id="constestant_votes${data['data'][i].id}">
+                                            </div>`
+                            }
+                            $('.contestantList').html(div)
+
+                            for(var i=0; i < data['data'].length; i++){
+                                var div_id = 'contestant_votes'+(data['data'][i].id);
+
+                                document.getElementById(div_id).innerHTML = `
+                                    <h6 style="color:white">${data['data'][i].contestantName}</h6>
+                                        <div class="progress mb-2" >
+                                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
+                                            style="width: ${data['data'][i].vote_percentage}%" aria-valuenow="${data['data'][i].vote_counts}"
+                                            aria-valuemin="0">${data['data'][i].vote_counts}
+                                        </div>`
+                                
+                            }
+                        }
+                    })
+                }, 100); 
+            </script>
         </div>
     <?php } ?>
     <!-- End of Contestant Live Tally -->
@@ -298,15 +384,43 @@
             <div class="card-header" style="background-color:#00295e">
                 <h2 style="color:white" class="text-center">Voting Live Tally</h2>
             </div>
-            <?php foreach($data as $row) { ?>
-                <div class="card-body">
-                    <h6 style="color:white"><?php echo $row->optionName; ?></h6>
-                    <div class="progress mb-2">
-                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" style="width: <?php echo $row->vote_percentage; ?>%" aria-valuenow="<?php echo $row->vote_counts; ?>"
-                                aria-valuemin="0"><?php echo $row->vote_counts; ?></div>
-                    </div>
-                </div>
-            <?php } ?>
+            <div class="optionList">
+            
+            </div>
+
+            <script>
+                setInterval(() => {
+                    $.ajax({
+                        url: '<?php echo base_url() ?>user/progress/get_votes/'+'<?php echo $tableName.'/'.$refTableID;?>',
+                        type: 'GET',
+                        datatype: 'JSON',
+
+                        success:function(data){
+                            var data = jQuery.parseJSON(data)
+                            var div = "";
+
+                            for(var i= 0; i < data['data'].length; i++){
+                                div += `<div class="card-body" id="option_votes${data['data'][i].id}">
+                                            </div>`
+                            }
+                            $('.optionList').html(div)
+
+                            for(var i=0; i < data['data'].length; i++){
+                                var div_id = 'option_votes'+(data['data'][i].id);
+
+                                document.getElementById(div_id).innerHTML = `
+                                    <h6 style="color:white">${data['data'][i].optionName}</h6>
+                                        <div class="progress mb-2" >
+                                            <div class="progress-bar bg-info progress-bar progress-bar-animated" role="progressbar" 
+                                            style="width: ${data['data'][i].vote_percentage}%" aria-valuenow="${data['data'][i].vote_counts}"
+                                            aria-valuemin="0">${data['data'][i].vote_counts}
+                                        </div>`
+                                
+                            }
+                        }
+                    })
+                }, 100); 
+            </script>
         </div>
     <?php } ?>
     <!-- End of Option Live Tally -->

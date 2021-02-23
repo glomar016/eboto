@@ -20,7 +20,6 @@ class Progress extends CI_Controller {
 	 */
 	public function index()
 	{
-
         $this->load->model('database_model');
         $this->load->helper('date');
 
@@ -71,6 +70,33 @@ class Progress extends CI_Controller {
 		$this->load->view('user/progress', $data);
     }
 	
+    function get_votes($tableName, $refTableID){
+
+        if($tableName == 't_candidate'){
+            $data['data'] = $this->database_model->get_candidate_votes($refTableID, 'candidateElectionID'
+                                                            , "t_candidate", "t_vote_candidate"
+                                                            , "vote_candidateID", "candidateName");
+        }
+
+        if($tableName == 't_ep'){
+            $data['data'] = $this->database_model->get_candidate_votes($refTableID, 'candidateEpID'
+                                                            , "t_candidate", "t_vote_ep_candidate"
+                                                            , "vote_candidateID", "candidateName");
+        }
+
+        else if($tableName == 't_contestant'){
+            $data['data'] = $this->database_model->get_votes($refTableID, 'contestantContestID'
+                                                            , "t_contestant", "t_vote_contestant"
+                                                            , "vote_contestantID", "contestantName");
+        }
+        else if($tableName == 't_option'){
+            $data['data'] = $this->database_model->get_votes($refTableID, 'optionPollID'
+                                                            , "t_option", "t_vote_option"
+                                                            , "vote_optionID", "optionName");
+        }
+       
+        echo json_encode($data);
+    }
 	
 
 }

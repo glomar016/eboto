@@ -165,7 +165,7 @@
                                                     success:function(data){
                                                         if(data == 1 || moment().diff("<?php echo $row->electionDateEnd ?>", 'hours') > 0){
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_election');
-                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "View Progress";
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "Live Result";
                                                         }
                                                         else{
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_election');
@@ -249,7 +249,7 @@
                                                     success:function(data){
                                                         if(data == 1 || moment().diff("<?php echo $row->epDateEnd ?>", 'hours') > 0){
                                                             document.getElementById('<?php echo "btn_ep".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_ep');
-                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').textContent = "View Progress";
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').textContent = "Live Result";
                                                         }
                                                         else{
                                                             document.getElementById('<?php echo "btn_ep".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_ep');
@@ -326,7 +326,7 @@
                                                     success:function(data){
                                                         if(data == 1){
                                                             document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_contest');
-                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "View Progress";
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "Live Result";
                                                         }
                                                         else{
                                                             document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_contest');
@@ -403,7 +403,7 @@
                                                     success:function(data){
                                                         if(data == 1){
                                                             document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_poll');
-                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "View Progress";
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "Live Result";
                                                         }
                                                         else{
                                                             document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_poll');

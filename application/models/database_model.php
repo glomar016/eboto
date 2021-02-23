@@ -63,7 +63,6 @@ class Database_model extends CI_Model {
         $this->db->update($tableName);
     }
 
-
     // GET
     function get($id, $tableName)
     {
@@ -189,13 +188,14 @@ class Database_model extends CI_Model {
 
     // To get live tally of voting
     function get_votes($refTableID, $refColumn, $tableName, $tableName2, $fkColumn, $name){
-        $this->db->select("COUNT(".$tableName2.".id) as vote_counts
+        $this->db->select("$tableName.id, COUNT(".$tableName2.".id) as vote_counts
                                 , COUNT(".$tableName2.".id) * 100 / SUM(COUNT(".$tableName2.".id)) OVER() as vote_percentage
                                 , $tableName.$name");
         $this->db->from($tableName);
         $this->db->join($tableName2, $tableName2.'.'.$fkColumn. '='.$tableName.'.id', 'left');
         $this->db->where($tableName.".".$refColumn, $refTableID);
         $this->db->group_by($tableName.'.'.$name);
+        $this->db->group_by($tableName.'.id');
         $this->db->order_by('vote_counts', "DESC");
         $query = $this->db->get();
         $data = $query->result();
@@ -204,7 +204,7 @@ class Database_model extends CI_Model {
 
     // To get live tally of voting
     function get_candidate_votes($refTableID, $refColumn, $tableName, $tableName2, $fkColumn, $name){
-        $this->db->select("COUNT(".$tableName2.".id) as vote_counts
+        $this->db->select("$tableName.id, COUNT(".$tableName2.".id) as vote_counts
                                 , COUNT(".$tableName2.".id) * 100 / SUM(COUNT(".$tableName2.".id)) OVER() as vote_percentage
                                 , $tableName.$name
                                 , $tableName."."candidatePosition");
@@ -240,8 +240,7 @@ class Database_model extends CI_Model {
             $this->db->limit(1);
             $query = $this->db->get();
         }
-        
-        if ($query->num_rows() == 1) {
+        if ($query->num_rows() >= 1) {
             return 1;
         } 
         else {
