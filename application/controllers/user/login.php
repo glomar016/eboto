@@ -55,7 +55,7 @@ class Login extends CI_Controller {
 					$userStudentNo = $this->input->post('userStudentNo');
 					$userPassword = $this->input->post('userPassword');
 					
-					$result = $this->auth_model->read_user_information($userStudentNo);
+					$result = $this->auth_model->read_user_information($userStudentNo, $userPassword);
 						if ($result != FALSE) {
 							$session_data = array(
 								'userStudentNo' => $result[0]->userStudentNo,

@@ -31,10 +31,10 @@
                             <a href="<?php echo base_url()?>admin/organization">
                                 <i class="fas fa-users"></i>Organization</a>
                         </li>
-                        <!-- <li <?php if($this->router->fetch_class() == 'userrole') {?> class="active has-sub" <?php } ?>> 
+                        <li <?php if($this->router->fetch_class() == 'userrole') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/userrole">
                                 <i class="fas fa-user"></i>User Role</a>
-                        </li> -->
+                        </li>
                         <li <?php if($this->router->fetch_class() == 'reports') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>admin/reports">
                                 <i class="fas fa-flag"></i>Vote Logs</a>

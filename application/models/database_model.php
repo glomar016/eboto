@@ -49,6 +49,15 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    // get the views of any tables
+    function view_user($statusColumn, $tableName){
+        $this->db->select("*");
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
     // UPDATE
     function update($id, $data, $tableName)
     {
@@ -59,6 +68,13 @@ class Database_model extends CI_Model {
     // DISABLE
     function delete($id, $statusColumn, $tableName){
         $this->db->set($statusColumn, '0');
+        $this->db->where("id", $id);
+        $this->db->update($tableName);
+    }
+
+    // ENABLE
+    function activate($id, $statusColumn, $tableName){
+        $this->db->set($statusColumn, '1');
         $this->db->where("id", $id);
         $this->db->update($tableName);
     }

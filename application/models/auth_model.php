@@ -20,9 +20,9 @@ class Auth_model extends CI_Model {
         }
     }
 
-    function read_user_information($userStudentNo) {
+    function read_user_information($userStudentNo, $userPassword) {
 
-        $condition = "userStudentNo =" . "'" . $userStudentNo . "'";
+        $condition = "userStudentNo =" . "'" . $userStudentNo . "' AND userPassword =" . "'" . $userPassword . "'";
         $this->db->select('*');
         $this->db->from('t_user');
         $this->db->where($condition);

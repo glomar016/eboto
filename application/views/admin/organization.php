@@ -279,6 +279,7 @@ $(document).ready(function(){
         organizationDataTable.ajax.url(url).load();
     }
 
+    // delete org
     $(document).on("click", ".btn_delete", function(){
         var id = this.value;
 

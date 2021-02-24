@@ -155,6 +155,7 @@ $(document).ready(function(){
                 "<p style='white-space: pre-wrap;'><strong>Description</strong>: "+candidateDescription+"</p></div>");
         }
 
+        
     loadviewdata();
 
 });

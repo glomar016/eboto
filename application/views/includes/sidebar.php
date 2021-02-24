@@ -23,10 +23,10 @@
                             <a href="<?php echo base_url()?>contest">
                                 <i class="fas fa-trophy"></i>Contest</a>
                         </li>
-                        <!-- <li <?php if($this->router->fetch_class() == 'userOrganization') {?> class="active has-sub" <?php } ?>> 
+                        <li <?php if($this->router->fetch_class() == 'userOrganization') {?> class="active has-sub" <?php } ?>> 
                             <a href="<?php echo base_url()?>userOrganization">
                                 <i class="fas fa-users"></i>Organization</a>
-                        </li> -->
+                        </li>
                         <li <?php if($this->router->fetch_class() == 'profile') {?> class="active has-sub" <?php } ?>>
                             <a href="<?php echo base_url()?>profile">
                                 <i class="fas fa-user-circle"></i>Profile</a>

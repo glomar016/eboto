@@ -645,8 +645,7 @@ $(document).ready(function(){
 
         })
     }
-
-    load_election_votes()
+    
     // End of loadtable
 
 
