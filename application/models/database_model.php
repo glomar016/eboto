@@ -240,13 +240,13 @@ class Database_model extends CI_Model {
     function already_voted($userId, $tableId, $refTableName, $tableName){
 
         if($tableName == 't_vote_candidate'){
-            $query = $this->db->query("EXEC SP_CHECK_ALREADY_VOTE_ELECTION $userId, $refTableName, $tableId");
+            $query = $this->db->query("EXEC SP_CHECK_ALREADY_VOTE_ELECTION $userId, $tableId");
         }
         else if($tableName == 't_vote_contestant'){
-            $query = $this->db->query("EXEC SP_CHECK_ALREADY_VOTE_CONTEST $userId, $refTableName, $tableId");
+            $query = $this->db->query("EXEC SP_CHECK_ALREADY_VOTE_CONTEST $userId, $tableId");
         }
         else if($tableName == 't_vote_option'){
-            $query = $this->db->query("EXEC SP_CHECK_ALREADY_VOTE_POLL $userId, $refTableName, $tableId");
+            $query = $this->db->query("EXEC SP_CHECK_ALREADY_VOTE_POLL $userId, $tableId");
         }
         else{
             $this->db->select('*');
@@ -265,7 +265,7 @@ class Database_model extends CI_Model {
     }
 
     function get_private(){
-        $query = $this->db->query("EXEC SP_GET_PRIVATE");
+        $query = $this->db->query("EXEC SP_GET_PRIVATE 'PRIVATE'");
         // $this->db->select('id');
         // $this->db->from('r_org');
         // $this->db->where("orgName", "PRIVATE");

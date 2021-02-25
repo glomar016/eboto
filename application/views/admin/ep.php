@@ -137,7 +137,7 @@ else {
     <div class="modal fade" id="epModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:#900000;>
+				<div class="modal-header" style=background-color:#28a745;>
 							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Create Election Partylist</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
