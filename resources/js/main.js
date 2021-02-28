@@ -802,7 +802,7 @@
           datasets: [
             {
               label: "My First dataset",
-              data: [Math.round(election_percentage), Math.round(contest_percentage), Math.round(poll_percentage)],
+              data: [(Number(election_percentage)).toFixed(2), Number(contest_percentage).toFixed(2), Number(poll_percentage).toFixed(2)],
               backgroundColor: [
                 '#00b5e9',
                 '#00ad5f',
@@ -824,9 +824,9 @@
             }
           ],
           labels: [
-            'Election',
-            'Contest',
-            'Poll'
+            'Election %',
+            'Contest %',
+            'Poll %'
           ]
         },
         options: {

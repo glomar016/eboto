@@ -100,7 +100,7 @@ class Vote extends CI_Controller {
 		
 
 
-		// Condition to check if user already voted
+		Condition to check if user already voted
 		if($check == 1){
 			$this->load->view('user/already_voted');
 		}

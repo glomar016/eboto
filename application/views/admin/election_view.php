@@ -648,6 +648,8 @@ $(document).ready(function(){
     
     // End of loadtable
 
+    load_election_votes()
+
 
 });
 

@@ -14,6 +14,6 @@ $config = Array(
             'newline'   => "\r\n",
             'wordwrap'  => TRUE,
             'validate'  => FALSE
-        );
+);
 
 ?>

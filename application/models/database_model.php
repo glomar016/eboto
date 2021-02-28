@@ -275,4 +275,16 @@ class Database_model extends CI_Model {
         return $data;
     }
 
+    function get_result($tableName, $dateEnd, $currDate, $endDate, $columnStatus){
+        $this->db->select('*');
+        $this->db->from($tableName);
+        $this->db->where($dateEnd. ">'". $currDate."'");
+        $this->db->where($dateEnd. "<'". $endDate."'");
+        $this->db->where($columnStatus, '1');
+        $query = $this->db->get();
+
+        $data = $query->result();
+        return $data;
+    }
+
 }

@@ -133,7 +133,7 @@ else {
      <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:#900000;>
+				<div class="modal-header" style=background-color:#28a745;>
 							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add User</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -209,7 +209,7 @@ else {
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input type="submit" name="Submit" id="btnAddUser" value="Submit" class="btn btn-primary">
+                                        <input type="submit" name="Submit" id="btnAddUser" value="Submit" class="btn btn-success">
                                     </div>
                                 </div>
                             </form>
@@ -225,7 +225,7 @@ else {
      <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style=background-color:#ffc107;>
+				<div class="modal-header" style=background-color:gold;>
 							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Update User</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -461,7 +461,7 @@ $(document).ready(function(){
        
     });
 
-    // Update org
+    // Update user
     $('#editUserForm').on('submit', function(e){
                 e.preventDefault();
                 $("#btnEditUser").attr("disabled", true);
@@ -517,6 +517,7 @@ $(document).ready(function(){
                                         }
                                     })
                             }
+                            $("#btnEditUser").attr("disabled", false);
                             $('#editUserModal').modal('hide');
                             $('#editUserModal form')[0].reset();
                         })
@@ -590,11 +591,10 @@ $(document).ready(function(){
 
 
             }
-            })
+        })
        
     });
     // END OF DELETE USER
-    
 
 
 });

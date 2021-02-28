@@ -149,6 +149,7 @@ $('#forgot_pass_form').on('submit', function(e){
                                         }).then((result) => {
                                                 $("#btn_sendmail").val("Submit").attr("disabled", false);
                                                 $('#forgot_pass_form')[0].reset();
+                                                window.location.href = "<?php echo base_url()?>user/login";
                                         })
                                         // End of Swal
                                     }

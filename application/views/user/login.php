@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="login-checkbox float-right">
                                     <label>
-                                        <a href="<?php echo base_url()?>user/forgotten">Forgotten Password?</a>
+                                        <a href="<?php echo base_url()?>user/forgotten">Forgot Password?</a>
                                     </label>
                                 </div>
                                 <div>

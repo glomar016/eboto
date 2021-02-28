@@ -155,7 +155,7 @@ else {
                                         </div>
                                     </div>
                                     <div style= float:right;>
-                                        <input type="submit" name="upload" id="upload" value="Upload" class="btn btn-primary">
+                                        <input type="submit" name="upload" id="upload" value="Submit" class="btn btn-success">
                                     </div>
                                 </div>
                             </form>

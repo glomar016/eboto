@@ -213,7 +213,7 @@
                                     <div class="col-lg-4">
                                         <!-- CHART PERCENT-->
                                         <div class="chart-percent-3 m-b-40">
-                                            <h3 class="title-3 m-b-25">Chart %</h3>
+                                            <h3 class="title-3 m-b-25">Chart % Made</h3>
                                             <div class="chart-note m-b-5">
                                                 <span class="dot dot--blue"></span>
                                                 <span>Election Made</span>

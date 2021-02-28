@@ -1,7 +1,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="<?php echo base_url()?>admin/dashboard">
-                    <img src="<?php echo base_url()?>resources/images/icon/eLogoFont.png" alt="PUP E-Boto" />
+                    <img src="<?php echo base_url()?>resources/images/icon/eLogoFont.png" style="height:70px;padding-left:45px" alt="PUP E-Boto" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
