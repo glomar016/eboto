@@ -51,7 +51,7 @@ class Forgotten extends CI_Controller {
         $data = $this->auth_model->get_user_info($studentNumber, $email);
         $name = $data[0]->userFirstName.' '.$data[0]->userMiddleName.' '.$data[0]->userLastName;
         $password = $data[0]->userPassword; 
-        $filename = base_url().'resources/images/icon/eLogoFont.png';
+        $filename = base_url().'resources/images/icon/emailLogo.png';
         $this->email->attach($filename);
         $cid = $this->email->attachment_cid($filename);
 
@@ -61,17 +61,25 @@ class Forgotten extends CI_Controller {
             <head> 
                 <title>Welcome to PUP-Eboto</title> 
             </head> 
-            <body style="background-color: #800000"> 
+            <body style="background-color: #800000; max-width:500px; margin:auto;"> 
+            <br><br><br>
             <div style="text-align: center;">
                 <img src="cid:' .$cid.'">
                 <h3 style="color:white">Hi '. $data[0]->userFirstName.'!</h3> 
-                <h2 style="color:white;">Here is your account details</h2> 
+                <h1 style="color:yellow;">Here is your account details</h1> 
             </div>
-                      <h4 style="text-align: center; color:white; margin:0px;">Name: '. $name. '</h4>
-                      <h4 style="text-align: center; color:white; margin:0px;">Email: '. $email. '</h4>
-                      <h4 style="text-align: center; color:white; margin:0px">Password: '. $password. '</h4>
+            <div style="color:white">
+                <h4 style="text-align: center; color:white; margin:0px;">Name: '. $name. '</h4>
+                <h4 style="text-align: center; color:white; margin:0px;">Email: '. $email. '</h4>
+                <h4 style="text-align: center; color:white; margin:0px;">Course: '. $data[0]->userCourse. '</h4>
+                <h4 style="text-align: center; color:white; margin:0px;">Student No: '. $studentNumber. '</h4>
+                <h4 style="text-align: center; color:white; margin:0px">Password: '. $password. '</h4>
+            </div>
+            <br><br><br>
             </body> 
         </html>';
+
+        
         
 
         $this->email->from('pup_eboto@gmail.com', 'PUP E-Boto');

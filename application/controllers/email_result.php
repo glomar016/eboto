@@ -26,7 +26,7 @@ class Email_result extends CI_Controller {
 
 		$data['election'] = $this->database_model->get_result('t_election', 'electionDateEnd', $currDate, $endDate, 'electionStatus');
 
-        $filename = base_url().'resources/images/icon/eLogoFont.png';
+        $filename = base_url().'resources/images/icon/emailLogo.png';
         $this->email->attach($filename);
         $cid = $this->email->attachment_cid($filename);
         // Election Loop
@@ -57,14 +57,16 @@ class Email_result extends CI_Controller {
                     <head> 
                         <title>Welcome to PUP-Eboto</title> 
                     </head> 
-                    <body style="background-color: #800000"> 
-                    <div style="text-align: center; margin:2px;">
+                    <body style="background-color: #800000; max-width:500px; margin:auto;">  
+                    <br>
+                    <br>
+                    <div style="text-align: center; margin:0px; padding:0px;">
                         <img src="cid:' .$cid.'">
                         <h3 style="color:white">Hi '. $user->userFirstName.'!</h3> 
-                        <h2 style="color:white">Here is the result of </h2> 
-                        <h2 style="text-align: center; color:white; margin:0px;">'. $election->electionName. '</h2>
+                        <h2 style="color:white"; margin:0px>Here is the result of </h2> 
+                        <h1 style="text-align: center; color:yellow; margin:0px;">'. $election->electionName. '</h1>
                     </div>
-                    <div>
+                    <div style="color:white; text-align:center">
                         <br>
                             '.$htmlResult.'<br>
                     </div>      
@@ -94,7 +96,7 @@ class Email_result extends CI_Controller {
             $currDate = date("Y-m-d 00:00:00");
             $endDate = date("Y-m-d H:i:s", strtotime('+1 day', strtotime($currDate)));
 
-            $filename = base_url().'resources/images/icon/eLogoFont.png';
+            $filename = base_url().'resources/images/icon/emailLogo.png';
             $this->email->attach($filename);
             $cid = $this->email->attachment_cid($filename);
 
@@ -128,14 +130,15 @@ class Email_result extends CI_Controller {
                     <head> 
                         <title>Welcome to PUP-Eboto</title> 
                     </head> 
-                    <body style="background-color: #800000"> 
+                    <body style="background-color: #800000; max-width:500px; margin:auto;">  
+                    <br>
                     <div style="text-align: center; margin:2px;">
                         <img src="cid:' .$cid.'">
                         <h3 style="color:white">Hi '. $user->userFirstName.'!</h3> 
                         <h2 style="color:white">Here is the result of </h2> 
-                        <h2 style="text-align: center; color:white; margin:0px;">'. $ep->epName. '</h2>
+                        <h1 style="text-align: center; color:yellow; margin:0px;">'. $ep->epName. '</h1>
                     </div>
-                    <div>
+                    <div style="color:white; text-align:center">
                         <br>
                     '.$htmlResult.'<br>
                     </div>
@@ -160,7 +163,7 @@ class Email_result extends CI_Controller {
             $currDate = date("Y-m-d 00:00:00");
             $endDate = date("Y-m-d H:i:s", strtotime('+1 day', strtotime($currDate)));
 
-            $filename = base_url().'resources/images/icon/eLogoFont.png';
+            $filename = base_url().'resources/images/icon/emailLogo.png';
             $this->email->attach($filename);
             $cid = $this->email->attachment_cid($filename);
     
@@ -194,14 +197,15 @@ class Email_result extends CI_Controller {
                     <head> 
                         <title>Welcome to PUP-Eboto</title> 
                     </head> 
-                    <body style="background-color: #800000"> 
+                    <body style="background-color: #800000; max-width:500px; margin:auto;">  
+                    <br>
                     <div style="text-align: center; margin:2px;">
                         <img src="cid:' .$cid.'">
                         <h3 style="color:white">Hi '. $user->userFirstName.'!</h3> 
                         <h2 style="color:white">Here is the result of </h2> 
-                        <h2 style="text-align: center; color:white; margin:0px;">'. $contest->contestName. '</h2>
+                        <h1 style="text-align: center; color:yellow; margin:0px;">'. $contest->contestName. '</h1>
                     </div>
-                    <div>
+                    <div style="color:white; text-align:center">
                         <br>
                     '.$htmlResult.'<br>
                     </div>
@@ -232,7 +236,7 @@ class Email_result extends CI_Controller {
 
             $data['poll'] = $this->database_model->get_result('t_poll', 'pollDateEnd', $currDate, $endDate, 'pollStatus');
 
-            $filename = base_url().'resources/images/icon/eLogoFont.png';
+            $filename = base_url().'resources/images/icon/emailLogo.png';
             $this->email->attach($filename);
             $cid = $this->email->attachment_cid($filename);
     
@@ -266,14 +270,15 @@ class Email_result extends CI_Controller {
                     <head> 
                         <title>Welcome to PUP-Eboto</title> 
                     </head> 
-                    <body style="background-color: #800000"> 
+                    <body style="background-color: #800000; max-width:500px; margin:auto;">  
+                    <br>
                     <div style="text-align: center; margin:2px;">
                         <img src="cid:' .$cid.'">
                         <h3 style="color:white">Hi '. $user->userFirstName.'!</h3> 
                         <h2 style="color:white">Here is the result of </h2> 
-                        <h2 style="text-align: center; color:white; margin:0px;">'. $poll->pollName. '</h2>
+                        <h1 style="text-align: center; color:yellow; margin:0px;">'. $poll->pollName. '</h1>
                     </div>
-                    <div>
+                    <div style="color:white; text-align:center">
                         <br>
                     '.$htmlResult.'<br>
                     </div>

@@ -309,7 +309,12 @@
                                         var contest_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_contest".$row->id ?>');
                                                 setInterval(() => {
                                                     // clock.textContent 
-                                                    contest_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    if(moment().diff("<?php echo $row->contestDateEnd ?>", 'hours') > 0){
+                                                        contest_clock_<?php echo $row->id ?>.textContent = "Already ended."
+                                                    }
+                                                    else{
+                                                        contest_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    }
                                         }, 100);
 
                                         // check if already voted function
@@ -386,7 +391,12 @@
                                         var poll_clock_<?php echo $row->id ?> = document.getElementById('<?php echo "liveclock_poll".$row->id ?>');
                                                 setInterval(() => {
                                                     // clock.textContent 
-                                                    poll_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    if(moment().diff("<?php echo $row->pollDateEnd ?>", 'hours') > 0){
+                                                        poll_clock_<?php echo $row->id ?>.textContent = "Already ended."
+                                                    }
+                                                    else{
+                                                        poll_clock_<?php echo $row->id ?>.textContent = moment(dateEnd_<?php echo $row->id ?>).endOf('seconds').fromNow();
+                                                    }
                                         }, 100);
 
                                         // check if already voted function
