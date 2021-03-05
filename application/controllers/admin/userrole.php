@@ -21,6 +21,37 @@ class Userrole extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('admin/userrole');
+    }
+    
+    public function add_user()
+	{
+		$this->load->helper('string');
+		// loading model that needed
+		$this->load->model('database_model');
+		$userFirstName = $this->input->post('userFirstName');
+		$userMiddleName = $this->input->post('userMiddleName');
+		$userLastName = $this->input->post('userLastName');
+		$userStudentNo = $this->input->post('userStudentNo');
+		$userEmail = $this->input->post('userEmail');
+		$userCourse = $this->input->post('userCourse');
+		$userType = $this->input->post('userType');
+
+		$userPassword = random_string('alnum', 8);
+
+		$insert_data = array(
+			'userFirstName' => $userFirstName,
+			'userMiddleName' => $userMiddleName,
+			'userLastName' => $userLastName,
+			'userStudentNo' => $userStudentNo,
+			'userEmail' => $userEmail,
+			'userCourse' => $userCourse,
+			'userType' => $userType,
+			'userPassword' => $userPassword
+			);
+
+		print_r($insert_data);
+		$this->database_model->create($insert_data, "t_user");
+		
 		$data = $this->database_model->view_user('userStatus', 't_user');
 		foreach($data as $row){
 			if($row->userCourse == 'BSIT'){
@@ -72,36 +103,6 @@ class Userrole extends CI_Controller {
 				$this->database_model->updateOrg($row->id, $data);
 			}
 		}
-    }
-    
-    public function add_user()
-	{
-		$this->load->helper('string');
-		// loading model that needed
-		$this->load->model('database_model');
-		$userFirstName = $this->input->post('userFirstName');
-		$userMiddleName = $this->input->post('userMiddleName');
-		$userLastName = $this->input->post('userLastName');
-		$userStudentNo = $this->input->post('userStudentNo');
-		$userEmail = $this->input->post('userEmail');
-		$userCourse = $this->input->post('userCourse');
-		$userType = $this->input->post('userType');
-
-		$userPassword = random_string('alnum', 8);
-
-		$insert_data = array(
-			'userFirstName' => $userFirstName,
-			'userMiddleName' => $userMiddleName,
-			'userLastName' => $userLastName,
-			'userStudentNo' => $userStudentNo,
-			'userEmail' => $userEmail,
-			'userCourse' => $userCourse,
-			'userType' => $userType,
-			'userPassword' => $userPassword
-			);
-
-		print_r($insert_data);
-		$this->database_model->create($insert_data, "t_user");
 	}
 
 	public function show_user()
