@@ -274,7 +274,7 @@
                             </div>
                             <br>
                             <div class="portfolio__item__text">
-                                <h4><?php echo $row->candidateName ?></h4>
+                                <h4 id="candidate<?php echo $row->id?>"><?php echo $row->candidateName ?></h4>
                                 <h6><?php echo $row->candidatePosition ?></h6>
                                     <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>                  
                             </div>
@@ -325,7 +325,7 @@
                             </div>
                             <br>
                             <div class="portfolio__item__text">
-                                <h4><?php echo $row->candidateName ?></h4>
+                                <h4 id="candidate<?php echo $row->id?>"><?php echo $row->candidateName ?></h4>
                                 <h5 style="color:red"><?php echo $row->candidatePosition ?></h5>
                                 <h6><?php echo $row->partylistName ?></h6><br>
                                 <span style="white-space: pre-wrap;"><?php echo $row->candidateDescription ?></span>                  
@@ -376,7 +376,7 @@
                             </div>
                             <br>
                             <div class="portfolio__item__text">
-                                <h4><?php echo $row->contestantName ?></h4>
+                                <h4 id="contestant<?php echo $row->id?>"><?php echo $row->contestantName ?></h4>
                                     <span style="white-space: pre-wrap;"><?php echo $row->contestantDescription ?></span>                  
                             </div>
                             <div class="mt-auto"  style="margin: auto;">
@@ -420,7 +420,7 @@
                         <div class="d-flex flex-column">
                             <br>
                             <div class="portfolio__item__text">
-                                <h4 style="white-space: pre-wrap;"><?php echo $row->optionName ?></h4>
+                                <h4 id="option<?php echo $row->id?>" style="white-space: pre-wrap;"><?php echo $row->optionName ?></h4>
                             </div>
                             <div class="mt-auto" style="margin: auto;">
                                 <ul class="ks-cboxtags">
@@ -536,17 +536,17 @@ $(document).ready(function(){
         var refTableID = refTableID.text();
 
         var selected = [];
+        var stringSelected = ""
         console.log(refTableID)
         
         // Insert selected candidate ID
         $('input[class="selected_candidate"]:checked').each(function() {
             selected.push(this.value);
+            stringSelected += '(' + $('#candidate'+this.value).html() + ') '
         });
-        console.log(selected)
                             Swal.fire({
-                                title: 'Are you sure on your votes?',
-                                text: "You won't be able to revert this!",
-                                icon: 'warning',
+                                title: 'You are voting: ',
+                                text: stringSelected,
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
@@ -589,16 +589,18 @@ $(document).ready(function(){
         var refTableID = refTableID.text();
 
         var selected = [];
+        var stringSelected = ""
         console.log(refTableID)
         
         // Insert selected candidate ID
         $('input[class="selected_candidate"]:checked').each(function() {
             selected.push(this.value);
+            stringSelected += '(' + $('#candidate'+this.value).html() + ') '
         });
         console.log(selected)
                             Swal.fire({
-                                title: 'Are you sure on your votes?',
-                                text: "You won't be able to revert this!",
+                                title: 'You are voting:',
+                                text: stringSelected,
                                 icon: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
@@ -642,11 +644,12 @@ $(document).ready(function(){
         var tableName = "t_contestant";
 
         var selected = $('input[name="selected_contestant"]:checked').val();
+        var stringSelected = '(' + $('#contestant'+selected).html() + ') '        
         
         console.log(selected)
                             Swal.fire({
-                                title: 'Are you sure on your votes?',
-                                text: "You won't be able to revert this!",
+                                title: 'You are voting:',
+                                text: stringSelected,
                                 icon: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
@@ -691,11 +694,12 @@ $(document).ready(function(){
         var tableName = "t_option";
         
         var selected = $('input[name="selected_option"]:checked').val();
+        var stringSelected = '(' + $('#option'+selected).html() + ') '
 
         console.log(selected)
                             Swal.fire({
-                                title: 'Are you sure on your votes?',
-                                text: "You won't be able to revert this!",
+                                title: 'You are voting: ',
+                                text: stringSelected,
                                 icon: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',

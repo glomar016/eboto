@@ -59,7 +59,7 @@ class Login extends CI_Controller {
 						if ($result != FALSE) {
 							$session_data = array(
 								'userStudentNo' => $result[0]->userStudentNo,
-								'userPassword' => $result[0]->userPassword,
+								'userOrg' => $result[0]->userOrg,
 								'userId' => $result[0]->id,
 								'userType' => $result[0]->userType,
 								);

@@ -106,6 +106,10 @@ else {
                                     <div class="au-card-inner text-center partylistList">
                                         <h2><?php echo $data[0]->epName?></h2>
                                     </div>
+                                    <div class="au-card-inner text-center">
+                                        <label>Vote Link: </label>
+                                        <a target="_blank" href="<?php echo base_url() ?>user/vote/view/<?php echo $data[0]->id?>/t_candidate/t_ep">eboto.com/user/vote/view/<?php echo $data[0]->id?>/t_candidate/t_ep</a>
+                                    </div>
                                 </div>
 
                             <!-- Data Table Content -->

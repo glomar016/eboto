@@ -612,6 +612,7 @@
 
           success:function(data){
               var data = jQuery.parseJSON(JSON.stringify(data));
+              console.log(data)
               var i = 0;
               for(i=0; i<data.election_month.length; i++){
                 election_month[data.election_month[i].month -1] = (data.election_month[i].count)

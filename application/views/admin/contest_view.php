@@ -104,6 +104,10 @@ else {
                             <div class="au-card-inner text-center contestantList">
                                 <h2><?php echo $data[0]->contestName?></h2>
                             </div>
+                            <div class="au-card-inner text-center">
+                                <label>Vote Link: </label>
+                                <a target="_blank" href="<?php echo base_url() ?>user/vote/view/<?php echo $data[0]->id?>/t_contestant/t_contest">eboto.com/user/vote/view/<?php echo $data[0]->id?>/t_contestant/t_contest</a>
+                            </div>
                     </div>
                     <!-- End of Card Header -->
                     <!-- Data Table Content -->

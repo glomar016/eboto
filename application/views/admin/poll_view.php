@@ -104,6 +104,10 @@ else {
                             <div class="au-card-inner text-center optionList">
                                 <h2><?php echo $data[0]->pollName?></h2>
                             </div>
+                            <div class="au-card-inner text-center">
+                                <label>Vote Link: </label>
+                                <a target="_blank" href="<?php echo base_url() ?>user/vote/view/<?php echo $data[0]->id?>/t_option/t_poll">eboto.com/user/vote/view/<?php echo $data[0]->id?>/t_option/t_poll</a>
+                            </div>
                     </div>
                     <!-- End of Card Header -->
                     <!-- Data Table Content -->

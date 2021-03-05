@@ -3,6 +3,8 @@
     if (isset($this->session->userdata['logged_in'])) {
             $userStudentNo = ($this->session->userdata['logged_in']['userStudentNo']);
             $userId = ($this->session->userdata['logged_in']['userId']);
+            $userOrg = ($this->session->userdata['logged_in']['userOrg']);
+            $currDate = date('Y-m-d h:i:s');
         } 
         else {
             header("location: ".base_url()."user/login");
@@ -156,6 +158,8 @@
                                             var tableId = <?php echo $row->id ?>;
                                             var refTableName = 'vote_electionID';
                                             var tableName = 't_vote_candidate';
+                                            var currDate = '<?php echo $currDate; ?>';
+                                            
 
                                             $.ajax({
                                                 url: '<?php echo base_url()?>user/vote/already_voted/'+userId+'/'+tableId+'/'+refTableName+'/'+tableName,
@@ -163,9 +167,13 @@
                                                 // dataType: "JSON",
 
                                                     success:function(data){
-                                                        if(data == 1 || moment().diff("<?php echo $row->electionDateEnd ?>", 'hours') > 0){
+                                                        if(moment().diff("<?php echo $row->electionDateEnd ?>", 'hours') > 0){
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-info', 'btn_view_election');
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "Final Result";
+                                                        }
+                                                        else if(data == 1){
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_election');
-                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "Live Result";
+                                                            document.getElementById('<?php echo "btn_election".$row->id?>').textContent = "Live Tally";
                                                         }
                                                         else{
                                                             document.getElementById('<?php echo "btn_election".$row->id?>').classList.add('btn', 'btn-primary', 'btn_vote_election');
@@ -247,7 +255,11 @@
                                                 // dataType: "JSON",
 
                                                     success:function(data){
-                                                        if(data == 1 || moment().diff("<?php echo $row->epDateEnd ?>", 'hours') > 0){
+                                                        if(moment().diff("<?php echo $row->epDateEnd ?>", 'hours') > 0){
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').classList.add('btn', 'btn-info', 'btn_view_election');
+                                                            document.getElementById('<?php echo "btn_ep".$row->id?>').textContent = "Final Result";
+                                                        }
+                                                        else if(data == 1){
                                                             document.getElementById('<?php echo "btn_ep".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_ep');
                                                             document.getElementById('<?php echo "btn_ep".$row->id?>').textContent = "Live Result";
                                                         }
@@ -329,7 +341,11 @@
                                                 // dataType: "JSON",
 
                                                     success:function(data){
-                                                        if(data == 1){
+                                                        if(moment().diff("<?php echo $row->contestDateEnd ?>", 'hours') > 0){
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-info', 'btn_view_election');
+                                                            document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "Final Result";
+                                                        }
+                                                        else if(data == 1){
                                                             document.getElementById('<?php echo "btn_contest".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_contest');
                                                             document.getElementById('<?php echo "btn_contest".$row->id?>').textContent = "Live Result";
                                                         }
@@ -411,7 +427,11 @@
                                                 // dataType: "JSON",
 
                                                     success:function(data){
-                                                        if(data == 1){
+                                                        if(moment().diff("<?php echo $row->pollDateEnd ?>", 'hours') > 0){
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-info', 'btn_view_election');
+                                                            document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "Final Result";
+                                                        }
+                                                        else if(data == 1){
                                                             document.getElementById('<?php echo "btn_poll".$row->id?>').classList.add('btn', 'btn-success', 'btn_view_poll');
                                                             document.getElementById('<?php echo "btn_poll".$row->id?>').textContent = "Live Result";
                                                         }
@@ -474,24 +494,20 @@ $(document).ready(function(){
         $(document).on("click", ".btn_vote_election", function(){
             var id = this.value;
             var tableName = "t_candidate";
-            var refColumn = "candidateElectionID";
-            var columnStatus = "candidateStatus";
             var refTableName = "t_election";
         
 
-            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refTableName;
         });
 
         // Voting in ep
         $(document).on("click", ".btn_vote_ep", function(){
             var id = this.value;
             var tableName = "t_candidate";
-            var refColumn = "candidateEpID";
-            var columnStatus = "candidateStatus";
             var refTableName = "t_ep";
         
 
-            window.location.href = "<?php echo base_url()?>user/vote/view_ep/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
+            window.location.href = "<?php echo base_url()?>user/vote/view_ep/"+id+"/"+tableName+"/"+refTableName;
         }); 
 
 
@@ -499,22 +515,18 @@ $(document).ready(function(){
         $(document).on("click", ".btn_vote_contest", function(){
             var id = this.value;
             var tableName = "t_contestant";
-            var refColumn = "contestantContestID";
-            var columnStatus = "contestantStatus";
             var refTableName = "t_contest";
 
-            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refTableName;
         });
 
         // Voting in poll
         $(document).on("click", ".btn_vote_poll", function(){
             var id = this.value;
             var tableName = "t_option";
-            var refColumn = "optionPollID";
-            var columnStatus = "optionStatus";
             var refTableName = "t_poll";
 
-            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refColumn+"/"+columnStatus+"/"+refTableName;
+            window.location.href = "<?php echo base_url()?>user/vote/view/"+id+"/"+tableName+"/"+refTableName;
         });
     // End of viewing
 

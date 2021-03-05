@@ -12,14 +12,32 @@ class Database_model extends CI_Model {
     }
 
     // get the views of datatables for specific election/contest/poll 
-    function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
+    function show_admin($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday){
 
         // $query = $this->db->query("EXEC SP_SHOW_ACTIVE_ELECTION $tableName, $fkColumn, $statusColumn, $dateEnd");
         $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
         $this->db->from($tableName);
         $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
-        $this->db->where($statusColumn, "1");
+        $this->db->where($statusColumn, 1);
         $this->db->where("DATEADD(day, 1, $dateEnd) >=", $dateToday);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    // get the views of datatables for specific election/contest/poll 
+    function show($statusColumn, $tableName, $tableName2, $fkColumn, $dateEnd, $dateToday, $userOrg, $orgColumn, $publicId){
+
+        // $query = $this->db->query("EXEC SP_SHOW_ACTIVE_ELECTION $tableName, $fkColumn, $statusColumn, $dateEnd");
+        $this->db->select("*, $tableName.id, $tableName2.id AS $tableName2".'_id');
+        $this->db->from($tableName);
+        $this->db->join($tableName2, $tableName.'.'.$fkColumn.' = '.$tableName2.'.id', 'left');
+        $this->db->where($statusColumn, 1);
+        $this->db->where("DATEADD(day, 1, $dateEnd) >=", $dateToday);
+        $this->db->where($orgColumn, $userOrg);
+        $this->db->or_where($statusColumn, 1);
+        $this->db->where("DATEADD(day, 1, $dateEnd) >=", $dateToday);
+        $this->db->where($orgColumn, $publicId);
         $query = $this->db->get();
         $data = $query->result();
         return $data;
@@ -278,13 +296,28 @@ class Database_model extends CI_Model {
     function get_result($tableName, $dateEnd, $currDate, $endDate, $columnStatus){
         $this->db->select('*');
         $this->db->from($tableName);
-        $this->db->where($dateEnd. ">'". $currDate."'");
-        $this->db->where($dateEnd. "<'". $endDate."'");
+        $this->db->where($dateEnd. "<'". $currDate."'");
+        $this->db->where($dateEnd. ">'". $endDate."'");
         $this->db->where($columnStatus, '1');
         $query = $this->db->get();
 
         $data = $query->result();
         return $data;
+    }
+
+    function get_org_id($orgName){
+        $this->db->select('id');
+        $this->db->from('r_org');
+        $this->db->where('orgName', $orgName);
+        $this->db->where('orgStatus', 1);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
+
+    function updateOrg($userId, $data){
+        $this->db->where("id", $userId);
+        $this->db->update('t_user', $data);
     }
 
 }

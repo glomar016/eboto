@@ -21,6 +21,57 @@ class Userrole extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('admin/userrole');
+		$data = $this->database_model->view_user('userStatus', 't_user');
+		foreach($data as $row){
+			if($row->userCourse == 'BSIT'){
+				$data = $this->database_model->get_org_id('COMMITS');
+				$orgId = $data[0]->id;
+				$data = array(
+					'userOrg' => $orgId
+				);
+				$this->database_model->updateOrg($row->id, $data);
+			}
+			else if($row->userCourse == 'BSBA MM'){
+				$data = $this->database_model->get_org_id('JMS');
+				$orgId = $data[0]->id;
+				$data = array(
+					'userOrg' => $orgId
+				);
+				$this->database_model->updateOrg($row->id, $data);
+			}
+			else if($row->userCourse == 'BBTE'){
+				$data = $this->database_model->get_org_id('FBTO');
+				$orgId = $data[0]->id;
+				$data = array(
+					'userOrg' => $orgId
+				);
+				$this->database_model->updateOrg($row->id, $data);
+			}
+			else if($row->userCourse == 'BSENT'){
+				$data = $this->database_model->get_org_id('YES');
+				$orgId = $data[0]->id;
+				$data = array(
+					'userOrg' => $orgId
+				);
+				$this->database_model->updateOrg($row->id, $data);
+			}
+			else if($row->userCourse == 'BSBA HRM'){
+				$data = $this->database_model->get_org_id('CHRS');
+				$orgId = $data[0]->id;
+				$data = array(
+					'userOrg' => $orgId
+				);
+				$this->database_model->updateOrg($row->id, $data);
+			}
+			else if($row->userCourse == 'DOMT'){
+				$data = $this->database_model->get_org_id('DOMT');
+				$orgId = $data[0]->id;
+				$data = array(
+					'userOrg' => $orgId
+				);
+				$this->database_model->updateOrg($row->id, $data);
+			}
+		}
     }
     
     public function add_user()

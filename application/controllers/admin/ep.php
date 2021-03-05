@@ -98,7 +98,7 @@ class ep extends CI_Controller {
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-		$data["data"] = $this->database_model->show('epStatus', "t_ep", "r_org", "epOrg", "epDateEnd", $dateToday);
+		$data["data"] = $this->database_model->show_admin('epStatus', "t_ep", "r_org", "epOrg", "epDateEnd", $dateToday);
 
 		echo json_encode($data);
 

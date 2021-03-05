@@ -98,7 +98,7 @@ class election extends CI_Controller {
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-		$data["data"] = $this->database_model->show('electionStatus', "t_election", "r_org", "electionOrg", "electionDateEnd", $dateToday);
+		$data["data"] = $this->database_model->show_admin('electionStatus', "t_election", "r_org", "electionOrg", "electionDateEnd", $dateToday);
 
 		echo json_encode($data);
 

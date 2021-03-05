@@ -98,7 +98,7 @@ class Contest extends CI_Controller {
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-		$data["data"] = $this->database_model->show('contestStatus', "t_contest", "r_org", "contestOrg", "contestDateEnd", $dateToday);
+		$data["data"] = $this->database_model->show_admin('contestStatus', "t_contest", "r_org", "contestOrg", "contestDateEnd", $dateToday);
 
 		echo json_encode($data);
 

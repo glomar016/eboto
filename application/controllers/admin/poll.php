@@ -98,7 +98,7 @@ class Poll extends CI_Controller {
 
 		$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-		$data["data"] = $this->database_model->show('pollStatus', "t_poll", "r_org", "pollOrg", "pollDateEnd", $dateToday);
+		$data["data"] = $this->database_model->show_admin('pollStatus', "t_poll", "r_org", "pollOrg", "pollDateEnd", $dateToday);
 
 		echo json_encode($data);
 

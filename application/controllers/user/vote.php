@@ -27,6 +27,13 @@ class Vote extends CI_Controller {
 		
 		$session = 1;
 
+		if (isset($this->session->userdata['logged_in'])) {
+            $userStudentNo = ($this->session->userdata['logged_in']['userStudentNo']);
+            $userId = ($this->session->userdata['logged_in']['userId']);
+            $userOrg = ($this->session->userdata['logged_in']['userOrg']);
+            $currDate = date('Y-m-d h:i:s');
+        } 
+
 		// Check if already logged in
 		if($session != 1){
 			$this->load->view('user/login');
@@ -36,10 +43,13 @@ class Vote extends CI_Controller {
 
 			$dateToday = mdate("%Y-%m-%d %h:%i:%s");
 
-			$data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday);
-			$data['ep'] = $this->database_model->show('epStatus', 't_ep', 'r_org', 'epOrg', 'epDateEnd', $dateToday);
-			$data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday);
-			$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday);
+			$data['public'] = $this->database_model->get_org_id('PUBLIC');
+			$publicId = $data['public'][0]->id;
+
+			$data['election'] = $this->database_model->show('electionStatus', 't_election', 'r_org', 'electionOrg', 'electionDateEnd', $dateToday, $userOrg, 'electionOrg', $publicId);
+			$data['ep'] = $this->database_model->show('epStatus', 't_ep', 'r_org', 'epOrg', 'epDateEnd', $dateToday, $userOrg, 'epOrg', $publicId);
+			$data['contest'] = $this->database_model->show('contestStatus', 't_contest', 'r_org', 'contestOrg', 'contestDateEnd', $dateToday, $userOrg, 'contestOrg', $publicId);
+			$data['poll'] = $this->database_model->show('pollStatus', 't_poll', 'r_org', 'pollOrg', 'pollDateEnd', $dateToday, $userOrg, 'pollOrg', $publicId);
 
 			// Sort by date end
 			$electionDateEnd = array_column($data['election'], 'electionDateEnd');
@@ -58,22 +68,30 @@ class Vote extends CI_Controller {
 		}
     }
 	
-	public function view($id, $tableName, $refColumn, $columnStatus, $refTableName)
+	public function view($id, $tableName, $refTableName)
 	{
 		$this->load->model('database_model');
 
 		$userId = ($this->session->userdata['logged_in']['userId']);
 		
-		if($tableName == 't_candidate' && $refColumn == 'candidateElectionID'){
+		if($tableName == 't_candidate' && $refTableName == 't_election'){
+			$refColumn = 'candidateElectionID';
+			$columnStatus = 'candidateStatus';
 			$check = $this->database_model->already_voted($userId, $id, 'vote_electionID', 't_vote_candidate');
 		}
-		else if($tableName == 't_candidate' && $refColumn == 'candidateEpID'){
+		else if($tableName == 't_candidate' && $refTableName == 't_ep'){
+			$refColumn = 'candidateEpID';
+			$columnStatus = 'candidateStatus';
 			$check = $this->database_model->already_voted($userId, $id, 'vote_epID', 't_vote_ep_candidate');
 		}
 		else if($tableName == 't_contestant'){
+			$refColumn = 'contestantContestID';
+			$columnStatus = 'contestantStatus';
 			$check = $this->database_model->already_voted($userId, $id, 'vote_contestID', 't_vote_contestant');
 		}
 		else if($tableName == 't_option'){
+			$refColumn = 'optionPollID';
+			$columnStatus = 'optionStatus';
 			$check = $this->database_model->already_voted($userId, $id, 'vote_pollID', 't_vote_option');
 		}
 

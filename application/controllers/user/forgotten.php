@@ -61,21 +61,23 @@ class Forgotten extends CI_Controller {
             <head> 
                 <title>Welcome to PUP-Eboto</title> 
             </head> 
-            <body style="background-color: #800000; max-width:500px; margin:auto;"> 
-            <br><br><br>
-            <div style="text-align: center;">
-                <img src="cid:' .$cid.'">
-                <h3 style="color:white">Hi '. $data[0]->userFirstName.'!</h3> 
-                <h1 style="color:yellow;">Here is your account details</h1> 
+            <body style="background-color: yellow; max-width:550px; margin:auto;">  
+            <div style="margin:50px; background-color:#800000">
+                <br><br><br>
+                <div style="text-align: center;">
+                    <img src="cid:' .$cid.'">
+                    <h3 style="color:white">Hi '. $data[0]->userFirstName.'!</h3> 
+                    <h1 style="color:yellow;">Here is your account details</h1> 
+                </div>
+                <div style="color:white">
+                    <h4 style="text-align: center; color:white; margin:0px;">Name: '. $name. '</h4>
+                    <h4 style="text-align: center; color:white; margin:0px;">Email: '. $email. '</h4>
+                    <h4 style="text-align: center; color:white; margin:0px;">Course: '. $data[0]->userCourse. '</h4>
+                    <h4 style="text-align: center; color:white; margin:0px;">Student No: '. $studentNumber. '</h4>
+                    <h4 style="text-align: center; color:white; margin:0px">Password: '. $password. '</h4>
+                </div>
+                <br><br><br>
             </div>
-            <div style="color:white">
-                <h4 style="text-align: center; color:white; margin:0px;">Name: '. $name. '</h4>
-                <h4 style="text-align: center; color:white; margin:0px;">Email: '. $email. '</h4>
-                <h4 style="text-align: center; color:white; margin:0px;">Course: '. $data[0]->userCourse. '</h4>
-                <h4 style="text-align: center; color:white; margin:0px;">Student No: '. $studentNumber. '</h4>
-                <h4 style="text-align: center; color:white; margin:0px">Password: '. $password. '</h4>
-            </div>
-            <br><br><br>
             </body> 
         </html>';
 
@@ -91,7 +93,7 @@ class Forgotten extends CI_Controller {
         $this->email->send();
 
     }
-    
+
     
 
 }
