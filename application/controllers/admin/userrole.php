@@ -49,7 +49,6 @@ class Userrole extends CI_Controller {
 			'userPassword' => $userPassword
 			);
 
-		print_r($insert_data);
 		$this->database_model->create($insert_data, "t_user");
 		
 		$data = $this->database_model->view_user('userStatus', 't_user');
