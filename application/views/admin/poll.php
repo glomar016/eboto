@@ -175,7 +175,15 @@ else {
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:8px; class="fa fa-sort-numeric-asc"></i>
+                                            <label for="pollLimit" class=" form-control-label">Vote limit per user<small style=color:red> *</small> </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="number" id="pollLimit" name="pollLimit" placeholder="Limit" maxlength="50" class="form-control">
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                         <i style =padding-right:16px; class="fa fa-comment"></i>
@@ -257,6 +265,15 @@ else {
                                                 }
                                                 ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:8px; class="fa fa-sort-numeric-asc"></i>
+                                            <label for="editpollLimit" class=" form-control-label">Vote limit per user<small style=color:red> *</small> </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="number" id="editpollLimit" name="editpollLimit" placeholder="Limit" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -435,6 +452,7 @@ $(document).ready(function() {
                     $('[name="id"').val(row.id);
                     $('[name="editpollName"]').val(row.pollName);
                     $('[name="editpollOrg"]').val(row.pollOrg);
+                    $('[name="editpollLimit"]').val(row.pollLimit);
                     $('[name="editpollDescription"]').val(row.pollDescription);
                     $('[name="editpollDateStart"]').val(row.pollDateStart.slice(0, 10));
                     $('[name="editpollDateEnd"]').val(row.pollDateEnd.slice(0, 10));
@@ -490,7 +508,7 @@ $(document).ready(function() {
                                                     })
                     }
                     else{
-                        if(pollName == '' || pollDateStart == '' || pollDateEnd == ''){
+                        if(pollName == '' || pollDateStart == '' || pollDateEnd == '' || pollLimit == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Please fill out required field.',

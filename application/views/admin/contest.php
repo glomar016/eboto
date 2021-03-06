@@ -155,6 +155,7 @@ else {
                                             <input type="text" id="contestName" name="contestName" placeholder="Name of contest" maxlength="50" class="form-control">
                                         </div>
                                     </div>
+                                
                                     <div id="divcontestOrg">
                                         <div class="row form-group">
                                             <div class="col col-md-3">
@@ -173,6 +174,15 @@ else {
                                                     ?>
                                                 </select>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:8px; class="fa fa-sort-numeric-asc"></i>
+                                            <label for="contestLimit" class=" form-control-label">Vote limit per user<small style=color:red> *</small> </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="number" id="contestLimit" name="contestLimit" placeholder="Limit" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -256,6 +266,15 @@ else {
                                                 }
                                                 ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                        <i style =padding-right:8px; class="fa fa-sort-numeric-asc"></i>
+                                            <label for="editcontestLimit" class=" form-control-label">Vote limit per user<small style=color:red> *</small> </label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                            <input type="number" id="editcontestLimit" name="editcontestLimit" placeholder="Limit" maxlength="50" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -433,6 +452,7 @@ $(document).ready(function() {
                     var row = parsedResponse[0];
                     $('[name="id"').val(row.id);
                     $('[name="editcontestName"]').val(row.contestName);
+                    $('[name="editcontestLimit"]').val(row.contestLimit);
                     $('[name="editcontestOrg"]').val(row.contestOrg);
                     $('[name="editcontestDescription"]').val(row.contestDescription);
                     $('[name="editcontestDateStart"]').val(row.contestDateStart.slice(0, 10));
@@ -489,7 +509,7 @@ $(document).ready(function() {
                                                     })
                     }
                     else{
-                        if(contestName == '' || contestDateStart == '' || contestDateEnd == ''){
+                        if(contestName == '' || contestDateStart == '' || contestDateEnd == '' || contestLimit == ''){
                                             Swal.fire({
                                                     title: 'Warning!',
                                                     text: 'Please fill out required field.',

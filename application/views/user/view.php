@@ -21,10 +21,12 @@
     else if($table['tableName'] == 't_contest'){
         $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->contestDateEnd));
         $password = $refInfo[0]->contestPassword;
+        $limit = $refInfo[0]->contestLimit;
     }
     else if($table['tableName'] == 't_poll'){
         $dateEnd = date("Y-m-d h:i:sa", strtotime($refInfo[0]->pollDateEnd));
         $password = $refInfo[0]->pollPassword;
+        $limit = $refInfo[0]->pollLimit;
     }
     
 
@@ -194,6 +196,7 @@
                     <div class="d-flex justify-content-center breadcrumb__text">
                             <div class=" text-center">
                                 <p style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->contestDescription?></p>
+                                <p style="color:red;white-space: pre-wrap;">Selection Limit: <?php echo $refInfo[0]->contestLimit?></p>
                             </div>
                     </div>
                             <!-- Live Clock -->
@@ -226,6 +229,7 @@
                     <div class="d-flex justify-content-center breadcrumb__text">
                             <div class=" text-center">
                                 <p style="color:black;white-space: pre-wrap;"><?php echo $refInfo[0]->pollDescription?></p>
+                                <p style="color:red;white-space: pre-wrap;">Selection Limit: <?php echo $refInfo[0]->pollLimit?></p>
                             </div>
                     </div>
                             <!-- Live Clock -->
@@ -286,7 +290,7 @@
                                         value="<?php echo $row->id ?>">
                                         <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
                                         <br>
-                                        <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                        <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px; font-family: sans-serif;"
                                         type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
                                         "document.getElementById('<?php echo $row->id ?>').checked = false">
                                     </div>
@@ -338,7 +342,7 @@
                                             value="<?php echo $row->id ?>">
                                             <label for="<?php echo $row->id ?>"><strong>Select this candidate</strong></label>
                                             <br>
-                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px; font-family: sans-serif;"
                                             type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
                                             "document.getElementById('<?php echo $row->id ?>').checked = false">
                                         </div>
@@ -383,11 +387,11 @@
                                 <ul class="ks-cboxtags">
                                     <li>
                                         <div class="text-center">
-                                            <input type="radio" id="<?php echo $row->id ?>" name="selected_contestant"
+                                            <input type="checkbox" id="<?php echo $row->id ?>" name="selected_contestant"
                                             value="<?php echo $row->id ?>">
                                             <label for="<?php echo $row->id ?>"><strong>Select this contestant</strong></label>
                                             <br>
-                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px; font-family: sans-serif;"
                                             type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
                                             "document.getElementById('<?php echo $row->id ?>').checked = false">
                                         </div>
@@ -426,11 +430,11 @@
                                 <ul class="ks-cboxtags">
                                     <li>
                                         <div class="text-center">
-                                            <input type="radio" id="<?php echo $row->id ?>" name="selected_option"
+                                            <input type="checkbox" id="<?php echo $row->id ?>" name="selected_option"
                                             value="<?php echo $row->id ?>">
                                             <label for="<?php echo $row->id ?>"><strong>Select this option</strong></label>
                                             <br>
-                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px"
+                                            <input style="padding-top:2px; padding-bottom:2px; border-radius:100px; font-size:10px; font-family: sans-serif;"
                                             type=button class="btn btn-sm btn-outline-secondary" value="Uncheck" onclick=
                                             "document.getElementById('<?php echo $row->id ?>').checked = false">
                                         </div>
@@ -487,6 +491,19 @@ $(document).ready(function(){
 
     var tableName = "<?php echo $table['tableName']?>"
     var tablePassword = "<?php echo $password ?>"
+    var limit = "<?php echo $limit ?>"
+
+    $('input[type=checkbox]').on('change', function (e) {
+    if ($('input[type=checkbox]:checked').length > limit) {
+        $(this).prop('checked', false);
+        Swal.fire({
+                        title: 'Failed!',
+                        text: 'Max selection of this voting line is ' +limit,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                        })
+    }
+    });
 
 
     if (tablePassword != ""){
@@ -643,8 +660,15 @@ $(document).ready(function(){
         
         var tableName = "t_contestant";
 
-        var selected = $('input[name="selected_contestant"]:checked').val();
-        var stringSelected = '(' + $('#contestant'+selected).html() + ') '        
+        var selected = []
+        var stringSelected = ""
+
+        $('input[name="selected_contestant"]:checked').each(function() {
+            selected.push(this.value);
+            stringSelected += '(' + $('#contestant'+this.value).html() + ') '    
+        });
+    
+  
         
         console.log(selected)
                             Swal.fire({
@@ -692,9 +716,14 @@ $(document).ready(function(){
         var refTableID = refTableID.text();
 
         var tableName = "t_option";
+        var selected = []
+        var stringSelected = ""
+
+        $('input[name="selected_option"]:checked').each(function() {
+            selected.push(this.value);
+            stringSelected += '(' + $('#option'+this.value).html() + ') '
+        });
         
-        var selected = $('input[name="selected_option"]:checked').val();
-        var stringSelected = '(' + $('#option'+selected).html() + ') '
 
         console.log(selected)
                             Swal.fire({

@@ -97,38 +97,38 @@ class Vote extends CI_Controller {
 
 
 		// Condition to check if user already voted
-		if($check == 1){
-			$this->load->view('user/already_voted');
-		}
-		else{
+		// if($check == 1){
+		// 	$this->load->view('user/already_voted');
+		// }
+		// else{
 			$data['data'] = $this->database_model->get_candidate($id, $tableName, $refColumn, $columnStatus);
 			$data['table'] = ['tableName' => $refTableName];
 			$data['refTable'] = $id;
 			$data['refInfo'] = $this->database_model->get($id, $refTableName);
 			$this->load->view('user/view', $data);
-		}
+		// }
 	}
 
-	public function view_ep($id, $tableName, $refColumn, $columnStatus, $refTableName){
+	public function view_ep($id, $tableName, $refTableName){
 		$this->load->model('database_model');
 
 		$userId = ($this->session->userdata['logged_in']['userId']);
-
-		$check = $this->database_model->already_voted($userId, $id, 'vote_epID', 't_vote_ep_candidate');
 		
-
+		$refColumn = 'candidateEpID';
+		$columnStatus = 'candidateStatus';
+		$check = $this->database_model->already_voted($userId, $id, 'vote_epID', 't_vote_ep_candidate');
 
 		// Condition to check if user already voted
-		if($check == 1){
-			$this->load->view('user/already_voted');
-		}
-		else{
+		// if($check == 1){
+		// 	$this->load->view('user/already_voted');
+		// }
+		// else{
 			$data['data'] = $this->database_model->get_ep_candidate($id, $tableName, $refColumn, $columnStatus);
 			$data['table'] = ['tableName' => $refTableName];
 			$data['refTable'] = $id;
 			$data['refInfo'] = $this->database_model->get($id, $refTableName);
 			$this->load->view('user/view', $data);
-		}
+		// }
 	}
 	
 	public function vote_candidate()
@@ -142,6 +142,7 @@ class Vote extends CI_Controller {
 
 		// echo $selected;
 		print_r($data);
+
 		echo $refTableID;
 		
 		foreach($data as $candidateID){
@@ -178,9 +179,10 @@ class Vote extends CI_Controller {
 
 		// echo $selected;
 		print_r($data);
-		echo $refTableID;
 		
-		$this->database_model->insert_vote($data, 'vote_contestantID', $refTableID, 'vote_contestID', 't_vote_contestant', $vote_userID);
+		foreach($data as $contestantID){
+			// $this->database_model->insert_vote($contestantID, 'vote_contestantID', $refTableID, 'vote_contestID', 't_vote_contestant', $vote_userID);
+		}
 	}
 
 	public function vote_option()
@@ -196,7 +198,10 @@ class Vote extends CI_Controller {
 		print_r($data);
 		echo $refTableID;
 		
-		$this->database_model->insert_vote($data, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option', $vote_userID);
+		foreach($data as $optionID){
+			// $this->database_model->insert_vote($optionID, 'vote_optionID', $refTableID, 'vote_pollID', 't_vote_option', $vote_userID);
+		}
+		
 	}
 
 	// This is to check if user is already voted to election/contest/poll/

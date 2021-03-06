@@ -320,4 +320,7 @@ class Database_model extends CI_Model {
         $this->db->update('t_user', $data);
     }
 
+
+	
+
 }

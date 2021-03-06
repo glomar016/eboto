@@ -93,9 +93,17 @@ else {
                                     <div class="table-data__tool">
                                                 <h2>List of User</h2>
                                             <div class="table-data__tool-right">
+                                            <div>
+                                            <label>Download this for: </label>
+                                                    <a href="<?php echo base_url() ?>resources/files/multipleuser.xlsx">Multiple User Excel Format.xlsx</a>
+                                            </div>
+                                                    
                                                 <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addUserModal">   
                                                 <i style=padding:3px; class="fa fa-plus"></i> 
-                                                Add User </button>
+                                                Add Individual User </button>
+                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addExcel">   
+                                                <i style=padding:3px; class="fa fa-plus"></i> 
+                                                Add Multiple User </button>
                                             </div>
                                         </div>
                                         <div class="table-responsive table-responsive-data2">
@@ -129,15 +137,49 @@ else {
         </div>
     </div>
 
+     <!-- ADD EXCEL MODAL -->
+     <div class="modal fade" id="addExcel" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style=background-color:#28a745;>
+                    <h3 class="modal-title" id="largeModalLabel" style=color:white;>Add Multiple User</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card">   
+                        <div class="card-body card-block">
+                            <form action="" method="post" id="addExcelForm" name="addExcelForm">
+                                    <div class="row form-group">
+                                        <div class="col col-md-4">
+                                            <label for="excelFile" class=" form-control-label">Excel File<small style=color:red> *</small></label>
+                                        </div>
+                                        <div class="col-4 col-md-8">
+                                        <input id="excelFile" name="excelFile" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                                        </div>
+                                    </div>
+                                    <div style= float:right;>
+                                        <input type="submit" name="Submit" id="btnAddExcel" value="Submit" class="btn btn-success">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF EXCEL USER MODAL -->
+
      <!-- ADD USER MODAL -->
      <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style=background-color:#28a745;>
-							<h3 class="modal-title" id="largeModalLabel" style=color:white;>Add User</h3>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+                    <h3 class="modal-title" id="largeModalLabel" style=color:white;>Add User</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="card">   
                         <div class="card-body card-block">
@@ -431,6 +473,48 @@ $(document).ready(function(){
                                     $('#addUserModal form')[0].reset();
                                 }
                     })
+            }
+    });
+
+    // Create org
+    $('#addExcelForm').on('submit', function(e){
+            e.preventDefault();
+            $("#btnAddExcel").attr("disabled", true);
+
+            var excelFile = $('#excelFile').val()
+            var Extension = excelFile.substring(
+                excelFile.lastIndexOf('.') + 1).toLowerCase();
+
+            if (Extension == "xlsx") {
+                    $.ajax({
+                        url: '<?php echo base_url()?>admin/userrole/import',
+                        type: "post",
+                        data: new FormData(this),
+                        processData:false,
+                        contentType:false,
+                    
+                        success: function(){
+                            refresh()
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'You successfully add a multiple user.',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                                })
+                                $("#btnAddExcel").attr("disabled", false);
+                                $('#addExcel').modal('hide');
+                                $('#addExcel form')[0].reset();
+                        }
+                    })
+            }
+            else{
+                Swal.fire({
+                            title: 'Warning!',
+                            text: 'Should be .xlsx file!',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                    $("#btnAddExcel").attr("disabled", false);
             }
     });
 

@@ -40,6 +40,7 @@ class Contest extends CI_Controller {
 		$contestOrg = $this->input->post('contestOrg');
 		$contestPassword = $this->input->post('contestPassword');
 		$contestDescription = $this->input->post('contestDescription');
+		$contestLimit = $this->input->post('contestLimit');
 		$contestDateStart = $this->input->post('contestDateStart');
 		$contestDateEnd = $this->input->post('contestDateEnd');
 		$contestDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($contestDateEnd)));
@@ -49,6 +50,7 @@ class Contest extends CI_Controller {
 		$data = array(
 			"contestName" => $contestName, 
 			"contestDescription" => $contestDescription,
+			"contestLimit" => $contestLimit,
 			"contestOrg" => $contestOrg, 
 			"contestDateStart" =>$contestDateStart,
 			"contestDateEnd" => $contestDateEnd,
@@ -68,6 +70,7 @@ class Contest extends CI_Controller {
 		$contestName = $this->input->post('editcontestName');
 		$contestOrg = $this->input->post('editcontestOrg');
 		$contestDescription = $this->input->post('editcontestDescription');
+		$contestLimit = $this->input->post('editcontestLimit');
 		$contestDateStart = $this->input->post('editcontestDateStart');
 		$contestDateEnd = $this->input->post('editcontestDateEnd');
 		$contestDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($contestDateEnd)));
@@ -77,6 +80,7 @@ class Contest extends CI_Controller {
 		$data = array(
 				"contestName" => $contestName, 
 				"contestDescription" => $contestDescription,
+				"contestLimit" => $contestLimit,
                 "contestOrg" => $contestOrg, 
                 "contestDateStart" => $contestDateStart,
                 "contestDateEnd" => $contestDateEnd

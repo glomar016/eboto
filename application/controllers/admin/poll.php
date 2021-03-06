@@ -39,6 +39,7 @@ class Poll extends CI_Controller {
 		$pollName = $this->input->post('pollName');
 		$pollOrg = $this->input->post('pollOrg');
 		$pollPassword = $this->input->post('pollPassword');
+		$pollLimit = $this->input->post('pollLimit');
 		$pollDescription = $this->input->post('pollDescription');
 		$pollDateStart = $this->input->post('pollDateStart');
 		$pollDateEnd = $this->input->post('pollDateEnd');
@@ -50,6 +51,7 @@ class Poll extends CI_Controller {
 			"pollName" => $pollName, 
 			"pollDescription" => $pollDescription,
 			"pollOrg" => $pollOrg, 
+			"pollLimit" => $pollLimit, 
 			"pollDateStart" =>$pollDateStart,
 			"pollDateEnd" => $pollDateEnd,
 			"pollPassword" => $pollPassword
@@ -68,6 +70,7 @@ class Poll extends CI_Controller {
 		$pollName = $this->input->post('editpollName');
 		$pollOrg = $this->input->post('editpollOrg');
 		$pollDescription = $this->input->post('editpollDescription');
+		$pollLimit = $this->input->post('editpollLimit');
 		$pollDateStart = $this->input->post('editpollDateStart');
 		$pollDateEnd = $this->input->post('editpollDateEnd');
 		$pollDateEnd = date("Y-m-d H:i:s", strtotime('+23 hours +59 minutes +59 seconds', strtotime($pollDateEnd)));
@@ -77,6 +80,7 @@ class Poll extends CI_Controller {
 		$data = array(
 				"pollName" => $pollName, 
 				"pollDescription" => $pollDescription,
+				"pollLimit" => $pollLimit,
                 "pollOrg" => $pollOrg, 
                 "pollDateStart" => $pollDateStart,
                 "pollDateEnd" => $pollDateEnd
