@@ -121,7 +121,6 @@ class Userrole extends CI_Controller {
 		// loading model that needed
 		$this->load->model('database_model');
 
-
 		$id = $this->input->get('id');
 		$this->database_model->delete($id, "userStatus", "t_user");
 	}

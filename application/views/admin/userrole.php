@@ -94,23 +94,27 @@ else {
                                                 <h2>List of User</h2>
                                             <div class="table-data__tool-right">
                                             <div>
-                                            <label>Download this for: </label>
-                                                    <a href="<?php echo base_url() ?>resources/files/multipleuser.xlsx">Multiple User Excel Format.xlsx</a>
+                                            <label>Download this format for: </label>
+                                                    <a href="<?php echo base_url() ?>resources/files/multipleuser.xlsx">Multiple User Format</a>
                                             </div>
                                                     
                                                 <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addUserModal">   
                                                 <i style=padding:3px; class="fa fa-plus"></i> 
                                                 Add Individual User </button>
-                                                <button  type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addExcel">   
+                                                <button  type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#addExcel">   
                                                 <i style=padding:3px; class="fa fa-plus"></i> 
                                                 Add Multiple User </button>
                                             </div>
                                         </div>
                                         <div class="table-responsive table-responsive-data2">
                                             <table id="userTable" class="table table-data3" style="width:100%"> 
+                                            <button class="btn btn-danger btn-sm multipleDelete float-right" style="padding:5px;margin-bottom:20px;margin-right:10px">Delete Selected</i></button>
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th hidden>Id</th>
+                                                        <th>
+                                                            <input type="checkbox" class="selectAll">
+                                                        </th>
                                                         <th>Name</th>
                                                         <th>Student Number</th>
                                                         <th>Email</th>
@@ -391,6 +395,9 @@ $(document).ready(function(){
             "ajax": "<?php echo base_url()?>admin/userrole/show_user",
             "columns": [
                 { data: "id"},
+                { data: "id", render: function(data, type, row){
+                    return '<input type="checkbox" name="multipleCheckbox" value="'+row.id+'" style="margin-left:30px">'
+                }},
                 { data: "userLastName", render: function(data, type, row){
                     return row.userLastName + ', ' +row.userFirstName + ' ' + row.userMiddleName
                 }},
@@ -415,7 +422,8 @@ $(document).ready(function(){
                 }}
             ],
             "aoColumnDefs": [{"bVisible": false, "aTargets": [0]}],
-            "order": [[1, "asc"]]
+            "order": [[1, "asc"]],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         })
     }
 
@@ -679,6 +687,50 @@ $(document).ready(function(){
        
     });
     // END OF DELETE USER
+
+    $(".selectAll").click( function(){
+        if( $(this).is(':checked') ){
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        }
+        else{
+            $('input:checkbox').not(this).prop('checked', false);
+        }
+    });
+
+    $(".multipleDelete").click( function(){
+
+        var selected = []
+        $('input[name="multipleCheckbox"]:checked').each(function() {
+            selected.push(this.value);
+        });
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, activate it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+                for(var i=0; i<selected.length; i++){
+                    $.ajax({
+                    url: '<?php echo base_url()?>admin/userrole/delete_user',
+                    data: {id: selected[i]},
+                    });
+                }
+                refresh();
+                Swal.fire(
+                    'Success!',
+                    'User has been activated!.',
+                    'success'
+                    )
+
+            }
+        })
+    });
 
 
 });

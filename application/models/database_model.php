@@ -71,6 +71,7 @@ class Database_model extends CI_Model {
     function view_user($statusColumn, $tableName){
         $this->db->select("*");
         $this->db->from($tableName);
+        $this->db->where($statusColumn, "1");
         $query = $this->db->get();
         $data = $query->result();
         return $data;
