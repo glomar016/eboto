@@ -1,4 +1,4 @@
-1. Copy all files inside sqldriver folder to your
+1. Copy all files inside readme/ext folder to your
 xampp/php/ext
 
 2. Modify your php.ini 

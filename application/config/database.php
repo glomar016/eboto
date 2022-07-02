@@ -78,11 +78,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'DESKTOP-564AP4H',
+	'hostname' => 'RAVENTGR\SQLEXPRESS',
 	// 'hostname' => 'DESKTOP-0C1LSAP',
 	// 'hostname' => 'LAPTOP-4JFKTN3K\SQLEXPRESS',
-	'username' => 'sa',
-	'password' => 'qwerty',
+	'username' => '',
+	'password' => '',
 	'database' => 'eboto',
 	'dbdriver' => 'sqlsrv',
 	'dbprefix' => '',
